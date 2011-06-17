@@ -1,14 +1,21 @@
 /*---------------------------------------------------------------------------------
 
 	Zelda: Oracle Of Secrets
-	- Quent42340
+	- Pixelda ( ex Pixelua )
+		* Quent42340
+		* Fantasix
 
 ---------------------------------------------------------------------------------*/
 #include "main.h"
+#include "game.h"
+
+int i;
 
 int main(void) {
+	// Initialize game
+	Game* game = new Game;
 	
-	while(1) {
-		swiWaitForVBlank();
-	}
+	while(1);
+	
+	delete game;
 }

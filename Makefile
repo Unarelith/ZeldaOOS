@@ -8,6 +8,12 @@ endif
 
 include $(DEVKITARM)/ds_rules
 
+export GAME_TITLE	:=	The Legend of Zelda
+export GAME_SUBTITLE1	:=	Oracle of Secrets
+export GAME_SUBTITLE2	:=	Pixelda
+export NITRO_FILES	:=	$(CURDIR)/efsroot
+export OTHER_OPTIONS	:=	-g ZOOS QP "Zelda-OOS"
+
 #---------------------------------------------------------------------------------
 # TARGET is the name of the output
 # BUILD is the directory where object files & intermediate files will be placed
@@ -20,8 +26,8 @@ TARGET		:=	$(shell basename $(CURDIR))
 BUILD		:=	build
 SOURCES		:=	source
 INCLUDES	:=	include
-DATA		:=	data  
-GRAPHICS	:=	gfx  
+DATA		:=	data
+GRAPHICS	:=	gfx
 
 #---------------------------------------------------------------------------------
 # options for code generation
@@ -42,15 +48,15 @@ LDFLAGS	=	-specs=ds_arm9.specs -g $(ARCH) -Wl,-Map,$(notdir $*.map)
 #---------------------------------------------------------------------------------
 # any extra libraries we wish to link with the project (order is important)
 #---------------------------------------------------------------------------------
-LIBS	:= 	-lnds9
- 
- 
+LIBS	:= 	-lfat -lnds9
+
+
 #---------------------------------------------------------------------------------
 # list of directories containing libraries, this must be the top level containing
 # include and lib
 #---------------------------------------------------------------------------------
 LIBDIRS	:=	$(LIBNDS)
- 
+
 #---------------------------------------------------------------------------------
 # no real need to edit anything past this point unless you need to add additional
 # rules for different file extensions
@@ -71,7 +77,7 @@ CPPFILES	:=	$(foreach dir,$(SOURCES),$(notdir $(wildcard $(dir)/*.cpp)))
 SFILES		:=	$(foreach dir,$(SOURCES),$(notdir $(wildcard $(dir)/*.s)))
 PNGFILES	:=	$(foreach dir,$(GRAPHICS),$(notdir $(wildcard $(dir)/*.png)))
 BINFILES	:=	$(foreach dir,$(DATA),$(notdir $(wildcard $(dir)/*.*)))
- 
+
 #---------------------------------------------------------------------------------
 # use CXX for linking C++ projects, CC for standard C
 #---------------------------------------------------------------------------------
@@ -89,11 +95,11 @@ endif
 export OFILES	:=	$(addsuffix .o,$(BINFILES)) \
 					$(PNGFILES:.png=.o) \
 					$(CPPFILES:.cpp=.o) $(CFILES:.c=.o) $(SFILES:.s=.o)
- 
+
 export INCLUDE	:=	$(foreach dir,$(INCLUDES),-iquote $(CURDIR)/$(dir)) \
 					$(foreach dir,$(LIBDIRS),-I$(dir)/include) \
 					-I$(CURDIR)/$(BUILD)
- 
+
 export LIBPATHS	:=	$(foreach dir,$(LIBDIRS),-L$(dir)/lib)
 
 icons := $(wildcard *.bmp)
@@ -105,28 +111,35 @@ else
 		export GAME_ICON := $(CURDIR)/icon.bmp
 	endif
 endif
- 
+
 .PHONY: $(BUILD) clean
- 
+
 #---------------------------------------------------------------------------------
 $(BUILD):
 	@[ -d $@ ] || mkdir -p $@
 	@make --no-print-directory -C $(BUILD) -f $(CURDIR)/Makefile
- 
+	@./tools/efs $(TARGET).nds
+	@cp $(TARGET).nds $(TARGET)_r4.nds
+	@dlditool r4tf.dldi $(TARGET)_r4.nds
+
 #---------------------------------------------------------------------------------
 clean:
 	@echo clean ...
-	@rm -fr $(BUILD) $(TARGET).elf $(TARGET).nds
+	@rm -fr $(BUILD) $(TARGET).elf $(TARGET).nds $(TARGET)_r4.nds $(TARGET).img
+
+#---------------------------------------------------------------------------------
+run:
+	@./tools/desmume-cli --gbaslot-rom=$(TARGET).nds $(TARGET).nds
 
 #---------------------------------------------------------------------------------
 else
- 
+
 #---------------------------------------------------------------------------------
 # main targets
 #---------------------------------------------------------------------------------
 $(OUTPUT).nds	: 	$(OUTPUT).elf
 $(OUTPUT).elf	:	$(OFILES)
- 
+
 #---------------------------------------------------------------------------------
 %.bin.o	:	%.bin
 #---------------------------------------------------------------------------------
@@ -144,7 +157,7 @@ $(OUTPUT).elf	:	$(OFILES)
 	grit $< -fts -o$*
 
 -include $(DEPSDIR)/*.d
- 
+
 #---------------------------------------------------------------------------------------
 endif
 #---------------------------------------------------------------------------------------

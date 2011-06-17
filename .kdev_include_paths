@@ -2,3 +2,6 @@ RESOLVE: SOURCE=/home/quentin/Bureau/libndsTests/ZeldaOOS/source BUILD=/home/que
 /home/quentin/Bureau/libndsTests/ZeldaOOS/include
 /home/quentin/Bureau/libndsTests/ZeldaOOS/build
 /home/quentin/devkitPro/libnds/include
+/home/quentin/devkitPro/libnds/include/nds
+/home/quentin/devkitPro/libnds/include/nds/arm9
+/home/quentin/devkitPro/libnds/include/nds/arm7

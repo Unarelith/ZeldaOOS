@@ -1,0 +1,44 @@
+[Buildset]
+BuildItems=@Variant(\x00\x00\x00\t\x00\x00\x00\x00\x01\x00\x00\x00\x0b\x00\x00\x00\x00\x01\x00\x00\x00\x10\x00Z\x00e\x00l\x00d\x00a\x00O\x00O\x00S)
+
+[Launch]
+Launch Configurations=Launch Configuration 0,Launch Configuration 1
+
+[Launch][Launch Configuration 0]
+Configured Launch Modes=execute
+Configured Launchers=nativeAppLauncher
+Name=Debugger
+Type=Native Application
+
+[Launch][Launch Configuration 0][Data]
+Arguments="/home/quentin/devkitPro/nocashgba/NO\\$GBA.EXE" ZeldaOOS.nds
+Dependencies=@Variant(\x00\x00\x00\t\x00\x00\x00\x00\x00)
+Dependency Action=Nothing
+EnvironmentGroup=default
+Executable=wine
+External Terminal=konsole --noclose --workdir %workdir -e %exe
+Project Target=
+Use External Terminal=false
+Working Directory=file:///home/quentin/Bureau/libndsTests/ZeldaOOS
+isExecutable=true
+
+[Launch][Launch Configuration 1]
+Configured Launch Modes=execute
+Configured Launchers=nativeAppLauncher
+Name=Launcher
+Type=Native Application
+
+[Launch][Launch Configuration 1][Data]
+Arguments=run
+Dependencies=@Variant(\x00\x00\x00\t\x00\x00\x00\x00\x00)
+Dependency Action=Nothing
+EnvironmentGroup=default
+Executable=make
+External Terminal=konsole --noclose --workdir %workdir -e %exe
+Project Target=
+Use External Terminal=false
+Working Directory=file:///home/quentin/Bureau/libndsTests/ZeldaOOS/
+isExecutable=true
+
+[Project]
+VersionControlSupport=kdevgit
