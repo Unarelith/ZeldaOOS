@@ -8,6 +8,16 @@ endif
 
 include $(DEVKITARM)/ds_rules
 
+# Vu quele nouveau GCC n'accepte plus les constantes externes dans les structures initialisées...
+# On va faire notre propre bin2o qui donne directement la taille (constante, non externe)
+define bin2o
+	bin2s $< | $(AS) -o $(@)
+	echo "extern const u8" `(echo $(<F) | sed -e 's/^\([0-9]\)/_\1/' | tr . _)`"["`(stat -c%s $<)`"];" > `(echo $(<F) | tr . _)`.h
+	# Ceux-ci sont vraiment inutiles, mais comme ils sont quand même dans le .o, autant donner l'accès...
+	echo "extern const u8" `(echo $(<F) | sed -e 's/^\([0-9]\)/_\1/' | tr . _)`"_end[];" >> `(echo $(<F) | tr . _)`.h
+	echo "extern const u32" `(echo $(<F) | sed -e 's/^\([0-9]\)/_\1/' | tr . _)`_size";" >> `(echo $(<F) | tr . _)`.h
+endef
+
 export GAME_TITLE	:=	The Legend of Zelda
 export GAME_SUBTITLE1	:=	Oracle of Secrets
 export GAME_SUBTITLE2	:=	Pixelda
@@ -48,7 +58,7 @@ LDFLAGS	=	-specs=ds_arm9.specs -g $(ARCH) -Wl,-Map,$(notdir $*.map)
 #---------------------------------------------------------------------------------
 # any extra libraries we wish to link with the project (order is important)
 #---------------------------------------------------------------------------------
-LIBS	:= 	-lfat -lnds9
+LIBS	:= 	-lul -lpng -lz -lfat -lnds9 
 
 
 #---------------------------------------------------------------------------------
@@ -134,6 +144,8 @@ run:
 #---------------------------------------------------------------------------------
 else
 
+DEPENDS	:=	$(OFILES:.o=.d)
+
 #---------------------------------------------------------------------------------
 # main targets
 #---------------------------------------------------------------------------------
@@ -147,6 +159,30 @@ $(OUTPUT).elf	:	$(OFILES)
 	$(bin2o)
 
 #---------------------------------------------------------------------------------
+%.pcx.o	:	%.pcx
+#---------------------------------------------------------------------------------
+	@echo $(notdir $<)
+	@$(bin2o)
+
+#---------------------------------------------------------------------------------
+%.png.o	:	%.png
+#---------------------------------------------------------------------------------
+	@echo $(notdir $<)
+	@$(bin2o)
+
+#---------------------------------------------------------------------------------
+%.jpg.o	:	%.jpg
+#---------------------------------------------------------------------------------
+	@echo $(notdir $<)
+	@$(bin2o)
+
+#---------------------------------------------------------------------------------
+%.txt.o	:	%.txt
+#---------------------------------------------------------------------------------
+	@echo $(notdir $<)
+	@$(bin2o)
+
+#---------------------------------------------------------------------------------
 # This rule creates assembly source files using grit
 # grit takes an image file and a .grit describing how the file is to be processed
 # add additional rules like this for each image extension
@@ -156,7 +192,7 @@ $(OUTPUT).elf	:	$(OFILES)
 #---------------------------------------------------------------------------------
 	grit $< -fts -o$*
 
--include $(DEPSDIR)/*.d
+-include $(DEPENDS)
 
 #---------------------------------------------------------------------------------------
 endif

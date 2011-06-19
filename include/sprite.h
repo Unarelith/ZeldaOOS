@@ -3,7 +3,6 @@
 
 #include "main.h"
 
-#include "pressStart.h"
 class Sprite {
     public:
 		// Construct & Destruct

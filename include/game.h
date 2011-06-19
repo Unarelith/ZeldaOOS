@@ -2,10 +2,16 @@
 #define GAME_H
 
 #include "main.h"
+#include "timer.h"
 #include "sprite.h"
+#include "sprite3D.h"
 
-#include "titleScreen.h"
-#include "pressStart.h"
+#include "titleScreen2.h"
+#include "titleScreen_png.h"
+#include "pressStart_png.h"
+#include "fileSelect_png.h"
+#include "acorn_png.h"
+#include "link_png.h"
 
 class Game {
 	public:
@@ -15,11 +21,13 @@ class Game {
 		
 		// Interface
 		void pressStartScreen();
+		void titleScreen();
+		
+		// Initialisation
+		void init();
 		
 	private:
-		int s_bg; // BG id returned by bgInit()
-		int s_bgSub; // Sub BG id returned by bgInitSub()
-		int s_bg16Sub; // Sub 16bit BG id returned by bgInitSub()
+		int s_bg; // Sub BG id returned by bgInitSub()
 };
 
 #endif // GAME_H

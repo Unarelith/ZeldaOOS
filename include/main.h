@@ -3,7 +3,7 @@
 
 extern int i;
 
-#include <nds.h> // Include NDS header
+#include <ulib/ulib.h> // Include ulib header
 #include <fat.h> // File system
 
 // Some other headers
@@ -12,6 +12,9 @@ extern int i;
 #include <malloc.h> // Memory allocation
 #include <math.h> // Math functions
 #include <string.h> // String functions
+#include <vector> // Vector
+
+using namespace std;
 
 #define WAIT_FOR_START(text) { printf(text); while(!(keysDown() & KEY_START)) { scanKeys(); swiWaitForVBlank(); } }
 

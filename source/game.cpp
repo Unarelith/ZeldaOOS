@@ -8,37 +8,32 @@ Game::Game() {
 	// Initialize random seed
 	srand(time(NULL));
 	
-	// Setup the video modes
-	videoSetMode(MODE_0_2D);
-	videoSetModeSub(MODE_0_2D);
+    // Initialization of µLibrary
+    ulInit(UL_INIT_ALL);
+    ulInitGfx();
+    ulInitText();
 	
-	// Setup VRAM banks
-	vramSetPrimaryBanks(VRAM_A_MAIN_SPRITE,
-						VRAM_B_MAIN_BG_0x06000000,
-						VRAM_C_SUB_BG,
-						VRAM_D_SUB_SPRITE);
+    // Use magenta as a transparent color
+    ulSetTransparentColor(RGB15(31, 0, 31));
 	
-	// Initialize the console
-	PrintConsole bottomScreen;
-	consoleInit(&bottomScreen, 1, BgType_Text4bpp, BgSize_T_256x256, 2, 0, false, true);
+	// Set main LCD
+	ulSetMainLcd(0);
 	
-	printf("EFS loading...");
+	ulDebug("EFS loading...");
 	
 	// Initialize EFS filesystem
 	if(!EFS_Init(EFS_AND_FAT | EFS_DEFAULT_DEVICE, NULL)) {
-		printf("FATAL ERROR: Bad filesystem init");
+		ulDebug("FATAL ERROR: Bad filesystem init");
 		while(1) { swiWaitForVBlank(); }
 	}
 	
-	printf("EFS loaded!");
+	ulDebug("EFS loaded!");
 	
-	// Initialize the oam ( Sprite system )
-	oamInit(&oamMain, SpriteMapping_Bmp_1D_256, false);
-	oamInit(&oamSub, SpriteMapping_Bmp_1D_256, false);
+	Timer::initTimers();
 	
-	// Initialize the background
-	s_bg = bgInit(0, BgType_Text8bpp, BgSize_T_512x512, 0, 1);
-	s_bgSub = bgInitSub(0, BgType_Text8bpp, BgSize_T_512x512, 4, 1);
+	//videoSetModeSub(MODE_5_2D);
+	//vramSetBankC(VRAM_C_SUB_BG);
+	//s_bg = bgInitSub(3, BgType_Bmp8, BgSize_B8_256x256, 0, 0);
 	
 	pressStartScreen();
 }
@@ -47,16 +42,123 @@ Game::~Game() {
 }
 
 void Game::pressStartScreen() {
-	consoleClear();
+	UL_IMAGE* titleScreenImg = ulLoadImageFilePNG((const char*)titleScreen_png, sizeof(titleScreen_png), UL_IN_RAM, UL_PF_PAL8);
+	if(!titleScreenImg) {
+		ulDebug("titleScreen image error");
+	}
 	
-	dmaCopy(titleScreenTiles, bgGetGfxPtr(s_bgSub), titleScreenTilesLen);
-	dmaCopy(titleScreenPal, BG_PALETTE_SUB, titleScreenPalLen);
-	dmaCopy(titleScreenMap, bgGetMapPtr(s_bgSub), titleScreenMapLen);
+	UL_IMAGE* pressStartImg = ulLoadImageFilePNG((const char*)pressStart_png, sizeof(pressStart_png), UL_IN_RAM, UL_PF_PAL8);
+	if(!pressStartImg) {
+		ulDebug("pressStart image error");
+	}
+	
+	Timer pressStartTimer;
+	pressStartTimer.start();
 	
 	while(1) {
-		swiWaitForVBlank();
+		// Read keys data
+		ulReadKeys(0);
 		
-		bgUpdate();
-		oamUpdate(&oamSub);
+		if((ul_keys.pressed.start) || (ul_keys.touch.click)) {
+			break;
+		}
+		
+		// Start the drawing
+		ulStartDrawing2D();
+		
+		//Draw the image in the screen
+		ulDrawImage(titleScreenImg);
+		
+		if(pressStartTimer.time() > 750) {
+			ulDrawImageXY(pressStartImg, 85, 152);
+			if(pressStartTimer.time() > 1500) {
+				pressStartTimer.reset();
+				pressStartTimer.start();
+			}
+		}
+		
+		// End the drawing
+		ulEndDrawing();
+		
+		//Wait the VBlank (synchronize at 60 fps)
+		ulSyncFrame();
 	}
+	
+	ulDeleteImage(titleScreenImg);
+	ulDeleteImage(pressStartImg);
+	
+	titleScreen();
+}
+
+void Game::titleScreen() {
+	/*consoleClear();
+	
+	dmaCopy(titleScreen2Bitmap, BG_GFX_SUB, titleScreen2BitmapLen);
+	dmaCopy(titleScreen2Pal, BG_PALETTE_SUB, titleScreen2PalLen);*/
+	
+	UL_IMAGE* fileSelectImg = ulLoadImageFilePNG((const char*)fileSelect_png, sizeof(fileSelect_png), UL_IN_RAM, UL_PF_PAL8);
+	if(!fileSelectImg) {
+		ulDebug("fileSelect image error");
+	}
+	
+	UL_IMAGE* acornImg = ulLoadImageFilePNG((const char*)acorn_png, sizeof(acorn_png), UL_IN_RAM, UL_PF_PAL8);
+	if(!acornImg) {
+		ulDebug("acorn image error");
+	}
+	
+	Sprite3D* link = new Sprite3D((const char*)link_png, sizeof(link_png), 16, 16);
+	
+	int curPos = 1;
+	
+	while(1) {
+		// Read keys data
+		ulReadKeys(0);
+		
+		if((ul_keys.pressed.start) || (ul_keys.touch.click)) {
+			break;
+		}
+		
+		// Start the drawing
+		ulStartDrawing2D();
+		
+		//Draw the image in the screen
+		ulDrawImage(fileSelectImg);
+		ulDrawImageXY(acornImg, 8, 64+((curPos-1)*32));
+		
+		// Draw sprite
+		link->drawFrame(138, 74, 1);
+		
+		// End the drawing
+		ulEndDrawing();
+		
+		if(ul_keys.pressed.up) {
+			curPos--;
+		}
+		else if(ul_keys.pressed.down) {
+			curPos++;
+		}
+		
+		if(curPos < 1) {
+			curPos = 3;
+		}
+		else if(curPos > 3){
+			curPos = 1;
+		}
+		
+		if(ul_keys.pressed.A) {
+			break;
+		}
+		
+		//Wait the VBlank (synchronize at 60 fps)
+		ulSyncFrame();
+	}
+	
+	ulDeleteImage(fileSelectImg);
+	ulDeleteImage(acornImg);
+	
+	init();
+}
+
+void Game::init() {
+	
 }
