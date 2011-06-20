@@ -1,10 +1,11 @@
 #include "sprite3D.h"
 
-Sprite3D_Animation::Sprite3D_Animation(int* tabAnim, int delay) {
+Sprite3D_Animation::Sprite3D_Animation(int size, int* tabAnim, int delay) {
+	s_size = size;
 	s_tabAnim = tabAnim;
 	s_delay = delay;
 	s_tmr = new Timer();
-	s_isPlayed = false;
+	s_isPlaying = false;
 }
 
 Sprite3D_Animation::~Sprite3D_Animation() {
@@ -35,8 +36,12 @@ Sprite3D::~Sprite3D() {
 
 void Sprite3D::drawFrame(s16 x, s16 y, int frame) {
 	u16 boardWidth = s_img->sizeX / s_width;
-	s16 yy = floor(frame / boardWidth);
+	/*s16 yy = floor(frame / boardWidth);
 	s16 xx = frame - (yy * boardWidth);
+	s16 sourcex = xx * s_width;
+	s16 sourcey = yy * s_height;*/
+	s16 xx = frame % boardWidth;
+	s16 yy = frame / boardWidth;
 	s16 sourcex = xx * s_width;
 	s16 sourcey = yy * s_height;
 	
@@ -44,8 +49,8 @@ void Sprite3D::drawFrame(s16 x, s16 y, int frame) {
 	ulDrawImageXY(s_img, x + s_img->centerX, y + s_img->centerY);
 }
 
-void Sprite3D::addAnimation(int* tabAnim, int delay) {
-	Sprite3D_Animation tmp(tabAnim, delay);
+void Sprite3D::addAnimation(int size, int* tabAnim, int delay) {
+	Sprite3D_Animation tmp(size, tabAnim, delay);
 	s_animations.push_back(tmp);
 }
 
@@ -62,23 +67,23 @@ void Sprite3D::stopAnimation(int anim) {
 }
 
 bool Sprite3D::animationAtEnd(int anim) {
-	return floor(s_animations.at(anim).tmr()->time() / s_animations.at(anim).delay() + 1) >= sizeof(s_animations.at(anim).tabAnim()) / sizeof(s_animations.at(anim).tabAnim()[1]);
+	return floor(s_animations.at(anim).tmr()->time() / s_animations.at(anim).delay() + 1) >= s_animations.at(anim).size();
 }
 
 void Sprite3D::playAnimation(s16 x, s16 y, int anim) {
-	if(!s_animations.at(anim).isPlayed()) {
+	if(!s_animations.at(anim).isPlaying()) {
 		resetAnimation(anim);
 		startAnimation(anim);
-		s_animations.at(anim).isPlayed(true);
+		s_animations.at(anim).isPlaying(true);
 	}
 	
-	if(floor(s_animations.at(anim).tmr()->time() / s_animations.at(anim).delay()) >= sizeof(s_animations.at(anim).tabAnim()) / sizeof(s_animations.at(anim).tabAnim()[0])) {
+	if(s_animations.at(anim).tmr()->time() / s_animations.at(anim).delay() >= s_animations.at(anim).size()) {
 		resetAnimation(anim);
 		startAnimation(anim);
 	}
 	
 	consoleClear();
 	int animToDraw = s_animations.at(anim).tabAnim()[s_animations.at(anim).tmr()->time() / s_animations.at(anim).delay()];
-	printf("\x1b[0;0H%d,%d\n%d,%d\n%d", animToDraw, s_animations.at(anim).tmr()->time(), s_animations.at(anim).delay(), anim, s_animations.at(anim).tmr()->time() / s_animations.at(anim).delay());
+	printf("\x1b[0;0H%d,%d\n%d,%d\n%d,%d", animToDraw, s_animations.at(anim).tmr()->time(), s_animations.at(anim).delay(), anim, s_animations.at(anim).tmr()->time() / s_animations.at(anim).delay(), s_animations.at(anim).size());
 	drawFrame(x, y, animToDraw);
 }

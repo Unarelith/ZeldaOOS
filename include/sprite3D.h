@@ -7,23 +7,25 @@
 class Sprite3D_Animation {
 	public:
 		// Construct & Destruct
-		Sprite3D_Animation(int* tabAnim, int delay);
+		Sprite3D_Animation(int size, int* tabAnim, int delay);
 		~Sprite3D_Animation();
 		
 		// Get functions
+		int size() const { return s_size; }
 		int* tabAnim() const { return s_tabAnim; }
 		int delay() const { return s_delay; }
 		Timer* tmr() const { return s_tmr; }
-		bool isPlayed() const { return s_isPlayed; }
+		bool isPlaying() const { return s_isPlaying; }
 		
 		// Setting functions
-		void isPlayed(bool isPlayed) { s_isPlayed = isPlayed; }
+		void isPlaying(bool isPlaying) { s_isPlaying = isPlaying; }
 	
 	private:
+		int s_size;
 		int* s_tabAnim;
 		int s_delay;
 		Timer* s_tmr;
-		bool s_isPlayed;
+		bool s_isPlaying;
 };
 
 class Sprite3D {
@@ -35,7 +37,7 @@ class Sprite3D {
 		
 		// Update functions
         void drawFrame(s16 x, s16 y, int frame);
-		void addAnimation(int* tabAnim, int delay);
+		void addAnimation(int size, int* tabAnim, int delay);
 		void resetAnimation(int anim);
 		void startAnimation(int anim);
 		void stopAnimation(int anim);
