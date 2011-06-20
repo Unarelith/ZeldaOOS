@@ -52,7 +52,7 @@ void Sprite3D::drawFrame(s16 x, s16 y, int frame) {
 void Sprite3D::addAnimation(int size, int* tabAnim, int delay) {
 	Sprite3D_Animation* tmp = new Sprite3D_Animation(size, tabAnim, delay);
 	s_animations.push_back(tmp);
-	printf("\x1b[5;0H addr: %d", s_animations.at(s_animations.size() - 1));
+	printf("\x1b[5;0H addr: %p", s_animations.at(s_animations.size() - 1)->tabAnim());
 	//printf("\x1b[5;0Hanimation: %d, %d / %d, %d / %d, %d", tabAnim[0], tabAnim[1], tmp->tabAnim()[0], tmp->tabAnim()[1], s_animations.at(s_animations.size() - 1).tabAnim()[0], s_animations.back().tabAnim()[1]);
 }
 
@@ -73,7 +73,7 @@ bool Sprite3D::animationAtEnd(int anim) {
 }
 
 void Sprite3D::playAnimation(s16 x, s16 y, int anim) {
-	printf("\x1b[6;0H addr: %d", s_animations.at(anim));
+	printf("\x1b[6;0H addr: %p", s_animations.at(anim)->tabAnim());
 	
 	// If the animation is not playing
 	if(!s_animations.at(anim)->isPlaying()) {

@@ -8,10 +8,10 @@
 
 // All player's directions
 enum PlayerDirection {
-	DIR_UP = 4,
-	DIR_DOWN = 1,
-	DIR_LEFT = 3,
-	DIR_RIGHT = 2
+	DIR_UP = 3,
+	DIR_DOWN = 0,
+	DIR_LEFT = 2,
+	DIR_RIGHT = 1
 };
 
 class Player : public Sprite3D {

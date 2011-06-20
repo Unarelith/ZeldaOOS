@@ -100,6 +100,6 @@ void Player::draw() {
 	/*if((!ul_keys.held.up) && (!ul_keys.held.down) && (!ul_keys.held.left) && (!ul_keys.held.right)) {
 		drawFrame(s_x - 16, s_y - 16, s_direction - 1); // Draw a simple frame
 	} else {*/
-		playAnimation(s_x - 16, s_y - 16, s_direction - 1); // Play player's animation
+		playAnimation(s_x - 16, s_y - 16, s_direction); // Play player's animation
 	//}
 }
