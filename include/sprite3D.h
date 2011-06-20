@@ -64,7 +64,7 @@ class Sprite3D {
 		UL_IMAGE* s_img;
 		
 		// Animations table
-		vector<Sprite3D_Animation*> s_animations;
+		vector<Sprite3D_Animation> s_animations;
 };
 
 #endif // SPRITE3D_H
