@@ -80,7 +80,7 @@ void Game::pressStartScreen() {
 		// End the drawing
 		ulEndDrawing();
 		
-		//Wait the VBlank (synchronize at 60 fps)
+		// Wait the VBlank (synchronize at 60 fps)
 		ulSyncFrame();
 	}
 	
@@ -91,9 +91,9 @@ void Game::pressStartScreen() {
 }
 
 void Game::titleScreen() {
-	/*consoleClear();
+	consoleClear();
 	
-	dmaCopy(titleScreen2Bitmap, BG_GFX_SUB, titleScreen2BitmapLen);
+	/*dmaCopy(titleScreen2Bitmap, BG_GFX_SUB, titleScreen2BitmapLen);
 	dmaCopy(titleScreen2Pal, BG_PALETTE_SUB, titleScreen2PalLen);*/
 	
 	UL_IMAGE* fileSelectImg = ulLoadImageFilePNG((const char*)fileSelect_png, sizeof(fileSelect_png), UL_IN_RAM, UL_PF_PAL8);
@@ -106,17 +106,13 @@ void Game::titleScreen() {
 		ulDebug("acorn image error");
 	}
 	
-	Sprite3D* link = new Sprite3D((const char*)link_png, sizeof(link_png), 16, 16);
+	Sprite3D* linkts = new Sprite3D((const char*)linkts_png, sizeof(linkts_png), 16, 16);
 	
 	int curPos = 1;
 	
 	while(1) {
 		// Read keys data
 		ulReadKeys(0);
-		
-		if((ul_keys.pressed.start) || (ul_keys.touch.click)) {
-			break;
-		}
 		
 		// Start the drawing
 		ulStartDrawing2D();
@@ -126,7 +122,7 @@ void Game::titleScreen() {
 		ulDrawImageXY(acornImg, 8, 64+((curPos-1)*32));
 		
 		// Draw sprite
-		link->drawFrame(138, 74, 1);
+		linkts->drawFrame(138, 74, 1);
 		
 		// End the drawing
 		ulEndDrawing();
@@ -149,16 +145,38 @@ void Game::titleScreen() {
 			break;
 		}
 		
-		//Wait the VBlank (synchronize at 60 fps)
+		// Wait the VBlank (synchronize at 60 fps)
 		ulSyncFrame();
 	}
 	
 	ulDeleteImage(fileSelectImg);
 	ulDeleteImage(acornImg);
 	
+	delete linkts;
+	
 	init();
 }
 
 void Game::init() {
+	Player* link = new Player;
 	
+	while(1) {
+		// Read keys data
+		ulReadKeys(0);
+		
+		// Start the drawing
+		ulStartDrawing2D();
+		
+		// Move link
+		link->move();
+		
+		// Draw sprite
+		link->draw();
+		
+		// End the drawing
+		ulEndDrawing();
+		
+		// Wait the VBlank (synchronize at 60 fps)
+		ulSyncFrame();
+	}
 }

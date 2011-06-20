@@ -47,8 +47,9 @@ class Sprite3D {
         s16 y() const { return s_y; } // Get sprite y coordinate
         u16 width() const { return s_width; } // Get width
         u16 height() const { return s_height; } // Get height
+        UL_IMAGE* img() const { return s_img; } // Get img
 	
-	private:
+	protected:
 		// Sprite size
 		u16 s_width;
 		u16 s_height;

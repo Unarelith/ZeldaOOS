@@ -62,7 +62,7 @@ void Sprite3D::stopAnimation(int anim) {
 }
 
 bool Sprite3D::animationAtEnd(int anim) {
-	return floor(s_animations.at(anim).tmr()->time() / s_animations.at(anim).delay() + 1) >= sizeof(s_animations.at(anim).tabAnim()) / sizeof(s_animations.at(anim).tabAnim()[0]);
+	return floor(s_animations.at(anim).tmr()->time() / s_animations.at(anim).delay() + 1) >= sizeof(s_animations.at(anim).tabAnim()) / sizeof(s_animations.at(anim).tabAnim()[1]);
 }
 
 void Sprite3D::playAnimation(s16 x, s16 y, int anim) {
@@ -77,6 +77,8 @@ void Sprite3D::playAnimation(s16 x, s16 y, int anim) {
 		startAnimation(anim);
 	}
 	
-	int animToDraw = s_animations.at(anim).tabAnim()[(int)floor(s_animations.at(anim).tmr()->time() / s_animations.at(anim).delay()) + 1];
+	consoleClear();
+	int animToDraw = s_animations.at(anim).tabAnim()[s_animations.at(anim).tmr()->time() / s_animations.at(anim).delay()];
+	printf("\x1b[0;0H%d,%d\n%d,%d\n%d", animToDraw, s_animations.at(anim).tmr()->time(), s_animations.at(anim).delay(), anim, s_animations.at(anim).tmr()->time() / s_animations.at(anim).delay());
 	drawFrame(x, y, animToDraw);
 }
