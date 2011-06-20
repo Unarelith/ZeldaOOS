@@ -8,7 +8,7 @@ Player::Player() : Sprite3D((const char*)link_png, sizeof(link_png), 48, 48) {
 	s_direction = DIR_LEFT;
 	
 	// Fill animations table
-	int animations[12][4] = {
+	int animations[4][2] = {
 		{4,0},
 		{5,1},
 		{6,2},
