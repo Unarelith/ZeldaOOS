@@ -5,8 +5,9 @@ Player::Player() : Sprite3D((const char*)link_png, sizeof(link_png), 48, 48) {
 	s_y = 65;
 	s_vx = 0;
 	s_vy = 0;
-	s_direction = 1;
+	s_direction = DIR_LEFT;
 	
+	// Fill animations table
 	int animations[12][4] = {
 		{4,0},
 		{5,1},
@@ -22,7 +23,7 @@ Player::Player() : Sprite3D((const char*)link_png, sizeof(link_png), 48, 48) {
 		{23,27}*/
 	};
 	
-	//addAnimation(0, NULL, 200);
+	// Add animations to player's sprite
 	addAnimation(2, animations[0], 200);
 	addAnimation(2, animations[1], 200);
 	addAnimation(2, animations[2], 200);
