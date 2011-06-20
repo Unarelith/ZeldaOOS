@@ -50,8 +50,9 @@ void Sprite3D::drawFrame(s16 x, s16 y, int frame) {
 }
 
 void Sprite3D::addAnimation(int size, int* tabAnim, int delay) {
-	Sprite3D_Animation tmp(size, tabAnim, delay);
-	s_animations.push_back(tmp);
+	Sprite3D_Animation* tmp = new Sprite3D_Animation(size, tabAnim, delay);
+	s_animations.push_back(*tmp);
+	//printf("\x1b[5;0Hanimation: %d, %d / %d, %d / %d, %d", tabAnim[0], tabAnim[1], tmp->tabAnim()[0], tmp->tabAnim()[1], s_animations.at(s_animations.size() - 1).tabAnim()[0], s_animations.back().tabAnim()[1]);
 }
 
 void Sprite3D::resetAnimation(int anim) {
@@ -88,9 +89,9 @@ void Sprite3D::playAnimation(s16 x, s16 y, int anim) {
 	consoleClear();
 	
 	// This variable contains the number of the animation's frame to draw
-	int animToDraw = s_animations.at(anim).tabAnim()[s_animations.at(anim).tmr()->time() / s_animations.at(anim).delay()];
+	int animToDraw = s_animations.at(anim).tabAnim()[(int)(s_animations.at(anim).tmr()->time() / s_animations.at(anim).delay())];
 	drawFrame(x, y, animToDraw); // Draw the frame
 	
 	// Debug printing
-	printf("\x1b[0;0H%d,%d\n%d,%d\n%d,%d", animToDraw, s_animations.at(anim).tmr()->time(), s_animations.at(anim).delay(), anim, s_animations.at(anim).tmr()->time() / s_animations.at(anim).delay(), s_animations.at(anim).size());
+	printf("\x1b[10;0H%d,%d\n%d,%d\n%d,%d\n%d,%d", animToDraw, s_animations.at(anim).tmr()->time(), s_animations.at(anim).delay(), anim, s_animations.at(anim).tmr()->time() / s_animations.at(anim).delay(), s_animations.at(anim).size(), s_animations.at(anim).tabAnim()[0], s_animations.at(anim).tabAnim()[1]);
 }

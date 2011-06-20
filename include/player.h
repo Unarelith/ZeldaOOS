@@ -6,6 +6,7 @@
 
 #include "link_png.h"
 
+// All player's directions
 enum PlayerDirection {
 	DIR_UP = 4,
 	DIR_DOWN = 1,

@@ -42,34 +42,64 @@ Player::~Player() {
 }
 
 void Player::move() {
+	// If up key held
 	if(ul_keys.held.up) {
+		// Set vertical speed vector negative
 		s_vy = -1;
-		s_direction = DIR_UP;
-	}
-	if(ul_keys.held.down) {
-		s_vy = 1;
-		s_direction = DIR_DOWN;
-	}
-	if(ul_keys.held.left) {
-		s_vx = -1;
-		s_direction = DIR_LEFT;
-	}
-	if(ul_keys.held.right) {
-		s_vx = 1;
-		s_direction = DIR_RIGHT;
+		
+		// If all other keys are released
+		if((!ul_keys.held.down) && (!ul_keys.held.left) && (!ul_keys.held.right)) {
+			s_direction = DIR_UP;
+		}
 	}
 	
+	// If down key held
+	if(ul_keys.held.down) {
+		// Set vertical speed vector positive
+		s_vy = 1;
+		
+		// If all other keys are released
+		if((!ul_keys.held.up) && (!ul_keys.held.left) && (!ul_keys.held.right)) {
+			s_direction = DIR_DOWN;
+		}
+	}
+	
+	// If left key held
+	if(ul_keys.held.left) {
+		// Set horizontal speed vector negative
+		s_vx = -1;
+		
+		// If all other keys are released
+		if((!ul_keys.held.up) && (!ul_keys.held.down) && (!ul_keys.held.right)) {
+			s_direction = DIR_LEFT;
+		}
+	}
+	
+	// If right key held
+	if(ul_keys.held.right) {
+		// Set horizontal speed vector positive
+		s_vx = 1;
+		
+		// If all other keys are released
+		if((!ul_keys.held.up) && (!ul_keys.held.down) && (!ul_keys.held.left)) {
+			s_direction = DIR_RIGHT;
+		}
+	}
+	
+	// Add speed vectors to coordinates ( move the player )
 	s_x += s_vx;
 	s_y += s_vy;
 	
+	// Reset speed vectors
 	s_vx = 0;
 	s_vy = 0;
 }
 
 void Player::draw() {
+	// If all directional keys are released
 	/*if((!ul_keys.held.up) && (!ul_keys.held.down) && (!ul_keys.held.left) && (!ul_keys.held.right)) {
-		drawFrame(s_x - 16, s_y - 16, s_direction - 1);
+		drawFrame(s_x - 16, s_y - 16, s_direction - 1); // Draw a simple frame
 	} else {*/
-		playAnimation(s_x - 16, s_y - 16, s_direction - 1);
+		playAnimation(s_x - 16, s_y - 16, s_direction - 1); // Play player's animation
 	//}
 }
