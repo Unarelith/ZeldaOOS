@@ -6,6 +6,13 @@
 
 #include "link_png.h"
 
+enum PlayerDirection {
+	DIR_UP = 4,
+	DIR_DOWN = 1,
+	DIR_LEFT = 3,
+	DIR_RIGHT = 2
+};
+
 class Player : public Sprite3D {
 	public:
 		// Construct & Destruct
@@ -25,7 +32,7 @@ class Player : public Sprite3D {
 		s8 s_vy;
 		
 		// Direction
-		int s_direction; // 1: Up / 2: Down / 3: Left / 4: Right
+		PlayerDirection s_direction;
 };
 
 #endif // PLAYER_H

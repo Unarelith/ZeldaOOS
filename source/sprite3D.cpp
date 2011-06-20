@@ -67,23 +67,30 @@ void Sprite3D::stopAnimation(int anim) {
 }
 
 bool Sprite3D::animationAtEnd(int anim) {
-	return floor(s_animations.at(anim).tmr()->time() / s_animations.at(anim).delay() + 1) >= s_animations.at(anim).size();
+	return s_animations.at(anim).tmr()->time() / s_animations.at(anim).delay() >= s_animations.at(anim).size();
 }
 
 void Sprite3D::playAnimation(s16 x, s16 y, int anim) {
+	// If the animation is not playing
 	if(!s_animations.at(anim).isPlaying()) {
-		resetAnimation(anim);
-		startAnimation(anim);
-		s_animations.at(anim).isPlaying(true);
+		resetAnimation(anim); // Reset animation timer
+		startAnimation(anim); // Start animation timer
+		s_animations.at(anim).isPlaying(true); // Set isPlaying boolean to true
 	}
 	
+	// If the animation is at end
 	if(s_animations.at(anim).tmr()->time() / s_animations.at(anim).delay() >= s_animations.at(anim).size()) {
-		resetAnimation(anim);
-		startAnimation(anim);
+		resetAnimation(anim); // Reset animation timer
+		startAnimation(anim); // Start animation timer
 	}
 	
+	// Clear the console
 	consoleClear();
+	
+	// This variable contains the number of the animation's frame to draw
 	int animToDraw = s_animations.at(anim).tabAnim()[s_animations.at(anim).tmr()->time() / s_animations.at(anim).delay()];
+	drawFrame(x, y, animToDraw); // Draw the frame
+	
+	// Debug printing
 	printf("\x1b[0;0H%d,%d\n%d,%d\n%d,%d", animToDraw, s_animations.at(anim).tmr()->time(), s_animations.at(anim).delay(), anim, s_animations.at(anim).tmr()->time() / s_animations.at(anim).delay(), s_animations.at(anim).size());
-	drawFrame(x, y, animToDraw);
 }

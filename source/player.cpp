@@ -43,19 +43,19 @@ Player::~Player() {
 void Player::move() {
 	if(ul_keys.held.up) {
 		s_vy = -1;
-		s_direction = 4;
+		s_direction = DIR_UP;
 	}
 	if(ul_keys.held.down) {
 		s_vy = 1;
-		s_direction = 1;
+		s_direction = DIR_DOWN;
 	}
 	if(ul_keys.held.left) {
 		s_vx = -1;
-		s_direction = 3;
+		s_direction = DIR_LEFT;
 	}
 	if(ul_keys.held.right) {
 		s_vx = 1;
-		s_direction = 2;
+		s_direction = DIR_RIGHT;
 	}
 	
 	s_x += s_vx;
