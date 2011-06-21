@@ -25,10 +25,10 @@ Player::Player() : Sprite3D((const char*)link_png, sizeof(link_png), 48, 48) {
 	s_direction = DIR_LEFT;
 	
 	// Add animations to player's sprite
-	addAnimation(2, animations[0], 200);
-	addAnimation(2, animations[1], 200);
-	addAnimation(2, animations[2], 200);
-	addAnimation(2, animations[3], 200);
+	addAnimation(2, animations[0], 100);
+	addAnimation(2, animations[1], 100);
+	addAnimation(2, animations[2], 100);
+	addAnimation(2, animations[3], 100);
 	addAnimation(4, animations[4], 50);
 	addAnimation(4, animations[5], 50);
 	addAnimation(4, animations[6], 50);
@@ -62,17 +62,17 @@ bool passable(s16 caseX, s16 caseY) {
 }
 
 void Player::testCollisions() {
-	if(	(!passable((s_x + 1 + s_vx) / 16	, (s_y + 6) 		/ 16)) || // Left up
-		(!passable((s_x - 1 + s_vx) / 16 + 1, (s_y + 6) 		/ 16)) || // Right up
-		(!passable((s_x + 1 + s_vx) / 16	, (s_y - 1 + 15) 	/ 16)) || // Left down
-		(!passable((s_x - 1 + s_vx) / 16 + 1, (s_y - 1 + 15) 	/ 16)))   // Right down
+	if(	(!passable((s_x + 4 + s_vx) / 16	, (s_y + 6) 		/ 16)) || // Left up
+		(!passable((s_x - 4 + s_vx) / 16 + 1, (s_y + 6) 		/ 16)) || // Right up
+		(!passable((s_x + 4 + s_vx) / 16	, (s_y - 1 + 15) 	/ 16)) || // Left down
+		(!passable((s_x - 4 + s_vx) / 16 + 1, (s_y - 1 + 15) 	/ 16)))   // Right down
 	{
 			s_vx = 0;
 	}
-	if(	(!passable((s_x + 1) / 16		, (s_y + 6 + s_vy) / 16		)) || // Up left
-		(!passable((s_x + 1) / 16		, (s_y - 1 + s_vy) / 16 + 1	)) || // Down left
-		(!passable((s_x - 1 + 15) / 16	, (s_y + 6 + s_vy) / 16		)) || // Up right
-		(!passable((s_x - 1 + 15) / 16	, (s_y - 1 + s_vy) / 16 + 1	)))   // Down right
+	if(	(!passable((s_x + 4) / 16		, (s_y + 6 + s_vy) / 16		)) || // Up left
+		(!passable((s_x + 4) / 16		, (s_y - 1 + s_vy) / 16 + 1	)) || // Down left
+		(!passable((s_x - 4 + 15) / 16	, (s_y + 6 + s_vy) / 16		)) || // Up right
+		(!passable((s_x - 4 + 15) / 16	, (s_y - 1 + s_vy) / 16 + 1	)))   // Down right
 	{
 			s_vy = 0;
 	}
