@@ -21,6 +21,7 @@ class Player : public Sprite3D {
 		~Player();
 		
 		// Update functions
+		void testCollisions();
 		void move();
 		void draw();
 		

@@ -15,7 +15,7 @@ Sprite3D_Animation::~Sprite3D_Animation() {
 Sprite3D::Sprite3D(const char* filename, int filesize, u16 width, u16 height) {
 	s_width = width;
 	s_height = height;
-	s_img = ulLoadImageFilePNG(filename, filesize, UL_IN_VRAM, UL_PF_PAL8);
+	s_img = ulLoadImageFilePNG(filename, filesize, UL_IN_RAM, UL_PF_PAL8);
 	if(!s_img) {
 		ulDebug("unable to load a sprite");
 	}

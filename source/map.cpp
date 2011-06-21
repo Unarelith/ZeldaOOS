@@ -1,7 +1,7 @@
 #include "map.h"
 
-Map::Map(UL_IMAGE* image, char* filename, u16 width, u16 height, u16 tileWidth, u16 tileHeight) {
-	s_image = image;
+Map::Map(Tileset* tileset, char* filename, u16 width, u16 height, u16 tileWidth, u16 tileHeight) {
+	s_tileset = tileset;
 	s_filename = filename;
 	s_width = width;
 	s_height = height;
@@ -41,7 +41,7 @@ Map::Map(UL_IMAGE* image, char* filename, u16 width, u16 height, u16 tileWidth, 
     }
     free(buffer);
 	
-    s_map = ulCreateMap(s_image, (void*)table, s_tileWidth, s_tileHeight, s_width, s_height, UL_MF_U16);
+    s_map = ulCreateMap(s_tileset->image, (void*)table, s_tileWidth, s_tileHeight, s_width, s_height, UL_MF_U16);
 }
 
 Map::~Map() {

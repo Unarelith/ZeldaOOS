@@ -19,7 +19,8 @@
     along with this program.  If not, see <http://www.gnu.org/licenses/>.
 	
 	Special thanks:
-		- Brunni
+		- libnds creators and mainteners
+		- Brunni for the µLib
 		- µLua team
 			* Risike
 			* Fantasix
