@@ -3,10 +3,15 @@
 
 #include "main.h"
 
+typedef struct {
+	UL_IMAGE* image;
+	u16* nonPassable;
+} Tileset;
+
 class Map {
 	public:
 		// Construct & Destruct
-		Map(UL_IMAGE* image, char* filename, u16 width, u16 height, u16 tileWidth, u16 tileHeight);
+		Map(Tileset* tileset, char* filename, u16 width, u16 height, u16 tileWidth, u16 tileHeight);
 		~Map();
 		
 		// Draw the map
@@ -15,18 +20,20 @@ class Map {
 		// Scroll the map
 		void scroll(s16 x, s16 y);
 		
-		// Set a tile with coordinates
-		void setTile(s16 x, s16 y, u16 tile);
+		// Setting functions
+		void setTile(s16 x, s16 y, u16 tile); // Set a tile with coordinates
 		
-		// Get a tile with coordinates
-		u16 getTile(s16 x, s16 y);
+		// Get functions
+		u16 getTile(s16 x, s16 y); // Get a tile with coordinates
+		UL_MAP* map() const { return s_map; }
+		Tileset* tileset() const { return s_tileset; }
 		
 	private:
 		// Map
 		UL_MAP * s_map;
 		
 		// Tileset
-		UL_IMAGE* s_image;
+		Tileset* s_tileset;
 		
 		// Map filename
 		char* s_filename;

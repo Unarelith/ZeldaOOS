@@ -28,6 +28,9 @@ class Game {
 		// Initialisation
 		void init();
 		
+		// Static variables
+		static Map* currentMap;
+		
 	private:
 		int s_bg; // Sub BG id returned by bgInitSub()
 };
