@@ -40,8 +40,8 @@ Game::Game() {
 	vramSetBankC(VRAM_C_SUB_BG);
 	s_bg = bgInitSub(3, BgType_Bmp8, BgSize_B8_256x256, 0, 0);*/
 	
-	//init();
-	pressStartScreen();
+	init();
+	//pressStartScreen();
 }
 
 Game::~Game() {
