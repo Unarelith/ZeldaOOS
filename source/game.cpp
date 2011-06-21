@@ -18,6 +18,9 @@ Game::Game() {
 	
 	// Set main LCD
 	ulSetMainLcd(0);
+    
+    // Banks A-B for textures VRAM
+    ulSetTexVramParameters(UL_BANK_A | UL_BANK_B, VRAM_A, 256 << 10);
 	
 	ulDebug("EFS loading...");
 	
@@ -35,19 +38,20 @@ Game::Game() {
 	//vramSetBankC(VRAM_C_SUB_BG);
 	//s_bg = bgInitSub(3, BgType_Bmp8, BgSize_B8_256x256, 0, 0);
 	
-	pressStartScreen();
+	init();
+	//pressStartScreen();
 }
 
 Game::~Game() {
 }
 
 void Game::pressStartScreen() {
-	UL_IMAGE* titleScreenImg = ulLoadImageFilePNG((const char*)titleScreen_png, sizeof(titleScreen_png), UL_IN_RAM, UL_PF_PAL8);
+	UL_IMAGE* titleScreenImg = ulLoadImageFilePNG((const char*)titleScreen_png, sizeof(titleScreen_png), UL_IN_VRAM, UL_PF_PAL8);
 	if(!titleScreenImg) {
 		ulDebug("titleScreen image error");
 	}
 	
-	UL_IMAGE* pressStartImg = ulLoadImageFilePNG((const char*)pressStart_png, sizeof(pressStart_png), UL_IN_RAM, UL_PF_PAL8);
+	UL_IMAGE* pressStartImg = ulLoadImageFilePNG((const char*)pressStart_png, sizeof(pressStart_png), UL_IN_VRAM, UL_PF_PAL8);
 	if(!pressStartImg) {
 		ulDebug("pressStart image error");
 	}
@@ -96,12 +100,12 @@ void Game::titleScreen() {
 	/*dmaCopy(titleScreen2Bitmap, BG_GFX_SUB, titleScreen2BitmapLen);
 	dmaCopy(titleScreen2Pal, BG_PALETTE_SUB, titleScreen2PalLen);*/
 	
-	UL_IMAGE* fileSelectImg = ulLoadImageFilePNG((const char*)fileSelect_png, sizeof(fileSelect_png), UL_IN_RAM, UL_PF_PAL8);
+	UL_IMAGE* fileSelectImg = ulLoadImageFilePNG((const char*)fileSelect_png, sizeof(fileSelect_png), UL_IN_VRAM, UL_PF_PAL8);
 	if(!fileSelectImg) {
 		ulDebug("fileSelect image error");
 	}
 	
-	UL_IMAGE* acornImg = ulLoadImageFilePNG((const char*)acorn_png, sizeof(acorn_png), UL_IN_RAM, UL_PF_PAL8);
+	UL_IMAGE* acornImg = ulLoadImageFilePNG((const char*)acorn_png, sizeof(acorn_png), UL_IN_VRAM, UL_PF_PAL8);
 	if(!acornImg) {
 		ulDebug("acorn image error");
 	}
@@ -160,12 +164,24 @@ void Game::titleScreen() {
 void Game::init() {
 	Player* link = new Player;
 	
+	UL_IMAGE* tileset = ulLoadImageFilePNG((const char*)plain_png, sizeof(plain_png), UL_IN_VRAM, UL_PF_PAL8);
+	if(!tileset) {
+		ulDebug("tileset loading error");
+	}
+	
+	Map* a1 = new Map(tileset, "efs:/a1.map", 16, 12, 16, 16);
+	
+	//ulDebug("\nvram available: %d\n", ulGetTexVramAvailMemory());
+	
 	while(1) {
 		// Read keys data
 		ulReadKeys(0);
 		
 		// Start the drawing
 		ulStartDrawing2D();
+		
+		// Draw map
+		a1->draw();
 		
 		// Move link
 		link->move();

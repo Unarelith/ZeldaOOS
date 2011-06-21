@@ -13,6 +13,8 @@ extern int i;
 #include <math.h> // Math functions
 #include <string.h> // String functions
 #include <vector> // Vector
+#include <sys/stat.h>
+#include <sys/dir.h>
 
 using namespace std;
 

@@ -15,7 +15,7 @@ Sprite3D_Animation::~Sprite3D_Animation() {
 Sprite3D::Sprite3D(const char* filename, int filesize, u16 width, u16 height) {
 	s_width = width;
 	s_height = height;
-	s_img = ulLoadImageFilePNG(filename, filesize, UL_IN_RAM, UL_PF_PAL8);
+	s_img = ulLoadImageFilePNG(filename, filesize, UL_IN_VRAM, UL_PF_PAL8);
 	if(!s_img) {
 		ulDebug("unable to load a sprite");
 	}
@@ -84,12 +84,12 @@ void Sprite3D::playAnimation(s16 x, s16 y, int anim) {
 		startAnimation(anim); // Start animation timer
 	}
 	
-	// Clear the console
-	consoleClear();
-	
 	// This variable contains the number of the animation's frame to draw
 	int animToDraw = s_animations.at(anim)->tabAnim()[(int)(s_animations.at(anim)->tmr()->time() / s_animations.at(anim)->delay())];
 	drawFrame(x, y, animToDraw); // Draw the frame
+	
+	// Clear the console
+	//consoleClear();
 	
 	// Debug printing
 	//printf("\x1b[10;0H%d,%d\n%d,%d\n%d,%d\n%d,%d", animToDraw, s_animations.at(anim)->tmr()->time(), s_animations.at(anim)->delay(), anim, s_animations.at(anim)->tmr()->time() / s_animations.at(anim)->delay(), s_animations.at(anim)->size(), s_animations.at(anim)->tabAnim()[0], s_animations.at(anim)->tabAnim()[1]);

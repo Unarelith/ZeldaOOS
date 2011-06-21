@@ -5,6 +5,7 @@
 #include "timer.h"
 #include "sprite.h"
 #include "player.h"
+#include "map.h"
 
 #include "titleScreen2.h"
 #include "titleScreen_png.h"
@@ -12,6 +13,7 @@
 #include "fileSelect_png.h"
 #include "acorn_png.h"
 #include "linkts_png.h"
+#include "plain_png.h"
 
 class Game {
 	public:
