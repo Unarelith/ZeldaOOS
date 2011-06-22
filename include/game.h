@@ -6,6 +6,7 @@
 #include "sprite.h"
 #include "player.h"
 #include "map.h"
+#include "weapon.h"
 
 #include "titleScreen2.h"
 #include "titleScreen_png.h"

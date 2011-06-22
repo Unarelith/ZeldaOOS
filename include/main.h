@@ -15,6 +15,7 @@ extern int i;
 #include <vector> // Vector
 #include <sys/stat.h>
 #include <sys/dir.h>
+#include <ctype.h>
 
 using namespace std;
 

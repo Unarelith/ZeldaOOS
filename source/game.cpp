@@ -24,15 +24,15 @@ Game::Game() {
     // Banks A-B for textures VRAM
     ulSetTexVramParameters(UL_BANK_A | UL_BANK_B, VRAM_A, 256 << 10);
 	
-	ulDebug("EFS loading...");
+	ulDebug("EFS loading...\n");
 	
 	// Initialize EFS filesystem
 	if(!EFS_Init(EFS_AND_FAT | EFS_DEFAULT_DEVICE, NULL)) {
-		ulDebug("FATAL ERROR: Bad filesystem init");
+		ulDebug("FATAL ERROR: Bad filesystem init\n");
 		while(1) { swiWaitForVBlank(); }
 	}
 	
-	ulDebug("EFS loaded!");
+	ulDebug("EFS loaded!\n");
 	
 	Timer::initTimers();
 	
@@ -50,12 +50,12 @@ Game::~Game() {
 void Game::pressStartScreen() {
 	UL_IMAGE* titleScreenImg = ulLoadImageFilePNG((const char*)titleScreen_png, sizeof(titleScreen_png), UL_IN_VRAM, UL_PF_PAL8);
 	if(!titleScreenImg) {
-		ulDebug("titleScreen image error");
+		ulDebug("titleScreen image error\n");
 	}
 	
 	UL_IMAGE* pressStartImg = ulLoadImageFilePNG((const char*)pressStart_png, sizeof(pressStart_png), UL_IN_VRAM, UL_PF_PAL8);
 	if(!pressStartImg) {
-		ulDebug("pressStart image error");
+		ulDebug("pressStart image error\n");
 	}
 	
 	Timer pressStartTimer;
@@ -104,12 +104,12 @@ void Game::titleScreen() {
 	
 	UL_IMAGE* fileSelectImg = ulLoadImageFilePNG((const char*)fileSelect_png, sizeof(fileSelect_png), UL_IN_VRAM, UL_PF_PAL8);
 	if(!fileSelectImg) {
-		ulDebug("fileSelect image error");
+		ulDebug("fileSelect image error\n");
 	}
 	
 	UL_IMAGE* acornImg = ulLoadImageFilePNG((const char*)acorn_png, sizeof(acorn_png), UL_IN_VRAM, UL_PF_PAL8);
 	if(!acornImg) {
-		ulDebug("acorn image error");
+		ulDebug("acorn image error\n");
 	}
 	
 	Sprite3D* linkts = new Sprite3D((const char*)linkts_png, sizeof(linkts_png), 16, 16);
@@ -177,14 +177,16 @@ void Game::init() {
 	Tileset tileset = {0, nonPassable};
 	tileset.image = ulLoadImageFilePNG((const char*)plain_png, sizeof(plain_png), UL_IN_VRAM, UL_PF_PAL8);
 	if(!tileset.image) {
-		ulDebug("tileset loading error");
+		ulDebug("tileset loading error\n");
 	}
 	
-	Map* a1 = new Map(&tileset, "efs:/a1.map", 16, 12, 16, 16);
+	Map* a1 = new Map(&tileset, "efs:/maps/a1.map", 16, 12, 16, 16);
 	
 	//ulDebug("\nvram available: %d\n", ulGetTexVramAvailMemory());
 	
 	currentMap = a1;
+	
+	Weapon weapon("Sword", 0);
 	
 	while(1) {
 		// Read keys data
