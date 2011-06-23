@@ -1,0 +1,10 @@
+#16 color
+-gB4
+
+#magenta transparent
+-gTFF00FF
+
+#set size to 32x32
+-ab 32
+-ar 32
+

@@ -36,8 +36,8 @@ TARGET		:=	$(shell basename $(CURDIR))
 BUILD		:=	build
 SOURCES		:=	source
 INCLUDES	:=	include
-DATA		:=	data
-GRAPHICS	:=	gfx
+DATA		:=	data data/icons data/characters data/tilesets data/interface
+GRAPHICS	:=	gfx gfx/icons gfx/interface gfx/weapons
 
 #---------------------------------------------------------------------------------
 # options for code generation
@@ -191,6 +191,11 @@ $(OUTPUT).elf	:	$(OFILES)
 %.s %.h   : %.png %.grit
 #---------------------------------------------------------------------------------
 	grit $< -fts -o$*
+
+#---------------------------------------------------------------------------------
+%.s %.h   : %.png
+#---------------------------------------------------------------------------------
+	grit $< -fts -ff $(<D)/$(notdir $(<D)).grit -o$*
 
 -include $(DEPENDS)
 

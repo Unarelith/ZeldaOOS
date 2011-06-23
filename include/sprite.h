@@ -6,11 +6,11 @@
 class Sprite {
     public:
 		// Construct & Destruct
-        Sprite(int i, SpriteSize size, SpriteColorFormat format, s16 x, s16 y, OamState* oam = &oamMain);
+        Sprite(int i, SpriteSize size, SpriteColorFormat format, OamState* oam = &oamMain);
 		~Sprite();
 		
 		// Update functions
-        void draw();
+        void draw(s16 x, s16 y, int paletteAlpha = 15);
 		
         // Setting functions
 		void fill(const u32* data, u16 i);
@@ -18,7 +18,7 @@ class Sprite {
 		
 		// Get functions
         int i() const { return s_i; } // Get sprite ID
-        u16* gfx() const { return s_gfx; } // Get sprite gfx pointer
+        u16* gfx() { return s_gfx; } // Get sprite gfx pointer
         s16 x() const { return s_x; } // Get sprite x coordinate
         s16 y() const { return s_y; } // Get sprite y coordinate
     

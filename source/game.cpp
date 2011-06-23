@@ -10,6 +10,18 @@ Game::Game() {
 	// Initialize random seed
 	srand(time(NULL));
 	
+	videoSetModeSub(MODE_5_2D);
+	
+	vramSetBankC(VRAM_C_SUB_BG);
+	vramSetBankD(VRAM_D_SUB_SPRITE);
+	
+	ul_isConsoleInited = 1;
+	consoleInit(NULL, 0, BgType_Text4bpp, BgSize_T_256x256, 22, 3, false, true);
+	
+	s_bg = bgInitSub(3, BgType_Bmp8, BgSize_B8_256x256, 5, 0);
+	
+	oamInit(&oamSub, SpriteMapping_1D_256, false);
+	
     // Initialization of µLibrary
     ulInit(UL_INIT_ALL);
     ulInitGfx();
@@ -35,10 +47,6 @@ Game::Game() {
 	ulDebug("EFS loaded!\n");
 	
 	Timer::initTimers();
-	
-	/*videoSetModeSub(MODE_5_2D);
-	vramSetBankC(VRAM_C_SUB_BG);
-	s_bg = bgInitSub(3, BgType_Bmp8, BgSize_B8_256x256, 0, 0);*/
 	
 	init();
 	//pressStartScreen();
@@ -99,8 +107,8 @@ void Game::pressStartScreen() {
 void Game::titleScreen() {
 	consoleClear();
 	
-	//dmaCopy(titleScreen2Bitmap, BG_GFX_SUB, titleScreen2BitmapLen);
-	//dmaCopy(titleScreen2Pal, BG_PALETTE_SUB, titleScreen2PalLen);
+	dmaCopy(titleScreen2Bitmap, bgGetGfxPtr(s_bg), titleScreen2BitmapLen);
+	dmaCopy(titleScreen2Pal, BG_PALETTE_SUB, titleScreen2PalLen);
 	
 	UL_IMAGE* fileSelectImg = ulLoadImageFilePNG((const char*)fileSelect_png, sizeof(fileSelect_png), UL_IN_VRAM, UL_PF_PAL8);
 	if(!fileSelectImg) {
@@ -164,6 +172,9 @@ void Game::titleScreen() {
 }
 
 void Game::init() {
+	dmaCopy(statsBitmap, bgGetGfxPtr(s_bg), statsBitmapLen);
+	dmaCopy(statsPal, BG_PALETTE_SUB, statsPalLen);
+	
 	Player* link = new Player;
 	
 	u16 nonPassable[127] = {
@@ -186,7 +197,7 @@ void Game::init() {
 	
 	currentMap = a1;
 	
-	Weapon weapon("Sword", 0);
+	Weapon sword(swordL1Tiles, swordL1Pal, "Sword", 1);
 	
 	while(1) {
 		// Read keys data
@@ -204,10 +215,16 @@ void Game::init() {
 		// Draw sprite
 		link->draw();
 		
+		// Draw sword icon
+		sword.drawIcon(W_KEY_B);
+		
 		// End the drawing
 		ulEndDrawing();
 		
 		// Wait the VBlank (synchronize at 60 fps)
 		ulSyncFrame();
+		
+		// Update oam engine
+		oamUpdate(&oamSub);
 	}
 }

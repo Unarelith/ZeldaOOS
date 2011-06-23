@@ -9,6 +9,9 @@
 #include "weapon.h"
 
 #include "titleScreen2.h"
+#include "stats.h"
+#include "swordL1.h"
+
 #include "titleScreen_png.h"
 #include "pressStart_png.h"
 #include "fileSelect_png.h"
