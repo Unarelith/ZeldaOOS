@@ -2,7 +2,6 @@
 #define PLAYER_H
 
 #include "main.h"
-#include "sprite3D.h"
 
 #include "link_png.h"
 
@@ -14,7 +13,7 @@ enum PlayerDirection {
 	DIR_RIGHT = 1
 };
 
-class Player : public Sprite3D {
+class Player : public qSprite3D {
 	public:
 		// Construct & Destruct
 		Player();

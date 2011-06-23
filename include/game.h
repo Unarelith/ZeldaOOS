@@ -2,10 +2,7 @@
 #define GAME_H
 
 #include "main.h"
-#include "timer.h"
-#include "sprite.h"
 #include "player.h"
-#include "map.h"
 #include "weapon.h"
 
 #include "titleScreen2.h"
@@ -33,7 +30,7 @@ class Game {
 		void init();
 		
 		// Static variables
-		static Map* currentMap;
+		static qMap* currentMap;
 		
 	private:
 		int s_bg; // Sub BG id returned by bgInitSub()

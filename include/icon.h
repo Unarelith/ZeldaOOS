@@ -2,7 +2,6 @@
 #define ICON_H
 
 #include "main.h"
-#include "sprite.h"
 
 enum ICON_TYPE {
 	ICON_SEED = 0,
@@ -10,7 +9,7 @@ enum ICON_TYPE {
 	ICON_OBJECT = 2
 };
 
-class Icon : public Sprite {
+class Icon : public qSprite {
 	public:
 		// Construct & Destruct
 		Icon(int i, u8* gfx);

@@ -1,7 +1,6 @@
 #include "game.h"
-#include "efs_lib.h"
 
-Map* Game::currentMap;
+qMap* Game::currentMap;
 
 Game::Game() {
 	// Set up default exception handler
@@ -46,7 +45,7 @@ Game::Game() {
 	
 	ulDebug("EFS loaded!\n");
 	
-	Timer::initTimers();
+	qTimer::initTimers();
 	
 	init();
 	//pressStartScreen();
@@ -66,7 +65,7 @@ void Game::pressStartScreen() {
 		ulDebug("pressStart image error\n");
 	}
 	
-	Timer pressStartTimer;
+	qTimer pressStartTimer;
 	pressStartTimer.start();
 	
 	while(1) {
@@ -120,7 +119,7 @@ void Game::titleScreen() {
 		ulDebug("acorn image error\n");
 	}
 	
-	Sprite3D* linkts = new Sprite3D((const char*)linkts_png, sizeof(linkts_png), 16, 16);
+	qSprite3D* linkts = new qSprite3D((const char*)linkts_png, sizeof(linkts_png), 16, 16);
 	
 	int curPos = 1;
 	
@@ -185,13 +184,13 @@ void Game::init() {
 		240,241,242,243,244,245,246,247,250,251,252,254,255
 	};
 	
-	Tileset tileset = {0, nonPassable};
+	qTileset tileset = {0, nonPassable};
 	tileset.image = ulLoadImageFilePNG((const char*)plain_png, sizeof(plain_png), UL_IN_VRAM, UL_PF_PAL8);
 	if(!tileset.image) {
 		ulDebug("tileset loading error\n");
 	}
 	
-	Map* a1 = new Map(&tileset, "efs:/maps/a1.map", 16, 12, 16, 16);
+	qMap* a1 = new qMap(&tileset, "efs:/maps/a1.map", 16, 12, 16, 16);
 	
 	//ulDebug("\nvram available: %d\n", ulGetTexVramAvailMemory());
 	

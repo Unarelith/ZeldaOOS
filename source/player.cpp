@@ -17,7 +17,7 @@ int animations[12][4] = {
 	{23,27}
 };
 	
-Player::Player() : Sprite3D((const char*)link_png, sizeof(link_png), 48, 48) {
+Player::Player() : qSprite3D((const char*)link_png, sizeof(link_png), 48, 48) {
 	s_x = 240;
 	s_y = 128;
 	s_vx = 0;
