@@ -25,10 +25,10 @@ Player::Player() : qSprite3D((const char*)link_png, sizeof(link_png), 48, 48) {
 	s_direction = DIR_LEFT;
 	
 	// Add animations to player's sprite
-	addAnimation(2, animations[0], 100);
-	addAnimation(2, animations[1], 100);
-	addAnimation(2, animations[2], 100);
-	addAnimation(2, animations[3], 100);
+	addAnimation(2, animations[0], 100); // Down
+	addAnimation(2, animations[1], 100); // Right
+	addAnimation(2, animations[2], 100); // Left
+	addAnimation(2, animations[3], 100); // Up
 	addAnimation(4, animations[4], 50);
 	addAnimation(4, animations[5], 50);
 	addAnimation(4, animations[6], 50);

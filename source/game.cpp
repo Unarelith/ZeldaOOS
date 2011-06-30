@@ -15,9 +15,9 @@ Game::Game() {
 	vramSetBankD(VRAM_D_SUB_SPRITE);
 	
 	ul_isConsoleInited = 1;
-	consoleInit(NULL, 0, BgType_Text4bpp, BgSize_T_256x256, 22, 3, false, true);
+	consoleInit(NULL, 0, BgType_Text4bpp, BgSize_T_256x256, 0, 1, false, true);
 	
-	s_bg = bgInitSub(3, BgType_Bmp8, BgSize_B8_256x256, 5, 0);
+	s_bg = bgInitSub(3, BgType_Bmp16, BgSize_B16_256x256, 2, 0);
 	
 	oamInit(&oamSub, SpriteMapping_1D_256, false);
 	
@@ -31,19 +31,19 @@ Game::Game() {
 	
 	// Set main LCD
 	ulSetMainLcd(0);
-    
+	
     // Banks A-B for textures VRAM
     ulSetTexVramParameters(UL_BANK_A | UL_BANK_B, VRAM_A, 256 << 10);
 	
-	ulDebug("EFS loading...\n");
+	ulDebug("NitroFS loading...\n");
 	
 	// Initialize EFS filesystem
-	if(!EFS_Init(EFS_AND_FAT | EFS_DEFAULT_DEVICE, NULL)) {
-		ulDebug("FATAL ERROR: Bad filesystem init\n");
+	if(!nitroFSInit()) {
+		ulDebug("FATAL ERROR: Bad nitroFS init\n");
 		while(1) { swiWaitForVBlank(); }
 	}
 	
-	ulDebug("EFS loaded!\n");
+	ulDebug("NitroFS loaded!\n");
 	
 	qTimer::initTimers();
 	
@@ -107,7 +107,6 @@ void Game::titleScreen() {
 	consoleClear();
 	
 	dmaCopy(titleScreen2Bitmap, bgGetGfxPtr(s_bg), titleScreen2BitmapLen);
-	dmaCopy(titleScreen2Pal, BG_PALETTE_SUB, titleScreen2PalLen);
 	
 	UL_IMAGE* fileSelectImg = ulLoadImageFilePNG((const char*)fileSelect_png, sizeof(fileSelect_png), UL_IN_VRAM, UL_PF_PAL8);
 	if(!fileSelectImg) {
@@ -172,7 +171,6 @@ void Game::titleScreen() {
 
 void Game::init() {
 	dmaCopy(statsBitmap, bgGetGfxPtr(s_bg), statsBitmapLen);
-	dmaCopy(statsPal, BG_PALETTE_SUB, statsPalLen);
 	
 	Player* link = new Player;
 	
@@ -190,7 +188,7 @@ void Game::init() {
 		ulDebug("tileset loading error\n");
 	}
 	
-	qMap* a1 = new qMap(&tileset, "efs:/maps/a1.map", 16, 12, 16, 16);
+	qMap* a1 = new qMap(&tileset, "/maps/a1.map", 16, 12, 16, 16);
 	
 	//ulDebug("\nvram available: %d\n", ulGetTexVramAvailMemory());
 	

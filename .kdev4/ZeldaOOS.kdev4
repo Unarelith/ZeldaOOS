@@ -40,5 +40,8 @@ Use External Terminal=false
 Working Directory=file:///home/quentin/Bureau/libndsTests/ZeldaOOS/
 isExecutable=true
 
+[MakeBuilder]
+Number Of Jobs=1
+
 [Project]
 VersionControlSupport=kdevgit

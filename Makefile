@@ -21,8 +21,6 @@ endef
 export GAME_TITLE	:=	The Legend of Zelda
 export GAME_SUBTITLE1	:=	Oracle of Secrets
 export GAME_SUBTITLE2	:=	Pixelda
-export NITRO_FILES	:=	$(CURDIR)/efsroot
-export OTHER_OPTIONS	:=	-g ZOOS QP "Zelda-OOS"
 
 #---------------------------------------------------------------------------------
 # TARGET is the name of the output
@@ -38,6 +36,7 @@ SOURCES		:=	source
 INCLUDES	:=	include
 DATA		:=	data data/icons data/characters data/tilesets data/interface
 GRAPHICS	:=	gfx gfx/icons gfx/interface gfx/weapons
+NITRODATA	:= 	nitrofiles
 
 #---------------------------------------------------------------------------------
 # options for code generation
@@ -58,7 +57,7 @@ LDFLAGS	=	-specs=ds_arm9.specs -g $(ARCH) -Wl,-Map,$(notdir $*.map)
 #---------------------------------------------------------------------------------
 # any extra libraries we wish to link with the project (order is important)
 #---------------------------------------------------------------------------------
-LIBS	:= 	-lql -lul -lpng -lz -lfat -lmm9 -lnds9
+LIBS	:= 	-lql -lul -lpng -lz -lfilesystem -lfat -lmm9 -lnds9
 
 #---------------------------------------------------------------------------------
 # list of directories containing libraries, this must be the top level containing
@@ -78,6 +77,10 @@ export OUTPUT	:=	$(CURDIR)/$(TARGET)
 export VPATH	:=	$(foreach dir,$(SOURCES),$(CURDIR)/$(dir)) \
 					$(foreach dir,$(DATA),$(CURDIR)/$(dir)) \
 					$(foreach dir,$(GRAPHICS),$(CURDIR)/$(dir))
+
+ifneq ($(strip $(NITRODATA)),)
+	export NITRO_FILES	:=	$(CURDIR)/$(NITRODATA)
+endif
 
 export DEPSDIR	:=	$(CURDIR)/$(BUILD)
 
@@ -127,18 +130,15 @@ endif
 $(BUILD):
 	@[ -d $@ ] || mkdir -p $@
 	@make --no-print-directory -C $(BUILD) -f $(CURDIR)/Makefile
-	@./tools/efs $(TARGET).nds
-	@cp $(TARGET).nds $(TARGET)_r4.nds
-	@dlditool r4tf.dldi $(TARGET)_r4.nds
 
 #---------------------------------------------------------------------------------
 clean:
 	@echo clean ...
-	@rm -fr $(BUILD) $(TARGET).elf $(TARGET).nds $(TARGET)_r4.nds $(TARGET).img
+	@rm -fr $(BUILD) $(TARGET).elf $(TARGET).nds $(TARGET).img
 
 #---------------------------------------------------------------------------------
 run:
-	@./tools/desmume-cli --gbaslot-rom=$(TARGET).nds $(TARGET).nds
+	@./tools/desmume-cli $(TARGET).nds
 
 #---------------------------------------------------------------------------------
 else
