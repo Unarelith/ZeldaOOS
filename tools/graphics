@@ -1,0 +1,6 @@
+#!/bin/sh
+
+for i in graphics/*/*.sgrit;
+do grit ${i%.sgrit}.png -fts [ -W1 -gt -gB4 -gTFF00FF ] -ff $i -fa -o source/gfx;
+done
+

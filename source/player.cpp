@@ -1,5 +1,4 @@
-#include "player.h"
-#include "game.h"
+#include "main.h"
 
 // Fill animations table
 int animations[12][4] = {
@@ -17,7 +16,10 @@ int animations[12][4] = {
 	{23,27}
 };
 	
-Player::Player() : qSprite3D((const char*)link_png, sizeof(link_png), 48, 48) {
+Player::Player() : Sprite(SCREEN_DOWN, 0, SprSize_16x16, 0) {
+	loadTiles(SCREEN_DOWN, 0, 32, SprColors_16, linkTiles);
+	loadPalette(SCREEN_DOWN, 0, linkPal);
+	
 	s_x = 240;
 	s_y = 128;
 	s_vx = 0;
@@ -79,38 +81,38 @@ void Player::testCollisions() {
 }
 
 void Player::move() {
-	if(ul_keys.held.up) {
+	if((keysHeld() & KEY_UP)) {
 		// Set vertical speed vector negative
 		s_vy = -1;
 		
-		if((!ul_keys.held.down) && (!ul_keys.held.left) && (!ul_keys.held.right)) {
+		if((!(keysHeld() & KEY_DOWN)) && (!(keysHeld() & KEY_LEFT)) && (!(keysHeld() & KEY_RIGHT))) {
 			s_direction = DIR_UP; // Set direction to up
 		}
 	}
 	
-	if(ul_keys.held.down) {
+	if((keysHeld() & KEY_DOWN)) {
 		// Set vertical speed vector positive
 		s_vy = 1;
 		
-		if((!ul_keys.held.up) && (!ul_keys.held.left) && (!ul_keys.held.right)) {
+		if((!(keysHeld() & KEY_UP)) && (!(keysHeld() & KEY_LEFT)) && (!(keysHeld() & KEY_RIGHT))) {
 			s_direction = DIR_DOWN; // Set direction to down
 		}
 	}
 	
-	if(ul_keys.held.left) {
+	if((keysHeld() & KEY_LEFT)) {
 		// Set horizontal speed vector negative
 		s_vx = -1;
 		
-		if((!ul_keys.held.up) && (!ul_keys.held.down) && (!ul_keys.held.right)) {
+		if((!(keysHeld() & KEY_UP)) && (!(keysHeld() & KEY_DOWN)) && (!(keysHeld() & KEY_RIGHT))) {
 			s_direction = DIR_LEFT; // Set direction to left
 		}
 	}
 	
-	if(ul_keys.held.right) {
+	if((keysHeld() & KEY_RIGHT)) {
 		// Set horizontal speed vector positive
 		s_vx = 1;
 		
-		if((!ul_keys.held.up) && (!ul_keys.held.down) && (!ul_keys.held.left)) {
+		if((!(keysHeld() & KEY_UP)) && (!(keysHeld() & KEY_DOWN)) && (!(keysHeld() & KEY_LEFT))) {
 			s_direction = DIR_RIGHT; // Set direction to right
 		}
 	}
@@ -129,7 +131,7 @@ void Player::move() {
 
 void Player::draw() {
 	// If all directional keys are released
-	if((!ul_keys.held.up) && (!ul_keys.held.down) && (!ul_keys.held.left) && (!ul_keys.held.right)) {
+	if((!(keysHeld() & KEY_UP)) && (!(keysHeld() & KEY_DOWN)) && (!(keysHeld() & KEY_LEFT)) && (!(keysHeld() & KEY_RIGHT))) {
 		drawFrame(s_x - 16, s_y - 16, s_direction); // Draw a simple frame
 	} else {
 		playAnimation(s_x - 16, s_y - 16, s_direction); // Play player's animation

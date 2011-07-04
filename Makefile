@@ -35,7 +35,7 @@ BUILD		:=	build
 SOURCES		:=	source
 INCLUDES	:=	include
 DATA		:=	data data/icons data/characters data/tilesets data/interface
-GRAPHICS	:=	gfx gfx/icons gfx/interface gfx/weapons
+GRAPHICS	:=	gfx
 NITRODATA	:= 	nitrofiles
 
 #---------------------------------------------------------------------------------
@@ -57,7 +57,7 @@ LDFLAGS	=	-specs=ds_arm9.specs -g $(ARCH) -Wl,-Map,$(notdir $*.map)
 #---------------------------------------------------------------------------------
 # any extra libraries we wish to link with the project (order is important)
 #---------------------------------------------------------------------------------
-LIBS	:= 	-lql -lul -lpng -lz -lfilesystem -lfat -lmm9 -lnds9
+LIBS	:= 	-ls5 -lul -lpng -lz -lfilesystem -lfat -lmm9 -lnds9
 
 #---------------------------------------------------------------------------------
 # list of directories containing libraries, this must be the top level containing
@@ -124,7 +124,7 @@ else
 	endif
 endif
 
-.PHONY: $(BUILD) clean
+.PHONY: $(BUILD) clean run debug gfx
 
 #---------------------------------------------------------------------------------
 $(BUILD):
@@ -138,7 +138,22 @@ clean:
 
 #---------------------------------------------------------------------------------
 run:
-	@./tools/desmume-cli $(TARGET).nds
+	@#./tools/desmume-cli $(TARGET).nds
+	@wine "/home/quentin/devkitPro/nocashgba/NOcGBAF.EXE" $(TARGET).nds
+
+#---------------------------------------------------------------------------------
+debug:
+	@wine "/home/quentin/devkitPro/nocashgba/NOcGBA.EXE" $(TARGET).nds
+
+#---------------------------------------------------------------------------------
+gfx:
+	@echo making gfx data...
+	@rm -f source/gfx.s
+	@rm -f include/gfx.h
+	@grit graphics/*/*.png -fts [ -W1 -gt -gB4 -gTFF00FF -pS ] -O source/gfx -S gfx -fa -o source/gfx
+	@./tools/graphics
+	@mv -T source/gfx.h include/gfx.h
+	@echo gfx data ok
 
 #---------------------------------------------------------------------------------
 else
@@ -187,14 +202,14 @@ $(OUTPUT).elf	:	$(OFILES)
 # add additional rules like this for each image extension
 # you use in the graphics folders
 #---------------------------------------------------------------------------------
-%.s %.h   : %.png %.grit
+#%.s %.h   : %.png %.grit
 #---------------------------------------------------------------------------------
-	grit $< -fts -o$*
+#	grit $< -fts [ -W1 -gt -gB4 -gTFF00FF -!p ] -o source/gfx/$*
 
 #---------------------------------------------------------------------------------
-%.s %.h   : %.png
+#%.s %.h   : %.png
 #---------------------------------------------------------------------------------
-	grit $< -fts -ff $(<D)/$(notdir $(<D)).grit -o$*
+#	grit $< -fts -ff $(<D)/$(notdir $(<D)).grit -o$*
 
 -include $(DEPENDS)
 

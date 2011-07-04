@@ -1,10 +1,6 @@
 #ifndef PLAYER_H
 #define PLAYER_H
 
-#include "main.h"
-
-#include "link_png.h"
-
 // All player's directions
 enum PlayerDirection {
 	DIR_UP = 3,
@@ -13,7 +9,7 @@ enum PlayerDirection {
 	DIR_RIGHT = 1
 };
 
-class Player : public qSprite3D {
+class Player : public Sprite {
 	public:
 		// Construct & Destruct
 		Player();
@@ -27,6 +23,10 @@ class Player : public qSprite3D {
 	private:
 		// Player lifes
 		int s_lifes;
+		
+		// Player coordinates
+		s16 s_x;
+		s16 s_y;
 		
 		// Player movement vectors
 		s8 s_vx;
