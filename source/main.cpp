@@ -39,9 +39,8 @@
 	
 ---------------------------------------------------------------------------------*/
 #include "main.h"
-int i;
 
-//int animation[2] = {1,2};
+int i;
 
 int main(void) {
 	// Initialize game
@@ -50,30 +49,4 @@ int main(void) {
 	while(1);
 	
 	delete game;
-	
-	/*videoSetMode(MODE_0_2D);
-	vramSetBankA(VRAM_A_MAIN_SPRITE);
-	
-	enableSprites(0, 0);
-	enableSprites(1, 0);
-	
-	Timer::initTimers();
-	
-	loadTiles(0, 0, 12, SprColors_16, linktsTiles);
-	loadTiles(0, 12, 32, SprColors_16, linkTiles);
-	loadTiles(0, 44, 2, SprColors_16, dongeonkeyTiles);
-	loadPalette(0, 0, gfxPal);
-	loadPalette(0, 1, linkPal);
-	loadPalette(0, 2, linktsPal);
-	Sprite link_ts(SCREEN_UP, 0, SprSize_16x16, 0);
-	link_ts.addAnimation(2, animation, 400);
-	
-	while(1) {
-		link_ts.playAnimation(5, 5, 0, 2);
-		//drawSprite(0, 0, 5, 5, SprSize_16x16, SprColors_16, 0, 2);
-		//drawSprite(0, 1, 5, 30, SprSize_16x16, SprColors_16, 12, 1);
-		//drawSprite(0, 2, 50, 5, SprSize_8x16, SprColors_16, 44, 0);
-		
-		swiWaitForVBlank();
-	}*/
 }

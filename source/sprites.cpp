@@ -13,7 +13,7 @@ Sprite_Animation::~Sprite_Animation() {
 	delete s_tmr;
 }
 
-/*void Sprite::initGfx(u8 screen) {
+void Sprite::loadAllIcons(u8 screen) {
 	loadTiles(screen, 0, 2, SprColors_16, dongeonkeyTiles);
 	loadTiles(screen, 2, 2, SprColors_16, geshaTiles);
 	loadTiles(screen, 4, 2, SprColors_16, ringTiles);
@@ -40,7 +40,7 @@ Sprite_Animation::~Sprite_Animation() {
 	loadTiles(screen, 48, 2, SprColors_16, swordL2Tiles);
 	loadTiles(screen, 50, 2, SprColors_16, swordL3Tiles);
 	loadPalette(screen, 0, gfxPal);
-}*/
+}
 
 Sprite::Sprite(u8 screen, int id, s5_dimension size, u8 baseTile) {
 	s_baseTile = baseTile;

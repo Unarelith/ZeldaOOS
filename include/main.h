@@ -32,6 +32,7 @@ using namespace std;
 #include "map.h"
 #include "game.h"
 #include "player.h"
+#include "mapManager.h"
 
 #define WAIT_FOR_START(text) { printf(text); while(!(keysDown() & KEY_START)) { scanKeys(); swiWaitForVBlank(); } }
 

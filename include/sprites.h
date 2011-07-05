@@ -45,7 +45,7 @@ class Sprite {
 		int id() const { return s_id; } // Get sprite ID
 		
 		// Static functions
-		static void initGfx(u8 screen);
+		static void loadAllIcons(u8 screen);
 		
 	protected:
 		int s_id; // Sprite index

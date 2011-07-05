@@ -9,7 +9,7 @@
 @	+ 32 tiles Metatiled by 2x2 not compressed
 @	Total size: 512 + 1024 = 1536
 @
-@	Time-stamp: 2011-07-05, 12:24:11
+@	Time-stamp: 2011-07-05, 17:19:36
 @	Exported by Cearn's GBA Image Transmogrifier, v0.8.8
 @	( http://www.coranac.com/projects/#grit )
 @
@@ -106,7 +106,7 @@ linkPal:
 @	+ 2 tiles not compressed
 @	Total size: 64 = 64
 @
-@	Time-stamp: 2011-07-05, 12:24:11
+@	Time-stamp: 2011-07-05, 17:19:36
 @	Exported by Cearn's GBA Image Transmogrifier, v0.8.8
 @	( http://www.coranac.com/projects/#grit )
 @
@@ -130,7 +130,7 @@ dongeonkeyTiles:
 @	+ 2 tiles not compressed
 @	Total size: 64 = 64
 @
-@	Time-stamp: 2011-07-05, 12:24:11
+@	Time-stamp: 2011-07-05, 17:19:36
 @	Exported by Cearn's GBA Image Transmogrifier, v0.8.8
 @	( http://www.coranac.com/projects/#grit )
 @
@@ -154,7 +154,7 @@ geshaTiles:
 @	+ 2 tiles not compressed
 @	Total size: 64 = 64
 @
-@	Time-stamp: 2011-07-05, 12:24:11
+@	Time-stamp: 2011-07-05, 17:19:36
 @	Exported by Cearn's GBA Image Transmogrifier, v0.8.8
 @	( http://www.coranac.com/projects/#grit )
 @
@@ -178,7 +178,7 @@ ringTiles:
 @	+ 6 tiles not compressed
 @	Total size: 192 = 192
 @
-@	Time-stamp: 2011-07-05, 12:24:11
+@	Time-stamp: 2011-07-05, 17:19:36
 @	Exported by Cearn's GBA Image Transmogrifier, v0.8.8
 @	( http://www.coranac.com/projects/#grit )
 @
@@ -206,7 +206,7 @@ seedsTiles:
 @	+ 1 tiles not compressed
 @	Total size: 32 = 32
 @
-@	Time-stamp: 2011-07-05, 12:24:11
+@	Time-stamp: 2011-07-05, 17:19:36
 @	Exported by Cearn's GBA Image Transmogrifier, v0.8.8
 @	( http://www.coranac.com/projects/#grit )
 @
@@ -229,7 +229,7 @@ weapon_levelTiles:
 @	+ 2 tiles not compressed
 @	Total size: 64 = 64
 @
-@	Time-stamp: 2011-07-05, 12:24:11
+@	Time-stamp: 2011-07-05, 17:19:36
 @	Exported by Cearn's GBA Image Transmogrifier, v0.8.8
 @	( http://www.coranac.com/projects/#grit )
 @
@@ -253,7 +253,7 @@ acornTiles:
 @	+ bitmap not compressed
 @	Total size: 98304 = 98304
 @
-@	Time-stamp: 2011-07-05, 12:24:11
+@	Time-stamp: 2011-07-05, 17:19:36
 @	Exported by Cearn's GBA Image Transmogrifier, v0.8.8
 @	( http://www.coranac.com/projects/#grit )
 @
@@ -3731,7 +3731,7 @@ fileSelectBitmap:
 @	+ 12 tiles Metatiled by 2x2 not compressed
 @	Total size: 512 + 384 = 896
 @
-@	Time-stamp: 2011-07-05, 12:24:11
+@	Time-stamp: 2011-07-05, 17:19:36
 @	Exported by Cearn's GBA Image Transmogrifier, v0.8.8
 @	( http://www.coranac.com/projects/#grit )
 @
@@ -3806,7 +3806,7 @@ linktsPal:
 @	+ 9 tiles not compressed
 @	Total size: 288 = 288
 @
-@	Time-stamp: 2011-07-05, 12:24:11
+@	Time-stamp: 2011-07-05, 17:19:36
 @	Exported by Cearn's GBA Image Transmogrifier, v0.8.8
 @	( http://www.coranac.com/projects/#grit )
 @
@@ -3839,7 +3839,7 @@ numbersTiles:
 @	+ 11 tiles not compressed
 @	Total size: 512 + 352 = 864
 @
-@	Time-stamp: 2011-07-05, 12:24:11
+@	Time-stamp: 2011-07-05, 17:19:36
 @	Exported by Cearn's GBA Image Transmogrifier, v0.8.8
 @	( http://www.coranac.com/projects/#grit )
 @
@@ -3913,7 +3913,7 @@ pressStartPal:
 @	+ bitmap not compressed
 @	Total size: 98304 = 98304
 @
-@	Time-stamp: 2011-07-05, 12:24:11
+@	Time-stamp: 2011-07-05, 17:19:36
 @	Exported by Cearn's GBA Image Transmogrifier, v0.8.8
 @	( http://www.coranac.com/projects/#grit )
 @
@@ -7390,7 +7390,7 @@ statsBitmap:
 @	+ bitmap not compressed
 @	Total size: 98304 = 98304
 @
-@	Time-stamp: 2011-07-05, 12:24:11
+@	Time-stamp: 2011-07-05, 17:19:36
 @	Exported by Cearn's GBA Image Transmogrifier, v0.8.8
 @	( http://www.coranac.com/projects/#grit )
 @
@@ -10868,7 +10868,7 @@ titleScreenBitmap:
 @	+ 1024 tiles Metatiled by 2x2 not compressed
 @	Total size: 512 + 65536 = 66048
 @
-@	Time-stamp: 2011-07-05, 12:24:11
+@	Time-stamp: 2011-07-05, 17:19:36
 @	Exported by Cearn's GBA Image Transmogrifier, v0.8.8
 @	( http://www.coranac.com/projects/#grit )
 @
@@ -13233,7 +13233,7 @@ plainPal:
 @	+ 2 tiles not compressed
 @	Total size: 64 = 64
 @
-@	Time-stamp: 2011-07-05, 12:24:11
+@	Time-stamp: 2011-07-05, 17:19:36
 @	Exported by Cearn's GBA Image Transmogrifier, v0.8.8
 @	( http://www.coranac.com/projects/#grit )
 @
@@ -13257,7 +13257,7 @@ bombTiles:
 @	+ 2 tiles not compressed
 @	Total size: 64 = 64
 @
-@	Time-stamp: 2011-07-05, 12:24:11
+@	Time-stamp: 2011-07-05, 17:19:36
 @	Exported by Cearn's GBA Image Transmogrifier, v0.8.8
 @	( http://www.coranac.com/projects/#grit )
 @
@@ -13281,7 +13281,7 @@ boomrangL1Tiles:
 @	+ 2 tiles not compressed
 @	Total size: 64 = 64
 @
-@	Time-stamp: 2011-07-05, 12:24:11
+@	Time-stamp: 2011-07-05, 17:19:36
 @	Exported by Cearn's GBA Image Transmogrifier, v0.8.8
 @	( http://www.coranac.com/projects/#grit )
 @
@@ -13305,7 +13305,7 @@ boomrangL2Tiles:
 @	+ 2 tiles not compressed
 @	Total size: 64 = 64
 @
-@	Time-stamp: 2011-07-05, 12:24:11
+@	Time-stamp: 2011-07-05, 17:19:36
 @	Exported by Cearn's GBA Image Transmogrifier, v0.8.8
 @	( http://www.coranac.com/projects/#grit )
 @
@@ -13329,7 +13329,7 @@ bowTiles:
 @	+ 2 tiles not compressed
 @	Total size: 64 = 64
 @
-@	Time-stamp: 2011-07-05, 12:24:11
+@	Time-stamp: 2011-07-05, 17:19:36
 @	Exported by Cearn's GBA Image Transmogrifier, v0.8.8
 @	( http://www.coranac.com/projects/#grit )
 @
@@ -13353,7 +13353,7 @@ caneL1Tiles:
 @	+ 2 tiles not compressed
 @	Total size: 64 = 64
 @
-@	Time-stamp: 2011-07-05, 12:24:11
+@	Time-stamp: 2011-07-05, 17:19:36
 @	Exported by Cearn's GBA Image Transmogrifier, v0.8.8
 @	( http://www.coranac.com/projects/#grit )
 @
@@ -13377,7 +13377,7 @@ caneL2Tiles:
 @	+ 2 tiles not compressed
 @	Total size: 64 = 64
 @
-@	Time-stamp: 2011-07-05, 12:24:11
+@	Time-stamp: 2011-07-05, 17:19:36
 @	Exported by Cearn's GBA Image Transmogrifier, v0.8.8
 @	( http://www.coranac.com/projects/#grit )
 @
@@ -13401,7 +13401,7 @@ catapultTiles:
 @	+ 2 tiles not compressed
 @	Total size: 64 = 64
 @
-@	Time-stamp: 2011-07-05, 12:24:11
+@	Time-stamp: 2011-07-05, 17:19:36
 @	Exported by Cearn's GBA Image Transmogrifier, v0.8.8
 @	( http://www.coranac.com/projects/#grit )
 @
@@ -13425,7 +13425,7 @@ featherL1Tiles:
 @	+ 4 tiles not compressed
 @	Total size: 128 = 128
 @
-@	Time-stamp: 2011-07-05, 12:24:11
+@	Time-stamp: 2011-07-05, 17:19:36
 @	Exported by Cearn's GBA Image Transmogrifier, v0.8.8
 @	( http://www.coranac.com/projects/#grit )
 @
@@ -13451,7 +13451,7 @@ fluteTiles:
 @	+ 2 tiles not compressed
 @	Total size: 64 = 64
 @
-@	Time-stamp: 2011-07-05, 12:24:11
+@	Time-stamp: 2011-07-05, 17:19:36
 @	Exported by Cearn's GBA Image Transmogrifier, v0.8.8
 @	( http://www.coranac.com/projects/#grit )
 @
@@ -13475,7 +13475,7 @@ grapnelTiles:
 @	+ 2 tiles not compressed
 @	Total size: 64 = 64
 @
-@	Time-stamp: 2011-07-05, 12:24:11
+@	Time-stamp: 2011-07-05, 17:19:36
 @	Exported by Cearn's GBA Image Transmogrifier, v0.8.8
 @	( http://www.coranac.com/projects/#grit )
 @
@@ -13499,7 +13499,7 @@ seedbagTiles:
 @	+ 2 tiles not compressed
 @	Total size: 64 = 64
 @
-@	Time-stamp: 2011-07-05, 12:24:11
+@	Time-stamp: 2011-07-05, 17:19:36
 @	Exported by Cearn's GBA Image Transmogrifier, v0.8.8
 @	( http://www.coranac.com/projects/#grit )
 @
@@ -13523,7 +13523,7 @@ shieldL1Tiles:
 @	+ 2 tiles not compressed
 @	Total size: 64 = 64
 @
-@	Time-stamp: 2011-07-05, 12:24:11
+@	Time-stamp: 2011-07-05, 17:19:36
 @	Exported by Cearn's GBA Image Transmogrifier, v0.8.8
 @	( http://www.coranac.com/projects/#grit )
 @
@@ -13547,7 +13547,7 @@ shieldL2Tiles:
 @	+ 2 tiles not compressed
 @	Total size: 64 = 64
 @
-@	Time-stamp: 2011-07-05, 12:24:11
+@	Time-stamp: 2011-07-05, 17:19:36
 @	Exported by Cearn's GBA Image Transmogrifier, v0.8.8
 @	( http://www.coranac.com/projects/#grit )
 @
@@ -13571,7 +13571,7 @@ shieldL3Tiles:
 @	+ 2 tiles not compressed
 @	Total size: 64 = 64
 @
-@	Time-stamp: 2011-07-05, 12:24:11
+@	Time-stamp: 2011-07-05, 17:19:36
 @	Exported by Cearn's GBA Image Transmogrifier, v0.8.8
 @	( http://www.coranac.com/projects/#grit )
 @
@@ -13595,7 +13595,7 @@ shovelTiles:
 @	+ 2 tiles not compressed
 @	Total size: 64 = 64
 @
-@	Time-stamp: 2011-07-05, 12:24:11
+@	Time-stamp: 2011-07-05, 17:19:36
 @	Exported by Cearn's GBA Image Transmogrifier, v0.8.8
 @	( http://www.coranac.com/projects/#grit )
 @
@@ -13619,7 +13619,7 @@ strenghL1Tiles:
 @	+ 2 tiles not compressed
 @	Total size: 64 = 64
 @
-@	Time-stamp: 2011-07-05, 12:24:11
+@	Time-stamp: 2011-07-05, 17:19:36
 @	Exported by Cearn's GBA Image Transmogrifier, v0.8.8
 @	( http://www.coranac.com/projects/#grit )
 @
@@ -13643,7 +13643,7 @@ strenghL2Tiles:
 @	+ 2 tiles not compressed
 @	Total size: 64 = 64
 @
-@	Time-stamp: 2011-07-05, 12:24:11
+@	Time-stamp: 2011-07-05, 17:19:36
 @	Exported by Cearn's GBA Image Transmogrifier, v0.8.8
 @	( http://www.coranac.com/projects/#grit )
 @
@@ -13667,7 +13667,7 @@ swordL1Tiles:
 @	+ 2 tiles not compressed
 @	Total size: 64 = 64
 @
-@	Time-stamp: 2011-07-05, 12:24:11
+@	Time-stamp: 2011-07-05, 17:19:36
 @	Exported by Cearn's GBA Image Transmogrifier, v0.8.8
 @	( http://www.coranac.com/projects/#grit )
 @
@@ -13691,7 +13691,7 @@ swordL2Tiles:
 @	+ 2 tiles not compressed
 @	Total size: 64 = 64
 @
-@	Time-stamp: 2011-07-05, 12:24:11
+@	Time-stamp: 2011-07-05, 17:19:36
 @	Exported by Cearn's GBA Image Transmogrifier, v0.8.8
 @	( http://www.coranac.com/projects/#grit )
 @
@@ -13715,7 +13715,7 @@ swordL3Tiles:
 @	+ palette 256 entries, not compressed
 @	Total size: 512 = 512
 @
-@	Time-stamp: 2011-07-05, 12:24:11
+@	Time-stamp: 2011-07-05, 17:19:36
 @	Exported by Cearn's GBA Image Transmogrifier, v0.8.8
 @	( http://www.coranac.com/projects/#grit )
 @

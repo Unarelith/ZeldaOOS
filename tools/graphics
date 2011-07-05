@@ -1,10 +1,9 @@
 #!/bin/sh
 
 for i in graphics/*/*.sgrit;
-do grit ${i%.sgrit}.png -fts [ -W1 -gt -gTFF00FF ] -ff $i -fa -o source/gfx;
+do grit ${i%.sgrit}.png -fts -W1 -gt -gTFF00FF -ff $i -fa -o source/gfx;
 done
 
 for i in graphics/*/*.xgrit;
-do grit ${i%.xgrit}.png -fts [ -W1 ] -ff $i -fa -o source/gfx;
+do grit ${i%.xgrit}.png -fts -W1 -ff $i -fa -o source/gfx;
 done
-

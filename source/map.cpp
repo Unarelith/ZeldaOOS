@@ -42,7 +42,12 @@ Map::Map(Tileset* tileset, char* filename, u16 width, u16 height, u16 tileWidth,
 	
 	s_map = table;
 	s_bg = bg;
-	
+}
+
+Map::~Map() {
+}
+
+void Map::init() {
 	dmaCopy(s_tileset->tiles, bgGetGfxPtr(s_bg), plainTilesLen);
 	dmaCopy(s_tileset->palette, BG_PALETTE_SUB, plainPalLen);
 	
@@ -56,9 +61,6 @@ Map::Map(Tileset* tileset, char* filename, u16 width, u16 height, u16 tileWidth,
 			mapPtr[x * 2 + 1 + (y * 2 + 1) * 32] = s_map[(x + s_scrollX / 16) + (y + s_scrollY / 16) * s_width] * 4 + 3;
 		}
 	}
-}
-
-Map::~Map() {
 }
 
 void Map::draw() {
