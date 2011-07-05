@@ -132,8 +132,8 @@ void Player::move() {
 void Player::draw() {
 	// If all directional keys are released
 	if((!(keysHeld() & KEY_UP)) && (!(keysHeld() & KEY_DOWN)) && (!(keysHeld() & KEY_LEFT)) && (!(keysHeld() & KEY_RIGHT))) {
-		drawFrame(s_x - 16, s_y - 16, s_direction); // Draw a simple frame
+		drawFrame(s_x, s_y, s_direction); // Draw a simple frame
 	} else {
-		playAnimation(s_x - 16, s_y - 16, s_direction); // Play player's animation
+		playAnimation(s_x, s_y, s_direction); // Play player's animation
 	}
 }
