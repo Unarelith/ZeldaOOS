@@ -157,7 +157,8 @@ void Game::init() {
 	Player* link = new Player;
 	
 	Map** maps = initMaps(s_mapBg);
-	//currentMap = maps[0];
+	
+	currentMap = maps[0];
 	Map* a1 = maps[0];
 	a1->init();
 	
