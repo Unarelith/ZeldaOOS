@@ -3,9 +3,6 @@
 
 #include "main.h"
 
-#include "titleScreen2.h"
-#include "stats.h"
-
 class Game {
 	public:
 		// Construct & Destruct
@@ -24,6 +21,7 @@ class Game {
 		
 	private:
 		u8 s_bg; // BG id
+		u8 s_bgSub; // Sub BG id
 		u8 s_mapBg; // Map BG id
 };
 

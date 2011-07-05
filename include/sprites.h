@@ -32,6 +32,7 @@ class Sprite {
 		~Sprite();
 		
 		// Update functions
+		void clear();
 		void drawFrame(s16 x, s16 y, int frame, u8 palette = 0);
 		void addAnimation(int size, int* tabAnim, int delay);
 		void resetAnimation(int anim);

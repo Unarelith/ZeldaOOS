@@ -21,6 +21,7 @@ Game::Game() {
 	
 	// Initialize backgrounds
 	s_bg = bgInit(3, BgType_Bmp16, BgSize_B16_256x256, 2, 0);
+	s_bgSub = bgInitSub(3, BgType_Bmp16, BgSize_B16_256x256, 2, 0);
 	s_mapBg = bgInitSub(0, BgType_Text8bpp, BgSize_T_512x512, 0, 1);
 	
 	enableSprites(SCREEN_UP, 0);
@@ -38,58 +39,58 @@ Game::Game() {
 	
 	Timer::initTimers();
 	
-	init();
-	//pressStartScreen();
+	//init();
+	pressStartScreen();
 }
 
 Game::~Game() {
 }
 
-/*void Game::pressStartScreen() {
-	UL_IMAGE* titleScreenImg = ulLoadImageFilePNG((const char*)titleScreen_png, sizeof(titleScreen_png), UL_IN_VRAM, UL_PF_PAL8);
-	if(!titleScreenImg) {
-		ulDebug("titleScreen image error\n");
-	}
+void Game::pressStartScreen() {
+	dmaCopy(titleScreenBitmap, bgGetGfxPtr(s_bgSub), titleScreenBitmapLen);
 	
-	UL_IMAGE* pressStartImg = ulLoadImageFilePNG((const char*)pressStart_png, sizeof(pressStart_png), UL_IN_VRAM, UL_PF_PAL8);
-	if(!pressStartImg) {
-		ulDebug("pressStart image error\n");
-	}
+	loadTiles(SCREEN_DOWN, 0, 11, SprColors_16, pressStartTiles);
+	loadPalette(SCREEN_DOWN, 0, pressStartPal);
+	
+	Sprite* pressStartSpr1 = new Sprite(SCREEN_DOWN, 0, SprSize_32x8, 0);
+	Sprite* pressStartSpr2 = new Sprite(SCREEN_DOWN, 1, SprSize_32x8, 4);
+	Sprite* pressStartSpr3 = new Sprite(SCREEN_DOWN, 2, SprSize_32x8, 8);
 	
 	Timer pressStartTimer;
 	pressStartTimer.start();
 	
 	while(1) {
 		// Read keys data
-		ulReadKeys(0);
+		scanKeys();
 		
-		if((ul_keys.pressed.start) || (ul_keys.touch.click)) {
+		if((keysDown() & KEY_START) || (keysDown() & KEY_TOUCH)) {
 			break;
 		}
 		
-		// Start the drawing
-		ulStartDrawing2D();
-		
 		//Draw the image in the screen
-		ulDrawImage(titleScreenImg);
 		
 		if(pressStartTimer.time() > 750) {
-			ulDrawImageXY(pressStartImg, 85, 152);
+			//ulDrawImageXY(pressStartImg, 85, 152);
+			pressStartSpr1->drawFrame(85, 152, 0);
+			pressStartSpr2->drawFrame(117, 152, 0);
+			pressStartSpr3->drawFrame(149, 152, 0);
 			if(pressStartTimer.time() > 1500) {
 				pressStartTimer.reset();
 				pressStartTimer.start();
 			}
+		} else {
+			pressStartSpr1->clear();
+			pressStartSpr2->clear();
+			pressStartSpr3->clear();
 		}
 		
-		// End the drawing
-		ulEndDrawing();
-		
-		// Wait the VBlank (synchronize at 60 fps)
-		ulSyncFrame();
+		// Wait the VBlank
+		swiWaitForVBlank();
 	}
 	
-	ulDeleteImage(titleScreenImg);
-	ulDeleteImage(pressStartImg);
+	delete pressStartSpr1;
+	delete pressStartSpr2;
+	delete pressStartSpr3;
 	
 	titleScreen();
 }
@@ -97,43 +98,33 @@ Game::~Game() {
 void Game::titleScreen() {
 	consoleClear();
 	
-	dmaCopy(titleScreen2Bitmap, bgGetGfxPtr(s_bg), titleScreen2BitmapLen);
+	dmaCopy(titleScreenBitmap, bgGetGfxPtr(s_bg), titleScreenBitmapLen);
+	dmaCopy(fileSelectBitmap, bgGetGfxPtr(s_bgSub), fileSelectBitmapLen);
 	
-	UL_IMAGE* fileSelectImg = ulLoadImageFilePNG((const char*)fileSelect_png, sizeof(fileSelect_png), UL_IN_VRAM, UL_PF_PAL8);
-	if(!fileSelectImg) {
-		ulDebug("fileSelect image error\n");
-	}
+	loadTiles(SCREEN_DOWN, 0, 2, SprColors_16, acornTiles);
+	loadTiles(SCREEN_DOWN, 2, 12, SprColors_16, linktsTiles);
+	loadPalette(SCREEN_DOWN, 0, gfxPal);
+	loadPalette(SCREEN_DOWN, 1, linktsPal);
 	
-	UL_IMAGE* acornImg = ulLoadImageFilePNG((const char*)acorn_png, sizeof(acorn_png), UL_IN_VRAM, UL_PF_PAL8);
-	if(!acornImg) {
-		ulDebug("acorn image error\n");
-	}
-	
-	Sprite3D* linkts = new Sprite3D((const char*)linkts_png, sizeof(linkts_png), 16, 16);
+	Sprite* acorn = new Sprite(SCREEN_DOWN, 0, SprSize_8x16, 0);
+	Sprite* linkts = new Sprite(SCREEN_DOWN, 1, SprSize_16x16, 2);
 	
 	int curPos = 1;
 	
 	while(1) {
 		// Read keys data
-		ulReadKeys(0);
+		scanKeys();
 		
-		// Start the drawing
-		ulStartDrawing2D();
+		//Draw acorn sprite
+		acorn->drawFrame(8, 64+((curPos-1)*32), 0);
 		
-		//Draw the image in the screen
-		ulDrawImage(fileSelectImg);
-		ulDrawImageXY(acornImg, 8, 64+((curPos-1)*32));
+		// Draw link sprite
+		linkts->drawFrame(138, 74, 0, 1);
 		
-		// Draw sprite
-		linkts->drawFrame(138, 74, 1);
-		
-		// End the drawing
-		ulEndDrawing();
-		
-		if(ul_keys.pressed.up) {
+		if(keysDown() & KEY_UP) {
 			curPos--;
 		}
-		else if(ul_keys.pressed.down) {
+		else if(keysDown() & KEY_DOWN) {
 			curPos++;
 		}
 		
@@ -144,21 +135,19 @@ void Game::titleScreen() {
 			curPos = 1;
 		}
 		
-		if(ul_keys.pressed.A) {
+		if(keysHeld() & KEY_A) {
 			break;
 		}
 		
-		// Wait the VBlank (synchronize at 60 fps)
-		ulSyncFrame();
+		// Wait the VBlank
+		swiWaitForVBlank();
 	}
 	
-	ulDeleteImage(fileSelectImg);
-	ulDeleteImage(acornImg);
-	
+	delete acorn;
 	delete linkts;
 	
 	init();
-}*/
+}
 
 void Game::init() {
 	dmaCopy(statsBitmap, bgGetGfxPtr(s_bg), statsBitmapLen);
@@ -178,14 +167,12 @@ void Game::init() {
 	Map* a1 = new Map(&tileset, "/maps/a1.map", 16, 12, 16, 16, s_mapBg);
 	currentMap = a1;
 	
-	a1->setTile(2,2,4);
-	
 	while(1) {
 		// Read keys data
 		scanKeys();
 		
 		// Draw map
- 		//a1->draw();
+		a1->draw();
 		
 		// Move link
 		link->move();
@@ -193,8 +180,7 @@ void Game::init() {
 		// Draw sprite
 		link->draw();
 		
-//  	bgUpdate();
-		
+		// Wait the VBL
 		swiWaitForVBlank();
 	}
 }

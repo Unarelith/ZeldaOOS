@@ -50,10 +50,10 @@ Map::Map(Tileset* tileset, char* filename, u16 width, u16 height, u16 tileWidth,
 	u16 x, y;
 	for(y = 0 ; y < 16 ; y++) {
 		for(x = 0 ; x < 16 ; x++) {
-			mapPtr[x * 2 + y * 2 * 32] = s_map[x + y * s_width] * 4;
-			mapPtr[x * 2 + 1 + y * 2 * 32] = s_map[x + y * s_width] * 4 + 1;
-			mapPtr[x * 2 + (y * 2 + 1) * 32] = s_map[x + y * s_width] * 4 + 2;
-			mapPtr[x * 2 + 1 + (y * 2 + 1) * 32] = s_map[x + y * s_width] * 4 + 3;
+			mapPtr[x * 2 + y * 2 * 32] = s_map[(x + s_scrollX / 16) + (y + s_scrollY / 16) * s_width] * 4;
+			mapPtr[x * 2 + 1 + y * 2 * 32] = s_map[(x + s_scrollX / 16) + (y + s_scrollY / 16) * s_width] * 4 + 1;
+			mapPtr[x * 2 + (y * 2 + 1) * 32] = s_map[(x + s_scrollX / 16) + (y + s_scrollY / 16) * s_width] * 4 + 2;
+			mapPtr[x * 2 + 1 + (y * 2 + 1) * 32] = s_map[(x + s_scrollX / 16) + (y + s_scrollY / 16) * s_width] * 4 + 3;
 		}
 	}
 }
@@ -62,7 +62,16 @@ Map::~Map() {
 }
 
 void Map::draw() {
-	//uDrawMap(s_map);
+	u16* mapPtr = (u16*)bgGetMapPtr(s_bg);
+	u16 x, y;
+	for(y = 0 ; y < 16 ; y++) {
+		for(x = 0 ; x < 16 ; x++) {
+			mapPtr[x * 2 + y * 2 * 32] = s_map[(x + s_scrollX / 16) + (y + s_scrollY / 16) * s_width] * 4;
+			mapPtr[x * 2 + 1 + y * 2 * 32] = s_map[(x + s_scrollX / 16) + (y + s_scrollY / 16) * s_width] * 4 + 1;
+			mapPtr[x * 2 + (y * 2 + 1) * 32] = s_map[(x + s_scrollX / 16) + (y + s_scrollY / 16) * s_width] * 4 + 2;
+			mapPtr[x * 2 + 1 + (y * 2 + 1) * 32] = s_map[(x + s_scrollX / 16) + (y + s_scrollY / 16) * s_width] * 4 + 3;
+		}
+	}
 }
 
 void Map::scroll(s16 x, s16 y) {
@@ -71,11 +80,7 @@ void Map::scroll(s16 x, s16 y) {
 }
 
 void Map::setTile(s16 tileX, s16 tileY, u16 tile) {
-	u16* mapPtr = (u16*)bgGetMapPtr(s_bg);
-	mapPtr[tileX * 2 + tileY * 2 * 32] = tile * 4;
-	mapPtr[tileX * 2 + 1 + tileY * 2 * 32] = tile * 4 + 1;
-	mapPtr[tileX * 2 + (tileY * 2 + 1) * 32] = tile * 4 + 2;
-	mapPtr[tileX * 2 + 1 + (tileY * 2 + 1) * 32] = tile * 4 + 3;
+	s_map[tileX + tileY * s_width] = tile;
 }
 
 u16 Map::getTile(s16 tileX, s16 tileY) {
