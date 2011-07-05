@@ -21,7 +21,11 @@ Map** initMaps(u8 mapBg) {
 	Tileset* tilesets = initTilesets();
 	
 	Map* a1 = new Map(&tilesets[0], "/maps/a1.map", 16, 12, 16, 16, mapBg);
+<<<<<<< HEAD
 	Map* a2 = new Map(&tilesets[0], "/maps/a2.map", 16, 12, 16, 16, mapBg);
+=======
+	Map* a2 = new Map(&tilesets[1], "/maps/a2.map", 16, 12, 16, 16, mapBg);
+>>>>>>> e2d4c2043e05622c9cfc5cb4c28a80b21e5249b7
 	
 	Map** maps = NULL;
 	maps[0] = a1;
