@@ -1,5 +1,6 @@
 #ifndef MAP_H
 #define MAP_H
+#include "main.h"
 
 typedef struct {
 	const u32* tiles;
@@ -12,6 +13,9 @@ class Map {
 		// Construct & Destruct
 		Map(Tileset* tileset, char* filename, u16 width, u16 height, u16 tileWidth, u16 tileHeight, u8 bg);
 		~Map();
+		
+		// Initialize the map
+		void init();
 		
 		// Draw the map
 		void draw();

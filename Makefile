@@ -150,7 +150,7 @@ gfx:
 	@echo making gfx data...
 	@rm -f source/gfx.s
 	@rm -f include/gfx.h
-	@grit graphics/*/*.png -fts [ -W1 -gt -gB4 -gTFF00FF -pS ] -O source/gfx -S gfx -fa -o source/gfx
+	@grit graphics/*/*.png -fts -W1 -gt -gB4 -gTFF00FF -pS -O source/gfx -S gfx -fa -o source/gfx
 	@./tools/graphics
 	@mv -T source/gfx.h include/gfx.h
 	@echo gfx data ok
