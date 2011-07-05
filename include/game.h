@@ -23,7 +23,8 @@ class Game {
 		static Map* currentMap;
 		
 	private:
-		int s_bg; // Sub BG id returned by bgInitSub()
+		u8 s_bg; // BG id
+		u8 s_mapBg; // Map BG id
 };
 
 #endif // GAME_H

@@ -1,6 +1,6 @@
 #include "main.h"
 
-Map::Map(Tileset* tileset, char* filename, u16 width, u16 height, u16 tileWidth, u16 tileHeight) {
+Map::Map(Tileset* tileset, char* filename, u16 width, u16 height, u16 tileWidth, u16 tileHeight, u8 bg) {
 	s_tileset = tileset;
 	s_filename = filename;
 	s_width = width;
@@ -14,7 +14,7 @@ Map::Map(Tileset* tileset, char* filename, u16 width, u16 height, u16 tileWidth,
     int filesize;
     struct stat file_status;
     if(stat(filename, &file_status) != 0){
-        ulDebug("Unable to load %s", s_filename);
+        printf("Unable to load %s", s_filename);
     }
     filesize = file_status.st_size;
     FILE* f = fopen(filename, "r");
@@ -40,28 +40,44 @@ Map::Map(Tileset* tileset, char* filename, u16 width, u16 height, u16 tileWidth,
     }
     free(buffer);
 	
-    s_map = ulCreateMap(s_tileset->image, (void*)table, s_tileWidth, s_tileHeight, s_width, s_height, UL_MF_U16);
+	s_map = table;
+	s_bg = bg;
+	
+	dmaCopy(s_tileset->tiles, bgGetGfxPtr(s_bg), plainTilesLen);
+	dmaCopy(s_tileset->palette, BG_PALETTE_SUB, plainPalLen);
+	
+	u16* mapPtr = (u16*)bgGetMapPtr(s_bg);
+	u16 x, y;
+	for(y = 0 ; y < 16 ; y++) {
+		for(x = 0 ; x < 16 ; x++) {
+			mapPtr[x * 2 + y * 2 * 32] = s_map[x + y * s_width] * 4;
+			mapPtr[x * 2 + 1 + y * 2 * 32] = s_map[x + y * s_width] * 4 + 1;
+			mapPtr[x * 2 + (y * 2 + 1) * 32] = s_map[x + y * s_width] * 4 + 2;
+			mapPtr[x * 2 + 1 + (y * 2 + 1) * 32] = s_map[x + y * s_width] * 4 + 3;
+		}
+	}
 }
 
 Map::~Map() {
-	ulDeleteMap(s_map);
 }
 
 void Map::draw() {
-	ulDrawMap(s_map);
+	//uDrawMap(s_map);
 }
 
 void Map::scroll(s16 x, s16 y) {
-	s_map->scrollX = x;
-	s_map->scrollY = y;
+	s_scrollX = x;
+	s_scrollY = y;
 }
 
-void Map::setTile(s16 x, s16 y, u16 tile) {
-	u16* t = (u16*)s_map->map;
-	t[x + y * s_map->mapSizeX] = tile;
+void Map::setTile(s16 tileX, s16 tileY, u16 tile) {
+	u16* mapPtr = (u16*)bgGetMapPtr(s_bg);
+	mapPtr[tileX * 2 + tileY * 2 * 32] = tile * 4;
+	mapPtr[tileX * 2 + 1 + tileY * 2 * 32] = tile * 4 + 1;
+	mapPtr[tileX * 2 + (tileY * 2 + 1) * 32] = tile * 4 + 2;
+	mapPtr[tileX * 2 + 1 + (tileY * 2 + 1) * 32] = tile * 4 + 3;
 }
 
-u16 Map::getTile(s16 x, s16 y) {
-	u16* t = (u16*)s_map->map;
-	return t[x + y * s_map->mapSizeX];
+u16 Map::getTile(s16 tileX, s16 tileY) {
+	return s_map[tileX + tileY * s_width];
 }

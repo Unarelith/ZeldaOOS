@@ -19,7 +19,9 @@ Game::Game() {
 	
 	consoleInit(NULL, 0, BgType_Text4bpp, BgSize_T_256x256, 0, 1, true, true);
 	
+	// Initialize backgrounds
 	s_bg = bgInit(3, BgType_Bmp16, BgSize_B16_256x256, 2, 0);
+	s_mapBg = bgInitSub(0, BgType_Text8bpp, BgSize_T_512x512, 0, 1);
 	
 	enableSprites(SCREEN_UP, 0);
 	enableSprites(SCREEN_DOWN, 0);
@@ -163,35 +165,35 @@ void Game::init() {
 	
 	Player* link = new Player;
 	
-// 	u16 nonPassable[127] = {
-// 		7,28,29,30,31,44,45,46,47,60,61,62,63,64,65,66,67,68,69,70,71,76,78,79,112,113,114,115,116,117,
-// 		118,119,120,121,122,123,124,125,128,129,130,131,132,133,134,135,136,137,138,139,140,141,144,145,146,147,148,149,
-// 		150,151,152,153,154,155,156,157,159,160,161,162,163,164,165,166,167,168,169,170,171,172,173,175,176,177,178,179,
-// 		180,181,182,183,184,185,186,187,188,192,193,194,195,196,197,198,199,200,201,203,204,232,233,234,235,236,237,239,
-// 		240,241,242,243,244,245,246,247,250,251,252,254,255
-// 	};
-// 	
-// 	Tileset tileset = {0, nonPassable};
-// 	tileset.image = ulLoadImageFilePNG((const char*)plain_png, sizeof(plain_png), UL_IN_VRAM, UL_PF_PAL8);
-// 	if(!tileset.image) {
-// 		ulDebug("tileset loading error\n");
-// 	}
-// 	
-// 	Map* a1 = new Map(&tileset, "/maps/a1.map", 16, 12, 16, 16);
-// 	currentMap = a1;
+	u16 nonPassable[127] = {
+		7,28,29,30,31,44,45,46,47,60,61,62,63,64,65,66,67,68,69,70,71,76,78,79,112,113,114,115,116,117,
+		118,119,120,121,122,123,124,125,128,129,130,131,132,133,134,135,136,137,138,139,140,141,144,145,146,147,148,149,
+		150,151,152,153,154,155,156,157,159,160,161,162,163,164,165,166,167,168,169,170,171,172,173,175,176,177,178,179,
+		180,181,182,183,184,185,186,187,188,192,193,194,195,196,197,198,199,200,201,203,204,232,233,234,235,236,237,239,
+		240,241,242,243,244,245,246,247,250,251,252,254,255
+	};
+	
+	Tileset tileset = {plainTiles, plainPal, nonPassable};
+	
+	Map* a1 = new Map(&tileset, "/maps/a1.map", 16, 12, 16, 16, s_mapBg);
+	currentMap = a1;
+	
+	a1->setTile(2,2,4);
 	
 	while(1) {
 		// Read keys data
 		scanKeys();
 		
 		// Draw map
-// 		a1->draw();
+ 		//a1->draw();
 		
 		// Move link
 		link->move();
 		
 		// Draw sprite
 		link->draw();
+		
+//  	bgUpdate();
 		
 		swiWaitForVBlank();
 	}

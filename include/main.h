@@ -8,7 +8,6 @@ extern int i;
 
 #include <nds.h> // Include libnds header
 #include <libs5.h> // s5 lib header
-#include <ulib/ulib.h>
 #include <fat.h> // File system
 #include <filesystem.h> // Filesystem lib
 

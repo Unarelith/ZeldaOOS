@@ -9,7 +9,7 @@
 //	+ 32 tiles Metatiled by 2x2 not compressed
 //	Total size: 512 + 1024 = 1536
 //
-//	Time-stamp: 2011-07-04, 16:34:15
+//	Time-stamp: 2011-07-04, 23:08:30
 //	Exported by Cearn's GBA Image Transmogrifier, v0.8.8
 //	( http://www.coranac.com/projects/#grit )
 //
@@ -37,7 +37,7 @@ extern const unsigned short linkPal[256];
 //	+ 2 tiles not compressed
 //	Total size: 64 = 64
 //
-//	Time-stamp: 2011-07-04, 16:34:15
+//	Time-stamp: 2011-07-04, 23:08:29
 //	Exported by Cearn's GBA Image Transmogrifier, v0.8.8
 //	( http://www.coranac.com/projects/#grit )
 //
@@ -62,7 +62,7 @@ extern const unsigned int dongeonkeyTiles[16];
 //	+ 2 tiles not compressed
 //	Total size: 64 = 64
 //
-//	Time-stamp: 2011-07-04, 16:34:15
+//	Time-stamp: 2011-07-04, 23:08:29
 //	Exported by Cearn's GBA Image Transmogrifier, v0.8.8
 //	( http://www.coranac.com/projects/#grit )
 //
@@ -87,7 +87,7 @@ extern const unsigned int geshaTiles[16];
 //	+ 2 tiles not compressed
 //	Total size: 64 = 64
 //
-//	Time-stamp: 2011-07-04, 16:34:15
+//	Time-stamp: 2011-07-04, 23:08:29
 //	Exported by Cearn's GBA Image Transmogrifier, v0.8.8
 //	( http://www.coranac.com/projects/#grit )
 //
@@ -112,7 +112,7 @@ extern const unsigned int ringTiles[16];
 //	+ 6 tiles not compressed
 //	Total size: 192 = 192
 //
-//	Time-stamp: 2011-07-04, 16:34:15
+//	Time-stamp: 2011-07-04, 23:08:29
 //	Exported by Cearn's GBA Image Transmogrifier, v0.8.8
 //	( http://www.coranac.com/projects/#grit )
 //
@@ -137,7 +137,7 @@ extern const unsigned int seedsTiles[48];
 //	+ 1 tiles not compressed
 //	Total size: 32 = 32
 //
-//	Time-stamp: 2011-07-04, 16:34:15
+//	Time-stamp: 2011-07-04, 23:08:29
 //	Exported by Cearn's GBA Image Transmogrifier, v0.8.8
 //	( http://www.coranac.com/projects/#grit )
 //
@@ -163,7 +163,7 @@ extern const unsigned int weapon_levelTiles[8];
 //	+ 12 tiles Metatiled by 2x2 not compressed
 //	Total size: 512 + 384 = 896
 //
-//	Time-stamp: 2011-07-04, 16:34:15
+//	Time-stamp: 2011-07-04, 23:08:30
 //	Exported by Cearn's GBA Image Transmogrifier, v0.8.8
 //	( http://www.coranac.com/projects/#grit )
 //
@@ -182,6 +182,35 @@ extern const unsigned short linktsPal[256];
 
 //}}BLOCK(linkts)
 
+//{{BLOCK(plain)
+
+//======================================================================
+//
+//	plain, 256x256@8, 
+//	Transparent color : FF,00,FF
+//	+ palette 256 entries, not compressed
+//	+ 1024 tiles Metatiled by 2x2 not compressed
+//	Total size: 512 + 65536 = 66048
+//
+//	Time-stamp: 2011-07-04, 23:08:30
+//	Exported by Cearn's GBA Image Transmogrifier, v0.8.8
+//	( http://www.coranac.com/projects/#grit )
+//
+//======================================================================
+
+#ifndef GRIT_PLAIN_H
+#define GRIT_PLAIN_H
+
+#define plainTilesLen 65536
+extern const unsigned int plainTiles[16384];
+
+#define plainPalLen 512
+extern const unsigned short plainPal[256];
+
+#endif // GRIT_PLAIN_H
+
+//}}BLOCK(plain)
+
 //{{BLOCK(bomb)
 
 //======================================================================
@@ -191,7 +220,7 @@ extern const unsigned short linktsPal[256];
 //	+ 2 tiles not compressed
 //	Total size: 64 = 64
 //
-//	Time-stamp: 2011-07-04, 16:34:15
+//	Time-stamp: 2011-07-04, 23:08:30
 //	Exported by Cearn's GBA Image Transmogrifier, v0.8.8
 //	( http://www.coranac.com/projects/#grit )
 //
@@ -216,7 +245,7 @@ extern const unsigned int bombTiles[16];
 //	+ 2 tiles not compressed
 //	Total size: 64 = 64
 //
-//	Time-stamp: 2011-07-04, 16:34:15
+//	Time-stamp: 2011-07-04, 23:08:30
 //	Exported by Cearn's GBA Image Transmogrifier, v0.8.8
 //	( http://www.coranac.com/projects/#grit )
 //
@@ -241,7 +270,7 @@ extern const unsigned int boomrangL1Tiles[16];
 //	+ 2 tiles not compressed
 //	Total size: 64 = 64
 //
-//	Time-stamp: 2011-07-04, 16:34:15
+//	Time-stamp: 2011-07-04, 23:08:30
 //	Exported by Cearn's GBA Image Transmogrifier, v0.8.8
 //	( http://www.coranac.com/projects/#grit )
 //
@@ -266,7 +295,7 @@ extern const unsigned int boomrangL2Tiles[16];
 //	+ 2 tiles not compressed
 //	Total size: 64 = 64
 //
-//	Time-stamp: 2011-07-04, 16:34:15
+//	Time-stamp: 2011-07-04, 23:08:30
 //	Exported by Cearn's GBA Image Transmogrifier, v0.8.8
 //	( http://www.coranac.com/projects/#grit )
 //
@@ -291,7 +320,7 @@ extern const unsigned int bowTiles[16];
 //	+ 2 tiles not compressed
 //	Total size: 64 = 64
 //
-//	Time-stamp: 2011-07-04, 16:34:15
+//	Time-stamp: 2011-07-04, 23:08:30
 //	Exported by Cearn's GBA Image Transmogrifier, v0.8.8
 //	( http://www.coranac.com/projects/#grit )
 //
@@ -316,7 +345,7 @@ extern const unsigned int caneL1Tiles[16];
 //	+ 2 tiles not compressed
 //	Total size: 64 = 64
 //
-//	Time-stamp: 2011-07-04, 16:34:15
+//	Time-stamp: 2011-07-04, 23:08:30
 //	Exported by Cearn's GBA Image Transmogrifier, v0.8.8
 //	( http://www.coranac.com/projects/#grit )
 //
@@ -341,7 +370,7 @@ extern const unsigned int caneL2Tiles[16];
 //	+ 2 tiles not compressed
 //	Total size: 64 = 64
 //
-//	Time-stamp: 2011-07-04, 16:34:15
+//	Time-stamp: 2011-07-04, 23:08:30
 //	Exported by Cearn's GBA Image Transmogrifier, v0.8.8
 //	( http://www.coranac.com/projects/#grit )
 //
@@ -366,7 +395,7 @@ extern const unsigned int catapultTiles[16];
 //	+ 2 tiles not compressed
 //	Total size: 64 = 64
 //
-//	Time-stamp: 2011-07-04, 16:34:15
+//	Time-stamp: 2011-07-04, 23:08:30
 //	Exported by Cearn's GBA Image Transmogrifier, v0.8.8
 //	( http://www.coranac.com/projects/#grit )
 //
@@ -391,7 +420,7 @@ extern const unsigned int featherL1Tiles[16];
 //	+ 4 tiles not compressed
 //	Total size: 128 = 128
 //
-//	Time-stamp: 2011-07-04, 16:34:15
+//	Time-stamp: 2011-07-04, 23:08:30
 //	Exported by Cearn's GBA Image Transmogrifier, v0.8.8
 //	( http://www.coranac.com/projects/#grit )
 //
@@ -416,7 +445,7 @@ extern const unsigned int fluteTiles[32];
 //	+ 2 tiles not compressed
 //	Total size: 64 = 64
 //
-//	Time-stamp: 2011-07-04, 16:34:15
+//	Time-stamp: 2011-07-04, 23:08:30
 //	Exported by Cearn's GBA Image Transmogrifier, v0.8.8
 //	( http://www.coranac.com/projects/#grit )
 //
@@ -441,7 +470,7 @@ extern const unsigned int grapnelTiles[16];
 //	+ 2 tiles not compressed
 //	Total size: 64 = 64
 //
-//	Time-stamp: 2011-07-04, 16:34:15
+//	Time-stamp: 2011-07-04, 23:08:30
 //	Exported by Cearn's GBA Image Transmogrifier, v0.8.8
 //	( http://www.coranac.com/projects/#grit )
 //
@@ -466,7 +495,7 @@ extern const unsigned int seedbagTiles[16];
 //	+ 2 tiles not compressed
 //	Total size: 64 = 64
 //
-//	Time-stamp: 2011-07-04, 16:34:15
+//	Time-stamp: 2011-07-04, 23:08:30
 //	Exported by Cearn's GBA Image Transmogrifier, v0.8.8
 //	( http://www.coranac.com/projects/#grit )
 //
@@ -491,7 +520,7 @@ extern const unsigned int shieldL1Tiles[16];
 //	+ 2 tiles not compressed
 //	Total size: 64 = 64
 //
-//	Time-stamp: 2011-07-04, 16:34:15
+//	Time-stamp: 2011-07-04, 23:08:30
 //	Exported by Cearn's GBA Image Transmogrifier, v0.8.8
 //	( http://www.coranac.com/projects/#grit )
 //
@@ -516,7 +545,7 @@ extern const unsigned int shieldL2Tiles[16];
 //	+ 2 tiles not compressed
 //	Total size: 64 = 64
 //
-//	Time-stamp: 2011-07-04, 16:34:15
+//	Time-stamp: 2011-07-04, 23:08:30
 //	Exported by Cearn's GBA Image Transmogrifier, v0.8.8
 //	( http://www.coranac.com/projects/#grit )
 //
@@ -541,7 +570,7 @@ extern const unsigned int shieldL3Tiles[16];
 //	+ 2 tiles not compressed
 //	Total size: 64 = 64
 //
-//	Time-stamp: 2011-07-04, 16:34:15
+//	Time-stamp: 2011-07-04, 23:08:30
 //	Exported by Cearn's GBA Image Transmogrifier, v0.8.8
 //	( http://www.coranac.com/projects/#grit )
 //
@@ -566,7 +595,7 @@ extern const unsigned int shovelTiles[16];
 //	+ 2 tiles not compressed
 //	Total size: 64 = 64
 //
-//	Time-stamp: 2011-07-04, 16:34:15
+//	Time-stamp: 2011-07-04, 23:08:30
 //	Exported by Cearn's GBA Image Transmogrifier, v0.8.8
 //	( http://www.coranac.com/projects/#grit )
 //
@@ -591,7 +620,7 @@ extern const unsigned int strenghL1Tiles[16];
 //	+ 2 tiles not compressed
 //	Total size: 64 = 64
 //
-//	Time-stamp: 2011-07-04, 16:34:15
+//	Time-stamp: 2011-07-04, 23:08:30
 //	Exported by Cearn's GBA Image Transmogrifier, v0.8.8
 //	( http://www.coranac.com/projects/#grit )
 //
@@ -616,7 +645,7 @@ extern const unsigned int strenghL2Tiles[16];
 //	+ 2 tiles not compressed
 //	Total size: 64 = 64
 //
-//	Time-stamp: 2011-07-04, 16:34:15
+//	Time-stamp: 2011-07-04, 23:08:30
 //	Exported by Cearn's GBA Image Transmogrifier, v0.8.8
 //	( http://www.coranac.com/projects/#grit )
 //
@@ -641,7 +670,7 @@ extern const unsigned int swordL1Tiles[16];
 //	+ 2 tiles not compressed
 //	Total size: 64 = 64
 //
-//	Time-stamp: 2011-07-04, 16:34:15
+//	Time-stamp: 2011-07-04, 23:08:30
 //	Exported by Cearn's GBA Image Transmogrifier, v0.8.8
 //	( http://www.coranac.com/projects/#grit )
 //
@@ -666,7 +695,7 @@ extern const unsigned int swordL2Tiles[16];
 //	+ 2 tiles not compressed
 //	Total size: 64 = 64
 //
-//	Time-stamp: 2011-07-04, 16:34:15
+//	Time-stamp: 2011-07-04, 23:08:30
 //	Exported by Cearn's GBA Image Transmogrifier, v0.8.8
 //	( http://www.coranac.com/projects/#grit )
 //
@@ -691,7 +720,7 @@ extern const unsigned int swordL3Tiles[16];
 //	+ palette 256 entries, not compressed
 //	Total size: 512 = 512
 //
-//	Time-stamp: 2011-07-04, 16:34:15
+//	Time-stamp: 2011-07-04, 23:08:30
 //	Exported by Cearn's GBA Image Transmogrifier, v0.8.8
 //	( http://www.coranac.com/projects/#grit )
 //
