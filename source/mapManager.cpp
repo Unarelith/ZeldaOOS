@@ -11,7 +11,7 @@ u16 plainNonPassable[127] = {
 Tileset* initTilesets() {
 	Tileset plain = {plainTiles, plainPal, plainNonPassable};
 	
-	Tileset* tilesets = new Tileset;
+	Tileset* tilesets = new Tileset[TILESETS];
 	tilesets[0] = plain;
 	
 	return tilesets;
@@ -23,7 +23,7 @@ Map** initMaps(u8 mapBg) {
 	Map* a1 = new Map(&tilesets[0], "/maps/a1.map", 16, 12, 16, 16, mapBg);
 	Map* a2 = new Map(&tilesets[0], "/maps/a2.map", 16, 12, 16, 16, mapBg);
 	
-	Map** maps = new Map*;
+	Map** maps = new Map*[MAPS];
 	maps[0] = a1;
 	maps[1] = a2;
 	
