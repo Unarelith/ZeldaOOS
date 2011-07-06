@@ -42,7 +42,7 @@ Game::Game() {
 	// Initialize backgrounds
 	s_bg = bgInit(3, BgType_Bmp16, BgSize_B16_256x256, 2, 0);
 	s_bgSub = bgInitSub(3, BgType_Bmp16, BgSize_B16_256x256, 2, 0);
-	s_mapBg = bgInitSub(0, BgType_Text8bpp, BgSize_T_256x256, 0, 1);
+	s_mapBg = bgInitSub(0, BgType_Text8bpp, BgSize_T_512x512, 0, 1);
 	
 	enableSprites(SCREEN_UP, 0);
 	enableSprites(SCREEN_DOWN, 0);
@@ -177,9 +177,8 @@ void Game::init() {
 	Sprite::loadAllIcons(SCREEN_UP);
 	
 	Sprite swordIcon(SCREEN_UP, 1, SprSize_8x16, 46);
-	Sprite* swordAnimation = new Sprite(swordIcon);
 	
-	Weapon sword(&swordIcon, swordAnimation);
+	Weapon sword(&swordIcon, (Sprite*)NULL);
 	sword.setKey(W_KEY_B);
 	
 	link = new Player;
@@ -188,6 +187,8 @@ void Game::init() {
 	
 	currentMap = maps[0];
 	currentMap->init();
+	
+	currentMap->scroll(32, 32);
 	
 	while(1) {
 		// Read keys data
@@ -203,7 +204,6 @@ void Game::init() {
 		link->draw();
 		
 		// Draw sword icon
-		//swordIcon.draw(W_KEY_B, 176);
 		sword.drawIcon();
 		
 		// Wait the VBL

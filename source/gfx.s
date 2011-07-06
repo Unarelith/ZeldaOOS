@@ -9,7 +9,7 @@
 @	+ 32 tiles Metatiled by 2x2 not compressed
 @	Total size: 512 + 1024 = 1536
 @
-@	Time-stamp: 2011-07-06, 19:57:16
+@	Time-stamp: 2011-07-06, 20:04:27
 @	Exported by Cearn's GBA Image Transmogrifier, v0.8.8
 @	( http://www.coranac.com/projects/#grit )
 @
@@ -59,7 +59,7 @@ linkTiles:
 	.align	2
 	.global linkPal		@ 512 unsigned chars
 linkPal:
-	.hword 0x7C1F,0x0000,0x1A60,0x4F3F,0x0000,0x0000,0x0000,0x0000
+	.hword 0x7C1F,0x0000,0x22A2,0x475F,0x0000,0x0000,0x0000,0x0000
 	.hword 0x0000,0x0000,0x0000,0x0000,0x0000,0x0000,0x0000,0x0000
 	.hword 0x0000,0x0000,0x0000,0x0000,0x0000,0x0000,0x0000,0x0000
 	.hword 0x0000,0x0000,0x0000,0x0000,0x0000,0x0000,0x0000,0x0000
@@ -106,7 +106,7 @@ linkPal:
 @	+ 2 tiles not compressed
 @	Total size: 64 = 64
 @
-@	Time-stamp: 2011-07-06, 19:57:16
+@	Time-stamp: 2011-07-06, 20:04:27
 @	Exported by Cearn's GBA Image Transmogrifier, v0.8.8
 @	( http://www.coranac.com/projects/#grit )
 @
@@ -116,8 +116,8 @@ linkPal:
 	.align	2
 	.global dongeonkeyTiles		@ 64 unsigned chars
 dongeonkeyTiles:
-	.word 0x00000000,0x00111110,0x01455541,0x01511151,0x01510151,0x01511151,0x01455541,0x00111110
-	.word 0x00014100,0x00015100,0x00015100,0x01115100,0x01445100,0x01115100,0x00011100,0x00000000
+	.word 0x00000000,0x00444440,0x04566654,0x04644464,0x04640464,0x04644464,0x04566654,0x00444440
+	.word 0x00045400,0x00046400,0x00046400,0x04446400,0x04556400,0x04446400,0x00044400,0x00000000
 
 @}}BLOCK(dongeonkey)
 
@@ -130,7 +130,7 @@ dongeonkeyTiles:
 @	+ 2 tiles not compressed
 @	Total size: 64 = 64
 @
-@	Time-stamp: 2011-07-06, 19:57:16
+@	Time-stamp: 2011-07-06, 20:04:27
 @	Exported by Cearn's GBA Image Transmogrifier, v0.8.8
 @	( http://www.coranac.com/projects/#grit )
 @
@@ -140,8 +140,8 @@ dongeonkeyTiles:
 	.align	2
 	.global geshaTiles		@ 64 unsigned chars
 geshaTiles:
-	.word 0x00000000,0x00000000,0x00006000,0x00067600,0x00067600,0x00677760,0x00678760,0x06777876
-	.word 0x06777876,0x06777876,0x06777776,0x06777776,0x00677760,0x00066600,0x00000000,0x00000000
+	.word 0x00000000,0x00000000,0x00007000,0x00078700,0x00078700,0x00788870,0x00789870,0x07888987
+	.word 0x07888987,0x07888987,0x07888887,0x07888887,0x00788870,0x00077700,0x00000000,0x00000000
 
 @}}BLOCK(gesha)
 
@@ -154,7 +154,7 @@ geshaTiles:
 @	+ 2 tiles not compressed
 @	Total size: 64 = 64
 @
-@	Time-stamp: 2011-07-06, 19:57:16
+@	Time-stamp: 2011-07-06, 20:04:27
 @	Exported by Cearn's GBA Image Transmogrifier, v0.8.8
 @	( http://www.coranac.com/projects/#grit )
 @
@@ -164,8 +164,8 @@ geshaTiles:
 	.align	2
 	.global ringTiles		@ 64 unsigned chars
 ringTiles:
-	.word 0x00000000,0x00000000,0x00000000,0x00066000,0x00688600,0x00699600,0x06888860,0x68666686
-	.word 0x68600686,0x68600686,0x68666686,0x06888860,0x00666600,0x00000000,0x00000000,0x00000000
+	.word 0x00000000,0x00000000,0x00000000,0x00077000,0x00799700,0x007AA700,0x07999970,0x79777797
+	.word 0x79700797,0x79700797,0x79777797,0x07999970,0x00777700,0x00000000,0x00000000,0x00000000
 
 @}}BLOCK(ring)
 
@@ -178,7 +178,7 @@ ringTiles:
 @	+ 6 tiles not compressed
 @	Total size: 192 = 192
 @
-@	Time-stamp: 2011-07-06, 19:57:16
+@	Time-stamp: 2011-07-06, 20:04:27
 @	Exported by Cearn's GBA Image Transmogrifier, v0.8.8
 @	( http://www.coranac.com/projects/#grit )
 @
@@ -188,11 +188,11 @@ ringTiles:
 	.align	2
 	.global seedsTiles		@ 192 unsigned chars
 seedsTiles:
-	.word 0x00060000,0x00686600,0x06886860,0x68AA8886,0x6AAAA8A6,0x6AAAAAA6,0x06AA6A60,0x00666600
-	.word 0x00066000,0x00666600,0x00688600,0x06988660,0x69986696,0x69998896,0x06999960,0x00666600
-	.word 0x66666600,0x67778860,0x66666786,0x06777676,0x06677676,0x00666866,0x00006860,0x00006660
-	.word 0x06666660,0x66666666,0x67788776,0x66678776,0x66788766,0x06776660,0x00688600,0x00066000
-	.word 0x00066000,0x066BB660,0x06BB8860,0x6BBB88B6,0x6BBBBBB6,0x06BBBB60,0x066BB660,0x00066000
+	.word 0x00070000,0x00797700,0x07997970,0x79BB9997,0x7BBBB9B7,0x7BBBBBB7,0x07BB7B70,0x00777700
+	.word 0x00077000,0x00777700,0x00799700,0x07A99770,0x7AA977A7,0x7AAA99A7,0x07AAAA70,0x00777700
+	.word 0x77777700,0x78889970,0x77777897,0x07888787,0x07788787,0x00777977,0x00007970,0x00007770
+	.word 0x07777770,0x77777777,0x78899887,0x77789887,0x77899877,0x07887770,0x00799700,0x00077000
+	.word 0x00077000,0x077CC770,0x07CC9970,0x7CCC99C7,0x7CCCCCC7,0x07CCCC70,0x077CC770,0x00077000
 	.word 0x00000000,0x00000000,0x00000000,0x00000000,0x00000000,0x00000000,0x00000000,0x00000000
 
 @}}BLOCK(seeds)
@@ -206,7 +206,7 @@ seedsTiles:
 @	+ 1 tiles not compressed
 @	Total size: 32 = 32
 @
-@	Time-stamp: 2011-07-06, 19:57:16
+@	Time-stamp: 2011-07-06, 20:04:27
 @	Exported by Cearn's GBA Image Transmogrifier, v0.8.8
 @	( http://www.coranac.com/projects/#grit )
 @
@@ -216,7 +216,7 @@ seedsTiles:
 	.align	2
 	.global weapon_levelTiles		@ 32 unsigned chars
 weapon_levelTiles:
-	.word 0x00000000,0x00000110,0x00000110,0x00000110,0x01100110,0x00000110,0x00011110,0x00000000
+	.word 0x00000000,0x00000440,0x00000440,0x00000440,0x04400440,0x00000440,0x00044440,0x00000000
 
 @}}BLOCK(weapon_level)
 
@@ -229,7 +229,7 @@ weapon_levelTiles:
 @	+ 2 tiles not compressed
 @	Total size: 64 = 64
 @
-@	Time-stamp: 2011-07-06, 19:57:16
+@	Time-stamp: 2011-07-06, 20:04:27
 @	Exported by Cearn's GBA Image Transmogrifier, v0.8.8
 @	( http://www.coranac.com/projects/#grit )
 @
@@ -239,8 +239,8 @@ weapon_levelTiles:
 	.align	2
 	.global acornTiles		@ 64 unsigned chars
 acornTiles:
-	.word 0x00000000,0x00011000,0x001DD100,0x001CC100,0x01CDDC10,0x1CDDDDC1,0x1C1111C1,0x11CCCC11
-	.word 0x1CCCDDC1,0x1CCCDDC1,0x1CCCCCC1,0x1CCCCCC1,0x01CCCC10,0x001CC100,0x00011000,0x00000000
+	.word 0x00000000,0x00044000,0x004EE400,0x004DD400,0x04DEED40,0x4DEEEED4,0x4D4444D4,0x44DDDD44
+	.word 0x4DDDEED4,0x4DDDEED4,0x4DDDDDD4,0x4DDDDDD4,0x04DDDD40,0x004DD400,0x00044000,0x00000000
 
 @}}BLOCK(acorn)
 
@@ -253,7 +253,7 @@ acornTiles:
 @	+ bitmap not compressed
 @	Total size: 98304 = 98304
 @
-@	Time-stamp: 2011-07-06, 19:57:16
+@	Time-stamp: 2011-07-06, 20:04:27
 @	Exported by Cearn's GBA Image Transmogrifier, v0.8.8
 @	( http://www.coranac.com/projects/#grit )
 @
@@ -3731,7 +3731,7 @@ fileSelectBitmap:
 @	+ 12 tiles Metatiled by 2x2 not compressed
 @	Total size: 512 + 384 = 896
 @
-@	Time-stamp: 2011-07-06, 19:57:16
+@	Time-stamp: 2011-07-06, 20:04:27
 @	Exported by Cearn's GBA Image Transmogrifier, v0.8.8
 @	( http://www.coranac.com/projects/#grit )
 @
@@ -3806,7 +3806,7 @@ linktsPal:
 @	+ 9 tiles not compressed
 @	Total size: 288 = 288
 @
-@	Time-stamp: 2011-07-06, 19:57:16
+@	Time-stamp: 2011-07-06, 20:04:27
 @	Exported by Cearn's GBA Image Transmogrifier, v0.8.8
 @	( http://www.coranac.com/projects/#grit )
 @
@@ -3816,16 +3816,16 @@ linktsPal:
 	.align	2
 	.global numbersTiles		@ 288 unsigned chars
 numbersTiles:
-	.word 0x00011110,0x00110011,0x00110011,0x00110011,0x00110011,0x00011110,0x11111111,0x11111111
-	.word 0x10000110,0x11000111,0x00000110,0x10000110,0x11000110,0x11000110,0x11111111,0x11111111
-	.word 0x11000111,0x01101100,0x00001100,0x00000111,0x01100000,0x11001111,0x11111111,0x11111111
-	.word 0x10000011,0x11000110,0x11100011,0x10110110,0x11110110,0x10000011,0x11111111,0x11111111
-	.word 0x11111001,0x00011001,0x11111001,0x10000001,0x10000011,0x11111001,0x11111111,0x11111111
-	.word 0x01111000,0x00001100,0x01111100,0x11001101,0x11001101,0x01111000,0x11111111,0x11111111
-	.word 0x01111110,0x01100000,0x00110000,0x00011000,0x00011000,0x00011000,0x11111111,0x11111111
-	.word 0x00011110,0x10110011,0x10011110,0x00110011,0x00110011,0x00011110,0x11111111,0x11111111
+	.word 0x00044440,0x00440044,0x00440044,0x00440044,0x00440044,0x00044440,0x44444444,0x44444444
+	.word 0x40000440,0x44000444,0x00000440,0x40000440,0x44000440,0x44000440,0x44444444,0x44444444
+	.word 0x44000444,0x04404400,0x00004400,0x00000444,0x04400000,0x44004444,0x44444444,0x44444444
+	.word 0x40000044,0x44000440,0x44400044,0x40440440,0x44440440,0x40000044,0x44444444,0x44444444
+	.word 0x44444004,0x00044004,0x44444004,0x40000004,0x40000044,0x44444004,0x44444444,0x44444444
+	.word 0x04444000,0x00004400,0x04444400,0x44004404,0x44004404,0x04444000,0x44444444,0x44444444
+	.word 0x04444440,0x04400000,0x00440000,0x00044000,0x00044000,0x00044000,0x44444444,0x44444444
+	.word 0x00044440,0x40440044,0x40044440,0x00440044,0x00440044,0x00044440,0x44444444,0x44444444
 
-	.word 0x11101111,0x11111001,0x11111001,0x11111111,0x11111000,0x11101111,0x11111111,0x11111111
+	.word 0x44404444,0x44444004,0x44444004,0x44444444,0x44444000,0x44404444,0x44444444,0x44444444
 
 @}}BLOCK(numbers)
 
@@ -3839,7 +3839,7 @@ numbersTiles:
 @	+ 11 tiles not compressed
 @	Total size: 512 + 352 = 864
 @
-@	Time-stamp: 2011-07-06, 19:57:16
+@	Time-stamp: 2011-07-06, 20:04:27
 @	Exported by Cearn's GBA Image Transmogrifier, v0.8.8
 @	( http://www.coranac.com/projects/#grit )
 @
@@ -3913,7 +3913,7 @@ pressStartPal:
 @	+ bitmap not compressed
 @	Total size: 98304 = 98304
 @
-@	Time-stamp: 2011-07-06, 19:57:16
+@	Time-stamp: 2011-07-06, 20:04:27
 @	Exported by Cearn's GBA Image Transmogrifier, v0.8.8
 @	( http://www.coranac.com/projects/#grit )
 @
@@ -7390,7 +7390,7 @@ statsBitmap:
 @	+ bitmap not compressed
 @	Total size: 98304 = 98304
 @
-@	Time-stamp: 2011-07-06, 19:57:16
+@	Time-stamp: 2011-07-06, 20:04:27
 @	Exported by Cearn's GBA Image Transmogrifier, v0.8.8
 @	( http://www.coranac.com/projects/#grit )
 @
@@ -10868,7 +10868,7 @@ titleScreenBitmap:
 @	+ 1024 tiles Metatiled by 2x2 not compressed
 @	Total size: 512 + 65536 = 66048
 @
-@	Time-stamp: 2011-07-06, 19:57:16
+@	Time-stamp: 2011-07-06, 20:04:27
 @	Exported by Cearn's GBA Image Transmogrifier, v0.8.8
 @	( http://www.coranac.com/projects/#grit )
 @
@@ -13233,7 +13233,7 @@ plainPal:
 @	+ 2 tiles not compressed
 @	Total size: 64 = 64
 @
-@	Time-stamp: 2011-07-06, 19:57:16
+@	Time-stamp: 2011-07-06, 20:04:27
 @	Exported by Cearn's GBA Image Transmogrifier, v0.8.8
 @	( http://www.coranac.com/projects/#grit )
 @
@@ -13243,8 +13243,8 @@ plainPal:
 	.align	2
 	.global bombTiles		@ 64 unsigned chars
 bombTiles:
-	.word 0x00000000,0x00000000,0x06600000,0x00660000,0x00060000,0x00066000,0x00665600,0x06666660
-	.word 0x66666556,0x66666556,0x66666666,0x66666666,0x66666666,0x06666660,0x00666600,0x00000000
+	.word 0x00000000,0x00000000,0x07700000,0x00770000,0x00070000,0x00077000,0x00754700,0x07777770
+	.word 0x57775445,0x77775447,0x75775557,0x75777777,0x57577775,0x07755770,0x00577500,0x00000000
 
 @}}BLOCK(bomb)
 
@@ -13257,7 +13257,7 @@ bombTiles:
 @	+ 2 tiles not compressed
 @	Total size: 64 = 64
 @
-@	Time-stamp: 2011-07-06, 19:57:16
+@	Time-stamp: 2011-07-06, 20:04:27
 @	Exported by Cearn's GBA Image Transmogrifier, v0.8.8
 @	( http://www.coranac.com/projects/#grit )
 @
@@ -13267,8 +13267,8 @@ bombTiles:
 	.align	2
 	.global boomrangL1Tiles		@ 64 unsigned chars
 boomrangL1Tiles:
-	.word 0x00000000,0x00000000,0x66660000,0x68876000,0x67887600,0x06788760,0x00678876,0x00068886
-	.word 0x00068886,0x00678876,0x06788760,0x67887600,0x68876000,0x66660000,0x00000000,0x00000000
+	.word 0x00000000,0x00000000,0x77770000,0x77767000,0x76776700,0x07677670,0x00767767,0x00077777
+	.word 0x00077777,0x00767767,0x07677670,0x76776700,0x77767000,0x77770000,0x00000000,0x00000000
 
 @}}BLOCK(boomrangL1)
 
@@ -13281,7 +13281,7 @@ boomrangL1Tiles:
 @	+ 2 tiles not compressed
 @	Total size: 64 = 64
 @
-@	Time-stamp: 2011-07-06, 19:57:16
+@	Time-stamp: 2011-07-06, 20:04:27
 @	Exported by Cearn's GBA Image Transmogrifier, v0.8.8
 @	( http://www.coranac.com/projects/#grit )
 @
@@ -13291,8 +13291,8 @@ boomrangL1Tiles:
 	.align	2
 	.global boomrangL2Tiles		@ 64 unsigned chars
 boomrangL2Tiles:
-	.word 0x11000000,0x16100000,0x16610000,0x01561000,0x01656100,0x00155610,0x00165561,0x00015551
-	.word 0x00015551,0x00165561,0x00155610,0x01656100,0x01561000,0x16610000,0x16100000,0x11000000
+	.word 0x44000000,0x45400000,0x45540000,0x04454000,0x04545400,0x00444540,0x00454454,0x00044444
+	.word 0x00044444,0x00454454,0x00444540,0x04545400,0x04454000,0x45540000,0x45400000,0x44000000
 
 @}}BLOCK(boomrangL2)
 
@@ -13305,7 +13305,7 @@ boomrangL2Tiles:
 @	+ 2 tiles not compressed
 @	Total size: 64 = 64
 @
-@	Time-stamp: 2011-07-06, 19:57:16
+@	Time-stamp: 2011-07-06, 20:04:27
 @	Exported by Cearn's GBA Image Transmogrifier, v0.8.8
 @	( http://www.coranac.com/projects/#grit )
 @
@@ -13315,8 +13315,8 @@ boomrangL2Tiles:
 	.align	2
 	.global bowTiles		@ 64 unsigned chars
 bowTiles:
-	.word 0x00000000,0x01110000,0x01991000,0x01199100,0x01019910,0x01001910,0x01001910,0x01001910
-	.word 0x01001910,0x01001910,0x01001910,0x01019910,0x01199100,0x01991000,0x01110000,0x00000000
+	.word 0x00000000,0x04440000,0x04884000,0x04488400,0x04048840,0x04004840,0x04004840,0x04004840
+	.word 0x04004840,0x04004840,0x04004840,0x04048840,0x04488400,0x04884000,0x04440000,0x00000000
 
 @}}BLOCK(bow)
 
@@ -13329,7 +13329,7 @@ bowTiles:
 @	+ 2 tiles not compressed
 @	Total size: 64 = 64
 @
-@	Time-stamp: 2011-07-06, 19:57:16
+@	Time-stamp: 2011-07-06, 20:04:27
 @	Exported by Cearn's GBA Image Transmogrifier, v0.8.8
 @	( http://www.coranac.com/projects/#grit )
 @
@@ -13339,8 +13339,8 @@ bowTiles:
 	.align	2
 	.global caneL1Tiles		@ 64 unsigned chars
 caneL1Tiles:
-	.word 0x00111100,0x01A33A10,0x1AAAAAA1,0x1AA11AA1,0x1A311AA1,0x1A310110,0x1AA31000,0x01AAA100
-	.word 0x0013A100,0x001AA100,0x001AA100,0x001AA100,0x001AA100,0x001AA100,0x001AA100,0x00011000
+	.word 0x00444400,0x049AA940,0x49999994,0x49944994,0x49A44994,0x49A40440,0x499A4000,0x04999400
+	.word 0x004A9400,0x00499400,0x00499400,0x00499400,0x00499400,0x00499400,0x00499400,0x00044000
 
 @}}BLOCK(caneL1)
 
@@ -13353,7 +13353,7 @@ caneL1Tiles:
 @	+ 2 tiles not compressed
 @	Total size: 64 = 64
 @
-@	Time-stamp: 2011-07-06, 19:57:16
+@	Time-stamp: 2011-07-06, 20:04:27
 @	Exported by Cearn's GBA Image Transmogrifier, v0.8.8
 @	( http://www.coranac.com/projects/#grit )
 @
@@ -13363,8 +13363,8 @@ caneL1Tiles:
 	.align	2
 	.global caneL2Tiles		@ 64 unsigned chars
 caneL2Tiles:
-	.word 0x00111100,0x01CCCC10,0x1BBBBBB1,0x1CC11CC1,0x1BB11BB1,0x1CC10110,0x1BBB1000,0x01CCC100
-	.word 0x001BB100,0x001CC100,0x001BB100,0x001CC100,0x001BB100,0x001CC100,0x001BB100,0x00011000
+	.word 0x00444400,0x04CCCC40,0x4BBBBBB4,0x4CC44CC4,0x4BB44BB4,0x4CC40440,0x4BBB4000,0x04CCC400
+	.word 0x004BB400,0x004CC400,0x004BB400,0x004CC400,0x004BB400,0x004CC400,0x004BB400,0x00044000
 
 @}}BLOCK(caneL2)
 
@@ -13377,7 +13377,7 @@ caneL2Tiles:
 @	+ 2 tiles not compressed
 @	Total size: 64 = 64
 @
-@	Time-stamp: 2011-07-06, 19:57:16
+@	Time-stamp: 2011-07-06, 20:04:27
 @	Exported by Cearn's GBA Image Transmogrifier, v0.8.8
 @	( http://www.coranac.com/projects/#grit )
 @
@@ -13387,8 +13387,8 @@ caneL2Tiles:
 	.align	2
 	.global catapultTiles		@ 64 unsigned chars
 catapultTiles:
-	.word 0x11111111,0x1DDEEED1,0x01111110,0x01DDED10,0x001DE100,0x001DE100,0x00111100,0x0111DD10
-	.word 0x111DEED1,0x111DEED1,0x1111DD11,0x11111111,0x01111110,0x01DDED10,0x00111100,0x00000000
+	.word 0x44444444,0x4DDEEED4,0x04444440,0x04DDED40,0x004DE400,0x004DE400,0x00444400,0x0444DD40
+	.word 0x444DEED4,0x444DEED4,0x4444DD44,0x44444444,0x04444440,0x04DDED40,0x00444400,0x00000000
 
 @}}BLOCK(catapult)
 
@@ -13401,7 +13401,7 @@ catapultTiles:
 @	+ 2 tiles not compressed
 @	Total size: 64 = 64
 @
-@	Time-stamp: 2011-07-06, 19:57:16
+@	Time-stamp: 2011-07-06, 20:04:27
 @	Exported by Cearn's GBA Image Transmogrifier, v0.8.8
 @	( http://www.coranac.com/projects/#grit )
 @
@@ -13411,8 +13411,8 @@ catapultTiles:
 	.align	2
 	.global featherL1Tiles		@ 64 unsigned chars
 featherL1Tiles:
-	.word 0x11000000,0x1F110000,0x1FFF1000,0x1FFFF100,0x1FFF0100,0x1FFF0010,0x0100F010,0x0100F001
-	.word 0x01000F01,0x00100F01,0x00010F01,0x00001FF1,0x00001F10,0x00001F10,0x00001F10,0x00001100
+	.word 0x44000000,0x4F440000,0x4FFF4000,0x4FFFF400,0x4FFF0400,0x4FFF0040,0x0400F040,0x0400F004
+	.word 0x04000F04,0x00400F04,0x00040F04,0x00004FF4,0x00004F40,0x00004F40,0x00004F40,0x00004400
 
 @}}BLOCK(featherL1)
 
@@ -13425,7 +13425,7 @@ featherL1Tiles:
 @	+ 4 tiles not compressed
 @	Total size: 128 = 128
 @
-@	Time-stamp: 2011-07-06, 19:57:16
+@	Time-stamp: 2011-07-06, 20:04:27
 @	Exported by Cearn's GBA Image Transmogrifier, v0.8.8
 @	( http://www.coranac.com/projects/#grit )
 @
@@ -13435,10 +13435,10 @@ featherL1Tiles:
 	.align	2
 	.global fluteTiles		@ 128 unsigned chars
 fluteTiles:
-	.word 0x01111100,0x11000110,0x00000010,0x00000100,0x00001000,0x11001000,0x31111110,0x13313311
-	.word 0x01110000,0x11310000,0x11111111,0x11113100,0x01131111,0x01131331,0x00113313,0x00113133
-	.word 0x33133331,0x31131131,0x31311131,0x11311131,0x11311310,0x11333310,0x11133100,0x00111000
-	.word 0x01111111,0x11111111,0x11111111,0x11111111,0x11133111,0x11311311,0x01333310,0x00111100
+	.word 0x04444400,0x44000440,0x00000040,0x00000400,0x00004000,0x44004000,0xA1444440,0x1AA4AA14
+	.word 0x04440000,0x41A40000,0x41444444,0x4441A400,0x041A1144,0x041A1AA1,0x0041AA1A,0x0041A1AA
+	.word 0xAA4AAAA4,0xA14A41A4,0xA4A441A4,0x14A441A4,0x14A41A40,0x14AAAA40,0x441AA400,0x00444000
+	.word 0x04441441,0x41444414,0x44111144,0x41411414,0x414AA414,0x41A44A14,0x04AAAA40,0x00444400
 
 @}}BLOCK(flute)
 
@@ -13451,7 +13451,7 @@ fluteTiles:
 @	+ 2 tiles not compressed
 @	Total size: 64 = 64
 @
-@	Time-stamp: 2011-07-06, 19:57:16
+@	Time-stamp: 2011-07-06, 20:04:27
 @	Exported by Cearn's GBA Image Transmogrifier, v0.8.8
 @	( http://www.coranac.com/projects/#grit )
 @
@@ -13461,8 +13461,8 @@ fluteTiles:
 	.align	2
 	.global grapnelTiles		@ 64 unsigned chars
 grapnelTiles:
-	.word 0x00110110,0x01F101F1,0x01011101,0x01001001,0x00110110,0x00011100,0x00001000,0x00001000
-	.word 0x00000100,0x00000100,0x00001000,0x00011100,0x001F0010,0x001FFF10,0x001FFF10,0x00111110
+	.word 0x00440440,0x04F404F4,0x04044404,0x04004004,0x00440440,0x00044400,0x00004000,0x00004000
+	.word 0x00000400,0x00000400,0x00004000,0x00044400,0x004F0040,0x004FFF40,0x004FFF40,0x00444440
 
 @}}BLOCK(grapnel)
 
@@ -13475,7 +13475,7 @@ grapnelTiles:
 @	+ 2 tiles not compressed
 @	Total size: 64 = 64
 @
-@	Time-stamp: 2011-07-06, 19:57:16
+@	Time-stamp: 2011-07-06, 20:04:27
 @	Exported by Cearn's GBA Image Transmogrifier, v0.8.8
 @	( http://www.coranac.com/projects/#grit )
 @
@@ -13485,8 +13485,8 @@ grapnelTiles:
 	.align	2
 	.global seedbagTiles		@ 64 unsigned chars
 seedbagTiles:
-	.word 0x00000000,0x00006600,0x06667860,0x67877886,0x68886876,0x06786760,0x00666600,0x06767860
-	.word 0x67888886,0x67888886,0x67888886,0x67787886,0x67778776,0x06777760,0x00666600,0x00000000
+	.word 0x00000000,0x00007700,0x07776770,0x76766777,0x77777767,0x07677670,0x00777700,0x07676770
+	.word 0x76777777,0x76777777,0x76777777,0x76676777,0x76667667,0x07666670,0x00777700,0x00000000
 
 @}}BLOCK(seedbag)
 
@@ -13499,7 +13499,7 @@ seedbagTiles:
 @	+ 2 tiles not compressed
 @	Total size: 64 = 64
 @
-@	Time-stamp: 2011-07-06, 19:57:16
+@	Time-stamp: 2011-07-06, 20:04:27
 @	Exported by Cearn's GBA Image Transmogrifier, v0.8.8
 @	( http://www.coranac.com/projects/#grit )
 @
@@ -13509,8 +13509,8 @@ seedbagTiles:
 	.align	2
 	.global shieldL1Tiles		@ 64 unsigned chars
 shieldL1Tiles:
-	.word 0x00000000,0x00000000,0x00000000,0x06666660,0x69999996,0x69666696,0x69699696,0x69699696
-	.word 0x69699696,0x69966996,0x06999960,0x00666600,0x00000000,0x00000000,0x00000000,0x00000000
+	.word 0x00000000,0x00000000,0x00000000,0x07777770,0x7AAAAAA7,0x7A7777A7,0x7A7AA7A7,0x7A7AA7A7
+	.word 0x7A7AA7A7,0x7AA77AA7,0x07AAAA70,0x00777700,0x00000000,0x00000000,0x00000000,0x00000000
 
 @}}BLOCK(shieldL1)
 
@@ -13523,7 +13523,7 @@ shieldL1Tiles:
 @	+ 2 tiles not compressed
 @	Total size: 64 = 64
 @
-@	Time-stamp: 2011-07-06, 19:57:16
+@	Time-stamp: 2011-07-06, 20:04:27
 @	Exported by Cearn's GBA Image Transmogrifier, v0.8.8
 @	( http://www.coranac.com/projects/#grit )
 @
@@ -13533,8 +13533,8 @@ shieldL1Tiles:
 	.align	2
 	.global shieldL2Tiles		@ 64 unsigned chars
 shieldL2Tiles:
-	.word 0x00000000,0x00000000,0x00000000,0x66600666,0x68666686,0x68888886,0x68666686,0x68777686
-	.word 0x68777686,0x68777686,0x68877886,0x06888860,0x00666600,0x00000000,0x00000000,0x00000000
+	.word 0x00000000,0x00000000,0x00000000,0x77700777,0x77777777,0x77777777,0x77777777,0x77666777
+	.word 0x77666777,0x77666777,0x77766777,0x07777770,0x00777700,0x00000000,0x00000000,0x00000000
 
 @}}BLOCK(shieldL2)
 
@@ -13547,7 +13547,7 @@ shieldL2Tiles:
 @	+ 2 tiles not compressed
 @	Total size: 64 = 64
 @
-@	Time-stamp: 2011-07-06, 19:57:16
+@	Time-stamp: 2011-07-06, 20:04:27
 @	Exported by Cearn's GBA Image Transmogrifier, v0.8.8
 @	( http://www.coranac.com/projects/#grit )
 @
@@ -13557,8 +13557,8 @@ shieldL2Tiles:
 	.align	2
 	.global shieldL3Tiles		@ 64 unsigned chars
 shieldL3Tiles:
-	.word 0x00000000,0x00000000,0x00111100,0x01222210,0x12222221,0x12111121,0x12333121,0x12333121
-	.word 0x12333121,0x12333121,0x12233221,0x01222210,0x00122100,0x00011000,0x00000000,0x00000000
+	.word 0x00000000,0x00000000,0x00444400,0x04222240,0x42222224,0x42444424,0x42333424,0x42333424
+	.word 0x42333424,0x42333424,0x42233224,0x04222240,0x00422400,0x00044000,0x00000000,0x00000000
 
 @}}BLOCK(shieldL3)
 
@@ -13571,7 +13571,7 @@ shieldL3Tiles:
 @	+ 2 tiles not compressed
 @	Total size: 64 = 64
 @
-@	Time-stamp: 2011-07-06, 19:57:16
+@	Time-stamp: 2011-07-06, 20:04:27
 @	Exported by Cearn's GBA Image Transmogrifier, v0.8.8
 @	( http://www.coranac.com/projects/#grit )
 @
@@ -13581,8 +13581,8 @@ shieldL3Tiles:
 	.align	2
 	.global shovelTiles		@ 64 unsigned chars
 shovelTiles:
-	.word 0x00000000,0x06666660,0x06555560,0x06666660,0x00655600,0x00655600,0x00666600,0x66655666
-	.word 0x65655656,0x65666656,0x65666656,0x65566556,0x06555560,0x00655600,0x00066000,0x00000000
+	.word 0x00000000,0x07777770,0x07444470,0x07755770,0x00744700,0x00744700,0x00777700,0x77744777
+	.word 0x74744747,0x74577547,0x74555547,0x74455447,0x07444470,0x00744700,0x00077000,0x00000000
 
 @}}BLOCK(shovel)
 
@@ -13595,7 +13595,7 @@ shovelTiles:
 @	+ 2 tiles not compressed
 @	Total size: 64 = 64
 @
-@	Time-stamp: 2011-07-06, 19:57:16
+@	Time-stamp: 2011-07-06, 20:04:27
 @	Exported by Cearn's GBA Image Transmogrifier, v0.8.8
 @	( http://www.coranac.com/projects/#grit )
 @
@@ -13605,8 +13605,8 @@ shovelTiles:
 	.align	2
 	.global strenghL1Tiles		@ 64 unsigned chars
 strenghL1Tiles:
-	.word 0x00000000,0x00666000,0x06888600,0x68778860,0x68667660,0x67666786,0x66067886,0x00067886
-	.word 0x00067886,0x66067786,0x68666776,0x68668666,0x67888760,0x06777600,0x00666000,0x00000000
+	.word 0x00000000,0x00777000,0x07777700,0x77667770,0x77776770,0x76777677,0x77076777,0x00076777
+	.word 0x00076777,0x77076677,0x77777667,0x77777777,0x76777670,0x07666700,0x00777000,0x00000000
 
 @}}BLOCK(strenghL1)
 
@@ -13619,7 +13619,7 @@ strenghL1Tiles:
 @	+ 2 tiles not compressed
 @	Total size: 64 = 64
 @
-@	Time-stamp: 2011-07-06, 19:57:16
+@	Time-stamp: 2011-07-06, 20:04:27
 @	Exported by Cearn's GBA Image Transmogrifier, v0.8.8
 @	( http://www.coranac.com/projects/#grit )
 @
@@ -13629,8 +13629,8 @@ strenghL1Tiles:
 	.align	2
 	.global strenghL2Tiles		@ 64 unsigned chars
 strenghL2Tiles:
-	.word 0x00666660,0x06868760,0x68787600,0x68786066,0x66666686,0x67778676,0x67778676,0x06777860
-	.word 0x00666600,0x00666600,0x06778760,0x06778760,0x06666660,0x67778876,0x66666666,0x00000000
+	.word 0x00777770,0x07777670,0x77676700,0x77677077,0x77777777,0x76667767,0x76667767,0x07666770
+	.word 0x00777700,0x00777700,0x07667670,0x07667670,0x07777770,0x76667767,0x77777777,0x00000000
 
 @}}BLOCK(strenghL2)
 
@@ -13643,7 +13643,7 @@ strenghL2Tiles:
 @	+ 2 tiles not compressed
 @	Total size: 64 = 64
 @
-@	Time-stamp: 2011-07-06, 19:57:16
+@	Time-stamp: 2011-07-06, 20:04:27
 @	Exported by Cearn's GBA Image Transmogrifier, v0.8.8
 @	( http://www.coranac.com/projects/#grit )
 @
@@ -13653,8 +13653,8 @@ strenghL2Tiles:
 	.align	2
 	.global swordL1Tiles		@ 64 unsigned chars
 swordL1Tiles:
-	.word 0x00066000,0x00698600,0x00698600,0x00698600,0x00698600,0x00698600,0x00698600,0x00698600
-	.word 0x00698600,0x06666660,0x06888860,0x00666600,0x00699600,0x00699600,0x00699600,0x00066000
+	.word 0x00077000,0x007A9700,0x007A9700,0x007A9700,0x007A9700,0x007A9700,0x007A9700,0x007A9700
+	.word 0x007A9700,0x07777770,0x07999970,0x00777700,0x007AA700,0x007AA700,0x007AA700,0x00077000
 
 @}}BLOCK(swordL1)
 
@@ -13667,7 +13667,7 @@ swordL1Tiles:
 @	+ 2 tiles not compressed
 @	Total size: 64 = 64
 @
-@	Time-stamp: 2011-07-06, 19:57:16
+@	Time-stamp: 2011-07-06, 20:04:27
 @	Exported by Cearn's GBA Image Transmogrifier, v0.8.8
 @	( http://www.coranac.com/projects/#grit )
 @
@@ -13677,8 +13677,8 @@ swordL1Tiles:
 	.align	2
 	.global swordL2Tiles		@ 64 unsigned chars
 swordL2Tiles:
-	.word 0x00066000,0x00688600,0x00688600,0x00688600,0x00688600,0x00688600,0x00688600,0x00688600
-	.word 0x06688660,0x68666686,0x68888886,0x06677660,0x00677600,0x00677600,0x00677600,0x00066000
+	.word 0x00077000,0x00777700,0x00777700,0x00777700,0x00777700,0x00777700,0x00777700,0x00777700
+	.word 0x07777770,0x77777777,0x77777777,0x07766770,0x00766700,0x00766700,0x00766700,0x00077000
 
 @}}BLOCK(swordL2)
 
@@ -13691,7 +13691,7 @@ swordL2Tiles:
 @	+ 2 tiles not compressed
 @	Total size: 64 = 64
 @
-@	Time-stamp: 2011-07-06, 19:57:16
+@	Time-stamp: 2011-07-06, 20:04:27
 @	Exported by Cearn's GBA Image Transmogrifier, v0.8.8
 @	( http://www.coranac.com/projects/#grit )
 @
@@ -13701,8 +13701,8 @@ swordL2Tiles:
 	.align	2
 	.global swordL3Tiles		@ 64 unsigned chars
 swordL3Tiles:
-	.word 0x00011000,0x00155100,0x00155100,0x00155100,0x00155100,0x00155100,0x00155100,0x00155100
-	.word 0x01155110,0x15111151,0x15555551,0x15144151,0x11144111,0x00144100,0x00144100,0x00011000
+	.word 0x00044000,0x00455400,0x00455400,0x00455400,0x00455400,0x00455400,0x00455400,0x00455400
+	.word 0x04455440,0x45444454,0x45555554,0x45444454,0x44444444,0x00444400,0x00444400,0x00044000
 
 @}}BLOCK(swordL3)
 
@@ -13715,7 +13715,7 @@ swordL3Tiles:
 @	+ palette 256 entries, not compressed
 @	Total size: 512 = 512
 @
-@	Time-stamp: 2011-07-06, 19:57:16
+@	Time-stamp: 2011-07-06, 20:04:27
 @	Exported by Cearn's GBA Image Transmogrifier, v0.8.8
 @	( http://www.coranac.com/projects/#grit )
 @
@@ -13725,14 +13725,14 @@ swordL3Tiles:
 	.align	2
 	.global gfxPal		@ 512 unsigned chars
 gfxPal:
-	.hword 0x7C1F,0x0000,0x1A60,0x4F3F,0x18BC,0x2F7F,0x0842,0x7E45
-	.hword 0x4F9F,0x2AE4,0x1C7F,0x0E3F,0x0016,0x2BBF,0x7FFF,0x0F3B
-	.hword 0x03AF,0x2A5B,0x01D7,0x0A55,0x020A,0x016C,0x050D,0x475F
-	.hword 0x22A2,0x4D80,0x1BFF,0x4E73,0x67DF,0x20BF,0x294A,0x2908
-	.hword 0x28C6,0x2884,0x39AE,0x02DA,0x11AE,0x15E6,0x77FF,0x1A28
-	.hword 0x01C0,0x0180,0x7FDE,0x010B,0x1FFF,0x1FF8,0x032C,0x173E
-	.hword 0x0258,0x7240,0x7F8A,0x77FF,0x2CB5,0x7EF0,0x7C42,0x085D
-	.hword 0x231F,0x1E5B,0x181F,0x18DF,0x7FFF,0x001F,0x1B3F,0x7C00
+	.hword 0x7C1F,0x0000,0x22A2,0x475F,0x0000,0x18BC,0x2F7F,0x0842
+	.hword 0x7E45,0x4F9F,0x2AE4,0x1C7F,0x0E3F,0x0016,0x2BBF,0x7FFF
+	.hword 0x0F3B,0x03AF,0x2A5B,0x01D7,0x0A55,0x020A,0x016C,0x050D
+	.hword 0x4D80,0x1BFF,0x4E73,0x67DF,0x20BF,0x294A,0x2908,0x28C6
+	.hword 0x2884,0x39AE,0x02DA,0x11AE,0x15E6,0x77FF,0x1A28,0x01C0
+	.hword 0x0180,0x7FDE,0x010B,0x1FFF,0x1FF8,0x032C,0x173E,0x0258
+	.hword 0x7240,0x7F8A,0x77FF,0x2CB5,0x7EF0,0x7C42,0x085D,0x231F
+	.hword 0x1E5B,0x181F,0x4F3F,0x18DF,0x7FFF,0x001F,0x1B3F,0x7C00
 
 	.hword 0x7F33,0x7E66,0x7F79,0x7148,0x64C6,0x7FF9,0x0000,0x0000
 	.hword 0x0000,0x0000,0x0000,0x0000,0x0000,0x0000,0x0000,0x0000

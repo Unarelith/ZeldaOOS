@@ -75,30 +75,22 @@ void Map::init() {
 	u16 x, y;
 	for(y = 0 ; y < 16 ; y++) {
 		for(x = 0 ; x < 16 ; x++) {
-			mapPtr[x * 2 + y * 2 * 32] = s_map[(x + s_scrollX / 16) + (y + s_scrollY / 16) * s_width] * 4;
-			mapPtr[x * 2 + 1 + y * 2 * 32] = s_map[(x + s_scrollX / 16) + (y + s_scrollY / 16) * s_width] * 4 + 1;
-			mapPtr[x * 2 + (y * 2 + 1) * 32] = s_map[(x + s_scrollX / 16) + (y + s_scrollY / 16) * s_width] * 4 + 2;
-			mapPtr[x * 2 + 1 + (y * 2 + 1) * 32] = s_map[(x + s_scrollX / 16) + (y + s_scrollY / 16) * s_width] * 4 + 3;
+			mapPtr[x * 2 + y * 2 * 32] = s_map[x + y * s_width] * 4;
+			mapPtr[x * 2 + 1 + y * 2 * 32] = s_map[x + y * s_width] * 4 + 1;
+			mapPtr[x * 2 + (y * 2 + 1) * 32] = s_map[x + y * s_width] * 4 + 2;
+			mapPtr[x * 2 + 1 + (y * 2 + 1) * 32] = s_map[x + y * s_width] * 4 + 3;
 		}
 	}
 }
 
 void Map::draw() {
-	u16* mapPtr = (u16*)bgGetMapPtr(s_bg);
-	u16 x, y;
-	for(y = 0 ; y < 16 ; y++) {
-		for(x = 0 ; x < 16 ; x++) {
-			mapPtr[x * 2 + y * 2 * 32] = s_map[(x + s_scrollX / 16) + (y + s_scrollY / 16) * s_width] * 4;
-			mapPtr[x * 2 + 1 + y * 2 * 32] = s_map[(x + s_scrollX / 16) + (y + s_scrollY / 16) * s_width] * 4 + 1;
-			mapPtr[x * 2 + (y * 2 + 1) * 32] = s_map[(x + s_scrollX / 16) + (y + s_scrollY / 16) * s_width] * 4 + 2;
-			mapPtr[x * 2 + 1 + (y * 2 + 1) * 32] = s_map[(x + s_scrollX / 16) + (y + s_scrollY / 16) * s_width] * 4 + 3;
-		}
-	}
 }
 
 void Map::scroll(s16 x, s16 y) {
 	s_scrollX = x;
 	s_scrollY = y;
+	REG_BG0HOFS_SUB = s_scrollX & 1023;
+	REG_BG0VOFS_SUB = s_scrollY & 1023;
 }
 
 void Map::setTile(s16 tileX, s16 tileY, u16 tile) {
