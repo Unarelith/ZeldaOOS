@@ -1,6 +1,26 @@
+/*---------------------------------------------------------------------------------
+
+    The Legend of Zelda: Oracle of Secrets
+    Copyright (C) 2011 Pixelda quent42340@gmail.com
+
+    This program is free software: you can redistribute it and/or modify
+    it under the terms of the GNU General Public License as published by
+    the Free Software Foundation, either version 3 of the License, or
+    (at your option) any later version.
+
+    This program is distributed in the hope that it will be useful,
+    but WITHOUT ANY WARRANTY; without even the implied warranty of
+    MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+    GNU General Public License for more details.
+
+    You should have received a copy of the GNU General Public License
+    along with this program.  If not, see <http://www.gnu.org/licenses/>.
+
+---------------------------------------------------------------------------------*/
 #include "game.h"
 
 Map* Game::currentMap;
+Player* Game::link;
 
 Game::Game() {
 	// Set up default exception handler
@@ -22,7 +42,7 @@ Game::Game() {
 	// Initialize backgrounds
 	s_bg = bgInit(3, BgType_Bmp16, BgSize_B16_256x256, 2, 0);
 	s_bgSub = bgInitSub(3, BgType_Bmp16, BgSize_B16_256x256, 2, 0);
-	s_mapBg = bgInitSub(0, BgType_Text8bpp, BgSize_T_512x512, 0, 1);
+	s_mapBg = bgInitSub(0, BgType_Text8bpp, BgSize_T_256x256, 0, 1);
 	
 	enableSprites(SCREEN_UP, 0);
 	enableSprites(SCREEN_DOWN, 0);
@@ -149,31 +169,42 @@ void Game::titleScreen() {
 	init();
 }
 
+int swordAnimations[4] = {0, 1, 2, 3};
+
 void Game::init() {
 	dmaCopy(statsBitmap, bgGetGfxPtr(s_bg), statsBitmapLen);
 	
 	Sprite::loadAllIcons(SCREEN_UP);
 	
-	Player* link = new Player;
+	Sprite swordIcon(SCREEN_UP, 1, SprSize_8x16, 46);
+	Sprite* swordAnimation = new Sprite(swordIcon);
+	
+	Weapon sword(&swordIcon, swordAnimation);
+	sword.setKey(W_KEY_B);
+	
+	link = new Player;
 	
 	Map** maps = initMaps(s_mapBg);
 	
 	currentMap = maps[0];
-	Map* a1 = maps[0];
-	a1->init();
+	currentMap->init();
 	
 	while(1) {
 		// Read keys data
 		scanKeys();
 		
 		// Draw map
-		a1->draw();
+		currentMap->draw();
 		
 		// Move link
 		link->move();
 		
 		// Draw sprite
 		link->draw();
+		
+		// Draw sword icon
+		//swordIcon.draw(W_KEY_B, 176);
+		sword.drawIcon();
 		
 		// Wait the VBL
 		swiWaitForVBlank();

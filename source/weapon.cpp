@@ -17,47 +17,22 @@
     along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
 ---------------------------------------------------------------------------------*/
-#ifndef PLAYER_H
-#define PLAYER_H
+#include "main.h"
 
-// All player's directions
-enum PlayerDirection {
-	DIR_UP = 3,
-	DIR_DOWN = 0,
-	DIR_LEFT = 2,
-	DIR_RIGHT = 1
-};
+Weapon::Weapon(Sprite* icon, Sprite* animation) {
+	s_icon = icon;
+	s_animation = animation;
+}
 
-class Player : public Sprite {
-	public:
-		// Construct & Destruct
-		Player();
-		~Player();
-		
-		// Update functions
-		void testCollisions();
-		void move();
-		void draw();
-		
-		// Get functions
-		PlayerDirection direction() const { return s_direction; }
-		s16 x() const { return s_x; }
-		s16 y() const { return s_y; }
-		
-	private:
-		// Player lifes
-		int s_lifes;
-		
-		// Player coordinates
-		s16 s_x;
-		s16 s_y;
-		
-		// Player movement vectors
-		s8 s_vx;
-		s8 s_vy;
-		
-		// Direction
-		PlayerDirection s_direction;
-};
+Weapon::~Weapon() {
+	delete s_icon;
+	delete s_animation;
+}
 
-#endif // PLAYER_H
+void Weapon::drawIcon() {
+	s_icon->draw(s_key, 176);
+}
+
+void Weapon::playAnimation() {
+	//s_animation->playAnimation();
+}

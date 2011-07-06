@@ -1,7 +1,7 @@
 /*---------------------------------------------------------------------------------
 
 	Zelda: Oracle Of Secrets
-	Copyright (C) 2011 Pixelda ( ex Pixelua )
+	Copyright (C) 2011 Pixelda ( ex Pixelua ) quent42340@gmail.com
 		* Quent42340
 		* Fantasix
 	

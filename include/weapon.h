@@ -17,47 +17,34 @@
     along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
 ---------------------------------------------------------------------------------*/
-#ifndef PLAYER_H
-#define PLAYER_H
+#ifndef WEAPON_H
+#define WEAPON_H
 
-// All player's directions
-enum PlayerDirection {
-	DIR_UP = 3,
-	DIR_DOWN = 0,
-	DIR_LEFT = 2,
-	DIR_RIGHT = 1
+enum W_KEY {
+	W_KEY_B = 8,
+	W_KEY_A = 48,
+	W_KEY_X = 88,
+	W_KEY_Y = 128
 };
 
-class Player : public Sprite {
+class Weapon {
 	public:
 		// Construct & Destruct
-		Player();
-		~Player();
+		Weapon(Sprite* icon, Sprite* animation);
+		~Weapon();
 		
-		// Update functions
-		void testCollisions();
-		void move();
-		void draw();
+		// Setting functions
+		void setKey(W_KEY key) { s_key = key; }
 		
-		// Get functions
-		PlayerDirection direction() const { return s_direction; }
-		s16 x() const { return s_x; }
-		s16 y() const { return s_y; }
+		// Drawing functions
+		void drawIcon();
+		void playAnimation();
 		
 	private:
-		// Player lifes
-		int s_lifes;
+		Sprite* s_icon; // Weapon's icon
+		Sprite* s_animation; // Weapons's animation
+		W_KEY s_key; // Weapon's action key
 		
-		// Player coordinates
-		s16 s_x;
-		s16 s_y;
-		
-		// Player movement vectors
-		s8 s_vx;
-		s8 s_vy;
-		
-		// Direction
-		PlayerDirection s_direction;
 };
 
-#endif // PLAYER_H
+#endif // WEAPON_H
