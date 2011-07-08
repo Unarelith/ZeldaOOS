@@ -75,18 +75,22 @@ Map::Map(Tileset* tileset, char* filename, u16 width, u16 height, u16 tileWidth,
 Map::~Map() {
 }
 
+void Map::putTile(s16 x, s16 y, const u16* map, u16 mapX, u16 mapY, u16 mapWidth, u8 zone) {
+	u16* mapPtr = (u16*)bgGetMapPtr(s_bg);
+	mapPtr[x * 2 + y * 2 * 32 + zone * (32 * 32)] = map[mapX + mapY * mapWidth] * 4;
+	mapPtr[x * 2 + 1 + y * 2 * 32 + zone * (32 * 32)] = map[mapX + mapY * mapWidth] * 4 + 1;
+	mapPtr[x * 2 + (y * 2 + 1) * 32 + zone * (32 * 32)] = map[mapX + mapY * mapWidth] * 4 + 2;
+	mapPtr[x * 2 + 1 + (y * 2 + 1) * 32 + zone * (32 * 32)] = map[mapX + mapY * mapWidth] * 4 + 3;
+}
+
 void Map::init() {
 	dmaCopy(s_tileset->tiles, bgGetGfxPtr(s_bg), plainTilesLen);
 	dmaCopy(s_tileset->palette, BG_PALETTE_SUB, plainPalLen);
 	
-	u16* mapPtr = (u16*)bgGetMapPtr(s_bg);
 	u16 x, y;
-	for(y = 0 ; y < 16 ; y++) {
+	for(y = 0 ; y < 12 ; y++) {
 		for(x = 0 ; x < 16 ; x++) {
-			mapPtr[x * 2 + y * 2 * 32] = s_map[x + y * s_width] * 4;
-			mapPtr[x * 2 + 1 + y * 2 * 32] = s_map[x + y * s_width] * 4 + 1;
-			mapPtr[x * 2 + (y * 2 + 1) * 32] = s_map[x + y * s_width] * 4 + 2;
-			mapPtr[x * 2 + 1 + (y * 2 + 1) * 32] = s_map[x + y * s_width] * 4 + 3;
+			putTile(x, y, s_map, x, y, s_width);
 		}
 	}
 }
@@ -95,34 +99,18 @@ void Map::draw() {
 }
 
 void Map::scroll(s16 xx, s16 yy) {
-	/*REG_BG0HOFS_SUB = s_scrollX & 1023;
-	REG_BG0VOFS_SUB = s_scrollY & 1023;
-	
-	u16* mapPtr = (u16*)bgGetMapPtr(s_bg);
-	u16* nextMap = Game::maps[s_id + 1]->map();
-	if(s_scrollX > s_width - 32) {
-		mapPtr[s_scrollX * 2 + s_scrollY * 2 * 32 + 32 * 32] = nextMap[s_scrollX + s_scrollY * s_width] * 4;
-		mapPtr[s_scrollX * 2 + 1 + s_scrollY * 2 * 32 + 32 * 32] = nextMap[s_scrollX + s_scrollY * s_width] * 4 + 1;
-		mapPtr[s_scrollX * 2 + (s_scrollY * 2 + 1) * 32 + 32 * 32] = nextMap[s_scrollX + s_scrollY * s_width] * 4 + 2;
-		mapPtr[s_scrollX * 2 + 1 + (s_scrollY * 2 + 1) * 32 + 32 * 32] = nextMap[s_scrollX + s_scrollY * s_width] * 4 + 3;
-	}*/
-	
 	s16 x = s_scrollX + xx;
 	s16 y = s_scrollY + yy;
 	
-	u16* mapPtr = (u16*)bgGetMapPtr(s_bg);
 	Map* nextMap = Game::maps[s_id + 1];
 	
 	if(x > s_scrollX) { // Scroll right
 		s16 px = x - s_scrollX; // Number of pixels to scroll
 		for(int i = 0 ; (i < px) && (s_scrollX < s_width * 2 * 16 - 256) ; i++) {
-			s_scrollX += 2;
-			for(int j = s_scrollY / 8 ; j < s_scrollY / 8 + 25 ; j++) {
-				mapPtr[s_scrollX / 8 * 2 + j * 2 * 32 + 32 * 32] = nextMap->map()[s_scrollX / 8 + j * s_width] * 4;
-				mapPtr[s_scrollX / 8 * 2 + 1 + j * 2 * 32 + 32 * 32] = nextMap->map()[s_scrollX / 8 + j * s_width] * 4 + 1;
-				mapPtr[s_scrollX / 8 * 2 + (j * 2 + 1) * 32 + 32 * 32] = nextMap->map()[s_scrollX / 8 + j * s_width] * 4 + 2;
-				mapPtr[s_scrollX / 8 * 2 + 1 + (j * 2 + 1) * 32 + 32 * 32] = nextMap->map()[s_scrollX / 8 + j * s_width] * 4 + 3;
+			for(int j = s_scrollY / 16 ; j < s_scrollY / 16 + 12 ; j++) {
+				putTile(s_scrollX / 16, j, nextMap->map(), s_scrollX / 16, j, s_width, 1);
 			}
+			s_scrollX++;
 		}
 		
 		REG_BG0HOFS_SUB = s_scrollX & 1023;

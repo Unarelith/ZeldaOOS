@@ -82,6 +82,9 @@ class Map {
 		u16 s_tileWidth;
 		u16 s_tileHeight;
 		
+		// Put tile
+		void putTile(s16 x, s16 y, const u16* map, u16 mapX, u16 mapY, u16 mapWidth, u8 zone = 0);
+		
 };
 
 #endif // MAP_H
