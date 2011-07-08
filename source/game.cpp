@@ -189,8 +189,6 @@ void Game::init() {
 	currentMap = maps[0];
 	currentMap->init();
 	
-	currentMap->scroll(256, 0);
-	
 	while(1) {
 		// Read keys data
 		scanKeys();
@@ -206,6 +204,19 @@ void Game::init() {
 		
 		// Draw sword icon
 		sword.drawIcon();
+		
+		if(keysHeld() & KEY_A) {
+			currentMap->scroll(1, 0);
+		}
+		if(keysHeld() & KEY_B) {
+			currentMap->scroll(0, 1);
+		}
+		if(keysHeld() & KEY_X) {
+			currentMap->scroll(0, -1);
+		}
+		if(keysHeld() & KEY_Y) {
+			currentMap->scroll(-1, 0);
+		}
 		
 		// Wait the VBL
 		swiWaitForVBlank();

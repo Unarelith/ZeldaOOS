@@ -94,7 +94,7 @@ void Map::init() {
 void Map::draw() {
 }
 
-void Map::scroll(s16 x, s16 y) {
+void Map::scroll(s16 xx, s16 yy) {
 	/*REG_BG0HOFS_SUB = s_scrollX & 1023;
 	REG_BG0VOFS_SUB = s_scrollY & 1023;
 	
@@ -106,11 +106,15 @@ void Map::scroll(s16 x, s16 y) {
 		mapPtr[s_scrollX * 2 + (s_scrollY * 2 + 1) * 32 + 32 * 32] = nextMap[s_scrollX + s_scrollY * s_width] * 4 + 2;
 		mapPtr[s_scrollX * 2 + 1 + (s_scrollY * 2 + 1) * 32 + 32 * 32] = nextMap[s_scrollX + s_scrollY * s_width] * 4 + 3;
 	}*/
+	
+	s16 x = s_scrollX + xx;
+	s16 y = s_scrollY + yy;
+	
 	u16* mapPtr = (u16*)bgGetMapPtr(s_bg);
 	Map* nextMap = Game::maps[s_id + 1];
 	
 	if(x > s_scrollX) { // Scroll right
-		s16 px = x - s_scrollX;
+		s16 px = x - s_scrollX; // Number of pixels to scroll
 		for(int i = 0 ; (i < px) && (s_scrollX < s_width * 2 * 16 - 256) ; i++) {
 			s_scrollX += 2;
 			for(int j = s_scrollY / 8 ; j < s_scrollY / 8 + 25 ; j++) {

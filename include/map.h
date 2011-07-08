@@ -40,7 +40,7 @@ class Map {
 		void draw();
 		
 		// Scroll the map
-		void scroll(s16 x, s16 y);
+		void scroll(s16 xx, s16 yy);
 		
 		// Setting functions
 		void setTile(s16 tileX, s16 tileY, u16 tile); // Set a tile with coordinates
