@@ -3,7 +3,8 @@
 	Zelda: Oracle Of Secrets
 	Copyright (C) 2011 Pixelda ( ex Pixelua ) quent42340@gmail.com
 		* Quent42340
-		* Fantasix
+		* Synthesis
+		* ( ex-Fantasix )
 	
     This program is free software: you can redistribute it and/or modify
     it under the terms of the GNU General Public License as published by

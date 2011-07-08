@@ -116,6 +116,13 @@ void Map::scroll(s16 xx, s16 yy) {
 		REG_BG0HOFS_SUB = s_scrollX & 1023;
 	}
 	else if(x < s_scrollX) { // Scroll left
+		s16 px = x - s_scrollX; // Number of pixels to scroll
+		for(int i = 0 ; (i < px) && (s_scrollX < s_width * 2 * 16 - 256) ; i++) {
+			for(int j = s_scrollY / 16 ; j < s_scrollY / 16 + 12 ; j++) {
+				putTile(s_scrollX / 16, j, nextMap->map(), s_scrollX / 16, j, s_width, 1);
+			}
+			s_scrollX++;
+		}
 		
 		REG_BG0HOFS_SUB = s_scrollX & 1023;
 	}
