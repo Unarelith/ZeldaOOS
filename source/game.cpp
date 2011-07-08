@@ -21,6 +21,7 @@
 
 Map* Game::currentMap;
 Player* Game::link;
+Map** Game::maps;
 
 Game::Game() {
 	// Set up default exception handler
@@ -91,9 +92,9 @@ void Game::pressStartScreen() {
 		
 		if(pressStartTimer.time() > 750) {
 			//ulDrawImageXY(pressStartImg, 85, 152);
-			pressStartSpr1->drawFrame(85, 152, 0);
-			pressStartSpr2->drawFrame(117, 152, 0);
-			pressStartSpr3->drawFrame(149, 152, 0);
+			pressStartSpr1->draw(85, 152);
+			pressStartSpr2->draw(117, 152);
+			pressStartSpr3->draw(149, 152);
 			if(pressStartTimer.time() > 1500) {
 				pressStartTimer.reset();
 				pressStartTimer.start();
@@ -136,10 +137,10 @@ void Game::titleScreen() {
 		scanKeys();
 		
 		//Draw acorn sprite
-		acorn->drawFrame(8, 64+((curPos-1)*32), 0);
+		acorn->draw(8, 64+((curPos-1)*32));
 		
 		// Draw link sprite
-		linkts->drawFrame(138, 74, 0, 1);
+		linkts->draw(138, 74, 1);
 		
 		if(keysDown() & KEY_UP) {
 			curPos--;
@@ -183,12 +184,12 @@ void Game::init() {
 	
 	link = new Player;
 	
-	Map** maps = initMaps(s_mapBg);
+	maps = initMaps(s_mapBg);
 	
 	currentMap = maps[0];
 	currentMap->init();
 	
-	currentMap->scroll(32, 32);
+	currentMap->scroll(256, 0);
 	
 	while(1) {
 		// Read keys data

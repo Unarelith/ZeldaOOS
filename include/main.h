@@ -21,8 +21,6 @@
 #ifndef MAIN_H
 #define MAIN_H
 
-extern int i;
-
 #define SCREEN_UP 0
 #define SCREEN_DOWN 1
 

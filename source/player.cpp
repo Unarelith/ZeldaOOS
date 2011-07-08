@@ -64,7 +64,7 @@ Player::~Player() {
 }
 
 bool in_table(u16* t, u16 n) {
-	i = 0;
+	int i = 0;
 	while(t[i]) {
 		if(t[i] == n) {
 			return true;

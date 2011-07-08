@@ -20,7 +20,6 @@
 
 #ifndef MAP_H
 #define MAP_H
-#include "main.h"
 
 typedef struct {
 	const u32* tiles;
@@ -49,9 +48,16 @@ class Map {
 		// Get functions
 		u16 getTile(s16 tileX, s16 tileY); // Get a tile with coordinates
 		u16* map() const { return s_map; }
+		u16 width() const { return s_width; }
 		Tileset* tileset() const { return s_tileset; }
 		
+		// Number of maps
+		static int nbMaps;
+		
 	private:
+		// Map id
+		int s_id;
+		
 		// Map
 		u16* s_map;
 		

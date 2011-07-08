@@ -40,8 +40,6 @@
 ---------------------------------------------------------------------------------*/
 #include "main.h"
 
-int i;
-
 int main(void) {
 	// Initialize game
 	Game* game = new Game;

@@ -38,6 +38,7 @@ class Game {
 		// Static variables
 		static Map* currentMap;
 		static Player* link;
+		static Map** maps;
 		
 	private:
 		u8 s_bg; // BG id
