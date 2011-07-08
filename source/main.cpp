@@ -4,7 +4,7 @@
 	Copyright (C) 2011 Pixelda ( ex Pixelua ) quent42340@gmail.com
 		* Quent42340
 		* Synthesis
-		* ( ex-Fantasix )
+		* ( ex Fantasix: He used to be a member of Pixelua, not of Pixelda )
 	
     This program is free software: you can redistribute it and/or modify
     it under the terms of the GNU General Public License as published by
