@@ -111,7 +111,8 @@ void Map::scroll(s16 xx, s16 yy) {
 	
 	if(x > s_scrollX) { // Scroll right
 		s16 px = x - s_scrollX; // Number of pixels to scroll
-		Map* nextMap = Game::maps[s_id + 1];
+		s_mapX = (s_scrollX / 256); s_mapY = (s_scrollY / 192);
+		Map* nextMap = Game::maps[s_mapX + s_mapY * WM_SIZE];
 		for(int i = 0 ; (i < px) && (s_scrollX < s_width * 2 * 16 - 256) ; i++) {
 			for(int j = s_scrollY / 16 ; j < s_scrollY / 16 + 12 ; j++) {
 				putTile(s_scrollX / 16 + 16, j, nextMap, s_scrollX / 16, j);
@@ -123,10 +124,11 @@ void Map::scroll(s16 xx, s16 yy) {
 	}
 	else if(x < s_scrollX) { // Scroll left
 		s16 px = s_scrollX - x; // Number of pixels to scroll
-		Map* prevMap = Game::maps[s_id];
+		s_mapX = (s_scrollX / 256); s_mapY = (s_scrollY / 192);
+		Map* nextMap = Game::maps[s_mapX + s_mapY * WM_SIZE];
 		for(int i = 0 ; (i < px) && (s_scrollX > 0) ; i++) {
 			for(int j = s_scrollY / 16 ; j < s_scrollY / 16 + 12 ; j++) {
-				putTile(s_scrollX / 16 - 1, j, prevMap, s_scrollX / 16 - 1, j);
+				putTile(s_scrollX / 16 - 1, j, nextMap, s_scrollX / 16 - 1, j);
 			}
 			s_scrollX--;
 		}
@@ -136,10 +138,11 @@ void Map::scroll(s16 xx, s16 yy) {
 	
 	if(y > s_scrollY) { // Scroll down
 		s16 px = y - s_scrollY; // Number of pixels to scroll
-		Map* downMap = Game::maps[s_id + 2];
+		s_mapX = (s_scrollX / 256); s_mapY = (s_scrollY / 192);
+		Map* nextMap = Game::maps[s_mapX + s_mapY * WM_SIZE];
 		for(int i = 0 ; (i < px) && (s_scrollY < s_height * 2 * 16 - 192) ; i++) {
 			for(int j = s_scrollX / 16 ; j < s_scrollX / 16 + 16 ; j++) {
-				putTile(j, s_scrollY / 16 + 12, downMap, j, s_scrollY / 16);
+				putTile(j, s_scrollY / 16 + 12, nextMap, j, s_scrollY / 16);
 			}
 			s_scrollY++;
 		}
@@ -148,10 +151,11 @@ void Map::scroll(s16 xx, s16 yy) {
 	}
 	else if(y < s_scrollY) { // Scroll up
 		s16 px = s_scrollY - y; // Number of pixels to scroll
-		Map* upMap = Game::maps[s_id];
+		s_mapX = (s_scrollX / 256); s_mapY = (s_scrollY / 192);
+		Map* nextMap = Game::maps[s_mapX + s_mapY * WM_SIZE];
 		for(int i = 0 ; (i < px) && (s_scrollY > 0) ; i++) {
 			for(int j = s_scrollX / 16 ; j < s_scrollX / 16 + 16 ; j++) {
-				putTile(j, s_scrollY / 16 - 1, upMap, j, s_scrollY / 16 - 1);
+				putTile(j, s_scrollY / 16 - 1, nextMap, j, s_scrollY / 16 - 1);
 			}
 			s_scrollY--;
 		}

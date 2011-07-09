@@ -25,7 +25,7 @@
 #define MAPS 2
 
 // World map size
-#define WM_SIZE 16
+#define WM_SIZE 2
 
 Tileset* initTilesets();
 Map** initMaps(u8 mapBg);
