@@ -135,7 +135,7 @@ void Map::scroll(s16 xx, s16 yy) {
 	}
 	
 	if(y > s_scrollY) { // Scroll down
-		s16 px = y - s_scrollX; // Number of pixels to scroll
+		s16 px = y - s_scrollY; // Number of pixels to scroll
 		Map* downMap = Game::maps[s_id + 2];
 		for(int i = 0 ; (i < px) && (s_scrollY < s_height * 2 * 16 - 192) ; i++) {
 			for(int j = s_scrollX / 16 ; j < s_scrollX / 16 + 16 ; j++) {
