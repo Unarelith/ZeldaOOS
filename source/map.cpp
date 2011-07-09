@@ -82,7 +82,7 @@ void Map::init() {
 	u16 x, y;
 	for(y = 0 ; y < 12 ; y++) {
 		for(x = 0 ; x < 16 ; x++) {
-			putTile(x, y, this);
+			putTile(x, y, this, x, y);
 		}
 	}
 }
@@ -94,12 +94,12 @@ u16 Map::screenPos(s16 x, s16 y) const {
 	return ((x & 31) + ((x & 32) << 5) + ((y & 31) << 5) + ((y & 32) << 6));
 }
 
-void Map::putTile(s16 x, s16 y, const Map* map) {
+void Map::putTile(s16 x, s16 y, const Map* map, s16 mapX, s16 mapY) {
 	u16* mapPtr = (u16*)bgGetMapPtr(s_bg);
-	mapPtr[screenPos(x * 2, y * 2)] = map->map()[x + y * map->width()] * 4;
-	mapPtr[screenPos(x * 2 + 1, y * 2)] = map->map()[x + y * map->width()] * 4 + 1;
-	mapPtr[screenPos(x * 2, y * 2 + 1)] = map->map()[x + y * map->width()] * 4 + 2;
-	mapPtr[screenPos(x * 2 + 1, y * 2 + 1)] = map->map()[x + y * map->width()] * 4 + 3;
+	mapPtr[screenPos(x * 2, y * 2)] = map->map()[mapX + mapY * map->width()] * 4;
+	mapPtr[screenPos(x * 2 + 1, y * 2)] = map->map()[mapX + mapY * map->width()] * 4 + 1;
+	mapPtr[screenPos(x * 2, y * 2 + 1)] = map->map()[mapX + mapY * map->width()] * 4 + 2;
+	mapPtr[screenPos(x * 2 + 1, y * 2 + 1)] = map->map()[mapX + mapY * map->width()] * 4 + 3;
 }
 
 void Map::scroll(s16 xx, s16 yy) {
@@ -114,7 +114,7 @@ void Map::scroll(s16 xx, s16 yy) {
 		Map* nextMap = Game::maps[s_id + 1];
 		for(int i = 0 ; (i < px) && (s_scrollX < s_width * 2 * 16 - 256) ; i++) {
 			for(int j = s_scrollY / 16 ; j < s_scrollY / 16 + 12 ; j++) {
-				putTile(s_scrollX / 16 + 16, j, nextMap);
+				putTile(s_scrollX / 16 + 16, j, nextMap, s_scrollX / 16, j);
 			}
 			s_scrollX++;
 		}
@@ -126,7 +126,7 @@ void Map::scroll(s16 xx, s16 yy) {
 		Map* prevMap = Game::maps[s_id];
 		for(int i = 0 ; (i < px) && (s_scrollX > 0) ; i++) {
 			for(int j = s_scrollY / 16 ; j < s_scrollY / 16 + 12 ; j++) {
-				putTile(s_scrollX / 16 - 1, j, prevMap);
+				putTile(s_scrollX / 16 - 1, j, prevMap, s_scrollX / 16, j);
 			}
 			s_scrollX--;
 		}
@@ -139,7 +139,7 @@ void Map::scroll(s16 xx, s16 yy) {
 		Map* downMap = Game::maps[s_id + 2];
 		for(int i = 0 ; (i < px) && (s_scrollY < s_height * 2 * 16 - 192) ; i++) {
 			for(int j = s_scrollX / 16 ; j < s_scrollX / 16 + 16 ; j++) {
-				putTile(j, s_scrollY / 16 + 12, downMap);
+				putTile(j, s_scrollY / 16 + 12, downMap, j, s_scrollY / 16);
 			}
 			s_scrollY++;
 		}
@@ -151,7 +151,7 @@ void Map::scroll(s16 xx, s16 yy) {
 		Map* upMap = Game::maps[s_id];
 		for(int i = 0 ; (i < px) && (s_scrollY > 0) ; i++) {
 			for(int j = s_scrollX / 16 ; j < s_scrollX / 16 + 16 ; j++) {
-				putTile(j, s_scrollY / 16 - 1, upMap);
+				putTile(j, s_scrollY / 16 - 1, upMap, j, s_scrollY / 16);
 			}
 			s_scrollY--;
 		}

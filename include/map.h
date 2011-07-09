@@ -85,7 +85,7 @@ class Map {
 		u16 s_tileHeight;
 		
 		// Put tile
-		void putTile(s16 x, s16 y, const Map* map);
+		void putTile(s16 x, s16 y, const Map* map, s16 mapX, s16 mapY);
 		
 };
 
