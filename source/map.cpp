@@ -50,7 +50,7 @@ Map::Map(Tileset* tileset, char* filename, u16 width, u16 height, u16 tileWidth,
 	int counter = 0;
 	char* token;
 	u16 tile;
-	const char delimiters[] = "|";
+	const char delimiters[] = ",";
 	token = strtok(buffer, delimiters);
 	tile = (u16)atof(token);
 	table[counter] = tile;
