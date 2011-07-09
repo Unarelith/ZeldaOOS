@@ -40,10 +40,10 @@ Tileset* initTilesets() {
 Map** initMaps(u8 mapBg) {
 	Tileset* tilesets = initTilesets();
 	
-	Map* a1 = new Map(&tilesets[0], "/maps/a1.map", 16, 12, 16, 16, mapBg);
-	Map* a2 = new Map(&tilesets[0], "/maps/a2.map", 16, 12, 16, 16, mapBg);
-	Map* b1 = new Map(&tilesets[0], "/maps/b1.map", 16, 12, 16, 16, mapBg);
-	Map* b2 = new Map(&tilesets[0], "/maps/b2.map", 16, 12, 16, 16, mapBg);
+	Map* a1 = new Map(&tilesets[0], "/maps/a1.map", 16, 12, 16, 16, 0, 0, mapBg);
+	Map* a2 = new Map(&tilesets[0], "/maps/a2.map", 16, 12, 16, 16, 1, 0, mapBg);
+	Map* b1 = new Map(&tilesets[0], "/maps/b1.map", 16, 12, 16, 16, 0, 1, mapBg);
+	Map* b2 = new Map(&tilesets[0], "/maps/b2.map", 16, 12, 16, 16, 1, 1, mapBg);
 	
 	Map** maps = new Map*[MAPS];
 	maps[0] = a1;

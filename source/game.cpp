@@ -193,9 +193,6 @@ void Game::init() {
 		// Read keys data
 		scanKeys();
 		
-		// Draw map
-		currentMap->draw();
-		
 		// Move link
 		link->move();
 		

@@ -22,7 +22,10 @@
 
 int Map::nbMaps = 0;
 
-Map::Map(Tileset* tileset, char* filename, u16 width, u16 height, u16 tileWidth, u16 tileHeight, u8 bg) {
+Map::Map(Tileset* tileset, char* filename, u16 width, u16 height, u16 tileWidth, u16 tileHeight, u16 mapX, u16 mapY, u8 bg) {
+	s_mapX = mapX;
+	s_mapY = mapY;
+	
 	s_id = nbMaps;
 	nbMaps++;
 	
@@ -106,9 +109,6 @@ void Map::scroll(s16 xx, s16 yy) {
 	s16 x = s_scrollX + xx;
 	s16 y = s_scrollY + yy;
 	
-	//consoleClear();
-	//printf("\x1b[2;2H%d, %d", x, s_scrollX);
-	
 	if(x > s_scrollX) { // Scroll right
 		s16 px = x - s_scrollX; // Number of pixels to scroll
 		Map* nextMap = Game::maps[s_id + 1];
@@ -126,7 +126,7 @@ void Map::scroll(s16 xx, s16 yy) {
 		Map* prevMap = Game::maps[s_id];
 		for(int i = 0 ; (i < px) && (s_scrollX > 0) ; i++) {
 			for(int j = s_scrollY / 16 ; j < s_scrollY / 16 + 12 ; j++) {
-				putTile(s_scrollX / 16 - 1, j, prevMap, s_scrollX / 16, j);
+				putTile(s_scrollX / 16 - 1, j, prevMap, s_scrollX / 16 - 1, j);
 			}
 			s_scrollX--;
 		}
@@ -151,7 +151,7 @@ void Map::scroll(s16 xx, s16 yy) {
 		Map* upMap = Game::maps[s_id];
 		for(int i = 0 ; (i < px) && (s_scrollY > 0) ; i++) {
 			for(int j = s_scrollX / 16 ; j < s_scrollX / 16 + 16 ; j++) {
-				putTile(j, s_scrollY / 16 - 1, upMap, j, s_scrollY / 16);
+				putTile(j, s_scrollY / 16 - 1, upMap, j, s_scrollY / 16 - 1);
 			}
 			s_scrollY--;
 		}

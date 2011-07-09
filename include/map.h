@@ -30,7 +30,7 @@ typedef struct {
 class Map {
 	public:
 		// Construct & Destruct
-		Map(Tileset* tileset, char* filename, u16 width, u16 height, u16 tileWidth, u16 tileHeight, u8 bg);
+		Map(Tileset* tileset, char* filename, u16 width, u16 height, u16 tileWidth, u16 tileHeight, u16 mapX, u16 mapY, u8 bg);
 		~Map();
 		
 		// Initialize the map
@@ -59,6 +59,10 @@ class Map {
 	private:
 		// Map id
 		int s_id;
+		
+		// Map position
+		u16 s_mapX;
+		u16 s_mapY;
 		
 		// Map
 		u16* s_map;
