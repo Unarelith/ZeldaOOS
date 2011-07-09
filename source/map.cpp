@@ -148,7 +148,7 @@ void Map::scroll(s16 xx, s16 yy) {
 	}
 	else if(y < s_scrollY) { // Scroll up
 		s16 px = s_scrollY - y; // Number of pixels to scroll
-		Map* upMap = Game::maps[s_id - 2];
+		Map* upMap = Game::maps[s_id];
 		for(int i = 0 ; (i < px) && (s_scrollY > 0) ; i++) {
 			for(int j = s_scrollX / 16 ; j < s_scrollX / 16 + 16 ; j++) {
 				putTile(j, s_scrollY / 16 - 1, upMap);
