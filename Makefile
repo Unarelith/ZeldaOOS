@@ -124,7 +124,7 @@ else
 	endif
 endif
 
-.PHONY: $(BUILD) clean run debug gfx
+.PHONY: $(BUILD) clean run debug gfx maps all
 
 #---------------------------------------------------------------------------------
 $(BUILD):
@@ -153,7 +153,20 @@ gfx:
 	@grit graphics/*/*.png -fts -W1 -gt -gB4 -gTFF00FF -pS -O source/gfx -S gfx -fa -o source/gfx
 	@./tools/graphics
 	@mv -T source/gfx.h include/gfx.h
-	@echo gfx data ok
+	@echo done
+
+#---------------------------------------------------------------------------------
+maps:
+	@echo converting maps...
+	@./tools/maps
+	@echo done
+
+#---------------------------------------------------------------------------------
+all:
+	@make clean --no-print-directory
+	@make gfx --no-print-directory
+	@make maps --no-print-directory
+	@make
 
 #---------------------------------------------------------------------------------
 else

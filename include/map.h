@@ -54,6 +54,8 @@ class Map {
 		// Number of maps
 		static int nbMaps;
 		
+		u16 screenPos(s16 x, s16 y) const;
+		
 	private:
 		// Map id
 		int s_id;
@@ -83,7 +85,7 @@ class Map {
 		u16 s_tileHeight;
 		
 		// Put tile
-		void putTile(s16 x, s16 y, const u16* map, u16 mapX, u16 mapY, u16 mapWidth, u8 zone = 0);
+		void putTile(s16 x, s16 y, const Map* map);
 		
 };
 
