@@ -203,32 +203,32 @@ void Game::init() {
 		sword.drawIcon();
 		
 		if(keysDown() & KEY_A) {
-			for(int i = 0 ; i < 256 ; i++) {
-				currentMap->scroll(i, 0);
+			for(int i = 0 ; i < 32 ; i++) {
+				currentMap->scroll(8, 0);
 				swiWaitForVBlank();
 			}
-			scanKeys();
+			currentMap = currentMap->nextMap();
 		}
 		if(keysDown() & KEY_B) {
-			for(int i = 0 ; i < 192 ; i++) {
-				currentMap->scroll(0, i);
+			for(int i = 0 ; i < 24 ; i++) {
+				currentMap->scroll(0, 8);
 				swiWaitForVBlank();
 			}
-			scanKeys();
+			currentMap = currentMap->nextMap();
 		}
 		if(keysDown() & KEY_X) {
-			for(int i = 0 ; i < 192 ; i++) {
-				currentMap->scroll(0, -i);
+			for(int i = 0 ; i < 24 ; i++) {
+				currentMap->scroll(0, -8);
 				swiWaitForVBlank();
 			}
-			scanKeys();
+			currentMap = currentMap->nextMap();
 		}
 		if(keysDown() & KEY_Y) {
-			for(int i = 0 ; i < 256 ; i++) {
-				currentMap->scroll(-i, 0);
+			for(int i = 0 ; i < 32 ; i++) {
+				currentMap->scroll(-8, 0);
 				swiWaitForVBlank();
 			}
-			scanKeys();
+			currentMap = currentMap->nextMap();
 		}
 		
 		// Wait the VBL

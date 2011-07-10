@@ -30,7 +30,7 @@ typedef struct {
 class Map {
 	public:
 		// Construct & Destruct
-		Map(Tileset* tileset, char* filename, u16 width, u16 height, u16 tileWidth, u16 tileHeight, u16 mapX, u16 mapY, u8 bg);
+		Map(Tileset* tileset, char* filename, u16 width, u16 height, u16 tileWidth, u16 tileHeight, u8 bg);
 		~Map();
 		
 		// Initialize the map
@@ -48,6 +48,7 @@ class Map {
 		// Get functions
 		u16 getTile(s16 tileX, s16 tileY); // Get a tile with coordinates
 		u16* map() const { return s_map; }
+		Map* nextMap() const { return s_nextMap; }
 		u16 width() const { return s_width; }
 		Tileset* tileset() const { return s_tileset; }
 		
@@ -66,6 +67,9 @@ class Map {
 		
 		// Map
 		u16* s_map;
+		
+		// Next map
+		Map* s_nextMap;
 		
 		// Map filename
 		char* s_filename;

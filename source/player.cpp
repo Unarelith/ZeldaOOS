@@ -136,6 +136,67 @@ void Player::move() {
 		}
 	}
 	
+	if(s_x > 256 - 16) {
+		s_vx = 0;
+		s_vy = 0;
+		
+		for(int i = 0 ; i < 32 ; i++) {
+			Game::currentMap->scroll(8, 0);
+			if(s_x > 8) {
+				s_x -= 8;
+			}
+			draw();
+			swiWaitForVBlank();
+		}
+		
+		Game::currentMap = Game::currentMap->nextMap();
+	}
+	if(s_x < 0) {
+		s_vx = 0;
+		s_vy = 0;
+		
+		for(int i = 0 ; i < 32 ; i++) {
+			Game::currentMap->scroll(-8, 0);
+			if(s_x < 256 - 16 - 8) {
+				s_x += 8;
+			}
+			draw();
+			swiWaitForVBlank();
+		}
+		
+		Game::currentMap = Game::currentMap->nextMap();
+	}
+	if(s_y > 192 - 16) {
+		s_vx = 0;
+		s_vy = 0;
+		
+		for(int i = 0 ; i < 24 ; i++) {
+			Game::currentMap->scroll(0, 8);
+			if(s_y > 8) {
+				s_y -= 8;
+			}
+			draw();
+			swiWaitForVBlank();
+		}
+		
+		Game::currentMap = Game::currentMap->nextMap();
+	}
+	if(s_y < 0) {
+		s_vx = 0;
+		s_vy = 0;
+		
+		for(int i = 0 ; i < 24 ; i++) {
+			Game::currentMap->scroll(0, -8);
+			if(s_y < 192 - 16 - 8) {
+				s_y += 8;
+			}
+			draw();
+			swiWaitForVBlank();
+		}
+		
+		Game::currentMap = Game::currentMap->nextMap();
+	}
+	
 	// Test collisions
 	testCollisions();
 	
