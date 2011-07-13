@@ -1,14 +1,10 @@
-/**
- * section: xmlReader
- * synopsis: Parse an XML file with an xmlReader
- * purpose: Demonstrate the use of xmlReaderForFile() to parse an XML file
- *          and dump the informations about the nodes found in the process.
- *          (Note that the XMLReader functions require libxml2 version later
- *          than 2.6.)
- * usage: reader1 <filename>
- * test: reader1 test2.xml > reader1.tmp ; diff reader1.tmp reader1.res ; rm reader1.tmp
- * author: Daniel Veillard
- * copy: see Copyright for the status of this software.
+/*
+ *  xmlReader and Converter for Tiled map-editor
+ * Quent42340
+ * see COPYING
+ * usage: reader <input map> <output map>
+ * example: reader map.tmx map.map
+ *
  */
 
 #include <stdio.h>
@@ -16,6 +12,8 @@
 #include <libxml/xmlreader.h>
 
 #ifdef LIBXML_READER_ENABLED
+
+char* outfilepath;
 
 /**
  * processNode:
@@ -71,7 +69,14 @@ processNode(xmlTextReaderPtr reader) {
 				counter++;
 			}
 			free(buffer);
-			printf("%s\n", strncpy(out, preout, strlen(preout) - 1));
+			//printf("%s\n", strncpy(out, preout, strlen(preout) - 1));
+			
+			FILE* file;
+			file = fopen(outfilepath, "wb");
+			//fwrite(out, sizeof(out), 1, file);
+			//fprintf(file, "%s", strncpy(out, preout, strlen(preout) - 1));
+			fwrite(table, 2, counter, file);
+			fclose(file);
 		}
     }
 }
@@ -104,7 +109,8 @@ streamFile(const char *filename) {
 }
 
 int main(int argc, char **argv) {
-    if (argc != 2)
+    if (argc != 3)
+		printf("Usage: reader <input map> <output map>\n");
         return(1);
 
     /*
@@ -114,6 +120,7 @@ int main(int argc, char **argv) {
      */
     LIBXML_TEST_VERSION
 
+	outfilepath = argv[2];
     streamFile(argv[1]);
 
     /*

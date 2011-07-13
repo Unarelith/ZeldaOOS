@@ -36,8 +36,10 @@ Map::Map(Tileset* tileset, char* filename, u16 width, u16 height, u16 tileWidth,
 	s_tileWidth = tileWidth;
 	s_tileHeight = tileHeight;
 	
+	// Make temporary table to get map file data
 	u16* table;
 	table = (u16*)malloc(s_width * s_height * sizeof(u16));
+	
 	// Load map from file
 	int filesize;
 	struct stat file_status;
@@ -46,27 +48,8 @@ Map::Map(Tileset* tileset, char* filename, u16 width, u16 height, u16 tileWidth,
 	}
 	filesize = file_status.st_size;
 	FILE* f = fopen(filename, "r");
-	char* buffer = (char*)malloc(sizeof(char) * filesize);
-	fread(buffer, 1, filesize, f);
+	fread(table, 2, filesize, f);
 	fclose(f);
-	// (Now buffer contains the map file)
-	int counter = 0;
-	char* token;
-	u16 tile;
-	const char delimiters[] = ",";
-	token = strtok(buffer, delimiters);
-	tile = (u16)atof(token);
-	table[counter] = tile;
-	counter++;
-	while(token != NULL){
-		token = strtok(NULL, delimiters);
-		if(token != NULL){
-			tile = (u16)atof(token);
-			table[counter] = tile;
-		}
-		counter++;
-	}
-	free(buffer);
 	
 	s_map = table;
 	s_bg = bg;
@@ -111,60 +94,66 @@ void Map::scroll(s16 xx, s16 yy) {
 	
 	if(x > s_scrollX) { // Scroll right
 		s16 px = x - s_scrollX; // Number of pixels to scroll
-		s_mapX = (s_scrollX + 256) / 256;
-		s_mapY = s_scrollY / 192;
-		s_nextMap = Game::maps[s_mapX + s_mapY * WM_SIZE];
+		s_mapX = (s_scrollX + 256) / 256; // Map's X coordinate in the world map'
+		s_mapY = s_scrollY / 192; // Same for Y
+		s_nextMap = Game::maps[s_mapX + s_mapY * WM_SIZE]; // Next map to scroll on
+		printf("%d\n", s_mapX + s_mapY * WM_SIZE);
+		
 		for(int i = 0 ; (i < px) && (s_scrollX < s_width * 2 * 16 - 256) ; i++) {
 			for(int j = s_scrollY / 16 ; j < s_scrollY / 16 + 12 ; j++) {
 				putTile(s_scrollX / 16 + 16, j, s_nextMap, s_scrollX / 16, j);
 			}
-			s_scrollX++;
+			s_scrollX++; // Scroll the map
 		}
 		
-		REG_BG0HOFS_SUB = s_scrollX & 1023;
+		REG_BG0HOFS_SUB = s_scrollX & 1023; // Scroll the BG
 	}
 	else if(x < s_scrollX) { // Scroll left
 		s16 px = s_scrollX - x; // Number of pixels to scroll
-		s_mapX = (s_scrollX - 8) / 256;
-		s_mapY = s_scrollY / 192;
-		s_nextMap = Game::maps[s_mapX + s_mapY * WM_SIZE];
+		s_mapX = (s_scrollX - 8) / 256; // Map's X coordinate in the world map'
+		s_mapY = s_scrollY / 192; // Same for Y
+		s_nextMap = Game::maps[s_mapX + s_mapY * WM_SIZE]; // Next map to scroll on
+		printf("%d\n", s_mapX + s_mapY * WM_SIZE);
+		
 		for(int i = 0 ; (i < px) && (s_scrollX > 0) ; i++) {
 			for(int j = s_scrollY / 16 ; j < s_scrollY / 16 + 12 ; j++) {
 				putTile(s_scrollX / 16 - 1, j, s_nextMap, s_scrollX / 16 - 1, j);
 			}
-			s_scrollX--;
+			s_scrollX--; // Scroll the map
 		}
 		
-		REG_BG0HOFS_SUB = s_scrollX & 1023;
+		REG_BG0HOFS_SUB = s_scrollX & 1023; // Scroll the BG
 	}
 	
 	if(y > s_scrollY) { // Scroll down
 		s16 px = y - s_scrollY; // Number of pixels to scroll
-		s_mapX = s_scrollX / 256;
-		s_mapY = (s_scrollY + 192) / 192;
-		s_nextMap = Game::maps[s_mapX + s_mapY * WM_SIZE];
+		s_mapX = s_scrollX / 256; // Map's X coordinate in the world map'
+		s_mapY = (s_scrollY + 192) / 192; // Same for Y
+		s_nextMap = Game::maps[s_mapX + s_mapY * WM_SIZE]; // Next map to scroll on
+		
 		for(int i = 0 ; (i < px) && (s_scrollY < s_height * 2 * 16 - 192) ; i++) {
 			for(int j = s_scrollX / 16 ; j < s_scrollX / 16 + 16 ; j++) {
 				putTile(j, s_scrollY / 16 + 12, s_nextMap, j, s_scrollY / 16);
 			}
-			s_scrollY++;
+			s_scrollY++; // Scroll the map
 		}
 		
-		REG_BG0VOFS_SUB = s_scrollY & 1023;
+		REG_BG0VOFS_SUB = s_scrollY & 1023; // Scroll the BG
 	}
 	else if(y < s_scrollY) { // Scroll up
 		s16 px = s_scrollY - y; // Number of pixels to scroll
-		s_mapX = s_scrollX / 256;
-		s_mapY = (s_scrollY - 8) / 192;
-		s_nextMap = Game::maps[s_mapX + s_mapY * WM_SIZE];
+		s_mapX = s_scrollX / 256; // Map's X coordinate in the world map'
+		s_mapY = (s_scrollY - 8) / 192; // Same for Y
+		s_nextMap = Game::maps[s_mapX + s_mapY * WM_SIZE]; // Next map to scroll on
+		
 		for(int i = 0 ; (i < px) && (s_scrollY > 0) ; i++) {
 			for(int j = s_scrollX / 16 ; j < s_scrollX / 16 + 16 ; j++) {
 				putTile(j, s_scrollY / 16 - 1, s_nextMap, j, s_scrollY / 16 - 1);
 			}
-			s_scrollY--;
+			s_scrollY--; // Scroll the map
 		}
 		
-		REG_BG0VOFS_SUB = s_scrollY & 1023;
+		REG_BG0VOFS_SUB = s_scrollY & 1023; // Scroll the BG
 	}
 }
 
