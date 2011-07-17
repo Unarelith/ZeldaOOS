@@ -52,6 +52,7 @@ class Map {
 		u16 width() const { return s_width; }
 		Tileset* tileset() const { return s_tileset; }
 		u8 bg() const { return s_bg; }
+		int id() const { return s_id; }
 		
 		// Both functions
 		void scrollX(s16 scrollX) { s_scrollX = scrollX; }
