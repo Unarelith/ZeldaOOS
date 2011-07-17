@@ -75,7 +75,7 @@ processNode(xmlTextReaderPtr reader) {
 			file = fopen(outfilepath, "wb");
 			//fwrite(out, sizeof(out), 1, file);
 			//fprintf(file, "%s", strncpy(out, preout, strlen(preout) - 1));
-			fwrite(table, 2, counter, file);
+			fwrite(table, 2, counter - 1, file);
 			fclose(file);
 		}
     }
@@ -109,9 +109,10 @@ streamFile(const char *filename) {
 }
 
 int main(int argc, char **argv) {
-    if (argc != 3)
+    if (argc != 3) {
 		printf("Usage: reader <input map> <output map>\n");
         return(1);
+	}
 
     /*
      * this initialize the library and check potential ABI mismatches
