@@ -22,6 +22,7 @@
 Map* Game::currentMap;
 Player* Game::link;
 Map** Game::maps;
+Tileset* Game::tilesets;
 
 Game::Game() {
 	// Set up default exception handler
@@ -185,6 +186,7 @@ void Game::init() {
 	link = new Player;
 	
 	maps = initMaps(s_mapBg);
+	tilesets = initTilesets();
 	
 	currentMap = maps[0];
 	currentMap->init();

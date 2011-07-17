@@ -101,8 +101,7 @@ void Player::testCollisions() {
 
 void Player::move() {
 	if((keysHeld() & KEY_UP)) {
-		// Set vertical speed vector negative
-		s_vy = -1;
+		s_vy = -1; // Set vertical speed vector negative
 		
 		if((!(keysHeld() & KEY_DOWN)) && (!(keysHeld() & KEY_LEFT)) && (!(keysHeld() & KEY_RIGHT))) {
 			s_direction = DIR_UP; // Set direction to up
@@ -110,8 +109,7 @@ void Player::move() {
 	}
 	
 	if((keysHeld() & KEY_DOWN)) {
-		// Set vertical speed vector positive
-		s_vy = 1;
+		s_vy = 1; // Set vertical speed vector positive
 		
 		if((!(keysHeld() & KEY_UP)) && (!(keysHeld() & KEY_LEFT)) && (!(keysHeld() & KEY_RIGHT))) {
 			s_direction = DIR_DOWN; // Set direction to down
@@ -119,8 +117,7 @@ void Player::move() {
 	}
 	
 	if((keysHeld() & KEY_LEFT)) {
-		// Set horizontal speed vector negative
-		s_vx = -1;
+		s_vx = -1; // Set horizontal speed vector negative
 		
 		if((!(keysHeld() & KEY_UP)) && (!(keysHeld() & KEY_DOWN)) && (!(keysHeld() & KEY_RIGHT))) {
 			s_direction = DIR_LEFT; // Set direction to left
@@ -128,15 +125,14 @@ void Player::move() {
 	}
 	
 	if((keysHeld() & KEY_RIGHT)) {
-		// Set horizontal speed vector positive
-		s_vx = 1;
+		s_vx = 1; // Set horizontal speed vector positive
 		
 		if((!(keysHeld() & KEY_UP)) && (!(keysHeld() & KEY_DOWN)) && (!(keysHeld() & KEY_LEFT))) {
 			s_direction = DIR_RIGHT; // Set direction to right
 		}
 	}
 	
-	if(s_x > 256 - 16) {
+	if(s_x > 256 - 16) { // Scroll right
 		s_vx = 0;
 		s_vy = 0;
 		
@@ -151,7 +147,7 @@ void Player::move() {
 		
 		Game::currentMap = Game::currentMap->nextMap();
 	}
-	if(s_x < 0) {
+	if(s_x < 0) { // Scroll left
 		s_vx = 0;
 		s_vy = 0;
 		
@@ -166,7 +162,7 @@ void Player::move() {
 		
 		Game::currentMap = Game::currentMap->nextMap();
 	}
-	if(s_y > 192 - 16) {
+	if(s_y > 192 - 16) { // Scroll down
 		s_vx = 0;
 		s_vy = 0;
 		
@@ -181,7 +177,7 @@ void Player::move() {
 		
 		Game::currentMap = Game::currentMap->nextMap();
 	}
-	if(s_y < 0) {
+	if(s_y < 0) { // Scroll up
 		s_vx = 0;
 		s_vy = 0;
 		
@@ -198,7 +194,7 @@ void Player::move() {
 	}
 	
 	// Test collisions
-	testCollisions();
+	//testCollisions();
 	
 	// Add speed vectors to coordinates ( move the player )
 	s_x += s_vx;

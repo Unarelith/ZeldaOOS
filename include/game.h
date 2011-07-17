@@ -40,6 +40,7 @@ class Game {
 		static Map* currentMap;
 		static Player* link;
 		static Map** maps;
+		static Tileset* tilesets;
 		
 	private:
 		u8 s_bg; // BG id

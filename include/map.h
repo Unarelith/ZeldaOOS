@@ -51,6 +51,7 @@ class Map {
 		Map* nextMap() const { return s_nextMap; }
 		u16 width() const { return s_width; }
 		Tileset* tileset() const { return s_tileset; }
+		u8 bg() const { return s_bg; }
 		
 		// Number of maps
 		static int nbMaps;
