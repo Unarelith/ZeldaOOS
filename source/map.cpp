@@ -89,18 +89,13 @@ void Map::putTile(s16 x, s16 y, const Map* map, s16 mapX, s16 mapY) {
 }
 
 void Map::scroll(s16 xx, s16 yy) {
-	s16 x = s_scrollX + xx;
-	s16 y = s_scrollY + yy;
-	
 	s_mapY = s_id / WM_SIZE;
 	s_mapX = s_id - s_mapY * WM_SIZE;
 	
-	if(x > s_scrollX) { // Scroll right
-		s16 px = x - s_scrollX; // Number of pixels to scroll
-		
+	if(xx > 0) { // Scroll right		
 		s_nextMap = Game::maps[s_mapX + 1 + s_mapY * WM_SIZE]; // Next map to scroll on
 		
-		for(int i = 0 ; (i < px) && (s_scrollX < s_width * 2 * 16 - 256) ; i++) {
+		for(int i = 0 ; (i < xx) && (s_scrollX < s_width * 2 * 16 - 256) ; i++) {
 			for(int j = s_scrollY / 16 ; j < s_scrollY / 16 + 12 ; j++) {
 				putTile(s_scrollX / 16 + 16, j, s_nextMap, s_scrollX / 16, j);
 			}
@@ -109,12 +104,10 @@ void Map::scroll(s16 xx, s16 yy) {
 		
 		REG_BG0HOFS_SUB = s_scrollX & 1023; // Scroll the BG
 	}
-	else if(x < s_scrollX) { // Scroll left
-		s16 px = s_scrollX - x; // Number of pixels to scroll
-		
+	else if(xx < 0) { // Scroll left
 		s_nextMap = Game::maps[s_mapX - 1 + s_mapY * WM_SIZE]; // Next map to scroll on
 		
-		for(int i = 0 ; (i < px) && (s_scrollX > 0) ; i++) {
+		for(int i = 0 ; (i < -xx) && (s_scrollX > 0) ; i++) {
 			for(int j = s_scrollY / 16 ; j < s_scrollY / 16 + 12 ; j++) {
 				putTile(s_scrollX / 16 - 1, j, s_nextMap, s_scrollX / 16 - 1, j);
 			}
@@ -124,12 +117,10 @@ void Map::scroll(s16 xx, s16 yy) {
 		REG_BG0HOFS_SUB = s_scrollX & 1023; // Scroll the BG
 	}
 	
-	if(y > s_scrollY) { // Scroll down
-		s16 px = y - s_scrollY; // Number of pixels to scroll
-		
+	if(yy > 0) { // Scroll down
 		s_nextMap = Game::maps[s_mapX + (s_mapY + 1) * WM_SIZE]; // Next map to scroll on
 		
-		for(int i = 0 ; (i < px) && (s_scrollY < s_height * 2 * 16 - 192) ; i++) {
+		for(int i = 0 ; (i < yy) && (s_scrollY < s_height * 2 * 16 - 192) ; i++) {
 			for(int j = s_scrollX / 16 ; j < s_scrollX / 16 + 16 ; j++) {
 				putTile(j, s_scrollY / 16 + 12, s_nextMap, j, s_scrollY / 16);
 			}
@@ -138,12 +129,10 @@ void Map::scroll(s16 xx, s16 yy) {
 		
 		REG_BG0VOFS_SUB = s_scrollY & 1023; // Scroll the BG
 	}
-	else if(y < s_scrollY) { // Scroll up
-		s16 px = s_scrollY - y; // Number of pixels to scroll
-		
+	else if(yy < 0) { // Scroll up
 		s_nextMap = Game::maps[s_mapX + (s_mapY - 1) * WM_SIZE]; // Next map to scroll on
 		
-		for(int i = 0 ; (i < px) && (s_scrollY > 0) ; i++) {
+		for(int i = 0 ; (i < -yy) && (s_scrollY > 0) ; i++) {
 			for(int j = s_scrollX / 16 ; j < s_scrollX / 16 + 16 ; j++) {
 				putTile(j, s_scrollY / 16 - 1, s_nextMap, j, s_scrollY / 16 - 1);
 			}
