@@ -204,7 +204,7 @@ void Game::init() {
 		// Draw sword icon
 		sword.drawIcon();
 		
-		if(keysDown() & KEY_A) {
+		/*if(keysDown() & KEY_A) {
 			for(int i = 0 ; i < 32 ; i++) {
 				currentMap->scroll(8, 0);
 				swiWaitForVBlank();
@@ -231,7 +231,7 @@ void Game::init() {
 				swiWaitForVBlank();
 			}
 			currentMap = currentMap->nextMap();
-		}
+		}*/
 		
 		// Wait the VBL
 		swiWaitForVBlank();

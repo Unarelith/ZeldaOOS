@@ -136,6 +136,8 @@ void Player::move() {
 		s_vx = 0;
 		s_vy = 0;
 		
+		Game::currentMap->scrollX(0);
+		
 		for(int i = 0 ; i < 32 ; i++) {
 			Game::currentMap->scroll(8, 0);
 			if(s_x > 8) {
@@ -150,6 +152,8 @@ void Player::move() {
 	if(s_x < 0) { // Scroll left
 		s_vx = 0;
 		s_vy = 0;
+		
+		Game::currentMap->scrollX(256);
 		
 		for(int i = 0 ; i < 32 ; i++) {
 			Game::currentMap->scroll(-8, 0);
@@ -166,6 +170,8 @@ void Player::move() {
 		s_vx = 0;
 		s_vy = 0;
 		
+		Game::currentMap->scrollY(0);
+		
 		for(int i = 0 ; i < 24 ; i++) {
 			Game::currentMap->scroll(0, 8);
 			if(s_y > 8) {
@@ -180,6 +186,8 @@ void Player::move() {
 	if(s_y < 0) { // Scroll up
 		s_vx = 0;
 		s_vy = 0;
+		
+		Game::currentMap->scrollY(192);
 		
 		for(int i = 0 ; i < 24 ; i++) {
 			Game::currentMap->scroll(0, -8);

@@ -95,8 +95,6 @@ void Map::scroll(s16 xx, s16 yy) {
 	if(x > s_scrollX) { // Scroll right
 		s16 px = x - s_scrollX; // Number of pixels to scroll
 		
-		//s_mapX = (s_scrollX + 256) / 256; // Map's X coordinate in the world map'
-		//s_mapY = s_scrollY / 192; // Same for Y
 		s_mapY = s_id / WM_SIZE;
 		s_mapX = s_id - s_mapY * WM_SIZE + 1;
 		s_nextMap = Game::maps[s_mapX + s_mapY * WM_SIZE]; // Next map to scroll on
@@ -115,13 +113,9 @@ void Map::scroll(s16 xx, s16 yy) {
 	else if(x < s_scrollX) { // Scroll left
 		s16 px = s_scrollX - x; // Number of pixels to scroll
 		
-		//s_mapX = (s_scrollX - 8) / 256; // Map's X coordinate in the world map'
-		//s_mapY = s_scrollY / 192; // Same for Y
 		s_mapY = s_id / WM_SIZE;
 		s_mapX = s_id - s_mapY * WM_SIZE - 1;
 		s_nextMap = Game::maps[s_mapX + s_mapY * WM_SIZE]; // Next map to scroll on
-		
-		printf("\x1b[5,5H%d, %d\n", s_id, s_mapX + s_mapY * WM_SIZE);
 		
 		for(int i = 0 ; (i < px) && (s_scrollX > 0) ; i++) {
 			for(int j = s_scrollY / 16 ; j < s_scrollY / 16 + 12 ; j++) {
@@ -136,8 +130,8 @@ void Map::scroll(s16 xx, s16 yy) {
 	if(y > s_scrollY) { // Scroll down
 		s16 px = y - s_scrollY; // Number of pixels to scroll
 		
-		s_mapX = s_scrollX / 256; // Map's X coordinate in the world map'
-		s_mapY = (s_scrollY + 192) / 192; // Same for Y
+		s_mapY = s_id / WM_SIZE + 1;
+		s_mapX = s_id - s_mapY * WM_SIZE;
 		s_nextMap = Game::maps[s_mapX + s_mapY * WM_SIZE]; // Next map to scroll on
 		
 		for(int i = 0 ; (i < px) && (s_scrollY < s_height * 2 * 16 - 192) ; i++) {
@@ -152,8 +146,8 @@ void Map::scroll(s16 xx, s16 yy) {
 	else if(y < s_scrollY) { // Scroll up
 		s16 px = s_scrollY - y; // Number of pixels to scroll
 		
-		s_mapX = s_scrollX / 256; // Map's X coordinate in the world map'
-		s_mapY = (s_scrollY - 8) / 192; // Same for Y
+		s_mapY = s_id / WM_SIZE - 1;
+		s_mapX = s_id - s_mapY * WM_SIZE;
 		s_nextMap = Game::maps[s_mapX + s_mapY * WM_SIZE]; // Next map to scroll on
 		
 		for(int i = 0 ; (i < px) && (s_scrollY > 0) ; i++) {

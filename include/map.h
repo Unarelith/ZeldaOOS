@@ -53,6 +53,12 @@ class Map {
 		Tileset* tileset() const { return s_tileset; }
 		u8 bg() const { return s_bg; }
 		
+		// Both functions
+		void scrollX(s16 scrollX) { s_scrollX = scrollX; }
+		s16 scrollX() const { return s_scrollX; }
+		void scrollY(s16 scrollY) { s_scrollY = scrollY; }
+		s16 scrollY() const { return s_scrollY; }
+		
 		// Number of maps
 		static int nbMaps;
 		
