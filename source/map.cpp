@@ -22,6 +22,9 @@
 
 int Map::nbMaps = 0;
 
+s16 Map::scrollX = 0;
+s16 Map::scrollY = 0;
+
 Map::Map(Tileset* tileset, char* filename, u16 width, u16 height, u16 tileWidth, u16 tileHeight, u8 bg) {
 	s_mapX = 0;
 	s_mapY = 0;
@@ -53,9 +56,6 @@ Map::Map(Tileset* tileset, char* filename, u16 width, u16 height, u16 tileWidth,
 	
 	s_map = table;
 	s_bg = bg;
-	
-	s_scrollX = 0;
-	s_scrollY = 0;
 }
 
 Map::~Map() {
@@ -93,63 +93,56 @@ void Map::scroll(s16 xx, s16 yy) {
 	s_mapX = s_id - s_mapY * WM_SIZE;
 	
 	consoleClear();
+	printf("\x1b[5;5H%d, %d, %d, %d\n", s_nextMap->id(), s_mapX, s_mapY, s_id);
 	
 	if(xx > 0) { // Scroll right		
 		s_nextMap = Game::maps[s_mapX + 1 + s_mapY * WM_SIZE]; // Next map to scroll on
-
-		printf("\x1b[5;5H%d\n", s_nextMap->id());
 		
-		for(int i = 0 ; (i < xx) && (s_scrollX < s_width * 2 * 16 - 256) ; i++) {
-			for(int j = s_scrollY / 16 ; j < s_scrollY / 16 + 12 ; j++) {
-				putTile(s_scrollX / 16 + 16, j, s_nextMap, s_scrollX / 16, j);
+		for(int i = 0 ; (i < xx) && (scrollX < s_width * 2 * 16 - 256) ; i++) {
+			for(int j = scrollY / 16 ; j < scrollY / 16 + 12 ; j++) {
+				putTile(scrollX / 16 + 16, j, s_nextMap, scrollX / 16, j);
 			}
-			s_scrollX++; // Scroll the map
+			scrollX++; // Scroll the map
 		}
 		
-		REG_BG0HOFS_SUB = s_scrollX & 1023; // Scroll the BG
+		REG_BG0HOFS_SUB = scrollX & 1023; // Scroll the BG
 	}
 	else if(xx < 0) { // Scroll left
 		s_nextMap = Game::maps[s_mapX - 1 + s_mapY * WM_SIZE]; // Next map to scroll on
 		
-		printf("\x1b[5;5H%d\n", s_nextMap->id());
-		
-		for(int i = 0 ; (i < -xx) && (s_scrollX > 0) ; i++) {
-			for(int j = s_scrollY / 16 ; j < s_scrollY / 16 + 12 ; j++) {
-				putTile(s_scrollX / 16 - 1, j, s_nextMap, s_scrollX / 16 - 1, j);
+		for(int i = 0 ; (i < -xx) && (scrollX > 0) ; i++) {
+			for(int j = scrollY / 16 ; j < scrollY / 16 + 12 ; j++) {
+				putTile(scrollX / 16 - 1, j, s_nextMap, scrollX / 16 - 1, j);
 			}
-			s_scrollX--; // Scroll the map
+			scrollX--; // Scroll the map
 		}
 		
-		REG_BG0HOFS_SUB = s_scrollX & 1023; // Scroll the BG
+		REG_BG0HOFS_SUB = scrollX & 1023; // Scroll the BG
 	}
 	
 	if(yy > 0) { // Scroll down
 		s_nextMap = Game::maps[s_mapX + (s_mapY + 1) * WM_SIZE]; // Next map to scroll on
 		
-		printf("\x1b[5;5H%d\n", s_nextMap->id());
-		
-		for(int i = 0 ; (i < yy) && (s_scrollY < s_height * 2 * 16 - 192) ; i++) {
-			for(int j = s_scrollX / 16 ; j < s_scrollX / 16 + 16 ; j++) {
-				putTile(j, s_scrollY / 16 + 12, s_nextMap, j, s_scrollY / 16);
+		for(int i = 0 ; (i < yy) && (scrollY < s_height * 2 * 16 - 192) ; i++) {
+			for(int j = scrollX / 16 ; j < scrollX / 16 + 16 ; j++) {
+				putTile(j, scrollY / 16 + 12, s_nextMap, j, scrollY / 16);
 			}
-			s_scrollY++; // Scroll the map
+			scrollY++; // Scroll the map
 		}
 		
-		REG_BG0VOFS_SUB = s_scrollY & 1023; // Scroll the BG
+		REG_BG0VOFS_SUB = scrollY & 1023; // Scroll the BG
 	}
 	else if(yy < 0) { // Scroll up
 		s_nextMap = Game::maps[s_mapX + (s_mapY - 1) * WM_SIZE]; // Next map to scroll on
 		
-		printf("\x1b[5;5H%d\n", s_nextMap->id());
-		
-		for(int i = 0 ; (i < -yy) && (s_scrollY > 0) ; i++) {
-			for(int j = s_scrollX / 16 ; j < s_scrollX / 16 + 16 ; j++) {
-				putTile(j, s_scrollY / 16 - 1, s_nextMap, j, s_scrollY / 16 - 1);
+		for(int i = 0 ; (i < -yy) && (scrollY > 0) ; i++) {
+			for(int j = scrollX / 16 ; j < scrollX / 16 + 16 ; j++) {
+				putTile(j, scrollY / 16 - 1, s_nextMap, j, scrollY / 16 - 1);
 			}
-			s_scrollY--; // Scroll the map
+			scrollY--; // Scroll the map
 		}
 		
-		REG_BG0VOFS_SUB = s_scrollY & 1023; // Scroll the BG
+		REG_BG0VOFS_SUB = scrollY & 1023; // Scroll the BG
 	}
 }
 

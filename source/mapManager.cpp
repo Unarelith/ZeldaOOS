@@ -45,7 +45,7 @@ Map** initMaps(u8 mapBg) {
 	Map* b1 = new Map(&tilesets[0], "/maps/b1.map", 16, 12, 16, 16, mapBg);
 	Map* b2 = new Map(&tilesets[0], "/maps/b2.map", 16, 12, 16, 16, mapBg);
 
-	Map** maps = new Map*[MAPS];
+	Map** maps = new Map*[WM_SIZE * WM_SIZE];
 	maps[0] = a1;
 	maps[1] = a2;
 	maps[2] = b1;

@@ -54,16 +54,14 @@ class Map {
 		u8 bg() const { return s_bg; }
 		int id() const { return s_id; }
 		
-		// Both functions
-		void scrollX(s16 scrollX) { s_scrollX = scrollX; }
-		s16 scrollX() const { return s_scrollX; }
-		void scrollY(s16 scrollY) { s_scrollY = scrollY; }
-		s16 scrollY() const { return s_scrollY; }
-		
 		// Number of maps
 		static int nbMaps;
 		
 		u16 screenPos(s16 x, s16 y) const;
+		
+		// Absolute map scrolling coordinates
+		static s16 scrollX;
+		static s16 scrollY;
 		
 	private:
 		// Map id
@@ -87,10 +85,6 @@ class Map {
 		
 		// Tileset
 		Tileset* s_tileset;
-		
-		// Map scrolling coordinates
-		s16 s_scrollX;
-		s16 s_scrollY;
 		
 		// Map size
 		u16 s_width;
