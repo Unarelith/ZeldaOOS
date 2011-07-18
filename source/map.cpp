@@ -26,11 +26,11 @@ s16 Map::scrollX = 0;
 s16 Map::scrollY = 0;
 
 Map::Map(Tileset* tileset, char* filename, u16 width, u16 height, u16 tileWidth, u16 tileHeight, u8 bg) {
-	s_mapX = 0;
-	s_mapY = 0;
-	
 	s_id = nbMaps;
 	nbMaps++;
+	
+	s_mapY = s_id / WM_SIZE;
+	s_mapX = s_id - s_mapY * WM_SIZE;
 	
 	s_tileset = tileset;
 	s_filename = filename;
@@ -81,21 +81,23 @@ u16 Map::screenPos(s16 x, s16 y) const {
 }
 
 void Map::putTile(s16 x, s16 y, const Map* map, s16 mapX, s16 mapY) {
-	if((x >= 0) && (x < WM_SIZE * 16) && (y >= 0) && (y < WM_SIZE * 12)) {
+// 	mapX -= s_mapX * 16;
+// 	mapY -= map->mapY() * 12;
+// 	consoleClear();
+	printf("\x1b[5;0H%d, %d\n", mapX, mapY);
+// 	swiWaitForVBlank();
+// 	if((x >= 0) && (x < WM_SIZE * 16) && (y >= 0) && (y < WM_SIZE * 12)) {
 		u16* mapPtr = (u16*)bgGetMapPtr(s_bg);
 		mapPtr[screenPos(x * 2, y * 2)] = map->map()[mapX + mapY * map->width()] * 4;
 		mapPtr[screenPos(x * 2 + 1, y * 2)] = map->map()[mapX + mapY * map->width()] * 4 + 1;
 		mapPtr[screenPos(x * 2, y * 2 + 1)] = map->map()[mapX + mapY * map->width()] * 4 + 2;
 		mapPtr[screenPos(x * 2 + 1, y * 2 + 1)] = map->map()[mapX + mapY * map->width()] * 4 + 3;
-	}
+// 	}
 }
 
 void Map::scroll(s16 xx, s16 yy) {
-	s_mapY = s_id / WM_SIZE;
-	s_mapX = s_id - s_mapY * WM_SIZE;
-	
 	consoleClear();
-	printf("\x1b[5;5H%d, %d, %d, %d\n", s_nextMap->id(), s_mapX, s_mapY, s_id);
+	//printf("\x1b[5;5H%d, %d, %d, %d\n", s_nextMap->id(), s_mapX, s_mapY, s_id);
 	
 	if(xx > 0) { // Scroll right		
 		s_nextMap = Game::maps[s_mapX + 1 + s_mapY * WM_SIZE]; // Next map to scroll on
@@ -128,6 +130,9 @@ void Map::scroll(s16 xx, s16 yy) {
 		for(int i = 0 ; (i < yy) && (scrollY < s_height * 2 * 16 - 192) ; i++) {
 			for(int j = scrollX / 16 ; j < scrollX / 16 + 16 ; j++) {
 				putTile(j, scrollY / 16 + 12, s_nextMap, j, scrollY / 16);
+// 				consoleClear();
+// 				printf("\x1b[1;1H%d, %d\n", j, scrollY);
+// 				swiWaitForVBlank();
 			}
 			scrollY++; // Scroll the map
 		}

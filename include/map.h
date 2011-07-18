@@ -54,6 +54,8 @@ class Map {
 		Tileset* tileset() const { return s_tileset; }
 		u8 bg() const { return s_bg; }
 		int id() const { return s_id; }
+		u16 mapX() const { return s_mapX; }
+		u16 mapY() const { return s_mapY; }
 		
 		// Number of maps
 		static int nbMaps;
