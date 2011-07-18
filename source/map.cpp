@@ -81,11 +81,13 @@ u16 Map::screenPos(s16 x, s16 y) const {
 }
 
 void Map::putTile(s16 x, s16 y, const Map* map, s16 mapX, s16 mapY) {
-	u16* mapPtr = (u16*)bgGetMapPtr(s_bg);
-	mapPtr[screenPos(x * 2, y * 2)] = map->map()[mapX + mapY * map->width()] * 4;
-	mapPtr[screenPos(x * 2 + 1, y * 2)] = map->map()[mapX + mapY * map->width()] * 4 + 1;
-	mapPtr[screenPos(x * 2, y * 2 + 1)] = map->map()[mapX + mapY * map->width()] * 4 + 2;
-	mapPtr[screenPos(x * 2 + 1, y * 2 + 1)] = map->map()[mapX + mapY * map->width()] * 4 + 3;
+	if((x >= 0) && (x < WM_SIZE * 16) && (y >= 0) && (y < WM_SIZE * 12)) {
+		u16* mapPtr = (u16*)bgGetMapPtr(s_bg);
+		mapPtr[screenPos(x * 2, y * 2)] = map->map()[mapX + mapY * map->width()] * 4;
+		mapPtr[screenPos(x * 2 + 1, y * 2)] = map->map()[mapX + mapY * map->width()] * 4 + 1;
+		mapPtr[screenPos(x * 2, y * 2 + 1)] = map->map()[mapX + mapY * map->width()] * 4 + 2;
+		mapPtr[screenPos(x * 2 + 1, y * 2 + 1)] = map->map()[mapX + mapY * map->width()] * 4 + 3;
+	}
 }
 
 void Map::scroll(s16 xx, s16 yy) {

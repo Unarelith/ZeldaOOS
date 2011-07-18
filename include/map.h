@@ -50,6 +50,7 @@ class Map {
 		u16* map() const { return s_map; }
 		Map* nextMap() const { return s_nextMap; }
 		u16 width() const { return s_width; }
+		u16 height() const { return s_height; }
 		Tileset* tileset() const { return s_tileset; }
 		u8 bg() const { return s_bg; }
 		int id() const { return s_id; }
