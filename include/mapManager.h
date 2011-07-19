@@ -24,7 +24,7 @@
 #define TILESETS 1
 
 // World map size
-#define WM_SIZE 2
+#define WM_SIZE 3
 
 // Tiles tables
 extern u16 nonPassableTiles[12];
