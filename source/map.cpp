@@ -81,30 +81,24 @@ u16 Map::screenPos(s16 x, s16 y) const {
 }
 
 void Map::putTile(s16 x, s16 y, const Map* map, s16 mapX, s16 mapY) {
-// 	mapX -= s_mapX * 16;
-// 	mapY -= map->mapY() * 12;
-// 	consoleClear();
-	printf("\x1b[5;0H%d, %d\n", mapX, mapY);
-// 	swiWaitForVBlank();
-// 	if((x >= 0) && (x < WM_SIZE * 16) && (y >= 0) && (y < WM_SIZE * 12)) {
-		u16* mapPtr = (u16*)bgGetMapPtr(s_bg);
-		mapPtr[screenPos(x * 2, y * 2)] = map->map()[mapX + mapY * map->width()] * 4;
-		mapPtr[screenPos(x * 2 + 1, y * 2)] = map->map()[mapX + mapY * map->width()] * 4 + 1;
-		mapPtr[screenPos(x * 2, y * 2 + 1)] = map->map()[mapX + mapY * map->width()] * 4 + 2;
-		mapPtr[screenPos(x * 2 + 1, y * 2 + 1)] = map->map()[mapX + mapY * map->width()] * 4 + 3;
-// 	}
+	mapX &= 15;
+	mapY %= 12;
+	u16* mapPtr = (u16*)bgGetMapPtr(s_bg);
+	mapPtr[screenPos(x * 2, y * 2)] = map->map()[mapX + mapY * map->width()] * 4;
+	mapPtr[screenPos(x * 2 + 1, y * 2)] = map->map()[mapX + mapY * map->width()] * 4 + 1;
+	mapPtr[screenPos(x * 2, y * 2 + 1)] = map->map()[mapX + mapY * map->width()] * 4 + 2;
+	mapPtr[screenPos(x * 2 + 1, y * 2 + 1)] = map->map()[mapX + mapY * map->width()] * 4 + 3;
 }
 
 void Map::scroll(s16 xx, s16 yy) {
-	consoleClear();
-	//printf("\x1b[5;5H%d, %d, %d, %d\n", s_nextMap->id(), s_mapX, s_mapY, s_id);
-	
 	if(xx > 0) { // Scroll right		
 		s_nextMap = Game::maps[s_mapX + 1 + s_mapY * WM_SIZE]; // Next map to scroll on
 		
 		for(int i = 0 ; (i < xx) && (scrollX < s_width * 2 * 16 - 256) ; i++) {
-			for(int j = scrollY / 16 ; j < scrollY / 16 + 12 ; j++) {
-				putTile(scrollX / 16 + 16, j, s_nextMap, scrollX / 16, j);
+			if(!(scrollX & 15)) {
+				for(int j = scrollY / 16 ; j < scrollY / 16 + 12 ; j++) {
+					putTile(scrollX / 16 + 16, j, s_nextMap, scrollX / 16, j);
+				}
 			}
 			scrollX++; // Scroll the map
 		}
@@ -115,8 +109,10 @@ void Map::scroll(s16 xx, s16 yy) {
 		s_nextMap = Game::maps[s_mapX - 1 + s_mapY * WM_SIZE]; // Next map to scroll on
 		
 		for(int i = 0 ; (i < -xx) && (scrollX > 0) ; i++) {
-			for(int j = scrollY / 16 ; j < scrollY / 16 + 12 ; j++) {
-				putTile(scrollX / 16 - 1, j, s_nextMap, scrollX / 16 - 1, j);
+			if(!(scrollX & 15)) {
+				for(int j = scrollY / 16 ; j < scrollY / 16 + 12 ; j++) {
+					putTile(scrollX / 16 - 1, j, s_nextMap, scrollX / 16 - 1, j);
+				}
 			}
 			scrollX--; // Scroll the map
 		}
@@ -128,11 +124,10 @@ void Map::scroll(s16 xx, s16 yy) {
 		s_nextMap = Game::maps[s_mapX + (s_mapY + 1) * WM_SIZE]; // Next map to scroll on
 		
 		for(int i = 0 ; (i < yy) && (scrollY < s_height * 2 * 16 - 192) ; i++) {
-			for(int j = scrollX / 16 ; j < scrollX / 16 + 16 ; j++) {
-				putTile(j, scrollY / 16 + 12, s_nextMap, j, scrollY / 16);
-// 				consoleClear();
-// 				printf("\x1b[1;1H%d, %d\n", j, scrollY);
-// 				swiWaitForVBlank();
+			if(!(scrollY & 15)) {
+				for(int j = scrollX / 16 ; j < scrollX / 16 + 16 ; j++) {
+					putTile(j, scrollY / 16 + 12, s_nextMap, j, scrollY / 16);
+				}
 			}
 			scrollY++; // Scroll the map
 		}
@@ -143,8 +138,10 @@ void Map::scroll(s16 xx, s16 yy) {
 		s_nextMap = Game::maps[s_mapX + (s_mapY - 1) * WM_SIZE]; // Next map to scroll on
 		
 		for(int i = 0 ; (i < -yy) && (scrollY > 0) ; i++) {
-			for(int j = scrollX / 16 ; j < scrollX / 16 + 16 ; j++) {
-				putTile(j, scrollY / 16 - 1, s_nextMap, j, scrollY / 16 - 1);
+			if(!(scrollY & 15)) {
+				for(int j = scrollX / 16 ; j < scrollX / 16 + 16 ; j++) {
+					putTile(j, scrollY / 16 - 1, s_nextMap, j, scrollY / 16 - 1);
+				}
 			}
 			scrollY--; // Scroll the map
 		}
