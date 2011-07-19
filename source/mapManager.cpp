@@ -81,14 +81,24 @@ Map** initMaps(u8 mapBg) {
 
 	Map* a1 = new Map(&tilesets[0], "/maps/a1.map", 16, 12, 16, 16, mapBg);
 	Map* a2 = new Map(&tilesets[0], "/maps/a2.map", 16, 12, 16, 16, mapBg);
+	Map* a3 = new Map(&tilesets[0], "/maps/a3.map", 16, 12, 16, 16, mapBg);
 	Map* b1 = new Map(&tilesets[0], "/maps/b1.map", 16, 12, 16, 16, mapBg);
 	Map* b2 = new Map(&tilesets[0], "/maps/b2.map", 16, 12, 16, 16, mapBg);
+	Map* b3 = new Map(&tilesets[0], "/maps/b3.map", 16, 12, 16, 16, mapBg);
+	Map* c1 = new Map(&tilesets[0], "/maps/c1.map", 16, 12, 16, 16, mapBg);
+	Map* c2 = new Map(&tilesets[0], "/maps/c2.map", 16, 12, 16, 16, mapBg);
+	Map* c3 = new Map(&tilesets[0], "/maps/c3.map", 16, 12, 16, 16, mapBg);
 
 	Map** maps = new Map*[WM_SIZE * WM_SIZE];
 	maps[0] = a1;
 	maps[1] = a2;
-	maps[2] = b1;
-	maps[3] = b2;
+	maps[2] = a3;
+	maps[3] = b1;
+	maps[4] = b2;
+	maps[5] = b3;
+	maps[6] = c1;
+	maps[7] = c2;
+	maps[8] = c3;
 
 	return maps;
 }
