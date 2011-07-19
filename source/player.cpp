@@ -132,7 +132,7 @@ void Player::move() {
 		}
 	}
 	
-	if(s_x > 256 - 16) { // Scroll right
+	if(s_x > 256 - 16 + 2) { // Scroll right
 		s_vx = 0;
 		s_vy = 0;
 		
@@ -146,10 +146,11 @@ void Player::move() {
 				swiWaitForVBlank();
 			}
 		}
+		s_x -= 2;
 		
 		Game::currentMap = Game::currentMap->nextMap();
 	}
-	if(s_x < 0) { // Scroll left
+	if(s_x < 0 - 2) { // Scroll left
 		s_vx = 0;
 		s_vy = 0;
 		
@@ -163,10 +164,11 @@ void Player::move() {
 				swiWaitForVBlank();
 			}
 		}
+		s_x += 2;
 		
 		Game::currentMap = Game::currentMap->nextMap();
 	}
-	if(s_y > 192 - 16) { // Scroll down
+	if(s_y > 192 - 16 + 1) { // Scroll down
 		s_vx = 0;
 		s_vy = 0;
 		
@@ -182,11 +184,11 @@ void Player::move() {
 				swiWaitForVBlank();
 			}
 		}
-		s_y -= 2;
+		s_y -= 3;
 		
 		Game::currentMap = Game::currentMap->nextMap();
 	}
-	if(s_y < 0) { // Scroll up
+	if(s_y < 0 - 2) { // Scroll up
 		s_vx = 0;
 		s_vy = 0;
 		
@@ -194,7 +196,7 @@ void Player::move() {
 			if(s_y < 192 - 16 - 100) {
 				s_y += 13;
 			} else {
-				s_y += 16;
+				s_y += 17;
 			}
 			for(int j = 0 ; j < 2 ; j++) {
 				Game::currentMap->scroll(0, -8);
@@ -202,7 +204,7 @@ void Player::move() {
 				swiWaitForVBlank();
 			}
 		}
-		s_y++;
+		s_y ++;
 		
 		Game::currentMap = Game::currentMap->nextMap();
 	}
