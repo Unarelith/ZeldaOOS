@@ -75,7 +75,7 @@ bool in_table(u16* t, u16 n) {
 }
 
 bool passable(s16 caseX, s16 caseY) {
-	if(in_table(nonePassableTiles, Game::currentMap->tileset()->info[Game::currentMap->getTile(caseX, caseY)])) {
+	if(in_table(nonPassableTiles, Game::currentMap->tileset()->info[Game::currentMap->getTile(caseX, caseY)])) {
 		return false;
 	} else {
 		return true;

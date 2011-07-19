@@ -27,7 +27,7 @@
 #define WM_SIZE 2
 
 // Tiles tables
-extern u16 nonePassableTiles[12];
+extern u16 nonPassableTiles[12];
 
 Tileset* initTilesets();
 Map** initMaps(u8 mapBg);

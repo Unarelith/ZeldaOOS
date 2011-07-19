@@ -20,7 +20,31 @@
 
 #include "main.h"
 
-u16 nonePassableTiles[12] = {
+/*
+
+	Tiles informations:
+		0: Passable
+		1: Non passable
+		2: Slows and can be cutted
+		3: Non passable but can be cutted and can be lifted
+		4: Non passable but can be burned
+		5: Fruits on a tree ( not for a long time, this will be sprites )
+		6: Fireplace
+		7: Hole
+		8: Empty chest
+		9: Closed chest
+		10: Placard
+		12: Rock, can be lifted
+		13: Soft soil
+		14: Stairs
+		15: Stairs to underground
+		16: Cane of Somaria's cube
+		17: Hook's rock
+		18: Mass of earth
+
+*/
+
+u16 nonPassableTiles[12] = {
 	1,3,4,5,6,8,9,10,12,16,17,18
 };
 
@@ -40,7 +64,7 @@ u16 plainInfo[256] = {
 	1,1,1,1,1,1,1,1,1,1,0,6,1,0,0,0,
 	0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
 	0,0,0,0,0,0,0,0,0,0,0,0,0,0,7,1,
-	8,9,10,11,12,13,13,1,14,15,1,16,17,0,18,1
+	8,9,10,7,12,13,13,1,14,15,1,16,17,0,18,1
 };
 
 Tileset* initTilesets() {
