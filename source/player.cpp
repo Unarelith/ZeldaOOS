@@ -136,13 +136,15 @@ void Player::move() {
 		s_vx = 0;
 		s_vy = 0;
 		
-		for(int i = 0 ; i < 32 ; i++) {
-			Game::currentMap->scroll(8, 0);
+		for(int i = 0 ; i < 16 ; i++) {
 			if(s_x > 8) {
-				s_x -= 8;
+				s_x -= 15;
 			}
-			draw();
-			swiWaitForVBlank();
+			for(int j = 0 ; j < 2 ; j++) {
+				Game::currentMap->scroll(8, 0);
+				draw();
+				swiWaitForVBlank();
+			}
 		}
 		
 		Game::currentMap = Game::currentMap->nextMap();
@@ -151,13 +153,15 @@ void Player::move() {
 		s_vx = 0;
 		s_vy = 0;
 		
-		for(int i = 0 ; i < 32 ; i++) {
-			Game::currentMap->scroll(-8, 0);
+		for(int i = 0 ; i < 16 ; i++) {
 			if(s_x < 256 - 16 - 8) {
-				s_x += 8;
+				s_x += 15;
 			}
-			draw();
-			swiWaitForVBlank();
+			for(int j = 0 ; j < 2 ; j++) {
+				Game::currentMap->scroll(-8, 0);
+				draw();
+				swiWaitForVBlank();
+			}
 		}
 		
 		Game::currentMap = Game::currentMap->nextMap();
@@ -166,14 +170,20 @@ void Player::move() {
 		s_vx = 0;
 		s_vy = 0;
 		
-		for(int i = 0 ; i < 24 ; i++) {
-			Game::currentMap->scroll(0, 8);
-			if(s_y > 8) {
-				s_y -= 8;
+		for(int i = 0 ; i < 12 ; i++) {
+			if(s_y > 100) {
+				s_y -= 13;
+			} else {
+				s_y -= 16;
 			}
-			draw();
-			swiWaitForVBlank();
+			printf("%d\n", s_y);
+			for(int j = 0 ; j < 2 ; j++) {
+				Game::currentMap->scroll(0, 8);
+				draw();
+				swiWaitForVBlank();
+			}
 		}
+		s_y -= 2;
 		
 		Game::currentMap = Game::currentMap->nextMap();
 	}
@@ -181,14 +191,19 @@ void Player::move() {
 		s_vx = 0;
 		s_vy = 0;
 		
-		for(int i = 0 ; i < 24 ; i++) {
-			Game::currentMap->scroll(0, -8);
-			if(s_y < 192 - 16 - 8) {
-				s_y += 8;
+		for(int i = 0 ; i < 12 ; i++) {
+			if(s_y < 192 - 16 - 100) {
+				s_y += 13;
+			} else {
+				s_y += 16;
 			}
-			draw();
-			swiWaitForVBlank();
+			for(int j = 0 ; j < 2 ; j++) {
+				Game::currentMap->scroll(0, -8);
+				draw();
+				swiWaitForVBlank();
+			}
 		}
+		s_y++;
 		
 		Game::currentMap = Game::currentMap->nextMap();
 	}
