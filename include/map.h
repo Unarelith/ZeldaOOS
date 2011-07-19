@@ -24,7 +24,7 @@
 typedef struct {
 	const u32* tiles;
 	const u16* palette;
-	u16* nonPassable;
+	u16* info;
 } Tileset;
 
 class Map {

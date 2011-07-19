@@ -75,7 +75,7 @@ bool in_table(u16* t, u16 n) {
 }
 
 bool passable(s16 caseX, s16 caseY) {
-	if(in_table(Game::currentMap->tileset()->nonPassable, Game::currentMap->getTile(caseX, caseY))) {
+	if(in_table(nonePassableTiles, Game::currentMap->tileset()->info[Game::currentMap->getTile(caseX, caseY)])) {
 		return false;
 	} else {
 		return true;
@@ -176,7 +176,6 @@ void Player::move() {
 			} else {
 				s_y -= 16;
 			}
-			printf("%d\n", s_y);
 			for(int j = 0 ; j < 2 ; j++) {
 				Game::currentMap->scroll(0, 8);
 				draw();
