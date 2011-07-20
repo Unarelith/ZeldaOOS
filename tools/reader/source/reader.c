@@ -37,7 +37,7 @@ processNode(xmlTextReaderPtr reader) {
 	    name,
 	    xmlTextReaderIsEmptyElement(reader),
 	    xmlTextReaderHasValue(reader));*/
-	    
+		
     if(value != NULL) {
 		if(xmlTextReaderNodeType(reader) == 3) {
 			//printf("%s", xmlStrsub(value, 1, xmlStrlen(value)));
@@ -45,7 +45,7 @@ processNode(xmlTextReaderPtr reader) {
 			char* tmp = (char*)malloc(5 * sizeof(char));
 			char* preout = (char*)malloc(xmlStrlen(value) * sizeof(char));
 			char* out = (char*)malloc(xmlStrlen(value) * sizeof(char));
-			char* buffer = (char*)malloc(sizeof(char) * xmlStrlen(value));
+			char* buffer = (char*)malloc(sizeof(char) * xmlStrlen(value) + 1);
 			sprintf(buffer, "%s", value);
 			// (Now buffer contains the map file)
 			int counter = 0;
