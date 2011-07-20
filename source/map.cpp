@@ -98,7 +98,7 @@ void Map::scroll(s16 xx, s16 yy) {
 		
 		for(int i = 0 ; (i < xx) && (scrollX < s_width * 2 * 16 - 256) ; i++) {
 
-			iprintf("\x1b[5;0H%08x\n%d\n%08x\n", (int)s_nextMap, s_nextMap->s_id, (int)s_nextMap->map());
+			iprintf("\x1b[5;0H%08x\n%d\n%08x\n", (int)s_nextMap, s_nextMap->id(), (int)s_nextMap->map());
 
 			if(!(scrollX & 15)) {
 				for(int j = scrollY / 16 ; j < scrollY / 16 + 12 ; j++) {
@@ -117,7 +117,7 @@ void Map::scroll(s16 xx, s16 yy) {
 		
 		for(int i = 0 ; (i < -xx) && (scrollX > 0) ; i++) {
 
-			iprintf("\x1b[5;0H%08x\n%d\n%08x\n", (int)s_nextMap, s_nextMap->s_id, (int)s_nextMap->map());
+			iprintf("\x1b[5;0H%08x\n%d\n%08x\n", (int)s_nextMap, s_nextMap->id(), (int)s_nextMap->map());
 
 			if(!(scrollX & 15)) {
 				for(int j = scrollY / 16 ; j < scrollY / 16 + 12 ; j++) {
@@ -137,7 +137,7 @@ void Map::scroll(s16 xx, s16 yy) {
 		
 		for(int i = 0 ; (i < yy) && (scrollY < s_height * 2 * 16 - 192) ; i++) {
 
-			iprintf("\x1b[5;0H%08x\n%d\n%08x\n", (int)s_nextMap, s_nextMap->s_id, (int)s_nextMap->map());
+			iprintf("\x1b[5;0H%08x\n%d\n%08x\n", (int)s_nextMap, s_nextMap->id(), (int)s_nextMap->map());
 
 			if(!(scrollY & 15)) {
 				for(int j = scrollX / 16 ; j < scrollX / 16 + 16 ; j++) {
@@ -156,7 +156,7 @@ void Map::scroll(s16 xx, s16 yy) {
 		
 		for(int i = 0 ; (i < -yy) && (scrollY > 0) ; i++) {
 
-			iprintf("\x1b[5;0H%08x\n%d\n%08x\n", (int)s_nextMap, s_nextMap->s_id, (int)s_nextMap->map());
+			iprintf("\x1b[5;0H%08x\n%d\n%08x\n", (int)s_nextMap, s_nextMap->id(), (int)s_nextMap->map());
 
 			if(!(scrollY & 15)) {
 				for(int j = scrollX / 16 ; j < scrollX / 16 + 16 ; j++) {
