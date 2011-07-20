@@ -83,19 +83,24 @@ bool passable(s16 caseX, s16 caseY) {
 }
 
 void Player::testCollisions() {
-	if(	(!passable((s_x + 4 + s_vx) / 16	, (s_y + 6) 		/ 16)) || // Left up
-		(!passable((s_x - 4 + s_vx) / 16 + 1, (s_y + 6) 		/ 16)) || // Right up
-		(!passable((s_x + 4 + s_vx) / 16	, (s_y - 1 + 15) 	/ 16)) || // Left down
-		(!passable((s_x - 4 + s_vx) / 16 + 1, (s_y - 1 + 15) 	/ 16)))   // Right down
-	{
-			s_vx = 0;
+	// Right up & down
+	if((!passable((s_x - 4 + s_vx) / 16 + 1, (s_y + 6) / 16)) || (!passable((s_x - 4 + s_vx) / 16 + 1, (s_y - 1 + 15) / 16))) {
+		s_vx = 0;
 	}
-	if(	(!passable((s_x + 4) / 16		, (s_y + 6 + s_vy) / 16		)) || // Up left
-		(!passable((s_x + 4) / 16		, (s_y - 1 + s_vy) / 16 + 1	)) || // Down left
-		(!passable((s_x - 4 + 15) / 16	, (s_y + 6 + s_vy) / 16		)) || // Up right
-		(!passable((s_x - 4 + 15) / 16	, (s_y - 1 + s_vy) / 16 + 1	)))   // Down right
-	{
-			s_vy = 0;
+	
+	// Left up & down
+	if((!passable((s_x + 4 + s_vx) / 16, (s_y + 6) / 16)) || (!passable((s_x + 4 + s_vx) / 16, (s_y - 1 + 15) / 16))) {
+		s_vx = 0;
+	}
+	
+	// Up left & right
+	if((!passable((s_x + 4) / 16, (s_y + 6 + s_vy) / 16)) || (!passable((s_x - 4 + 15) / 16, (s_y + 6 + s_vy) / 16))) {
+		s_vy = 0;
+	}
+	
+	// Down left & right
+	if((!passable((s_x + 4)	/ 16, (s_y - 1 + s_vy) / 16 + 1)) || (!passable((s_x - 4 + 15) / 16, (s_y - 1 + s_vy) / 16 + 1))) {
+		s_vy = 0;
 	}
 }
 
