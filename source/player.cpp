@@ -228,7 +228,7 @@ void Player::move() {
 	}
 	
 	// Test collisions
-	testCollisions();
+	//testCollisions();
 	
 	// Add speed vectors to coordinates ( move the player )
 	s_x += s_vx;

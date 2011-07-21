@@ -21,7 +21,7 @@
 #ifndef MAPMANAGER_H
 #define MAPMANAGER_H
 
-#define TILESETS 1
+#define TILESETS 2
 
 // World map size
 #define WM_SIZE 3
