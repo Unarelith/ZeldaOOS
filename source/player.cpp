@@ -83,25 +83,79 @@ bool passable(s16 caseX, s16 caseY) {
 }
 
 void Player::testCollisions() {
-	// Right up & down
-	if((!passable((s_x - 4 + s_vx) / 16 + 1, (s_y + 6) / 16)) || (!passable((s_x - 4 + s_vx) / 16 + 1, (s_y - 1 + 15) / 16))) {
+	// right
+	if ((s_vx > 0) && ((!passable((s_x + 12) >> 4, (s_y + 8) >> 4))
+			|| (!passable((s_x + 12) >> 4, (s_y + 13) >> 4))))
+	{
 		s_vx = 0;
+		// obstacle up
+		if ((!passable((s_x + 12) >> 4, (s_y + 8) >> 4)) && passable((s_x + 12) >> 4, (s_y + 13) >> 4)) {
+			if (s_vy == 0) s_vy = 1;
+		}
+		// obstacle down
+		if ((!passable((s_x + 12) >> 4, (s_y + 13) >> 4)) && passable((s_x + 12) >> 4, (s_y + 8) >> 4)) {
+			if (s_vy == 0) s_vy = -1;
+		}
 	}
-	
-	// Left up & down
-	if((!passable((s_x + 4 + s_vx) / 16, (s_y + 6) / 16)) || (!passable((s_x + 4 + s_vx) / 16, (s_y - 1 + 15) / 16))) {
+	// left
+	if ((s_vx < 0) && ((!passable((s_x + 3) >> 4, (s_y + 8) >> 4))
+			|| (!passable((s_x + 3) >> 4, (s_y + 13) >> 4))))
+	{
 		s_vx = 0;
+		// obstacle up
+		if ((!passable((s_x + 3) >> 4, (s_y + 8) >> 4)) && passable((s_x + 3) >> 4, (s_y + 13) >> 4)) {
+			if (s_vy == 0) s_vy = 1;
+		}
+		// obstacle down
+		if ((!passable((s_x + 3) >> 4, (s_y + 13) >> 4)) && passable((s_x + 3) >> 4, (s_y + 8) >> 4)) {
+			if (s_vy == 0) s_vy = -1;
+		}
 	}
-	
-	// Up left & right
-	if((!passable((s_x + 4) / 16, (s_y + 6 + s_vy) / 16)) || (!passable((s_x - 4 + 15) / 16, (s_y + 6 + s_vy) / 16))) {
+	// up
+	if ((s_vy < 0) && ((!passable((s_x + 5) >> 4, (s_y + 5) >> 4))
+			|| (!passable((s_x + 10) >> 4, (s_y + 5) >> 4))))
+	{
 		s_vy = 0;
+		// obstacle left
+		if ((!passable((s_x + 5) >> 4, (s_y + 5) >> 4)) && passable((s_x + 10) >> 4, (s_y + 5) >> 4)) {
+			if (s_vx == 0) s_vx = 1;
+		}
+		// obstacle right
+		if ((!passable((s_x + 10) >> 4, (s_y + 5) >> 4)) && passable((s_x + 5) >> 4, (s_y + 5) >> 4)) {
+			if (s_vx == 0) s_vx = -1;
+		}
 	}
-	
-	// Down left & right
-	if((!passable((s_x + 4)	/ 16, (s_y - 1 + s_vy) / 16 + 1)) || (!passable((s_x - 4 + 15) / 16, (s_y - 1 + s_vy) / 16 + 1))) {
+	// down
+	if ((s_vy > 0) && ((!passable((s_x + 5) >> 4, (s_y + 15) >> 4))
+			|| (!passable((s_x + 10) >> 4, (s_y + 15) >> 4))))
+	{
 		s_vy = 0;
+		// obstacle left
+		if ((!passable((s_x + 5) >> 4, (s_y + 15) >> 4)) && passable((s_x + 10) >> 4, (s_y + 15) >> 4)) {
+			if (s_vx == 0) s_vx = 1;
+		}
+		// obstacle right
+		if ((!passable((s_x + 10) >> 4, (s_y + 15) >> 4)) && passable((s_x + 5) >> 4, (s_y + 15) >> 4)) {
+			if (s_vx == 0) s_vx = -1;
+		}
 	}
+
+/*
+	if(	(!passable((s_x + 4 + s_vx) / 16	, (s_y + 6) 		/ 16)) || // Left up
+		(!passable((s_x - 4 + s_vx) / 16 + 1, (s_y + 6) 		/ 16)) || // Right up
+		(!passable((s_x + 4 + s_vx) / 16	, (s_y - 1 + 15) 	/ 16)) || // Left down
+		(!passable((s_x - 4 + s_vx) / 16 + 1, (s_y - 1 + 15) 	/ 16)))   // Right down
+	{
+			s_vx = 0;
+	}
+	if(	(!passable((s_x + 4) / 16		, (s_y + 6 + s_vy) / 16		)) || // Up left
+		(!passable((s_x + 4) / 16		, (s_y - 1 + s_vy) / 16 + 1	)) || // Down left
+		(!passable((s_x - 4 + 15) / 16	, (s_y + 6 + s_vy) / 16		)) || // Up right
+		(!passable((s_x - 4 + 15) / 16	, (s_y - 1 + s_vy) / 16 + 1	)))   // Down right
+	{
+			s_vy = 0;
+	}
+*/
 }
 
 void Player::move() {
@@ -208,7 +262,7 @@ void Player::move() {
 
 void Player::draw() {
 	// If all directional keys are released
-	if((!(keysHeld() & KEY_UP)) && (!(keysHeld() & KEY_DOWN)) && (!(keysHeld() & KEY_LEFT)) && (!(keysHeld() & KEY_RIGHT))) {
+	if (!(keysHeld() & (KEY_UP | KEY_DOWN | KEY_LEFT | KEY_RIGHT))) {
 		drawFrame(s_x, s_y, s_direction); // Draw a simple frame
 	} else {
 		playAnimation(s_x, s_y, s_direction); // Play player's animation
