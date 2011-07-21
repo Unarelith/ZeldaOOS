@@ -83,79 +83,58 @@ bool passable(s16 caseX, s16 caseY) {
 }
 
 void Player::testCollisions() {
-	// right
-	if ((s_vx > 0) && ((!passable((s_x + 12) >> 4, (s_y + 8) >> 4))
-			|| (!passable((s_x + 12) >> 4, (s_y + 13) >> 4))))
-	{
+	// Right
+	if ((s_vx > 0) && ((!passable((s_x + 12) >> 4, (s_y + 8) >> 4)) || (!passable((s_x + 12) >> 4, (s_y + 13) >> 4)))) {
 		s_vx = 0;
-		// obstacle up
+		
+		// Obstacle up
 		if ((!passable((s_x + 12) >> 4, (s_y + 8) >> 4)) && passable((s_x + 12) >> 4, (s_y + 13) >> 4)) {
 			if (s_vy == 0) s_vy = 1;
 		}
-		// obstacle down
+		// Obstacle down
 		if ((!passable((s_x + 12) >> 4, (s_y + 13) >> 4)) && passable((s_x + 12) >> 4, (s_y + 8) >> 4)) {
 			if (s_vy == 0) s_vy = -1;
 		}
 	}
-	// left
-	if ((s_vx < 0) && ((!passable((s_x + 3) >> 4, (s_y + 8) >> 4))
-			|| (!passable((s_x + 3) >> 4, (s_y + 13) >> 4))))
-	{
+	// Left
+	if ((s_vx < 0) && ((!passable((s_x + 3) >> 4, (s_y + 8) >> 4)) || (!passable((s_x + 3) >> 4, (s_y + 13) >> 4)))) {
 		s_vx = 0;
-		// obstacle up
+		
+		// Obstacle up
 		if ((!passable((s_x + 3) >> 4, (s_y + 8) >> 4)) && passable((s_x + 3) >> 4, (s_y + 13) >> 4)) {
 			if (s_vy == 0) s_vy = 1;
 		}
-		// obstacle down
+		// Obstacle down
 		if ((!passable((s_x + 3) >> 4, (s_y + 13) >> 4)) && passable((s_x + 3) >> 4, (s_y + 8) >> 4)) {
 			if (s_vy == 0) s_vy = -1;
 		}
 	}
-	// up
-	if ((s_vy < 0) && ((!passable((s_x + 5) >> 4, (s_y + 5) >> 4))
-			|| (!passable((s_x + 10) >> 4, (s_y + 5) >> 4))))
-	{
+	// Up
+	if ((s_vy < 0) && ((!passable((s_x + 5) >> 4, (s_y + 5) >> 4)) || (!passable((s_x + 10) >> 4, (s_y + 5) >> 4)))) {
 		s_vy = 0;
-		// obstacle left
+		
+		// Obstacle left
 		if ((!passable((s_x + 5) >> 4, (s_y + 5) >> 4)) && passable((s_x + 10) >> 4, (s_y + 5) >> 4)) {
 			if (s_vx == 0) s_vx = 1;
 		}
-		// obstacle right
+		// Obstacle right
 		if ((!passable((s_x + 10) >> 4, (s_y + 5) >> 4)) && passable((s_x + 5) >> 4, (s_y + 5) >> 4)) {
 			if (s_vx == 0) s_vx = -1;
 		}
 	}
-	// down
-	if ((s_vy > 0) && ((!passable((s_x + 5) >> 4, (s_y + 15) >> 4))
-			|| (!passable((s_x + 10) >> 4, (s_y + 15) >> 4))))
-	{
+	// Down
+	if ((s_vy > 0) && ((!passable((s_x + 5) >> 4, (s_y + 15) >> 4)) || (!passable((s_x + 10) >> 4, (s_y + 15) >> 4)))) {
 		s_vy = 0;
-		// obstacle left
+		
+		// Obstacle left
 		if ((!passable((s_x + 5) >> 4, (s_y + 15) >> 4)) && passable((s_x + 10) >> 4, (s_y + 15) >> 4)) {
 			if (s_vx == 0) s_vx = 1;
 		}
-		// obstacle right
+		// Obstacle right
 		if ((!passable((s_x + 10) >> 4, (s_y + 15) >> 4)) && passable((s_x + 5) >> 4, (s_y + 15) >> 4)) {
 			if (s_vx == 0) s_vx = -1;
 		}
 	}
-
-/*
-	if(	(!passable((s_x + 4 + s_vx) / 16	, (s_y + 6) 		/ 16)) || // Left up
-		(!passable((s_x - 4 + s_vx) / 16 + 1, (s_y + 6) 		/ 16)) || // Right up
-		(!passable((s_x + 4 + s_vx) / 16	, (s_y - 1 + 15) 	/ 16)) || // Left down
-		(!passable((s_x - 4 + s_vx) / 16 + 1, (s_y - 1 + 15) 	/ 16)))   // Right down
-	{
-			s_vx = 0;
-	}
-	if(	(!passable((s_x + 4) / 16		, (s_y + 6 + s_vy) / 16		)) || // Up left
-		(!passable((s_x + 4) / 16		, (s_y - 1 + s_vy) / 16 + 1	)) || // Down left
-		(!passable((s_x - 4 + 15) / 16	, (s_y + 6 + s_vy) / 16		)) || // Up right
-		(!passable((s_x - 4 + 15) / 16	, (s_y - 1 + s_vy) / 16 + 1	)))   // Down right
-	{
-			s_vy = 0;
-	}
-*/
 }
 
 void Player::move() {
