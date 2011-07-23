@@ -28,6 +28,7 @@
 
 // Tiles tables
 extern u16 nonPassableTiles[12];
+extern u16 changeMapTiles[3];
 
 Tileset* initTilesets();
 Map** initMaps(u8 mapBg);

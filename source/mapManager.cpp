@@ -34,6 +34,7 @@
 		8: Empty chest
 		9: Closed chest
 		10: Placard
+		11: Door
 		12: Rock, can be lifted
 		13: Soft soil
 		14: Stairs
@@ -46,6 +47,10 @@
 
 u16 nonPassableTiles[12] = {
 	1,3,4,5,6,8,9,10,12,16,17,18
+};
+
+u16 changeMapTiles[3] = {
+	11,14,15
 };
 
 u16 plainInfo[256] = {
@@ -61,7 +66,7 @@ u16 plainInfo[256] = {
 	1,1,1,1,1,1,1,1,1,1,1,1,1,1,0,1,
 	1,1,1,1,1,1,1,1,1,1,1,1,1,1,0,1,
 	1,1,1,1,1,1,1,1,1,1,1,1,1,0,0,0,
-	1,1,1,1,1,1,1,1,1,1,0,6,1,0,0,0,
+	1,1,1,1,1,1,1,1,1,1,11,6,1,0,0,0,
 	0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
 	0,0,0,0,0,0,0,0,0,0,0,0,0,0,7,1,
 	8,9,10,7,12,13,13,1,14,15,1,16,17,0,18,1
@@ -101,7 +106,7 @@ Map** initMaps(u8 mapBg) {
 	Tileset* tilesets = initTilesets();
 
 	Map* a1 = new Map(&tilesets[0], "/maps/a1.map", 16, 12, 16, 16, mapBg);
-	Map* a2 = new Map(&tilesets[0], "/maps/1.map", 16, 12, 16, 16, mapBg);
+	Map* a2 = new Map(&tilesets[0], "/maps/a2.map", 16, 12, 16, 16, mapBg);
 	Map* a3 = new Map(&tilesets[0], "/maps/a3.map", 16, 12, 16, 16, mapBg);
 	Map* b1 = new Map(&tilesets[0], "/maps/b1.map", 16, 12, 16, 16, mapBg);
 	Map* b2 = new Map(&tilesets[0], "/maps/b2.map", 16, 12, 16, 16, mapBg);

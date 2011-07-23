@@ -63,7 +63,7 @@ Player::Player() : Sprite(SCREEN_DOWN, 0, SprSize_16x16, 0) {
 Player::~Player() {
 }
 
-bool in_table(u16* t, u16 n) {
+bool inTable(u16 t[], u16 n) {
 	int i = 0;
 	while(t[i]) {
 		if(t[i] == n) {
@@ -75,10 +75,18 @@ bool in_table(u16* t, u16 n) {
 }
 
 bool passable(s16 caseX, s16 caseY) {
-	if(in_table(nonPassableTiles, Game::currentMap->tileset()->info[Game::currentMap->getTile(caseX, caseY)])) {
+	if(inTable(nonPassableTiles, Game::currentMap->tileset()->info[Game::currentMap->getTile(caseX, caseY)])) {
 		return false;
 	} else {
 		return true;
+	}
+}
+
+bool inTiles(s16 caseX, s16 caseY, u16 t[]) {
+	if(inTable(t, Game::currentMap->tileset()->info[Game::currentMap->getTile(caseX, caseY)])) {
+		return true;
+	} else {
+		return false;
 	}
 }
 
@@ -227,8 +235,12 @@ void Player::move() {
 		Game::currentMap = Game::currentMap->nextMap();
 	}
 	
+	if ((s_vx > 0) && ((inTiles((s_x + 12) >> 4, (s_y + 8) >> 4, changeMapTiles)) || (inTiles((s_x + 12) >> 4, (s_y + 13) >> 4, changeMapTiles)))) {
+		
+	}
+	
 	// Test collisions
-	//testCollisions();
+	testCollisions();
 	
 	// Add speed vectors to coordinates ( move the player )
 	s_x += s_vx;
