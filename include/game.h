@@ -36,11 +36,16 @@ class Game {
 		// Initialisation
 		void init();
 		
+		// Static functions
+		static void scroll();
+		static void indoorChange();
+		
 		// Static variables
 		static Map* currentMap;
 		static Player* link;
 		static Map** maps;
 		static Tileset* tilesets;
+		static u8 transBg; // Indoor maps transition BG id
 		
 	private:
 		u8 s_bg; // BG id

@@ -1,9 +1,7 @@
-ZeldaOOS=/home/quentin/devkitPro/projects/ZeldaOOS CD=. filter="*.c *.cpp *.h *.s Makefile TODO" {
+ZeldaOOS=/home/quentin/devkitPro/projects/ZeldaOOS CD=. filter="*.c *.cpp *.h *.s *.tmx Makefile TODO" {
  Makefile
  TODO
  build=build {
- }
- gfx=gfx {
  }
  graphics=graphics {
   characters=characters {
@@ -29,6 +27,16 @@ ZeldaOOS=/home/quentin/devkitPro/projects/ZeldaOOS CD=. filter="*.c *.cpp *.h *.
   weapon.h
  }
  maps=maps {
+  1.tmx
+  a1.tmx
+  a2.tmx
+  a3.tmx
+  b1.tmx
+  b2.tmx
+  b3.tmx
+  c1.tmx
+  c2.tmx
+  c3.tmx
  }
  nitrofiles=nitrofiles {
   maps=maps {
@@ -47,9 +55,8 @@ ZeldaOOS=/home/quentin/devkitPro/projects/ZeldaOOS CD=. filter="*.c *.cpp *.h *.
  }
  tools=tools {
   reader=reader {
-   source=source {
-    reader.c
-   }
+   reader.c
+   Makefile
   }
  }
 }

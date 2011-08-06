@@ -63,7 +63,7 @@ Player::Player() : Sprite(SCREEN_DOWN, 0, SprSize_16x16, 0) {
 Player::~Player() {
 }
 
-bool inTable(u16 t[], u16 n) {
+bool Player::inTable(u16 t[], u16 n) {
 	int i = 0;
 	while(t[i]) {
 		if(t[i] == n) {
@@ -74,7 +74,7 @@ bool inTable(u16 t[], u16 n) {
 	return false;
 }
 
-bool passable(s16 caseX, s16 caseY) {
+bool Player::passable(s16 caseX, s16 caseY) {
 	if(inTable(nonPassableTiles, Game::currentMap->tileset()->info[Game::currentMap->getTile(caseX, caseY)])) {
 		return false;
 	} else {
@@ -82,7 +82,7 @@ bool passable(s16 caseX, s16 caseY) {
 	}
 }
 
-bool inTiles(s16 caseX, s16 caseY, u16 t[]) {
+bool Player::inTiles(s16 caseX, s16 caseY, u16 t[]) {
 	if(inTable(t, Game::currentMap->tileset()->info[Game::currentMap->getTile(caseX, caseY)])) {
 		return true;
 	} else {
@@ -178,70 +178,10 @@ void Player::move() {
 		}
 	}
 	
-	if(s_x > 256 - 16 + 2) { // Scroll right
-		s_vx = 0;
-		s_vy = 0;
-		
-		for(int i = 0 ; i < 32 ; i++) {
-			if ((i & 1) || (!(i & 15))) s_x -= 8; else s_x -= 7;
-
-			Game::currentMap->scroll(8, 0);
-			draw();
-			swiWaitForVBlank();
-		}
-		
-		Game::currentMap = Game::currentMap->nextMap();
-	}
-	if(s_x < 0 - 2) { // Scroll left
-		s_vx = 0;
-		s_vy = 0;
-		
-		for(int i = 0 ; i < 32 ; i++) {
-			if ((i & 1) || (!(i & 15))) s_x += 8; else s_x += 7;
-
-			Game::currentMap->scroll(-8, 0);
-			draw();
-			swiWaitForVBlank();
-		}
-		
-		Game::currentMap = Game::currentMap->nextMap();
-	}
-	if(s_y > 192 - 16 + 1) { // Scroll down
-		s_vx = 0;
-		s_vy = 0;
-		
-		for(int i = 0 ; i < 24 ; i++) {
-			if ((i & 1) && ((i & 7) < 7)) s_y -= 8; else s_y -= 7;
-
-			Game::currentMap->scroll(0, 8);
-			draw();
-			swiWaitForVBlank();
-		}
-
-		Game::currentMap = Game::currentMap->nextMap();
-	}
-	if(s_y < 0 - 2) { // Scroll up
-		s_vx = 0;
-		s_vy = 0;
-		
-		for(int i = 0 ; i < 24 ; i++) {
-			if ((i & 1) && ((i & 7) < 7)) s_y += 8; else s_y += 7;
-
-			Game::currentMap->scroll(0, -8);
-			draw();
-			swiWaitForVBlank();
-		}
-
-		Game::currentMap = Game::currentMap->nextMap();
-	}
-	
-	if ((s_vx > 0) && ((inTiles((s_x + 12) >> 4, (s_y + 8) >> 4, changeMapTiles)) || (inTiles((s_x + 12) >> 4, (s_y + 13) >> 4, changeMapTiles)))) {
-		
-	}
-	
 	// Test collisions
 	testCollisions();
-	
+	Game::indoorChange();
+
 	// Add speed vectors to coordinates ( move the player )
 	s_x += s_vx;
 	s_y += s_vy;
@@ -259,3 +199,4 @@ void Player::draw() {
 		playAnimation(s_x, s_y, s_direction); // Play player's animation
 	}
 }
+

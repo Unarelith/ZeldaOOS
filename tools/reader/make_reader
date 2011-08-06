@@ -1,5 +1,0 @@
-#!/bin/sh
-
-rm -f reader
-gcc -o reader `xml2-config --cflags` source/reader.c `xml2-config --libs`
-

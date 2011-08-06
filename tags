@@ -1,0 +1,545 @@
+!_TAG_FILE_FORMAT	2	/extended format; --format=1 will not append ;" to lines/
+!_TAG_FILE_SORTED	1	/0=unsorted, 1=sorted, 2=foldcase/
+!_TAG_PROGRAM_AUTHOR	Darren Hiebert	/dhiebert@users.sourceforge.net/
+!_TAG_PROGRAM_NAME	Exuberant Ctags	//
+!_TAG_PROGRAM_URL	http://ctags.sourceforge.net	/official site/
+!_TAG_PROGRAM_VERSION	5.8	//
+ARCH	Makefile	/^ARCH	:=	-mthumb -mthumb-interwork -march=armv5te -mtune=arm946e-s$/;"	m
+ASFLAGS	Makefile	/^ASFLAGS	:=	-g $(ARCH)$/;"	m
+BINFILES	Makefile	/^BINFILES	:=	$(foreach dir,$(DATA),$(notdir $(wildcard $(dir)\/*.*)))$/;"	m
+BUILD	Makefile	/^BUILD		:=	build$/;"	m
+CFILES	Makefile	/^CFILES		:=	$(foreach dir,$(SOURCES),$(notdir $(wildcard $(dir)\/*.c)))$/;"	m
+CFLAGS	Makefile	/^CFLAGS	:=	-g -Wall -O2\\$/;"	m
+CPPFILES	Makefile	/^CPPFILES	:=	$(foreach dir,$(SOURCES),$(notdir $(wildcard $(dir)\/*.cpp)))$/;"	m
+CXXFLAGS	Makefile	/^CXXFLAGS	:= $(CFLAGS) -fno-rtti -fno-exceptions -Wno-write-strings$/;"	m
+DATA	Makefile	/^DATA		:=	data data\/icons data\/characters data\/tilesets data\/interface$/;"	m
+DEPENDS	Makefile	/^DEPENDS	:=	$(OFILES:.o=.d)$/;"	m
+DEPSDIR	Makefile	/^export DEPSDIR	:=	$(CURDIR)\/$(BUILD)$/;"	m
+DIR_DOWN	include/player.h	/^	DIR_DOWN = 0,$/;"	e	enum:PlayerDirection
+DIR_LEFT	include/player.h	/^	DIR_LEFT = 2,$/;"	e	enum:PlayerDirection
+DIR_RIGHT	include/player.h	/^	DIR_RIGHT = 1$/;"	e	enum:PlayerDirection
+DIR_UP	include/player.h	/^	DIR_UP = 3,$/;"	e	enum:PlayerDirection
+GAME_H	include/game.h	22;"	d
+GAME_ICON	Makefile	/^		export GAME_ICON := $(CURDIR)\/icon.bmp$/;"	m
+GAME_ICON	Makefile	/^	export GAME_ICON := $(CURDIR)\/$(TARGET).bmp$/;"	m
+GAME_SUBTITLE1	Makefile	/^export GAME_SUBTITLE1	:=	Oracle of Secrets$/;"	m
+GAME_SUBTITLE2	Makefile	/^export GAME_SUBTITLE2	:=	Pixelda$/;"	m
+GAME_TITLE	Makefile	/^export GAME_TITLE	:=	The Legend of Zelda$/;"	m
+GRAPHICS	Makefile	/^GRAPHICS	:=	gfx$/;"	m
+GRIT_ACORN_H	include/gfx.h	172;"	d
+GRIT_BOMB_H	include/gfx.h	413;"	d
+GRIT_BOOMRANGL1_H	include/gfx.h	438;"	d
+GRIT_BOOMRANGL2_H	include/gfx.h	463;"	d
+GRIT_BOW_H	include/gfx.h	488;"	d
+GRIT_CANEL1_H	include/gfx.h	513;"	d
+GRIT_CANEL2_H	include/gfx.h	538;"	d
+GRIT_CATAPULT_H	include/gfx.h	563;"	d
+GRIT_DONGEONKEY_H	include/gfx.h	47;"	d
+GRIT_FEATHERL1_H	include/gfx.h	588;"	d
+GRIT_FILESELECT_H	include/gfx.h	197;"	d
+GRIT_FLUTE_H	include/gfx.h	613;"	d
+GRIT_GESHA_H	include/gfx.h	72;"	d
+GRIT_GFX_H	include/gfx.h	913;"	d
+GRIT_GRAPNEL_H	include/gfx.h	638;"	d
+GRIT_INDOOR_H	include/gfx.h	356;"	d
+GRIT_LINKTS_H	include/gfx.h	223;"	d
+GRIT_LINK_H	include/gfx.h	19;"	d
+GRIT_NUMBERS_H	include/gfx.h	251;"	d
+GRIT_PLAIN_H	include/gfx.h	385;"	d
+GRIT_PRESSSTART_H	include/gfx.h	277;"	d
+GRIT_RING_H	include/gfx.h	97;"	d
+GRIT_SEEDBAG_H	include/gfx.h	663;"	d
+GRIT_SEEDS_H	include/gfx.h	122;"	d
+GRIT_SHIELDL1_H	include/gfx.h	688;"	d
+GRIT_SHIELDL2_H	include/gfx.h	713;"	d
+GRIT_SHIELDL3_H	include/gfx.h	738;"	d
+GRIT_SHOVEL_H	include/gfx.h	763;"	d
+GRIT_STATS_H	include/gfx.h	305;"	d
+GRIT_STRENGHL1_H	include/gfx.h	788;"	d
+GRIT_STRENGHL2_H	include/gfx.h	813;"	d
+GRIT_SWORDL1_H	include/gfx.h	838;"	d
+GRIT_SWORDL2_H	include/gfx.h	863;"	d
+GRIT_SWORDL3_H	include/gfx.h	888;"	d
+GRIT_TITLESCREEN_H	include/gfx.h	330;"	d
+GRIT_WEAPON_LEVEL_H	include/gfx.h	147;"	d
+Game	include/game.h	/^		Game();$/;"	p	class:Game	access:public	signature:()
+Game	include/game.h	/^class Game {$/;"	c
+Game	source/game.cpp	/^Game::Game() {$/;"	f	class:Game	signature:()
+Game::Game	include/game.h	/^		Game();$/;"	p	class:Game	access:public	signature:()
+Game::Game	source/game.cpp	/^Game::Game() {$/;"	f	class:Game	signature:()
+Game::currentMap	include/game.h	/^		static Map* currentMap;$/;"	m	class:Game	access:public
+Game::currentMap	source/game.cpp	/^Map* Game::currentMap;$/;"	m	class:Game	file:
+Game::init	include/game.h	/^		void init();$/;"	p	class:Game	access:public	signature:()
+Game::init	source/game.cpp	/^void Game::init() {$/;"	f	class:Game	signature:()
+Game::link	include/game.h	/^		static Player* link;$/;"	m	class:Game	access:public
+Game::link	source/game.cpp	/^Player* Game::link;$/;"	m	class:Game	file:
+Game::maps	include/game.h	/^		static Map** maps;$/;"	m	class:Game	access:public
+Game::maps	source/game.cpp	/^Map** Game::maps;$/;"	m	class:Game	file:
+Game::pressStartScreen	include/game.h	/^		void pressStartScreen();$/;"	p	class:Game	access:public	signature:()
+Game::pressStartScreen	source/game.cpp	/^void Game::pressStartScreen() {$/;"	f	class:Game	signature:()
+Game::s_bg	include/game.h	/^		u8 s_bg; \/\/ BG id$/;"	m	class:Game	access:private
+Game::s_bgSub	include/game.h	/^		u8 s_bgSub; \/\/ Sub BG id$/;"	m	class:Game	access:private
+Game::s_mapBg	include/game.h	/^		u8 s_mapBg; \/\/ Map BG id$/;"	m	class:Game	access:private
+Game::tilesets	include/game.h	/^		static Tileset* tilesets;$/;"	m	class:Game	access:public
+Game::tilesets	source/game.cpp	/^Tileset* Game::tilesets;$/;"	m	class:Game	file:
+Game::titleScreen	include/game.h	/^		void titleScreen();$/;"	p	class:Game	access:public	signature:()
+Game::titleScreen	source/game.cpp	/^void Game::titleScreen() {$/;"	f	class:Game	signature:()
+Game::~Game	include/game.h	/^		~Game();$/;"	p	class:Game	access:public	signature:()
+Game::~Game	source/game.cpp	/^Game::~Game() {$/;"	f	class:Game	signature:()
+INCLUDE	Makefile	/^export INCLUDE	:=	$(foreach dir,$(INCLUDES),-iquote $(CURDIR)\/$(dir)) \\$/;"	m
+INCLUDES	Makefile	/^INCLUDES	:=	include$/;"	m
+LD	Makefile	/^	export LD	:=	$(CC)$/;"	m
+LD	Makefile	/^	export LD	:=	$(CXX)$/;"	m
+LDFLAGS	Makefile	/^LDFLAGS	=	-specs=ds_arm9.specs -g $(ARCH) -Wl,-Map,$(notdir $*.map)$/;"	m
+LIBDIRS	Makefile	/^LIBDIRS	:=	$(LIBNDS)$/;"	m
+LIBPATHS	Makefile	/^export LIBPATHS	:=	$(foreach dir,$(LIBDIRS),-L$(dir)\/lib)$/;"	m
+LIBS	Makefile	/^LIBS	:= 	-ls5 -lfilesystem -lfat -lmm9 -lnds9$/;"	m
+MAIN_H	include/main.h	22;"	d
+MAPMANAGER_H	include/mapManager.h	22;"	d
+MAP_H	include/map.h	22;"	d
+Map	include/map.h	/^		Map(Tileset* tileset, char* filename, u16 width, u16 height, u16 tileWidth, u16 tileHeight, u8 bg);$/;"	p	class:Map	access:public	signature:(Tileset* tileset, char* filename, u16 width, u16 height, u16 tileWidth, u16 tileHeight, u8 bg)
+Map	include/map.h	/^class Map {$/;"	c
+Map	source/map.cpp	/^Map::Map(Tileset* tileset, char* filename, u16 width, u16 height, u16 tileWidth, u16 tileHeight, u8 bg) {$/;"	f	class:Map	signature:(Tileset* tileset, char* filename, u16 width, u16 height, u16 tileWidth, u16 tileHeight, u8 bg)
+Map::Map	include/map.h	/^		Map(Tileset* tileset, char* filename, u16 width, u16 height, u16 tileWidth, u16 tileHeight, u8 bg);$/;"	p	class:Map	access:public	signature:(Tileset* tileset, char* filename, u16 width, u16 height, u16 tileWidth, u16 tileHeight, u8 bg)
+Map::Map	source/map.cpp	/^Map::Map(Tileset* tileset, char* filename, u16 width, u16 height, u16 tileWidth, u16 tileHeight, u8 bg) {$/;"	f	class:Map	signature:(Tileset* tileset, char* filename, u16 width, u16 height, u16 tileWidth, u16 tileHeight, u8 bg)
+Map::bg	include/map.h	/^		u8 bg() const { return s_bg; }$/;"	f	class:Map	access:public	signature:() const
+Map::draw	include/map.h	/^		void draw();$/;"	p	class:Map	access:public	signature:()
+Map::draw	source/map.cpp	/^void Map::draw() {$/;"	f	class:Map	signature:()
+Map::getTile	include/map.h	/^		u16 getTile(s16 tileX, s16 tileY); \/\/ Get a tile with coordinates$/;"	p	class:Map	access:public	signature:(s16 tileX, s16 tileY)
+Map::getTile	source/map.cpp	/^u16 Map::getTile(s16 tileX, s16 tileY) {$/;"	f	class:Map	signature:(s16 tileX, s16 tileY)
+Map::height	include/map.h	/^		u16 height() const { return s_height; }$/;"	f	class:Map	access:public	signature:() const
+Map::id	include/map.h	/^		int id() const { return s_id; }$/;"	f	class:Map	access:public	signature:() const
+Map::init	include/map.h	/^		void init();$/;"	p	class:Map	access:public	signature:()
+Map::init	source/map.cpp	/^void Map::init() {$/;"	f	class:Map	signature:()
+Map::map	include/map.h	/^		u16* map() const { return s_map; }$/;"	f	class:Map	access:public	signature:() const
+Map::mapX	include/map.h	/^		u16 mapX() const { return s_mapX; }$/;"	f	class:Map	access:public	signature:() const
+Map::mapY	include/map.h	/^		u16 mapY() const { return s_mapY; }$/;"	f	class:Map	access:public	signature:() const
+Map::nbMaps	include/map.h	/^		static int nbMaps;$/;"	m	class:Map	access:public
+Map::nbMaps	source/map.cpp	/^int Map::nbMaps = 0;$/;"	m	class:Map	file:
+Map::nextMap	include/map.h	/^		Map* nextMap() const { return s_nextMap; }$/;"	f	class:Map	access:public	signature:() const
+Map::putTile	include/map.h	/^		void putTile(s16 x, s16 y, const Map* map, s16 mapX, s16 mapY);$/;"	p	class:Map	access:private	signature:(s16 x, s16 y, const Map* map, s16 mapX, s16 mapY)
+Map::putTile	source/map.cpp	/^void Map::putTile(s16 x, s16 y, const Map* map, s16 mapX, s16 mapY) {$/;"	f	class:Map	signature:(s16 x, s16 y, const Map* map, s16 mapX, s16 mapY)
+Map::s_bg	include/map.h	/^		u8 s_bg;$/;"	m	class:Map	access:private
+Map::s_filename	include/map.h	/^		char* s_filename;$/;"	m	class:Map	access:private
+Map::s_height	include/map.h	/^		u16 s_height;$/;"	m	class:Map	access:private
+Map::s_id	include/map.h	/^		int s_id;$/;"	m	class:Map	access:private
+Map::s_map	include/map.h	/^		u16* s_map;$/;"	m	class:Map	access:private
+Map::s_mapX	include/map.h	/^		u16 s_mapX;$/;"	m	class:Map	access:private
+Map::s_mapY	include/map.h	/^		u16 s_mapY;$/;"	m	class:Map	access:private
+Map::s_nextMap	include/map.h	/^		Map* s_nextMap;$/;"	m	class:Map	access:private
+Map::s_tileHeight	include/map.h	/^		u16 s_tileHeight;$/;"	m	class:Map	access:private
+Map::s_tileWidth	include/map.h	/^		u16 s_tileWidth;$/;"	m	class:Map	access:private
+Map::s_tileset	include/map.h	/^		Tileset* s_tileset;$/;"	m	class:Map	access:private
+Map::s_width	include/map.h	/^		u16 s_width;$/;"	m	class:Map	access:private
+Map::screenPos	include/map.h	/^		u16 screenPos(s16 x, s16 y) const;$/;"	p	class:Map	access:public	signature:(s16 x, s16 y) const
+Map::screenPos	source/map.cpp	/^u16 Map::screenPos(s16 x, s16 y) const {$/;"	f	class:Map	signature:(s16 x, s16 y) const
+Map::scroll	include/map.h	/^		void scroll(s16 xx, s16 yy);$/;"	p	class:Map	access:public	signature:(s16 xx, s16 yy)
+Map::scroll	source/map.cpp	/^void Map::scroll(s16 xx, s16 yy) {$/;"	f	class:Map	signature:(s16 xx, s16 yy)
+Map::scrollX	include/map.h	/^		static s16 scrollX;$/;"	m	class:Map	access:public
+Map::scrollX	source/map.cpp	/^s16 Map::scrollX = 0;$/;"	m	class:Map	file:
+Map::scrollY	include/map.h	/^		static s16 scrollY;$/;"	m	class:Map	access:public
+Map::scrollY	source/map.cpp	/^s16 Map::scrollY = 0;$/;"	m	class:Map	file:
+Map::setTile	include/map.h	/^		void setTile(s16 tileX, s16 tileY, u16 tile); \/\/ Set a tile with coordinates$/;"	p	class:Map	access:public	signature:(s16 tileX, s16 tileY, u16 tile)
+Map::setTile	source/map.cpp	/^void Map::setTile(s16 tileX, s16 tileY, u16 tile) {$/;"	f	class:Map	signature:(s16 tileX, s16 tileY, u16 tile)
+Map::tileset	include/map.h	/^		Tileset* tileset() const { return s_tileset; }$/;"	f	class:Map	access:public	signature:() const
+Map::width	include/map.h	/^		u16 width() const { return s_width; }$/;"	f	class:Map	access:public	signature:() const
+Map::~Map	include/map.h	/^		~Map();$/;"	p	class:Map	access:public	signature:()
+Map::~Map	source/map.cpp	/^Map::~Map() {$/;"	f	class:Map	signature:()
+NITRODATA	Makefile	/^NITRODATA	:= 	nitrofiles$/;"	m
+NITRO_FILES	Makefile	/^	export NITRO_FILES	:=	$(CURDIR)\/$(NITRODATA)$/;"	m
+OFILES	Makefile	/^export OFILES	:=	$(addsuffix .o,$(BINFILES)) \\$/;"	m
+OUTPUT	Makefile	/^export OUTPUT	:=	$(CURDIR)\/$(TARGET)$/;"	m
+OnTimer	source/timer.cpp	/^void OnTimer(){$/;"	f	signature:()
+PLAYER_H	include/player.h	21;"	d
+PNGFILES	Makefile	/^PNGFILES	:=	$(foreach dir,$(GRAPHICS),$(notdir $(wildcard $(dir)\/*.png)))$/;"	m
+Player	include/player.h	/^		Player();$/;"	p	class:Player	access:public	signature:()
+Player	include/player.h	/^class Player : public Sprite {$/;"	c	inherits:Sprite
+Player	source/player.cpp	/^Player::Player() : Sprite(SCREEN_DOWN, 0, SprSize_16x16, 0) {$/;"	f	class:Player	signature:()
+Player::Player	include/player.h	/^		Player();$/;"	p	class:Player	access:public	signature:()
+Player::Player	source/player.cpp	/^Player::Player() : Sprite(SCREEN_DOWN, 0, SprSize_16x16, 0) {$/;"	f	class:Player	signature:()
+Player::direction	include/player.h	/^		PlayerDirection direction() const { return s_direction; }$/;"	f	class:Player	access:public	signature:() const
+Player::draw	include/player.h	/^		void draw();$/;"	p	class:Player	access:public	signature:()
+Player::draw	source/player.cpp	/^void Player::draw() {$/;"	f	class:Player	signature:()
+Player::move	include/player.h	/^		void move();$/;"	p	class:Player	access:public	signature:()
+Player::move	source/player.cpp	/^void Player::move() {$/;"	f	class:Player	signature:()
+Player::s_direction	include/player.h	/^		PlayerDirection s_direction;$/;"	m	class:Player	access:private
+Player::s_lifes	include/player.h	/^		int s_lifes;$/;"	m	class:Player	access:private
+Player::s_vx	include/player.h	/^		s8 s_vx;$/;"	m	class:Player	access:private
+Player::s_vy	include/player.h	/^		s8 s_vy;$/;"	m	class:Player	access:private
+Player::s_x	include/player.h	/^		s16 s_x;$/;"	m	class:Player	access:private
+Player::s_y	include/player.h	/^		s16 s_y;$/;"	m	class:Player	access:private
+Player::testCollisions	include/player.h	/^		void testCollisions();$/;"	p	class:Player	access:public	signature:()
+Player::testCollisions	source/player.cpp	/^void Player::testCollisions() {$/;"	f	class:Player	signature:()
+Player::x	include/player.h	/^		s16 x() const { return s_x; }$/;"	f	class:Player	access:public	signature:() const
+Player::y	include/player.h	/^		s16 y() const { return s_y; }$/;"	f	class:Player	access:public	signature:() const
+Player::~Player	include/player.h	/^		~Player();$/;"	p	class:Player	access:public	signature:()
+Player::~Player	source/player.cpp	/^Player::~Player() {$/;"	f	class:Player	signature:()
+PlayerDirection	include/player.h	/^enum PlayerDirection {$/;"	g
+SCREEN_DOWN	include/main.h	25;"	d
+SCREEN_UP	include/main.h	24;"	d
+SFILES	Makefile	/^SFILES		:=	$(foreach dir,$(SOURCES),$(notdir $(wildcard $(dir)\/*.s)))$/;"	m
+SOURCES	Makefile	/^SOURCES		:=	source$/;"	m
+SPRITE_H	include/sprites.h	21;"	d
+Sprite	include/sprites.h	/^		Sprite(u8 screen, int id, s5_dimension size, u8 baseTile, int tileSize = 4);$/;"	p	class:Sprite	access:public	signature:(u8 screen, int id, s5_dimension size, u8 baseTile, int tileSize = 4)
+Sprite	include/sprites.h	/^class Sprite {$/;"	c
+Sprite	source/sprites.cpp	/^Sprite::Sprite(u8 screen, int id, s5_dimension size, u8 baseTile, int tileSize) {$/;"	f	class:Sprite	signature:(u8 screen, int id, s5_dimension size, u8 baseTile, int tileSize)
+Sprite::Sprite	include/sprites.h	/^		Sprite(u8 screen, int id, s5_dimension size, u8 baseTile, int tileSize = 4);$/;"	p	class:Sprite	access:public	signature:(u8 screen, int id, s5_dimension size, u8 baseTile, int tileSize = 4)
+Sprite::Sprite	source/sprites.cpp	/^Sprite::Sprite(u8 screen, int id, s5_dimension size, u8 baseTile, int tileSize) {$/;"	f	class:Sprite	signature:(u8 screen, int id, s5_dimension size, u8 baseTile, int tileSize)
+Sprite::addAnimation	include/sprites.h	/^		void addAnimation(int size, int* tabAnim, int delay);$/;"	p	class:Sprite	access:public	signature:(int size, int* tabAnim, int delay)
+Sprite::addAnimation	source/sprites.cpp	/^void Sprite::addAnimation(int size, int* tabAnim, int delay) {$/;"	f	class:Sprite	signature:(int size, int* tabAnim, int delay)
+Sprite::animationAtEnd	include/sprites.h	/^		bool animationAtEnd(int anim);$/;"	p	class:Sprite	access:public	signature:(int anim)
+Sprite::animationAtEnd	source/sprites.cpp	/^bool Sprite::animationAtEnd(int anim) {$/;"	f	class:Sprite	signature:(int anim)
+Sprite::clear	include/sprites.h	/^		void clear();$/;"	p	class:Sprite	access:public	signature:()
+Sprite::clear	source/sprites.cpp	/^void Sprite::clear() {$/;"	f	class:Sprite	signature:()
+Sprite::draw	include/sprites.h	/^		void draw(s16 x, s16 y, u8 palette = 0);$/;"	p	class:Sprite	access:public	signature:(s16 x, s16 y, u8 palette = 0)
+Sprite::draw	source/sprites.cpp	/^void Sprite::draw(s16 x, s16 y, u8 palette) {$/;"	f	class:Sprite	signature:(s16 x, s16 y, u8 palette)
+Sprite::drawFrame	include/sprites.h	/^		void drawFrame(s16 x, s16 y, int frame, u8 palette = 0);$/;"	p	class:Sprite	access:public	signature:(s16 x, s16 y, int frame, u8 palette = 0)
+Sprite::drawFrame	source/sprites.cpp	/^void Sprite::drawFrame(s16 x, s16 y, int frame, u8 palette) {$/;"	f	class:Sprite	signature:(s16 x, s16 y, int frame, u8 palette)
+Sprite::id	include/sprites.h	/^		int id() const { return s_id; } \/\/ Get sprite ID$/;"	f	class:Sprite	access:public	signature:() const
+Sprite::loadAllIcons	include/sprites.h	/^		static void loadAllIcons(u8 screen);$/;"	p	class:Sprite	access:public	signature:(u8 screen)
+Sprite::loadAllIcons	source/sprites.cpp	/^void Sprite::loadAllIcons(u8 screen) {$/;"	f	class:Sprite	signature:(u8 screen)
+Sprite::playAnimation	include/sprites.h	/^		void playAnimation(s16 x, s16 y, int anim, u8 palette = 0);$/;"	p	class:Sprite	access:public	signature:(s16 x, s16 y, int anim, u8 palette = 0)
+Sprite::playAnimation	source/sprites.cpp	/^void Sprite::playAnimation(s16 x, s16 y, int anim, u8 palette) {$/;"	f	class:Sprite	signature:(s16 x, s16 y, int anim, u8 palette)
+Sprite::resetAnimation	include/sprites.h	/^		void resetAnimation(int anim);$/;"	p	class:Sprite	access:public	signature:(int anim)
+Sprite::resetAnimation	source/sprites.cpp	/^void Sprite::resetAnimation(int anim) {$/;"	f	class:Sprite	signature:(int anim)
+Sprite::s_animations	include/sprites.h	/^		vector<Sprite_Animation*> s_animations;$/;"	m	class:Sprite	access:protected
+Sprite::s_baseTile	include/sprites.h	/^		u8 s_baseTile; \/\/ Sprite base tile$/;"	m	class:Sprite	access:protected
+Sprite::s_color	include/sprites.h	/^		s5_colors s_color; \/\/ Sprite color format$/;"	m	class:Sprite	access:protected
+Sprite::s_id	include/sprites.h	/^		int s_id; \/\/ Sprite index$/;"	m	class:Sprite	access:protected
+Sprite::s_screen	include/sprites.h	/^		u8 s_screen; \/\/ Screen on those the sprite is printing$/;"	m	class:Sprite	access:protected
+Sprite::s_size	include/sprites.h	/^		s5_dimension s_size; \/\/ Sprite size$/;"	m	class:Sprite	access:protected
+Sprite::s_tileSize	include/sprites.h	/^		int s_tileSize;$/;"	m	class:Sprite	access:protected
+Sprite::s_x	include/sprites.h	/^		s16 s_x;$/;"	m	class:Sprite	access:protected
+Sprite::s_y	include/sprites.h	/^		s16 s_y;$/;"	m	class:Sprite	access:protected
+Sprite::startAnimation	include/sprites.h	/^		void startAnimation(int anim);$/;"	p	class:Sprite	access:public	signature:(int anim)
+Sprite::startAnimation	source/sprites.cpp	/^void Sprite::startAnimation(int anim) {$/;"	f	class:Sprite	signature:(int anim)
+Sprite::stopAnimation	include/sprites.h	/^		void stopAnimation(int anim);$/;"	p	class:Sprite	access:public	signature:(int anim)
+Sprite::stopAnimation	source/sprites.cpp	/^void Sprite::stopAnimation(int anim) {$/;"	f	class:Sprite	signature:(int anim)
+Sprite::~Sprite	include/sprites.h	/^		~Sprite();$/;"	p	class:Sprite	access:public	signature:()
+Sprite::~Sprite	source/sprites.cpp	/^Sprite::~Sprite() {$/;"	f	class:Sprite	signature:()
+Sprite_Animation	include/sprites.h	/^		Sprite_Animation(int size, int* tabAnim, int delay);$/;"	p	class:Sprite_Animation	access:public	signature:(int size, int* tabAnim, int delay)
+Sprite_Animation	include/sprites.h	/^class Sprite_Animation {$/;"	c
+Sprite_Animation	source/sprites.cpp	/^Sprite_Animation::Sprite_Animation(int size, int* tabAnim, int delay) {$/;"	f	class:Sprite_Animation	signature:(int size, int* tabAnim, int delay)
+Sprite_Animation::Sprite_Animation	include/sprites.h	/^		Sprite_Animation(int size, int* tabAnim, int delay);$/;"	p	class:Sprite_Animation	access:public	signature:(int size, int* tabAnim, int delay)
+Sprite_Animation::Sprite_Animation	source/sprites.cpp	/^Sprite_Animation::Sprite_Animation(int size, int* tabAnim, int delay) {$/;"	f	class:Sprite_Animation	signature:(int size, int* tabAnim, int delay)
+Sprite_Animation::delay	include/sprites.h	/^		int delay() const { return s_delay; }$/;"	f	class:Sprite_Animation	access:public	signature:() const
+Sprite_Animation::isPlaying	include/sprites.h	/^		bool isPlaying() const { return s_isPlaying; }$/;"	f	class:Sprite_Animation	access:public	signature:() const
+Sprite_Animation::isPlaying	include/sprites.h	/^		void isPlaying(bool isPlaying) { s_isPlaying = isPlaying; }$/;"	f	class:Sprite_Animation	access:public	signature:(bool isPlaying)
+Sprite_Animation::s_delay	include/sprites.h	/^		int s_delay;$/;"	m	class:Sprite_Animation	access:private
+Sprite_Animation::s_isPlaying	include/sprites.h	/^		bool s_isPlaying;$/;"	m	class:Sprite_Animation	access:private
+Sprite_Animation::s_size	include/sprites.h	/^		int s_size;$/;"	m	class:Sprite_Animation	access:private
+Sprite_Animation::s_tabAnim	include/sprites.h	/^		int* s_tabAnim;$/;"	m	class:Sprite_Animation	access:private
+Sprite_Animation::s_tmr	include/sprites.h	/^		Timer* s_tmr;$/;"	m	class:Sprite_Animation	access:private
+Sprite_Animation::size	include/sprites.h	/^		int size() const { return s_size; }$/;"	f	class:Sprite_Animation	access:public	signature:() const
+Sprite_Animation::tabAnim	include/sprites.h	/^		int* tabAnim() const { return s_tabAnim; }$/;"	f	class:Sprite_Animation	access:public	signature:() const
+Sprite_Animation::tmr	include/sprites.h	/^		Timer* tmr() const { return s_tmr; }$/;"	f	class:Sprite_Animation	access:public	signature:() const
+Sprite_Animation::~Sprite_Animation	include/sprites.h	/^		~Sprite_Animation();$/;"	p	class:Sprite_Animation	access:public	signature:()
+Sprite_Animation::~Sprite_Animation	source/sprites.cpp	/^Sprite_Animation::~Sprite_Animation() {$/;"	f	class:Sprite_Animation	signature:()
+TARGET	Makefile	/^TARGET		:=	$(shell basename $(CURDIR))$/;"	m
+TILESETS	include/mapManager.h	24;"	d
+TIMER_H	include/timer.h	22;"	d
+Tileset	include/map.h	/^} Tileset;$/;"	t	typeref:struct:__anon1
+Timer	include/timer.h	/^		Timer();$/;"	p	class:Timer	access:public	signature:()
+Timer	include/timer.h	/^class Timer {$/;"	c
+Timer	source/timer.cpp	/^Timer::Timer() {$/;"	f	class:Timer	signature:()
+Timer::Timer	include/timer.h	/^		Timer();$/;"	p	class:Timer	access:public	signature:()
+Timer::Timer	source/timer.cpp	/^Timer::Timer() {$/;"	f	class:Timer	signature:()
+Timer::initTimers	include/timer.h	/^		static void initTimers();$/;"	p	class:Timer	access:public	signature:()
+Timer::initTimers	source/timer.cpp	/^void Timer::initTimers() {$/;"	f	class:Timer	signature:()
+Timer::osTime	include/timer.h	/^		static int osTime;$/;"	m	class:Timer	access:public
+Timer::osTime	source/timer.cpp	/^int Timer::osTime;$/;"	m	class:Timer	file:
+Timer::reset	include/timer.h	/^		void reset();$/;"	p	class:Timer	access:public	signature:()
+Timer::reset	source/timer.cpp	/^void Timer::reset() {$/;"	f	class:Timer	signature:()
+Timer::s_isStarted	include/timer.h	/^		bool s_isStarted;$/;"	m	class:Timer	access:private
+Timer::s_t	include/timer.h	/^		int s_t;$/;"	m	class:Timer	access:private
+Timer::s_tick	include/timer.h	/^		int s_tick;$/;"	m	class:Timer	access:private
+Timer::start	include/timer.h	/^		void start();$/;"	p	class:Timer	access:public	signature:()
+Timer::start	source/timer.cpp	/^void Timer::start() {$/;"	f	class:Timer	signature:()
+Timer::stop	include/timer.h	/^		void stop();$/;"	p	class:Timer	access:public	signature:()
+Timer::stop	source/timer.cpp	/^void Timer::stop() {$/;"	f	class:Timer	signature:()
+Timer::time	include/timer.h	/^		int time() { return (s_isStarted) ? osTime - s_t : s_tick; }$/;"	f	class:Timer	access:public	signature:()
+Timer::~Timer	include/timer.h	/^		~Timer();$/;"	p	class:Timer	access:public	signature:()
+Timer::~Timer	source/timer.cpp	/^Timer::~Timer() {$/;"	f	class:Timer	signature:()
+VPATH	Makefile	/^export VPATH	:=	$(foreach dir,$(SOURCES),$(CURDIR)\/$(dir)) \\$/;"	m
+WAIT_FOR_START	include/main.h	56;"	d
+WEAPON_H	include/weapon.h	21;"	d
+WM_SIZE	include/mapManager.h	27;"	d
+W_KEY	include/weapon.h	/^enum W_KEY {$/;"	g
+W_KEY_A	include/weapon.h	/^	W_KEY_A = 48,$/;"	e	enum:W_KEY
+W_KEY_B	include/weapon.h	/^	W_KEY_B = 8,$/;"	e	enum:W_KEY
+W_KEY_X	include/weapon.h	/^	W_KEY_X = 88,$/;"	e	enum:W_KEY
+W_KEY_Y	include/weapon.h	/^	W_KEY_Y = 128$/;"	e	enum:W_KEY
+Weapon	include/weapon.h	/^		Weapon(Sprite* icon, Sprite* animation);$/;"	p	class:Weapon	access:public	signature:(Sprite* icon, Sprite* animation)
+Weapon	include/weapon.h	/^class Weapon {$/;"	c
+Weapon	source/weapon.cpp	/^Weapon::Weapon(Sprite* icon, Sprite* animation) {$/;"	f	class:Weapon	signature:(Sprite* icon, Sprite* animation)
+Weapon::Weapon	include/weapon.h	/^		Weapon(Sprite* icon, Sprite* animation);$/;"	p	class:Weapon	access:public	signature:(Sprite* icon, Sprite* animation)
+Weapon::Weapon	source/weapon.cpp	/^Weapon::Weapon(Sprite* icon, Sprite* animation) {$/;"	f	class:Weapon	signature:(Sprite* icon, Sprite* animation)
+Weapon::drawIcon	include/weapon.h	/^		void drawIcon();$/;"	p	class:Weapon	access:public	signature:()
+Weapon::drawIcon	source/weapon.cpp	/^void Weapon::drawIcon() {$/;"	f	class:Weapon	signature:()
+Weapon::playAnimation	include/weapon.h	/^		void playAnimation();$/;"	p	class:Weapon	access:public	signature:()
+Weapon::playAnimation	source/weapon.cpp	/^void Weapon::playAnimation() {$/;"	f	class:Weapon	signature:()
+Weapon::s_animation	include/weapon.h	/^		Sprite* s_animation; \/\/ Weapons's animation$/;"	m	class:Weapon	access:private
+Weapon::s_icon	include/weapon.h	/^		Sprite* s_icon; \/\/ Weapon's icon$/;"	m	class:Weapon	access:private
+Weapon::s_key	include/weapon.h	/^		W_KEY s_key; \/\/ Weapon's action key$/;"	m	class:Weapon	access:private
+Weapon::setKey	include/weapon.h	/^		void setKey(W_KEY key) { s_key = key; }$/;"	f	class:Weapon	access:public	signature:(W_KEY key)
+Weapon::~Weapon	include/weapon.h	/^		~Weapon();$/;"	p	class:Weapon	access:public	signature:()
+Weapon::~Weapon	source/weapon.cpp	/^Weapon::~Weapon() {$/;"	f	class:Weapon	signature:()
+__anon1::info	include/map.h	/^	u16* info;$/;"	m	struct:__anon1	access:public
+__anon1::palette	include/map.h	/^	const u16* palette;$/;"	m	struct:__anon1	access:public
+__anon1::tiles	include/map.h	/^	const u32* tiles;$/;"	m	struct:__anon1	access:public
+acornTiles	source/gfx.s	/^acornTiles:$/;"	l
+acornTilesLen	include/gfx.h	174;"	d
+addAnimation	include/sprites.h	/^		void addAnimation(int size, int* tabAnim, int delay);$/;"	p	class:Sprite	access:public	signature:(int size, int* tabAnim, int delay)
+addAnimation	source/sprites.cpp	/^void Sprite::addAnimation(int size, int* tabAnim, int delay) {$/;"	f	class:Sprite	signature:(int size, int* tabAnim, int delay)
+animationAtEnd	include/sprites.h	/^		bool animationAtEnd(int anim);$/;"	p	class:Sprite	access:public	signature:(int anim)
+animationAtEnd	source/sprites.cpp	/^bool Sprite::animationAtEnd(int anim) {$/;"	f	class:Sprite	signature:(int anim)
+animations	source/player.cpp	/^int animations[12][4] = {$/;"	v
+bg	include/map.h	/^		u8 bg() const { return s_bg; }$/;"	f	class:Map	access:public	signature:() const
+bin2o	Makefile	/^define bin2o$/;"	m
+bombTiles	source/gfx.s	/^bombTiles:$/;"	l
+bombTilesLen	include/gfx.h	415;"	d
+boomrangL1Tiles	source/gfx.s	/^boomrangL1Tiles:$/;"	l
+boomrangL1TilesLen	include/gfx.h	440;"	d
+boomrangL2Tiles	source/gfx.s	/^boomrangL2Tiles:$/;"	l
+boomrangL2TilesLen	include/gfx.h	465;"	d
+bowTiles	source/gfx.s	/^bowTiles:$/;"	l
+bowTilesLen	include/gfx.h	490;"	d
+caneL1Tiles	source/gfx.s	/^caneL1Tiles:$/;"	l
+caneL1TilesLen	include/gfx.h	515;"	d
+caneL2Tiles	source/gfx.s	/^caneL2Tiles:$/;"	l
+caneL2TilesLen	include/gfx.h	540;"	d
+catapultTiles	source/gfx.s	/^catapultTiles:$/;"	l
+catapultTilesLen	include/gfx.h	565;"	d
+changeMapTiles	source/mapManager.cpp	/^u16 changeMapTiles[3] = {$/;"	v
+clear	include/sprites.h	/^		void clear();$/;"	p	class:Sprite	access:public	signature:()
+clear	source/sprites.cpp	/^void Sprite::clear() {$/;"	f	class:Sprite	signature:()
+currentMap	include/game.h	/^		static Map* currentMap;$/;"	m	class:Game	access:public
+currentMap	source/game.cpp	/^Map* Game::currentMap;$/;"	m	class:Game	file:
+delay	include/sprites.h	/^		int delay() const { return s_delay; }$/;"	f	class:Sprite_Animation	access:public	signature:() const
+direction	include/player.h	/^		PlayerDirection direction() const { return s_direction; }$/;"	f	class:Player	access:public	signature:() const
+dongeonkeyTiles	source/gfx.s	/^dongeonkeyTiles:$/;"	l
+dongeonkeyTilesLen	include/gfx.h	49;"	d
+draw	include/map.h	/^		void draw();$/;"	p	class:Map	access:public	signature:()
+draw	include/player.h	/^		void draw();$/;"	p	class:Player	access:public	signature:()
+draw	include/sprites.h	/^		void draw(s16 x, s16 y, u8 palette = 0);$/;"	p	class:Sprite	access:public	signature:(s16 x, s16 y, u8 palette = 0)
+draw	source/map.cpp	/^void Map::draw() {$/;"	f	class:Map	signature:()
+draw	source/player.cpp	/^void Player::draw() {$/;"	f	class:Player	signature:()
+draw	source/sprites.cpp	/^void Sprite::draw(s16 x, s16 y, u8 palette) {$/;"	f	class:Sprite	signature:(s16 x, s16 y, u8 palette)
+drawFrame	include/sprites.h	/^		void drawFrame(s16 x, s16 y, int frame, u8 palette = 0);$/;"	p	class:Sprite	access:public	signature:(s16 x, s16 y, int frame, u8 palette = 0)
+drawFrame	source/sprites.cpp	/^void Sprite::drawFrame(s16 x, s16 y, int frame, u8 palette) {$/;"	f	class:Sprite	signature:(s16 x, s16 y, int frame, u8 palette)
+drawIcon	include/weapon.h	/^		void drawIcon();$/;"	p	class:Weapon	access:public	signature:()
+drawIcon	source/weapon.cpp	/^void Weapon::drawIcon() {$/;"	f	class:Weapon	signature:()
+featherL1Tiles	source/gfx.s	/^featherL1Tiles:$/;"	l
+featherL1TilesLen	include/gfx.h	590;"	d
+fileSelectBitmap	source/gfx.s	/^fileSelectBitmap:$/;"	l
+fileSelectBitmapLen	include/gfx.h	199;"	d
+fluteTiles	source/gfx.s	/^fluteTiles:$/;"	l
+fluteTilesLen	include/gfx.h	615;"	d
+geshaTiles	source/gfx.s	/^geshaTiles:$/;"	l
+geshaTilesLen	include/gfx.h	74;"	d
+getTile	include/map.h	/^		u16 getTile(s16 tileX, s16 tileY); \/\/ Get a tile with coordinates$/;"	p	class:Map	access:public	signature:(s16 tileX, s16 tileY)
+getTile	source/map.cpp	/^u16 Map::getTile(s16 tileX, s16 tileY) {$/;"	f	class:Map	signature:(s16 tileX, s16 tileY)
+gfxPal	source/gfx.s	/^gfxPal:$/;"	l
+gfxPalLen	include/gfx.h	915;"	d
+grapnelTiles	source/gfx.s	/^grapnelTiles:$/;"	l
+grapnelTilesLen	include/gfx.h	640;"	d
+height	include/map.h	/^		u16 height() const { return s_height; }$/;"	f	class:Map	access:public	signature:() const
+icons	Makefile	/^icons := $(wildcard *.bmp)$/;"	m
+id	include/map.h	/^		int id() const { return s_id; }$/;"	f	class:Map	access:public	signature:() const
+id	include/sprites.h	/^		int id() const { return s_id; } \/\/ Get sprite ID$/;"	f	class:Sprite	access:public	signature:() const
+inTable	source/player.cpp	/^bool inTable(u16 t[], u16 n) {$/;"	f	signature:(u16 t[], u16 n)
+inTiles	source/player.cpp	/^bool inTiles(s16 caseX, s16 caseY, u16 t[]) {$/;"	f	signature:(s16 caseX, s16 caseY, u16 t[])
+indoorInfo	source/mapManager.cpp	/^u16 indoorInfo[256] = {$/;"	v
+indoorPal	source/gfx.s	/^indoorPal:$/;"	l
+indoorPalLen	include/gfx.h	361;"	d
+indoorTiles	source/gfx.s	/^indoorTiles:$/;"	l
+indoorTilesLen	include/gfx.h	358;"	d
+info	include/map.h	/^	u16* info;$/;"	m	struct:__anon1	access:public
+init	include/game.h	/^		void init();$/;"	p	class:Game	access:public	signature:()
+init	include/map.h	/^		void init();$/;"	p	class:Map	access:public	signature:()
+init	source/game.cpp	/^void Game::init() {$/;"	f	class:Game	signature:()
+init	source/map.cpp	/^void Map::init() {$/;"	f	class:Map	signature:()
+initMaps	include/mapManager.h	/^Map** initMaps(u8 mapBg);$/;"	p	signature:(u8 mapBg)
+initMaps	source/mapManager.cpp	/^Map** initMaps(u8 mapBg) {$/;"	f	signature:(u8 mapBg)
+initTilesets	include/mapManager.h	/^Tileset* initTilesets();$/;"	p	signature:()
+initTilesets	source/mapManager.cpp	/^Tileset* initTilesets() {$/;"	f	signature:()
+initTimers	include/timer.h	/^		static void initTimers();$/;"	p	class:Timer	access:public	signature:()
+initTimers	source/timer.cpp	/^void Timer::initTimers() {$/;"	f	class:Timer	signature:()
+isPlaying	include/sprites.h	/^		bool isPlaying() const { return s_isPlaying; }$/;"	f	class:Sprite_Animation	access:public	signature:() const
+isPlaying	include/sprites.h	/^		void isPlaying(bool isPlaying) { s_isPlaying = isPlaying; }$/;"	f	class:Sprite_Animation	access:public	signature:(bool isPlaying)
+link	include/game.h	/^		static Player* link;$/;"	m	class:Game	access:public
+link	source/game.cpp	/^Player* Game::link;$/;"	m	class:Game	file:
+linkPal	source/gfx.s	/^linkPal:$/;"	l
+linkPalLen	include/gfx.h	24;"	d
+linkTiles	source/gfx.s	/^linkTiles:$/;"	l
+linkTilesLen	include/gfx.h	21;"	d
+linktsPal	source/gfx.s	/^linktsPal:$/;"	l
+linktsPalLen	include/gfx.h	228;"	d
+linktsTiles	source/gfx.s	/^linktsTiles:$/;"	l
+linktsTilesLen	include/gfx.h	225;"	d
+loadAllIcons	include/sprites.h	/^		static void loadAllIcons(u8 screen);$/;"	p	class:Sprite	access:public	signature:(u8 screen)
+loadAllIcons	source/sprites.cpp	/^void Sprite::loadAllIcons(u8 screen) {$/;"	f	class:Sprite	signature:(u8 screen)
+main	source/main.cpp	/^int main(void) {$/;"	f	signature:(void)
+main	tools/reader/source/reader.c	/^int main(int argc, char **argv) {$/;"	f	signature:(int argc, char **argv)
+main	tools/reader/source/reader.c	/^int main(void) {$/;"	f	signature:(void)
+map	include/map.h	/^		u16* map() const { return s_map; }$/;"	f	class:Map	access:public	signature:() const
+mapX	include/map.h	/^		u16 mapX() const { return s_mapX; }$/;"	f	class:Map	access:public	signature:() const
+mapY	include/map.h	/^		u16 mapY() const { return s_mapY; }$/;"	f	class:Map	access:public	signature:() const
+maps	include/game.h	/^		static Map** maps;$/;"	m	class:Game	access:public
+maps	source/game.cpp	/^Map** Game::maps;$/;"	m	class:Game	file:
+move	include/player.h	/^		void move();$/;"	p	class:Player	access:public	signature:()
+move	source/player.cpp	/^void Player::move() {$/;"	f	class:Player	signature:()
+nbMaps	include/map.h	/^		static int nbMaps;$/;"	m	class:Map	access:public
+nbMaps	source/map.cpp	/^int Map::nbMaps = 0;$/;"	m	class:Map	file:
+nextMap	include/map.h	/^		Map* nextMap() const { return s_nextMap; }$/;"	f	class:Map	access:public	signature:() const
+nonPassableTiles	source/mapManager.cpp	/^u16 nonPassableTiles[12] = {$/;"	v
+numbersTiles	source/gfx.s	/^numbersTiles:$/;"	l
+numbersTilesLen	include/gfx.h	253;"	d
+osTime	include/timer.h	/^		static int osTime;$/;"	m	class:Timer	access:public
+osTime	source/timer.cpp	/^int Timer::osTime;$/;"	m	class:Timer	file:
+outfilepath	tools/reader/source/reader.c	/^char* outfilepath;$/;"	v
+palette	include/map.h	/^	const u16* palette;$/;"	m	struct:__anon1	access:public
+passable	source/player.cpp	/^bool passable(s16 caseX, s16 caseY) {$/;"	f	signature:(s16 caseX, s16 caseY)
+plainInfo	source/mapManager.cpp	/^u16 plainInfo[256] = {$/;"	v
+plainPal	source/gfx.s	/^plainPal:$/;"	l
+plainPalLen	include/gfx.h	390;"	d
+plainTiles	source/gfx.s	/^plainTiles:$/;"	l
+plainTilesLen	include/gfx.h	387;"	d
+playAnimation	include/sprites.h	/^		void playAnimation(s16 x, s16 y, int anim, u8 palette = 0);$/;"	p	class:Sprite	access:public	signature:(s16 x, s16 y, int anim, u8 palette = 0)
+playAnimation	include/weapon.h	/^		void playAnimation();$/;"	p	class:Weapon	access:public	signature:()
+playAnimation	source/sprites.cpp	/^void Sprite::playAnimation(s16 x, s16 y, int anim, u8 palette) {$/;"	f	class:Sprite	signature:(s16 x, s16 y, int anim, u8 palette)
+playAnimation	source/weapon.cpp	/^void Weapon::playAnimation() {$/;"	f	class:Weapon	signature:()
+pressStartPal	source/gfx.s	/^pressStartPal:$/;"	l
+pressStartPalLen	include/gfx.h	282;"	d
+pressStartScreen	include/game.h	/^		void pressStartScreen();$/;"	p	class:Game	access:public	signature:()
+pressStartScreen	source/game.cpp	/^void Game::pressStartScreen() {$/;"	f	class:Game	signature:()
+pressStartTiles	source/gfx.s	/^pressStartTiles:$/;"	l
+pressStartTilesLen	include/gfx.h	279;"	d
+processNode	tools/reader/source/reader.c	/^processNode(xmlTextReaderPtr reader) {$/;"	f	file:	signature:(xmlTextReaderPtr reader)
+putTile	include/map.h	/^		void putTile(s16 x, s16 y, const Map* map, s16 mapX, s16 mapY);$/;"	p	class:Map	access:private	signature:(s16 x, s16 y, const Map* map, s16 mapX, s16 mapY)
+putTile	source/map.cpp	/^void Map::putTile(s16 x, s16 y, const Map* map, s16 mapX, s16 mapY) {$/;"	f	class:Map	signature:(s16 x, s16 y, const Map* map, s16 mapX, s16 mapY)
+reset	include/timer.h	/^		void reset();$/;"	p	class:Timer	access:public	signature:()
+reset	source/timer.cpp	/^void Timer::reset() {$/;"	f	class:Timer	signature:()
+resetAnimation	include/sprites.h	/^		void resetAnimation(int anim);$/;"	p	class:Sprite	access:public	signature:(int anim)
+resetAnimation	source/sprites.cpp	/^void Sprite::resetAnimation(int anim) {$/;"	f	class:Sprite	signature:(int anim)
+ringTiles	source/gfx.s	/^ringTiles:$/;"	l
+ringTilesLen	include/gfx.h	99;"	d
+s_animation	include/weapon.h	/^		Sprite* s_animation; \/\/ Weapons's animation$/;"	m	class:Weapon	access:private
+s_animations	include/sprites.h	/^		vector<Sprite_Animation*> s_animations;$/;"	m	class:Sprite	access:protected
+s_baseTile	include/sprites.h	/^		u8 s_baseTile; \/\/ Sprite base tile$/;"	m	class:Sprite	access:protected
+s_bg	include/game.h	/^		u8 s_bg; \/\/ BG id$/;"	m	class:Game	access:private
+s_bg	include/map.h	/^		u8 s_bg;$/;"	m	class:Map	access:private
+s_bgSub	include/game.h	/^		u8 s_bgSub; \/\/ Sub BG id$/;"	m	class:Game	access:private
+s_color	include/sprites.h	/^		s5_colors s_color; \/\/ Sprite color format$/;"	m	class:Sprite	access:protected
+s_delay	include/sprites.h	/^		int s_delay;$/;"	m	class:Sprite_Animation	access:private
+s_direction	include/player.h	/^		PlayerDirection s_direction;$/;"	m	class:Player	access:private
+s_filename	include/map.h	/^		char* s_filename;$/;"	m	class:Map	access:private
+s_height	include/map.h	/^		u16 s_height;$/;"	m	class:Map	access:private
+s_icon	include/weapon.h	/^		Sprite* s_icon; \/\/ Weapon's icon$/;"	m	class:Weapon	access:private
+s_id	include/map.h	/^		int s_id;$/;"	m	class:Map	access:private
+s_id	include/sprites.h	/^		int s_id; \/\/ Sprite index$/;"	m	class:Sprite	access:protected
+s_isPlaying	include/sprites.h	/^		bool s_isPlaying;$/;"	m	class:Sprite_Animation	access:private
+s_isStarted	include/timer.h	/^		bool s_isStarted;$/;"	m	class:Timer	access:private
+s_key	include/weapon.h	/^		W_KEY s_key; \/\/ Weapon's action key$/;"	m	class:Weapon	access:private
+s_lifes	include/player.h	/^		int s_lifes;$/;"	m	class:Player	access:private
+s_map	include/map.h	/^		u16* s_map;$/;"	m	class:Map	access:private
+s_mapBg	include/game.h	/^		u8 s_mapBg; \/\/ Map BG id$/;"	m	class:Game	access:private
+s_mapX	include/map.h	/^		u16 s_mapX;$/;"	m	class:Map	access:private
+s_mapY	include/map.h	/^		u16 s_mapY;$/;"	m	class:Map	access:private
+s_nextMap	include/map.h	/^		Map* s_nextMap;$/;"	m	class:Map	access:private
+s_screen	include/sprites.h	/^		u8 s_screen; \/\/ Screen on those the sprite is printing$/;"	m	class:Sprite	access:protected
+s_size	include/sprites.h	/^		int s_size;$/;"	m	class:Sprite_Animation	access:private
+s_size	include/sprites.h	/^		s5_dimension s_size; \/\/ Sprite size$/;"	m	class:Sprite	access:protected
+s_t	include/timer.h	/^		int s_t;$/;"	m	class:Timer	access:private
+s_tabAnim	include/sprites.h	/^		int* s_tabAnim;$/;"	m	class:Sprite_Animation	access:private
+s_tick	include/timer.h	/^		int s_tick;$/;"	m	class:Timer	access:private
+s_tileHeight	include/map.h	/^		u16 s_tileHeight;$/;"	m	class:Map	access:private
+s_tileSize	include/sprites.h	/^		int s_tileSize;$/;"	m	class:Sprite	access:protected
+s_tileWidth	include/map.h	/^		u16 s_tileWidth;$/;"	m	class:Map	access:private
+s_tileset	include/map.h	/^		Tileset* s_tileset;$/;"	m	class:Map	access:private
+s_tmr	include/sprites.h	/^		Timer* s_tmr;$/;"	m	class:Sprite_Animation	access:private
+s_vx	include/player.h	/^		s8 s_vx;$/;"	m	class:Player	access:private
+s_vy	include/player.h	/^		s8 s_vy;$/;"	m	class:Player	access:private
+s_width	include/map.h	/^		u16 s_width;$/;"	m	class:Map	access:private
+s_x	include/player.h	/^		s16 s_x;$/;"	m	class:Player	access:private
+s_x	include/sprites.h	/^		s16 s_x;$/;"	m	class:Sprite	access:protected
+s_y	include/player.h	/^		s16 s_y;$/;"	m	class:Player	access:private
+s_y	include/sprites.h	/^		s16 s_y;$/;"	m	class:Sprite	access:protected
+screenPos	include/map.h	/^		u16 screenPos(s16 x, s16 y) const;$/;"	p	class:Map	access:public	signature:(s16 x, s16 y) const
+screenPos	source/map.cpp	/^u16 Map::screenPos(s16 x, s16 y) const {$/;"	f	class:Map	signature:(s16 x, s16 y) const
+scroll	include/map.h	/^		void scroll(s16 xx, s16 yy);$/;"	p	class:Map	access:public	signature:(s16 xx, s16 yy)
+scroll	source/map.cpp	/^void Map::scroll(s16 xx, s16 yy) {$/;"	f	class:Map	signature:(s16 xx, s16 yy)
+scrollX	include/map.h	/^		static s16 scrollX;$/;"	m	class:Map	access:public
+scrollX	source/map.cpp	/^s16 Map::scrollX = 0;$/;"	m	class:Map	file:
+scrollY	include/map.h	/^		static s16 scrollY;$/;"	m	class:Map	access:public
+scrollY	source/map.cpp	/^s16 Map::scrollY = 0;$/;"	m	class:Map	file:
+seedbagTiles	source/gfx.s	/^seedbagTiles:$/;"	l
+seedbagTilesLen	include/gfx.h	665;"	d
+seedsTiles	source/gfx.s	/^seedsTiles:$/;"	l
+seedsTilesLen	include/gfx.h	124;"	d
+setKey	include/weapon.h	/^		void setKey(W_KEY key) { s_key = key; }$/;"	f	class:Weapon	access:public	signature:(W_KEY key)
+setTile	include/map.h	/^		void setTile(s16 tileX, s16 tileY, u16 tile); \/\/ Set a tile with coordinates$/;"	p	class:Map	access:public	signature:(s16 tileX, s16 tileY, u16 tile)
+setTile	source/map.cpp	/^void Map::setTile(s16 tileX, s16 tileY, u16 tile) {$/;"	f	class:Map	signature:(s16 tileX, s16 tileY, u16 tile)
+shieldL1Tiles	source/gfx.s	/^shieldL1Tiles:$/;"	l
+shieldL1TilesLen	include/gfx.h	690;"	d
+shieldL2Tiles	source/gfx.s	/^shieldL2Tiles:$/;"	l
+shieldL2TilesLen	include/gfx.h	715;"	d
+shieldL3Tiles	source/gfx.s	/^shieldL3Tiles:$/;"	l
+shieldL3TilesLen	include/gfx.h	740;"	d
+shovelTiles	source/gfx.s	/^shovelTiles:$/;"	l
+shovelTilesLen	include/gfx.h	765;"	d
+size	include/sprites.h	/^		int size() const { return s_size; }$/;"	f	class:Sprite_Animation	access:public	signature:() const
+start	include/timer.h	/^		void start();$/;"	p	class:Timer	access:public	signature:()
+start	source/timer.cpp	/^void Timer::start() {$/;"	f	class:Timer	signature:()
+startAnimation	include/sprites.h	/^		void startAnimation(int anim);$/;"	p	class:Sprite	access:public	signature:(int anim)
+startAnimation	source/sprites.cpp	/^void Sprite::startAnimation(int anim) {$/;"	f	class:Sprite	signature:(int anim)
+statsBitmap	source/gfx.s	/^statsBitmap:$/;"	l
+statsBitmapLen	include/gfx.h	307;"	d
+stop	include/timer.h	/^		void stop();$/;"	p	class:Timer	access:public	signature:()
+stop	source/timer.cpp	/^void Timer::stop() {$/;"	f	class:Timer	signature:()
+stopAnimation	include/sprites.h	/^		void stopAnimation(int anim);$/;"	p	class:Sprite	access:public	signature:(int anim)
+stopAnimation	source/sprites.cpp	/^void Sprite::stopAnimation(int anim) {$/;"	f	class:Sprite	signature:(int anim)
+streamFile	tools/reader/source/reader.c	/^streamFile(const char *filename) {$/;"	f	file:	signature:(const char *filename)
+strenghL1Tiles	source/gfx.s	/^strenghL1Tiles:$/;"	l
+strenghL1TilesLen	include/gfx.h	790;"	d
+strenghL2Tiles	source/gfx.s	/^strenghL2Tiles:$/;"	l
+strenghL2TilesLen	include/gfx.h	815;"	d
+swordAnimations	source/game.cpp	/^int swordAnimations[4] = {0, 1, 2, 3};$/;"	v
+swordL1Tiles	source/gfx.s	/^swordL1Tiles:$/;"	l
+swordL1TilesLen	include/gfx.h	840;"	d
+swordL2Tiles	source/gfx.s	/^swordL2Tiles:$/;"	l
+swordL2TilesLen	include/gfx.h	865;"	d
+swordL3Tiles	source/gfx.s	/^swordL3Tiles:$/;"	l
+swordL3TilesLen	include/gfx.h	890;"	d
+tabAnim	include/sprites.h	/^		int* tabAnim() const { return s_tabAnim; }$/;"	f	class:Sprite_Animation	access:public	signature:() const
+testCollisions	include/player.h	/^		void testCollisions();$/;"	p	class:Player	access:public	signature:()
+testCollisions	source/player.cpp	/^void Player::testCollisions() {$/;"	f	class:Player	signature:()
+tiles	include/map.h	/^	const u32* tiles;$/;"	m	struct:__anon1	access:public
+tileset	include/map.h	/^		Tileset* tileset() const { return s_tileset; }$/;"	f	class:Map	access:public	signature:() const
+tilesets	include/game.h	/^		static Tileset* tilesets;$/;"	m	class:Game	access:public
+tilesets	source/game.cpp	/^Tileset* Game::tilesets;$/;"	m	class:Game	file:
+time	include/timer.h	/^		int time() { return (s_isStarted) ? osTime - s_t : s_tick; }$/;"	f	class:Timer	access:public	signature:()
+titleScreen	include/game.h	/^		void titleScreen();$/;"	p	class:Game	access:public	signature:()
+titleScreen	source/game.cpp	/^void Game::titleScreen() {$/;"	f	class:Game	signature:()
+titleScreenBitmap	source/gfx.s	/^titleScreenBitmap:$/;"	l
+titleScreenBitmapLen	include/gfx.h	332;"	d
+tmr	include/sprites.h	/^		Timer* tmr() const { return s_tmr; }$/;"	f	class:Sprite_Animation	access:public	signature:() const
+weapon_levelTiles	source/gfx.s	/^weapon_levelTiles:$/;"	l
+weapon_levelTilesLen	include/gfx.h	149;"	d
+width	include/map.h	/^		u16 width() const { return s_width; }$/;"	f	class:Map	access:public	signature:() const
+x	include/player.h	/^		s16 x() const { return s_x; }$/;"	f	class:Player	access:public	signature:() const
+y	include/player.h	/^		s16 y() const { return s_y; }$/;"	f	class:Player	access:public	signature:() const
+~Game	include/game.h	/^		~Game();$/;"	p	class:Game	access:public	signature:()
+~Game	source/game.cpp	/^Game::~Game() {$/;"	f	class:Game	signature:()
+~Map	include/map.h	/^		~Map();$/;"	p	class:Map	access:public	signature:()
+~Map	source/map.cpp	/^Map::~Map() {$/;"	f	class:Map	signature:()
+~Player	include/player.h	/^		~Player();$/;"	p	class:Player	access:public	signature:()
+~Player	source/player.cpp	/^Player::~Player() {$/;"	f	class:Player	signature:()
+~Sprite	include/sprites.h	/^		~Sprite();$/;"	p	class:Sprite	access:public	signature:()
+~Sprite	source/sprites.cpp	/^Sprite::~Sprite() {$/;"	f	class:Sprite	signature:()
+~Sprite_Animation	include/sprites.h	/^		~Sprite_Animation();$/;"	p	class:Sprite_Animation	access:public	signature:()
+~Sprite_Animation	source/sprites.cpp	/^Sprite_Animation::~Sprite_Animation() {$/;"	f	class:Sprite_Animation	signature:()
+~Timer	include/timer.h	/^		~Timer();$/;"	p	class:Timer	access:public	signature:()
+~Timer	source/timer.cpp	/^Timer::~Timer() {$/;"	f	class:Timer	signature:()
+~Weapon	include/weapon.h	/^		~Weapon();$/;"	p	class:Weapon	access:public	signature:()
+~Weapon	source/weapon.cpp	/^Weapon::~Weapon() {$/;"	f	class:Weapon	signature:()

@@ -95,13 +95,12 @@ void Map::scroll(s16 xx, s16 yy) {
 		s_nextMap = Game::maps[s_mapX + 1 + s_mapY * WM_SIZE]; // Next map to scroll on
 		
 		for(int i = 0 ; (i < xx) && (scrollX < s_width * WM_SIZE * 16 - 256) ; i++) {
-
 			if(!(scrollX & 15)) {
 				for(int j = scrollY / 16 ; j < scrollY / 16 + 12 ; j++) {
 					putTile(scrollX / 16 + 16, j, s_nextMap, scrollX / 16, j);
 				}
 			}
-			scrollX++; // Scroll the map*
+			scrollX++; // Scroll the map
 		}
 		
 		REG_BG0HOFS_SUB = scrollX & 1023; // Scroll the BG
@@ -110,7 +109,6 @@ void Map::scroll(s16 xx, s16 yy) {
 		s_nextMap = Game::maps[s_mapX - 1 + s_mapY * WM_SIZE]; // Next map to scroll on
 		
 		for(int i = 0 ; (i < -xx) && (scrollX > 0) ; i++) {
-
 			if(!(scrollX & 15)) {
 				for(int j = scrollY / 16 ; j < scrollY / 16 + 12 ; j++) {
 					putTile(scrollX / 16 - 1, j, s_nextMap, scrollX / 16 - 1, j);
@@ -126,7 +124,6 @@ void Map::scroll(s16 xx, s16 yy) {
 		s_nextMap = Game::maps[s_mapX + (s_mapY + 1) * WM_SIZE]; // Next map to scroll on
 		
 		for(int i = 0 ; (i < yy) && (scrollY < s_height * WM_SIZE * 16 - 192) ; i++) {
-
 			if(!(scrollY & 15)) {
 				for(int j = scrollX / 16 ; j < scrollX / 16 + 16 ; j++) {
 					putTile(j, scrollY / 16 + 12, s_nextMap, j, scrollY / 16);
@@ -141,7 +138,6 @@ void Map::scroll(s16 xx, s16 yy) {
 		s_nextMap = Game::maps[s_mapX + (s_mapY - 1) * WM_SIZE]; // Next map to scroll on
 		
 		for(int i = 0 ; (i < -yy) && (scrollY > 0) ; i++) {
-
 			if(!(scrollY & 15)) {
 				for(int j = scrollX / 16 ; j < scrollX / 16 + 16 ; j++) {
 					putTile(j, scrollY / 16 - 1, s_nextMap, j, scrollY / 16 - 1);
@@ -151,6 +147,24 @@ void Map::scroll(s16 xx, s16 yy) {
 		}
 		
 		REG_BG0VOFS_SUB = scrollY & 1023; // Scroll the BG
+	}
+}
+
+void Map::indoorTransInit() {
+	BG_PALETTE_SUB[255] = ARGB16(1, 0x1F, 0x1E, 0x19);
+	
+	dmaFillWords(0xFFFFFFFF, bgGetGfxPtr(Game::transBg) + 32, 64);
+	dmaFillWords(0x00010001, bgGetMapPtr(Game::transBg), 32 * 24 * 2);
+}
+
+void Map::indoorTrans() {
+	u16* map = bgGetMapPtr(Game::transBg);
+	for(u16 x = 0 ; x < 16 ; x++) {
+		swiWaitForVBlank();
+		for(u16 y = 0 ; y < 24 ; y++) {
+			map[(15 - x) + (y << 5)] = 0;
+			map[(16 + x) + (y << 5)] = 0;
+		}
 	}
 }
 

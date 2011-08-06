@@ -138,7 +138,6 @@ clean:
 
 #---------------------------------------------------------------------------------
 run:
-	@#./tools/desmume-cli $(TARGET).nds
 	@wine "/home/quentin/devkitPro/nocashgba/NOcGBAF.EXE" $(TARGET).nds
 
 #---------------------------------------------------------------------------------
@@ -165,6 +164,9 @@ maps:
 all:
 	@make clean --no-print-directory
 	@make gfx --no-print-directory
+	@cd $(CURDIR)/tools/reader
+	@make
+	@cd ../../
 	@make maps --no-print-directory
 	@make
 

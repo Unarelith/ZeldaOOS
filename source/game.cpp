@@ -23,6 +23,7 @@ Map* Game::currentMap;
 Player* Game::link;
 Map** Game::maps;
 Tileset* Game::tilesets;
+u8 Game::transBg;
 
 Game::Game() {
 	// Set up default exception handler
@@ -43,11 +44,18 @@ Game::Game() {
 	
 	// Initialize backgrounds
 	s_bg = bgInit(3, BgType_Bmp16, BgSize_B16_256x256, 2, 0);
-	s_bgSub = bgInitSub(3, BgType_Bmp16, BgSize_B16_256x256, 2, 0);
+	s_bgSub = bgInitSub(3, BgType_Bmp16, BgSize_B16_256x256, 6, 0);
+	transBg = bgInitSub(1, BgType_Text8bpp, BgSize_T_256x256, 4, 5);
+	bgSetPriority(transBg, 0);
 	s_mapBg = bgInitSub(0, BgType_Text8bpp, BgSize_T_512x512, 0, 1);
+	bgSetPriority(s_mapBg, 1);
 	
 	enableSprites(SCREEN_UP, 0);
 	enableSprites(SCREEN_DOWN, 0);
+	
+	for(int i = 0 ; i < 128 ; i++) {
+		setSpritePriority(SCREEN_DOWN, i, 1);
+	}
 	
 	printf("NitroFS loading...\n");
 	
@@ -171,6 +179,87 @@ void Game::titleScreen() {
 	init();
 }
 
+void Game::scroll() {
+	// Scroll right
+	if(link->x() > 256 - 16 + 2) {
+		link->vx(0);
+		link->vy(0);
+		
+		for(int i = 0 ; i < 32 ; i++) {
+			if ((i & 1) || (!(i & 15))) link->x(link->x() - 8); else link->x(link->x() - 7);
+			
+			currentMap->scroll(8, 0);
+			link->draw();
+			swiWaitForVBlank();
+		}
+		
+		currentMap = currentMap->nextMap();
+	}
+	
+	// Scroll left
+	if(link->x() < 0 - 2) {
+		link->vx(0);
+		link->vy(0);
+		
+		for(int i = 0 ; i < 32 ; i++) {
+			if ((i & 1) || (!(i & 15))) link->x(link->x() + 8); else link->x(link->x() + 7);
+			
+			currentMap->scroll(-8, 0);
+			link->draw();
+			swiWaitForVBlank();
+		}
+		
+		currentMap = currentMap->nextMap();
+	}
+	
+	// Scroll down
+	if(link->y() > 192 - 16 + 1) {
+		link->vx(0);
+		link->vy(0);
+		
+		for(int i = 0 ; i < 24 ; i++) {
+			if ((i & 1) && ((i & 7) < 7)) link->y(link->y() - 8); else link->y(link->y() - 7);
+			
+			currentMap->scroll(0, 8);
+			link->draw();
+			swiWaitForVBlank();
+		}
+		
+		currentMap = currentMap->nextMap();
+	}
+	
+	// Scroll up
+	if(link->y() < 0 - 2) {
+		link->vx(0);
+		link->vy(0);
+		
+		for(int i = 0 ; i < 24 ; i++) {
+			if ((i & 1) && ((i & 7) < 7)) link->y(link->y() + 8); else link->y(link->y() + 7);
+			
+			currentMap->scroll(0, -8);
+			link->draw();
+			swiWaitForVBlank();
+		}
+		
+		currentMap = currentMap->nextMap();
+	}
+}
+
+void Game::indoorChange() {
+	if ((link->vy() < 0) && ((Player::inTiles((link->x() + 5) >> 4, (link->y() + 5) >> 4, changeMapTiles)) || (Player::inTiles((link->x() + 10) >> 4, (link->y() + 5) >> 4, changeMapTiles)))) {
+		link->vx(0);
+		link->vy(0);
+		printf("truc");
+		currentMap->indoorTransInit();
+		currentMap = maps[9];
+		link->x(120);
+		link->y(176);
+		link->draw();
+		currentMap->init();
+		currentMap->indoorTrans();
+	}
+}
+
 int swordAnimations[4] = {0, 1, 2, 3};
 
 void Game::init() {
@@ -201,6 +290,9 @@ void Game::init() {
 		// Draw sprite
 		link->draw();
 		
+		// Test the scrolling
+		scroll();
+			
 		// Draw sword icon
 		sword.drawIcon();
 		

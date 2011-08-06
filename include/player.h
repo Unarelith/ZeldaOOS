@@ -42,7 +42,18 @@ class Player : public Sprite {
 		// Get functions
 		PlayerDirection direction() const { return s_direction; }
 		s16 x() const { return s_x; }
+		void x(s16 xx) { s_x = xx; }
 		s16 y() const { return s_y; }
+		void y(s16 yy) { s_y = yy; }
+		s8 vx() const { return s_vx; }
+		void vx(s8 vxx) { s_vx = vxx; }
+		s8 vy() const { return s_vy; }
+		void vy(s8 vyy) { s_vy = vyy; }
+		
+		// Static functions
+		static bool inTable(u16 t[], u16 n);
+		static bool passable(s16 caseX, s16 caseY);
+		static bool inTiles(s16 caseX, s16 caseY, u16 t[]);
 		
 	private:
 		// Player lifes

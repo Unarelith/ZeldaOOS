@@ -50,7 +50,7 @@ u16 nonPassableTiles[12] = {
 };
 
 u16 changeMapTiles[3] = {
-	11,14,15
+	11,15
 };
 
 u16 plainInfo[256] = {
@@ -86,7 +86,7 @@ u16 indoorInfo[256] = {
 	1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,
 	0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
 	0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
-	0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
+	1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,
 	0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
 	8,9,10,7,0,0,1,12,15,15,15,15,0,0,0,0
 };
@@ -104,7 +104,7 @@ Tileset* initTilesets() {
 
 Map** initMaps(u8 mapBg) {
 	Tileset* tilesets = initTilesets();
-
+	
 	Map* a1 = new Map(&tilesets[0], "/maps/a1.map", 16, 12, 16, 16, mapBg);
 	Map* a2 = new Map(&tilesets[0], "/maps/a2.map", 16, 12, 16, 16, mapBg);
 	Map* a3 = new Map(&tilesets[0], "/maps/a3.map", 16, 12, 16, 16, mapBg);
@@ -114,9 +114,9 @@ Map** initMaps(u8 mapBg) {
 	Map* c1 = new Map(&tilesets[0], "/maps/c1.map", 16, 12, 16, 16, mapBg);
 	Map* c2 = new Map(&tilesets[0], "/maps/c2.map", 16, 12, 16, 16, mapBg);
 	Map* c3 = new Map(&tilesets[0], "/maps/c3.map", 16, 12, 16, 16, mapBg);
-	Map* ee1 = new Map(&tilesets[1], "/maps/1.map", 16, 16, 16, 16, mapBg);
-
-	Map** maps = new Map*[WM_SIZE * WM_SIZE];
+	Map* ee1 = new Map(&tilesets[1], "/maps/1.map", 16, 12, 16, 16, mapBg);
+	
+	Map** maps = new Map*[WM_SIZE * WM_SIZE + 1];
 	maps[0] = a1;
 	maps[1] = a2;
 	maps[2] = a3;
@@ -127,6 +127,6 @@ Map** initMaps(u8 mapBg) {
 	maps[7] = c2;
 	maps[8] = c3;
 	maps[WM_SIZE * WM_SIZE + 0] = ee1;
-
+	
 	return maps;
 }
