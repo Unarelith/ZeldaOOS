@@ -1,0 +1,71 @@
+Eleandra=/home/quentin/devkitPro/projects/Eleandra CD=. filter="*.c *.cpp *.h *.s *.tmx Makefile TODO graphics maps *.cdat *.*grit" {
+ Makefile
+ TODO
+ maps=maps {
+  1.tmx
+  a1.tmx
+  a2.tmx
+  a3.tmx
+  b1.tmx
+  b2.tmx
+  b3.tmx
+  c1.tmx
+  c2.tmx
+  c3.tmx
+  indoor.cdat
+  plain.cdat
+ }
+ graphics=graphics {
+  characters=characters {
+   link.sgrit
+  }
+  icons=icons {
+  }
+  interface=interface {
+   fileSelect.xgrit
+   linkts.sgrit
+   pressStart.sgrit
+   stats.xgrit
+   titleScreen.xgrit
+  }
+  tilesets=tilesets {
+   indoor.sgrit
+   plain.sgrit
+  }
+  weapons=weapons {
+  }
+ }
+ include=include {
+  door.h
+  game.h
+  gfx.h
+  main.h
+  map.h
+  mapManager.h
+  player.h
+  sprites.h
+  timer.h
+  weapon.h
+ }
+ source=source {
+  door.cpp
+  game.cpp
+  main.cpp
+  map.cpp
+  mapManager.cpp
+  player.cpp
+  sprites.cpp
+  timer.cpp
+  weapon.cpp
+  gfx.s
+ }
+ tools=tools {
+  graphics
+  maps
+  reader=reader {
+   reader.c
+   Makefile
+  }
+ }
+}
+

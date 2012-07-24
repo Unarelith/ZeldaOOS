@@ -1,0 +1,7 @@
+build
+*.elf
+*.nds
+*~
+*.img
+*.swp
+
