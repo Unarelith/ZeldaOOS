@@ -1,5 +1,0 @@
- - Maps intérieures :
- + pas plus de deux maps max en mémoire.
- + gérer les tiles où la collision n'est pas entière.
- - Gestion des armes
- - À voir si j'ai le temps: Améliorer le reader.

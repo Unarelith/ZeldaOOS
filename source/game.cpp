@@ -115,10 +115,10 @@ void Game::mainLoop() {
 	currentMap = maps[0];
 	currentMap->init();
 	
-	consoleClear();
-	
 	while(!(keysDown() & KEY_A)) {
 		scanKeys();
+		
+		consoleClear();
 		
 		// Move talek
 		talek->move();
@@ -130,6 +130,7 @@ void Game::mainLoop() {
 		scroll();
 		
 		printf("\x1b[10;13HPress A");
+		printf("\x1b[12;15H%d", currentMap->id());
 		
 		swiWaitForVBlank();
 	}

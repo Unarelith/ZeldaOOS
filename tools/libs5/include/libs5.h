@@ -89,12 +89,12 @@ void setSpriteMosaic(u8 screen, u8 hSize, u8 vSize);
  *           note: 1 256color tile is equivalent to 2 16color tiles.
  *           That means 256color baseTile = 3 corresponds to 16color baseTile = 6
  */
-void loadTiles(u8 screen, u8 baseTile, u8 numberOfTiles, s5_colors format, void* data);
+void loadTiles(u8 screen, u8 baseTile, u8 numberOfTiles, s5_colors format, const void* data);
 /* slot is in range 0..15 */
-void loadPalette(u8 screen, u8 slot, void* palette);
-void loadPalette256(u8 screen, void* palette);
+void loadPalette(u8 screen, u8 slot, const void* palette);
+void loadPalette256(u8 screen, const void* palette);
 /* vramBank: VramBankF or VramBankG for main screen, and VramBankI for sub screen */
-void loadExtPalette(s5_vramBank vramBank, u8 slot, void* palette);
+void loadExtPalette(s5_vramBank vramBank, u8 slot, const void* palette);
 
 
 #ifdef __cplusplus

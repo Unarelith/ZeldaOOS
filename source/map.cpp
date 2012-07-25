@@ -138,7 +138,6 @@ void Map::scroll(s16 xx, s16 yy) {
 		REG_BG0VOFS = scrollY & 1023; // Scroll the BG
 	}
 	else if(yy < 0) { // Scroll up
-		delete m_nextMap;
 		m_nextMap = Game::maps[m_mapX + (m_mapY - 1) * WM_SIZE]; // Next map to scroll on
 		
 		for(int i = 0 ; (i < -yy) && (scrollY > 0) ; i++) {
