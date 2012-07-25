@@ -17,51 +17,28 @@
 	along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
 ---------------------------------------------------------------------------------*/
-#include <nds.h>
-#include "timer.h"
+#ifndef MAPMANAGER_H
+#define MAPMANAGER_H
 
-int Timer::osTime;
+// Number of tilesets
+#define TILESETS 2
 
-Timer::Timer() {
-	s_t = osTime;
-	s_isStarted = false;
-	s_tick = 0;
-}
+// World map size
+#define WM_SIZE 3
 
-Timer::~Timer() {
-	reset();
-	stop();
-}
+// Tiles tables
+extern u16 nonPassableTiles[12];
+extern u16 changeMapTiles[3];
 
-void Timer::stop() {
-	if(s_isStarted) {
-		s_isStarted = false;
-		s_tick = osTime - s_t;
-	}
-}
+typedef struct {
+	u8 tilesetID;
+	char *mapfile;
+	u16 width, height;
+	u16 tileWidth, tileHeight;
+	u8 bg;
+} SubMap;
 
-void Timer::start() {
-	if(!s_isStarted) {
-		s_isStarted = true;
-		s_t = osTime - s_tick;
-	}
-}
+Tileset *initTilesets();
+Map **initMaps(u8 mapBg);
 
-void Timer::reset() {
-	s_t = osTime;
-	s_isStarted = false;
-	s_tick = 0;
-}
-
-void OnTimer(){
-	Timer::osTime++;
-}
-
-void Timer::initTimers() {
-	TIMER1_CR = 0;
-	TIMER1_DATA = TIMER_FREQ_1024(1000);
-	TIMER1_CR = TIMER_ENABLE | TIMER_DIV_1024 | TIMER_IRQ_REQ;
-	irqSet(IRQ_TIMER1, OnTimer);
-	irqEnable(IRQ_TIMER1);
-	osTime = 0;
-}
+#endif // MAPMANAGER_H

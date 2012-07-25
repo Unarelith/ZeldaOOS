@@ -1,6 +1,6 @@
 /*---------------------------------------------------------------------------------
 
-	RPGSystem
+	Eleandra
 	Copyright (C) 2012 Quentin BAZIN quent42340@gmail.com
 	
 	This program is free software: you can redistribute it and/or modify
@@ -22,7 +22,6 @@
 
 class Timer {
 	public:
-		// Construct & Destruct
 		Timer();
 		~Timer();
 		

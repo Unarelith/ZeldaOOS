@@ -8,7 +8,7 @@ endif
 
 include $(DEVKITARM)/ds_rules
 
-# Vu quele nouveau GCC n'accepte plus les constantes externes dans les structures initialisées...
+# Vu que le nouveau GCC n'accepte plus les constantes externes dans les structures initialisées...
 # On va faire notre propre bin2o qui donne directement la taille (constante, non externe)
 define bin2o
 	bin2s $< | $(AS) -o $(@)
@@ -18,9 +18,9 @@ define bin2o
 	echo "extern const u32" `(echo $(<F) | sed -e 's/^\([0-9]\)/_\1/' | tr . _)`_size";" >> `(echo $(<F) | tr . _)`.h
 endef
 
-export GAME_TITLE	:=	The Legend of Zelda
-export GAME_SUBTITLE1	:=	Oracle of Secrets
-export GAME_SUBTITLE2	:=	Pixelda
+export GAME_TITLE	:=	Eleandra
+export GAME_SUBTITLE1	:=	The Four Elements
+export GAME_SUBTITLE2	:=	by Quent42340
 
 #---------------------------------------------------------------------------------
 # TARGET is the name of the output
@@ -34,7 +34,7 @@ TARGET		:=	$(shell basename $(CURDIR))
 BUILD		:=	build
 SOURCES		:=	source
 INCLUDES	:=	include
-GRAPHICS	:=	gfx
+GRAPHICS	:=	graphics graphics/tilesets graphics/characters
 NITRODATA	:= 	nitrofiles
 
 #---------------------------------------------------------------------------------
@@ -42,13 +42,13 @@ NITRODATA	:= 	nitrofiles
 #---------------------------------------------------------------------------------
 ARCH	:=	-mthumb -mthumb-interwork -march=armv5te -mtune=arm946e-s
 
-CFLAGS	:=	-g -Wall -O2\
- 		-fomit-frame-pointer\
+CFLAGS	:=	-g -Wall -O2 \
+ 		-fomit-frame-pointer \
 		-ffast-math \
 		$(ARCH)
 
 CFLAGS	+=	$(INCLUDE) -DARM9
-CXXFLAGS	:= $(CFLAGS) -fno-rtti -fno-exceptions -Wno-write-strings -std=c++0x
+CXXFLAGS	:= $(CFLAGS) -fno-rtti -fno-exceptions -Wno-write-strings
 
 ASFLAGS	:=	-g $(ARCH)
 LDFLAGS	=	-specs=ds_arm9.specs -g $(ARCH) -Wl,-Map,$(notdir $*.map)
@@ -123,7 +123,7 @@ else
 	endif
 endif
 
-.PHONY: $(BUILD) clean run debug gfx maps all
+.PHONY: $(BUILD) clean run debug maps all
 
 #---------------------------------------------------------------------------------
 $(BUILD):
@@ -144,16 +144,6 @@ debug:
 	@wine "/home/quentin/devkitPro/nocashgba/NOcGBA.EXE" $(TARGET).nds
 
 #---------------------------------------------------------------------------------
-gfx:
-	@echo making gfx data...
-	@rm -f source/gfx.s
-	@rm -f include/gfx.h
-	@grit graphics/*/*.png -fts -W1 -gt -gB4 -gTFF00FF -pS -O source/gfx -S gfx -fa -o source/gfx
-	@./tools/graphics
-	@mv -T source/gfx.h include/gfx.h
-	@echo done
-
-#---------------------------------------------------------------------------------
 maps:
 	@echo converting maps...
 	@./tools/maps
@@ -162,7 +152,6 @@ maps:
 #---------------------------------------------------------------------------------
 all:
 	@make clean --no-print-directory
-	@make gfx --no-print-directory
 	@cd $(CURDIR)/tools/reader
 	@make
 	@cd ../../
@@ -216,14 +205,9 @@ $(OUTPUT).elf	:	$(OFILES)
 # add additional rules like this for each image extension
 # you use in the graphics folders
 #---------------------------------------------------------------------------------
-#%.s %.h   : %.png %.grit
+%.s %.h   : %.png %.grit
 #---------------------------------------------------------------------------------
-#	grit $< -fts [ -W1 -gt -gB4 -gTFF00FF -!p ] -o source/gfx/$*
-
-#---------------------------------------------------------------------------------
-#%.s %.h   : %.png
-#---------------------------------------------------------------------------------
-#	grit $< -fts -ff $(<D)/$(notdir $(<D)).grit -o$*
+	grit $< -fts -W2 -gt -gTFF00FF -o$*
 
 -include $(DEPENDS)
 

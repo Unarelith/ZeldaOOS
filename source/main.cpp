@@ -1,6 +1,6 @@
 /*---------------------------------------------------------------------------------
 
-	RPGSystem
+	Eleandra
 	Copyright (C) 2012 Quentin BAZIN quent42340@gmail.com
 	
 	This program is free software: you can redistribute it and/or modify
@@ -17,13 +17,16 @@
 	along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
 ---------------------------------------------------------------------------------*/
-#include "main.h"
+#include "timer.h"
+#include "sprites.h"
+#include "map.h"
+#include "player.h"
+#include "game.h"
 
 int main(void) {
 	// Initialize game
-	Game* game = new Game;
+	Game *game = new Game;
 	
-	while(1);
-	
+	// End of the game
 	delete game;
 }

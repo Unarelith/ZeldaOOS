@@ -1,6 +1,6 @@
 /*---------------------------------------------------------------------------------
 
-	RPGSystem
+	Eleandra
 	Copyright (C) 2012 Quentin BAZIN quent42340@gmail.com
 	
 	This program is free software: you can redistribute it and/or modify
@@ -17,42 +17,33 @@
 	along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
 ---------------------------------------------------------------------------------*/
-#ifndef MAIN_H
-#define MAIN_H
+#ifndef GAME_H
+#define GAME_H
 
 #define SCREEN_UP 0
 #define SCREEN_DOWN 1
 
-#include <nds.h> // Include libnds header
-#include <libs5.h> // s5 lib header
-#include <fat.h> // File system
-#include <filesystem.h> // Filesystem lib
+class Game {
+	public:
+		Game();
+		~Game();
+		
+		void mainLoop();
+		
+		// Scroll between maps
+		static void scroll();
+		
+		// Static variables
+		static Map *currentMap;
+		static Map **maps;
+		static Tileset *tilesets;
+		static u8 transBg; // Indoor maps transition BG id
+		static Player *talek;
+		
+	private:
+		u8 m_bg; // BG id
+		u8 m_bgSub; // Sub BG id
+		u8 m_mapBg; // Map BG id
+};
 
-// Some other headers
-#include <time.h> // Used for initializing random seed
-#include <stdio.h> // Printing text
-#include <malloc.h> // Memory allocation
-#include <math.h> // Math functions
-#include <string.h> // String functions
-#include <vector> // Vector
-#include <sys/stat.h>
-#include <sys/dir.h>
-#include <ctype.h>
-#include <dirent.h>
-
-using namespace std;
-
-#include "gfx.h"
-
-#include "timer.h"
-#include "sprites.h"
-#include "map.h"
-#include "player.h"
-#include "weapon.h"
-#include "mapManager.h"
-#include "door.h"
-#include "game.h"
-
-#define WAIT_FOR_START(text) { printf(text); while(!(keysDown() & KEY_START)) { scanKeys(); swiWaitForVBlank(); } }
-
-#endif // MAIN_H
+#endif // GAME_H
