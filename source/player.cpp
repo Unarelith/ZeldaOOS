@@ -43,8 +43,8 @@ int animations[12][4] = {
 };
 	
 Player::Player() : Sprite(SCREEN_UP, 0, SprSize_16x16, 0) {
-	//loadTiles(SCREEN_UP, 0, 32, SprColors_16, linkTiles);
-	//loadPalette(SCREEN_UP, 0, linkPal);
+	loadTiles(SCREEN_UP, 0, 32, SprColors_16, linkTiles);
+	loadPalette(SCREEN_UP, 0, linkPal);
 	
 	m_x = 240;
 	m_y = 128;
