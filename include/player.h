@@ -35,9 +35,12 @@ class Player : public Sprite {
 		~Player();
 		
 		// Update functions
-		void testCollisions();
 		void move();
 		void draw();
+		
+		// Player's collisions
+		void doorCollisions();
+		void testCollisions();
 		
 		// Get functions
 		PlayerDirection direction() const { return m_direction; }

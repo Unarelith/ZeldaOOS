@@ -25,6 +25,7 @@
 #include "map.h"
 #include "mapManager.h"
 #include "player.h"
+#include "door.h"
 #include "game.h"
 
 int Map::nbMaps = 0;
@@ -150,6 +151,24 @@ void Map::scroll(s16 xx, s16 yy) {
 		}
 		
 		REG_BG0VOFS = scrollY & 1023; // Scroll the BG
+	}
+}
+
+void Map::indoorTransInit() {
+	BG_PALETTE_SUB[255] = ARGB16(1, 0x1F, 0x1E, 0x19);
+	
+	dmaFillWords(0xFFFFFFFF, bgGetGfxPtr(Game::transBg) + 32, 64);
+	dmaFillWords(0x00010001, bgGetMapPtr(Game::transBg), 32 * 24 * 2);
+}
+
+void Map::indoorTrans() {
+	u16* map = bgGetMapPtr(Game::transBg);
+	for(u16 x = 0 ; x < 16 ; x++) {
+		swiWaitForVBlank();
+		for(u16 y = 0 ; y < 24 ; y++) {
+			map[(15 - x) + (y << 5)] = 0;
+			map[(16 + x) + (y << 5)] = 0;
+		}
 	}
 }
 

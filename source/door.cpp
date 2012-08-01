@@ -17,17 +17,32 @@
 	along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
 ---------------------------------------------------------------------------------*/
+#include <nds.h>
+#include <stdio.h>
 #include "timer.h"
 #include "sprites.h"
 #include "map.h"
+#include "mapManager.h"
 #include "player.h"
 #include "door.h"
 #include "game.h"
 
-int main(void) {
-	// Initialize game
-	Game *game = new Game;
+Door** initDoors() {
+	Door** doors = new Door*[DOORS];
 	
-	// End of the game
-	delete game;
+	doors[0] = new Door{0, 6 << 4, 3 << 4, DIR_DOWN, 1};
+	doors[1] = new Door{WM_SIZE * WM_SIZE + 0, (7 << 4) + 8, 11 << 4, DIR_UP, 0};
+	
+	return doors;
 }
+
+s16 findDoorID(s16 x, s16 y, u16 mapID) {
+	Door** doors = Game::doors;
+	for(u16 i = 0; i < DOORS ; i++) {
+		if(((doors[i]->x >> 4 == x >> 4) || (doors[i]->x >> 4 == (x >> 4) + 1)) && (doors[i]->y >> 4 == y >> 4) && (doors[i]->mapID == mapID)) {
+			return i;
+		}
+	}
+	return -1;
+}
+

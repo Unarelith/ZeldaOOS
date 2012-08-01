@@ -39,6 +39,10 @@ class Map {
 		// Scroll the map
 		void scroll(s16 xx, s16 yy);
 		
+		// Outdoor to indoor transition
+		void indoorTransInit();
+		void indoorTrans();
+		
 		// Setting functions
 		void setTile(s16 tileX, s16 tileY, u16 tile); // Set a tile with coordinates
 		

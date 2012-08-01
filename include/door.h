@@ -17,17 +17,19 @@
 	along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
 ---------------------------------------------------------------------------------*/
-#include "timer.h"
-#include "sprites.h"
-#include "map.h"
-#include "player.h"
-#include "door.h"
-#include "game.h"
+#ifndef DOOR_H
+#define DOOR_H
 
-int main(void) {
-	// Initialize game
-	Game *game = new Game;
-	
-	// End of the game
-	delete game;
-}
+#define DOORS 2
+
+typedef struct {
+	u16 mapID;
+	s16 x, y;
+	PlayerDirection direction;
+	s16 nextDoorID;
+} Door;
+
+Door **initDoors();
+s16 findDoorID(s16 x, s16 y, u16 mapID);
+
+#endif // DOOR_H

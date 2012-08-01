@@ -18,12 +18,14 @@
 
 ---------------------------------------------------------------------------------*/
 #include <nds.h>
+#include <cstdio>
 #include "timer.h"
 #include "sprites.h"
 #include "map.h"
 #include "mapManager.h"
 #include "player.h"
 #include "link.h"
+#include "door.h"
 #include "game.h"
 
 // Fill animations table
@@ -94,6 +96,29 @@ bool Player::inTiles(s16 caseX, s16 caseY, u16 t[]) {
 		return true;
 	} else {
 		return false;
+	}
+}
+
+void Player::doorCollisions() {
+	if((m_vy < 0) && ((inTiles((m_x + 5) >> 4, (m_y + 5) >> 4, changeMapTiles)) || (inTiles((m_x + 10) >> 4, (m_y + 5) >> 4, changeMapTiles)))) {
+		m_vx = 0;
+		m_vy = 0;
+		s16 doorID = findDoorID(m_x, m_y, Game::currentMap->id());
+		if(doorID == -1) {
+			consoleClear();
+			printf("Fatal error. Code: 02");
+			while(1) {
+				swiWaitForVBlank();
+			}
+		}
+		printf("door id: %d\n", doorID);
+		Game::currentMap->indoorTransInit();
+		Game::currentMap = Game::maps[Game::doors[Game::doors[doorID]->nextDoorID]->mapID];
+		m_x = Game::doors[Game::doors[doorID]->nextDoorID]->x;
+		m_y = Game::doors[Game::doors[doorID]->nextDoorID]->y;
+		draw();
+		Game::currentMap->init();
+		Game::currentMap->indoorTrans();
 	}
 }
 
@@ -190,7 +215,8 @@ void Player::move() {
 	
 	// Test collisions
 	testCollisions();
-
+	doorCollisions();
+	
 	// Add speed vectors to coordinates ( move the player )
 	m_x += m_vx;
 	m_y += m_vy;

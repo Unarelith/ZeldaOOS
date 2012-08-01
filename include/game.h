@@ -39,6 +39,7 @@ class Game {
 		static Tileset *tilesets;
 		static u8 transBg; // Indoor maps transition BG id
 		static Player *talek;
+		static Door **doors;
 		
 	private:
 		u8 m_bg; // BG id

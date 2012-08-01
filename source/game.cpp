@@ -27,6 +27,7 @@
 #include "map.h"
 #include "mapManager.h"
 #include "player.h"
+#include "door.h"
 #include "game.h"
 
 Map *Game::currentMap;
@@ -34,6 +35,7 @@ Map **Game::maps;
 Tileset *Game::tilesets;
 u8 Game::transBg;
 Player *Game::talek = 0;
+Door** Game::doors;
 
 Game::Game() {
 	// Set up default exception handler
@@ -112,13 +114,16 @@ void Game::mainLoop() {
 	maps = initMaps(m_mapBg);
 	tilesets = initTilesets();
 	
+	// Init doors system
+	doors = initDoors();
+	
 	currentMap = maps[0];
 	currentMap->init();
+		consoleClear();
 	
 	while(!(keysDown() & KEY_A)) {
 		scanKeys();
 		
-		consoleClear();
 		
 		// Move talek
 		talek->move();

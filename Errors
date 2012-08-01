@@ -1,0 +1,5 @@
+Error codes:
+
+00: All is ok.
+01: Unknown error.
+02: Door connexion error.

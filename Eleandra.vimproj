@@ -25,6 +25,7 @@ Eleandra=/home/quentin/devkitPro/projects/Eleandra CD=. filter="*.c *.cpp *.h *.
   }
  }
  include=include {
+  door.h
   game.h
   map.h
   mapManager.h
@@ -33,6 +34,7 @@ Eleandra=/home/quentin/devkitPro/projects/Eleandra CD=. filter="*.c *.cpp *.h *.
   timer.h
  }
  source=source {
+  door.cpp
   game.cpp
   main.cpp
   map.cpp
