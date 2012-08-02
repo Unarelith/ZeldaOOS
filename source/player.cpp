@@ -100,7 +100,8 @@ bool Player::inTiles(s16 caseX, s16 caseY, u16 t[]) {
 }
 
 void Player::doorCollisions() {
-	if((m_vy < 0) && ((inTiles((m_x + 5) >> 4, (m_y + 5) >> 4, changeMapTiles)) || (inTiles((m_x + 10) >> 4, (m_y + 5) >> 4, changeMapTiles)))) {
+	if((((m_vy < 0) && ((inTiles((m_x + 5) >> 4, (m_y + 12) >> 4, changeMapTiles)) || (inTiles((m_x + 10) >> 4, (m_y + 12) >> 4, doorUp)))))
+	 || ((m_vy > 0) && ((inTiles((m_x + 5) >> 4, (m_y) >> 4, changeMapTiles)) || (inTiles((m_x + 10) >> 4, (m_y) >> 4, doorDown))))) {
 		m_vx = 0;
 		m_vy = 0;
 		s16 doorID = findDoorID(m_x, m_y, Game::currentMap->id());

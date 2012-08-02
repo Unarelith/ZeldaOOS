@@ -28,7 +28,12 @@
 
 // Tiles tables
 extern u16 nonPassableTiles[12];
-extern u16 changeMapTiles[3];
+extern u16 changeMapTiles[2];
+
+extern u16 doorUp[1];
+extern u16 doorDown[1];
+extern u16 doorLeft[1];
+extern u16 doorRight[1];
 
 typedef struct {
 	u8 tilesetID;

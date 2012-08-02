@@ -119,11 +119,11 @@ void Game::mainLoop() {
 	
 	currentMap = maps[0];
 	currentMap->init();
-		consoleClear();
 	
 	while(!(keysDown() & KEY_A)) {
 		scanKeys();
 		
+		consoleClear();
 		
 		// Move talek
 		talek->move();
@@ -136,6 +136,7 @@ void Game::mainLoop() {
 		
 		printf("\x1b[10;13HPress A");
 		printf("\x1b[12;15H%d", currentMap->id());
+		printf("\x1b[14;15H%d", currentMap->map()[(talek->x() >> 4) + (talek->y() >> 4) * currentMap->width()]);
 		
 		swiWaitForVBlank();
 	}
