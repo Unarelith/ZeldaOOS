@@ -137,6 +137,7 @@ void Game::mainLoop() {
 		printf("\x1b[10;13HPress A");
 		printf("\x1b[12;15H%d", currentMap->id());
 		printf("\x1b[14;15H%d", currentMap->map()[(talek->x() >> 4) + (talek->y() >> 4) * currentMap->width()]);
+		printf("\x1b[16;15H%d", currentMap->tileset()->info[currentMap->map()[(talek->x() >> 4) + (talek->y() >> 4) * currentMap->width()]]);
 		
 		swiWaitForVBlank();
 	}

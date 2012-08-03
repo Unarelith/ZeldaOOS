@@ -86,7 +86,7 @@ u16 indoorInfo[256] = {
 	1,1,1,1,1,1,1,1,1,1,0,1,1,0,0,0,
 	1,1,1,1,1,1,1,1,1,1,0,1,1,1,1,0,
 	1,1,1,1,1,1,1,1,1,1,0,112,112,1,1,0,
-	1,1,1,1,1,1,1,1,1,1,0,0,0,0,0,0,
+	1,1,1,1,1,1,1,1,1,1,0,112,111,0,0,0,
 	1,1,1,1,1,1,1,1,1,1,0,0,0,0,0,0,
 	0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
 	1,1,1,1,1,1,1,1,1,1,1,1,0,1,1,1,
@@ -95,8 +95,8 @@ u16 indoorInfo[256] = {
 	0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
 	0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
 	1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,
-	0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
-	8,9,10,7,0,0,1,12,15,15,15,15,0,0,0,0
+	1,1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
+	8,9,10,7,0,0,1,12,15,15,111,15,0,0,0,0
 };
 
 Tileset* initTilesets() {
@@ -122,9 +122,10 @@ Map** initMaps(u8 mapBg) {
 	Map* c1 = new Map(&tilesets[0], "/maps/c1.map", 16, 12, 16, 16, mapBg);
 	Map* c2 = new Map(&tilesets[0], "/maps/c2.map", 16, 12, 16, 16, mapBg);
 	Map* c3 = new Map(&tilesets[0], "/maps/c3.map", 16, 12, 16, 16, mapBg);
-	Map* in1 = new Map(&tilesets[1], "/maps/1.map", 16, 12, 16, 16, mapBg);
+	Map* in1 = new Map(&tilesets[1], "/maps/in1.map", 16, 12, 16, 16, mapBg);
+	Map* in2 = new Map(&tilesets[1], "/maps/in2.map", 16, 12, 16, 16, mapBg);
 	
-	Map** maps = new Map*[WM_SIZE * WM_SIZE + 1];
+	Map** maps = new Map*[WM_SIZE * WM_SIZE + 2];
 	maps[0] = a1;
 	maps[1] = a2;
 	maps[2] = a3;
@@ -134,7 +135,8 @@ Map** initMaps(u8 mapBg) {
 	maps[6] = c1;
 	maps[7] = c2;
 	maps[8] = c3;
-	maps[WM_SIZE * WM_SIZE + 0] = in1;
+	maps[MAP_IN(1)] = in1;
+	maps[MAP_IN(2)] = in2;
 	
 	return maps;
 }

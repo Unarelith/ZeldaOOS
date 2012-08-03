@@ -1,12 +1,12 @@
-/*
- *  xmlReader and Converter for Tiled map-editor
- * Quent42340
- * see COPYING
- * usage: reader <input map> <output map>
- * example: reader map.tmx map.map
- *
- */
-
+//---------------------------------------------------------
+//	
+//	xmlReader and converter for Tiled map-editor
+//	by Quent42340
+//	see COPYING
+//	usage: reader <input map> <output map>
+//	example: reader map.tmx map.map
+//	
+//---------------------------------------------------------
 #include <stdio.h>
 #include <string.h>
 #include <libxml/xmlreader.h>
@@ -46,7 +46,7 @@ processNode(xmlTextReaderPtr reader) {
 	
     if(value != NULL) {
 		if(xmlTextReaderNodeType(reader) == 3) {
-			unsigned short* table = malloc(width * height * 4 * sizeof(unsigned short));
+			unsigned short* table = malloc(width * height * sizeof(unsigned short));
 			
 			// (Now buffer contains the map file)
 			int counter = 0;
@@ -54,26 +54,20 @@ processNode(xmlTextReaderPtr reader) {
 			char* token = strtok((char*)value, delimiters);
 			unsigned short tile = (unsigned short)atof(token);
 			
-			table[counter * 2] = tile - 1;
-			table[counter * 2 + 1] = tile - 1;
-			table[counter * 2 + width] = tile - 1;
-			table[counter * 2 + width + 1] = tile - 1;
+			table[counter] = tile - 1;
 			counter++;
 			
 			while(token != NULL) {
 				token = strtok(NULL, delimiters);
 				if(token != NULL) {
 					tile = (unsigned short)atof(token);
-					table[counter * 2] = tile - 1;
-					table[counter * 2 + 1] = tile - 1;
-					table[counter * 2 + width] = tile - 1;
-					table[counter * 2 + width + 1] = tile - 1;
+					table[counter] = tile - 1;
 				}
 				counter++;
 			}
 			
 			FILE* file = fopen(outfilepath, "wb");
-			fwrite(table, 2, counter * 4 - 1, file);
+			fwrite(table, 2, counter - 1, file);
 			fclose(file);
 			
 			free(table);

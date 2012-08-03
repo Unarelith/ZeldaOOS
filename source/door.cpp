@@ -31,7 +31,9 @@ Door** initDoors() {
 	Door** doors = new Door*[DOORS];
 	
 	doors[0] = new Door{0, 6 << 4, 3 << 4, DIR_DOWN, 1};
-	doors[1] = new Door{WM_SIZE * WM_SIZE + 0, (7 << 4) + 8, 11 << 4, DIR_UP, 0};
+	doors[1] = new Door{MAP_IN(1), (7 << 4) + 8, 11 << 4, DIR_UP, 0};
+	doors[2] = new Door{MAP_IN(1), 3 << 4, 2 << 4, DIR_DOWN, 3};
+	doors[3] = new Door{MAP_IN(2), 4 << 4, 8 << 4, DIR_UP, 2};
 	
 	return doors;
 }
@@ -39,7 +41,8 @@ Door** initDoors() {
 s16 findDoorID(s16 x, s16 y, u16 mapID) {
 	Door** doors = Game::doors;
 	for(u16 i = 0; i < DOORS ; i++) {
-		if(((doors[i]->x >> 4 == x >> 4) || (doors[i]->x >> 4 == (x >> 4) + 1)) && (doors[i]->y >> 4 == y >> 4) && (doors[i]->mapID == mapID)) {
+		printf("%d, %d, %d, %d | %d, %d\n", doors[i]->x >> 4, doors[i]->y >> 4, x >> 4, y >> 4, doors[i]->mapID, mapID);
+		if(((doors[i]->x >> 4 == x >> 4) || (doors[i]->x >> 4 == (x >> 4) + 1)) && ((doors[i]->y >> 4 == y >> 4) || (doors[i]->y >> 4 == (y >> 4) + 1)) && (doors[i]->mapID == mapID)) {
 			return i;
 		}
 	}

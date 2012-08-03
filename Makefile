@@ -152,10 +152,10 @@ maps:
 #---------------------------------------------------------------------------------
 all:
 	@make clean --no-print-directory
-	@cd $(CURDIR)/tools/reader
-	@make
-	@cd ../../
+	@rm -f $(CURDIR)/tools/reader/reader
+	@make -C $(CURDIR)/tools/reader --no-print-directory
 	@make maps --no-print-directory
+	@make
 	@make
 
 #---------------------------------------------------------------------------------

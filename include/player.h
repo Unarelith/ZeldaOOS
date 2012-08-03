@@ -42,16 +42,17 @@ class Player : public Sprite {
 		void doorCollisions();
 		void testCollisions();
 		
-		// Get functions
+		// Attributes functions
 		PlayerDirection direction() const { return m_direction; }
+		void direction(PlayerDirection direction) { m_direction = direction; }
 		s16 x() const { return m_x; }
-		void x(s16 xx) { m_x = xx; }
+		void x(s16 x) { m_x = x; }
 		s16 y() const { return m_y; }
-		void y(s16 yy) { m_y = yy; }
+		void y(s16 y) { m_y = y; }
 		s8 vx() const { return m_vx; }
-		void vx(s8 vxx) { m_vx = vxx; }
+		void vx(s8 vx) { m_vx = vx; }
 		s8 vy() const { return m_vy; }
-		void vy(s8 vyy) { m_vy = vyy; }
+		void vy(s8 vy) { m_vy = vy; }
 		
 		// Static functions
 		static bool inTable(u16 t[], u16 n);

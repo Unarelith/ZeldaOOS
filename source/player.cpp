@@ -99,15 +99,19 @@ bool Player::inTiles(s16 caseX, s16 caseY, u16 t[]) {
 	}
 }
 
+bool inDoor = false;
+
 void Player::doorCollisions() {
-	if((((m_vy < 0) && ((inTiles((m_x + 5) >> 4, (m_y + 12) >> 4, changeMapTiles)) || (inTiles((m_x + 10) >> 4, (m_y + 12) >> 4, doorUp)))))
-	 || ((m_vy > 0) && ((inTiles((m_x + 5) >> 4, (m_y) >> 4, changeMapTiles)) || (inTiles((m_x + 10) >> 4, (m_y) >> 4, doorDown))))) {
+	printf("INDOOR: %d\n", inDoor);
+	if(((m_vy < 0) && ((inTiles((m_x + 5) >> 4, (m_y + 12) >> 4, doorUp)) || (inTiles((m_x + 10) >> 4, (m_y + 12) >> 4, doorUp))))
+	|| ((m_vy > 0) && ((inTiles((m_x + 5) >> 4, m_y >> 4, doorDown)) || (inTiles((m_x + 10) >> 4, m_y >> 4, doorDown))))
+	|| ((inTiles((m_x + 8) >> 4, (m_y + 8) >> 4, changeMapTiles)) && (!inDoor))) {
 		m_vx = 0;
 		m_vy = 0;
 		s16 doorID = findDoorID(m_x, m_y, Game::currentMap->id());
 		if(doorID == -1) {
-			consoleClear();
-			printf("Fatal error. Code: 02");
+			printf("Fatal error. Code: 02\n");
+			printf("%d ; %d", m_x >> 4, m_y >> 4);
 			while(1) {
 				swiWaitForVBlank();
 			}
@@ -117,9 +121,15 @@ void Player::doorCollisions() {
 		Game::currentMap = Game::maps[Game::doors[Game::doors[doorID]->nextDoorID]->mapID];
 		m_x = Game::doors[Game::doors[doorID]->nextDoorID]->x;
 		m_y = Game::doors[Game::doors[doorID]->nextDoorID]->y;
+		m_direction = Game::doors[Game::doors[doorID]->nextDoorID]->direction;
 		draw();
 		Game::currentMap->init();
 		Game::currentMap->indoorTrans();
+		inDoor = true;
+	}
+	if((!inTiles((m_x + 2) >> 4, (m_y + 2) >> 4, changeMapTiles))
+	&& (!inTiles((m_x + 14) >> 4, (m_y + 14) >> 4, changeMapTiles))) {
+		inDoor = false;
 	}
 }
 

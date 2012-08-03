@@ -25,6 +25,7 @@
 
 // World map size
 #define WM_SIZE 3
+#define MAP_IN(x) (WM_SIZE * WM_SIZE + x - 1)
 
 // Tiles tables
 extern u16 nonPassableTiles[12];
