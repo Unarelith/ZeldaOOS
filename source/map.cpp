@@ -80,6 +80,18 @@ void Map::init() {
 	}
 }
 
+void Map::initOTF() {
+	dmaCopy(m_tileset->tiles, bgGetGfxPtr(m_bg), m_tileset->tilesLen);
+	dmaCopy(m_tileset->palette, BG_PALETTE, m_tileset->paletteLen);
+	
+	u16 x, y;
+	for(y = scrollY / 16 ; y < scrollY / 16 + 12 ; y++) {
+		for(x = scrollX / 16 ; x < scrollX / 16 + 16 ; x++) {
+			putTile(x, y, this, x, y);
+		}
+	}
+}
+
 u16 Map::screenPos(s16 x, s16 y) const {
 	return ((x & 31) + ((x & 32) << 5) + ((y & 31) << 5) + ((y & 32) << 6));
 }

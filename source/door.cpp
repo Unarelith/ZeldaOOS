@@ -34,6 +34,8 @@ Door** initDoors() {
 	doors[1] = new Door{MAP_IN(1), (7 << 4) + 8, 11 << 4, DIR_UP, 0};
 	doors[2] = new Door{MAP_IN(1), 3 << 4, 2 << 4, DIR_DOWN, 3};
 	doors[3] = new Door{MAP_IN(2), 4 << 4, 8 << 4, DIR_UP, 2};
+	doors[4] = new Door{7, 2 << 4, 7 << 4, DIR_DOWN, 5};
+	doors[5] = new Door{MAP_IN(3), (7 << 4) + 8, 11 << 4, DIR_UP, 4};
 	
 	return doors;
 }

@@ -22,6 +22,7 @@
 #include "mapManager.h"
 #include "plain.h"
 #include "indoor.h"
+#include "underground.h"
 
 /*	Tiles informations:
 		0: Passable
@@ -72,7 +73,7 @@ u16 plainInfo[256] = {
 	1,1,1,1,1,1,1,1,1,1,1,1,1,1,0,0,
 	1,1,1,1,1,1,1,1,1,1,1,1,1,1,0,0,
 	1,1,1,1,1,1,1,1,1,1,1,1,1,1,0,1,
-	1,1,1,1,1,1,1,1,1,1,1,1,1,1,0,1,
+	1,1,1,1,1,1,1,1,1,1,1,1,1,1,111,1,
 	1,1,1,1,1,1,1,1,1,1,1,1,1,0,0,0,
 	1,1,1,1,1,1,1,1,1,1,111,6,1,0,0,0,
 	0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
@@ -99,14 +100,35 @@ u16 indoorInfo[256] = {
 	8,9,10,7,0,0,1,12,15,15,111,15,0,0,0,0
 };
 
+u16 undergroundInfo[256] = {
+	0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
+	1,1,1,1,0,1,1,1,1,1,1,1,1,1,1,1,
+	0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
+	0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
+	0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
+	0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
+	0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
+	0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
+	0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
+	0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
+	0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
+	1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,
+	0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
+	0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
+	0,0,112,0,112,112,0,0,0,0,0,0,0,0,0,0,
+	0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+};
+
 Tileset* initTilesets() {
 	Tileset plain = {plainTiles, plainTilesLen, plainPal, plainPalLen, plainInfo};
 	Tileset indoor = {indoorTiles, indoorTilesLen, indoorPal, indoorPalLen, indoorInfo};
-
+	Tileset underground = {undergroundTiles, undergroundTilesLen, undergroundPal, undergroundPalLen, undergroundInfo};
+	
 	Tileset* tilesets = new Tileset[TILESETS];
 	tilesets[0] = plain;
 	tilesets[1] = indoor;
-
+	tilesets[2] = underground;
+	
 	return tilesets;
 }
 
@@ -124,8 +146,10 @@ Map** initMaps(u8 mapBg) {
 	Map* c3 = new Map(&tilesets[0], "/maps/c3.map", 16, 12, 16, 16, mapBg);
 	Map* in1 = new Map(&tilesets[1], "/maps/in1.map", 16, 12, 16, 16, mapBg);
 	Map* in2 = new Map(&tilesets[1], "/maps/in2.map", 16, 12, 16, 16, mapBg);
+	Map* in3a = new Map(&tilesets[2], "/maps/in3a.map", 16, 12, 16, 16, mapBg);
+	Map* in3b = new Map(&tilesets[2], "/maps/in3b.map", 16, 12, 16, 16, mapBg);
 	
-	Map** maps = new Map*[WM_SIZE * WM_SIZE + 2];
+	Map** maps = new Map*[WM_SIZE * WM_SIZE + 4];
 	maps[0] = a1;
 	maps[1] = a2;
 	maps[2] = a3;
@@ -137,6 +161,8 @@ Map** initMaps(u8 mapBg) {
 	maps[8] = c3;
 	maps[MAP_IN(1)] = in1;
 	maps[MAP_IN(2)] = in2;
+	maps[MAP_IN(3)] = in3a;
+	maps[MAP_IN(4)] = in3b;
 	
 	return maps;
 }

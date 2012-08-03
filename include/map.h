@@ -35,6 +35,7 @@ class Map {
 			
 		// Initialize the map
 		void init();
+		void initOTF();
 		
 		// Scroll the map
 		void scroll(s16 xx, s16 yy);
@@ -56,7 +57,9 @@ class Map {
 		u8 bg() const { return m_bg; }
 		u16 id() const { return m_id; }
 		u16 mapX() const { return m_mapX; }
+		void mapX(u16 mapX) { m_mapX = mapX; }
 		u16 mapY() const { return m_mapY; }
+		void mapY(u16 mapY) { m_mapY = mapY; }
 		
 		// Number of maps
 		static int nbMaps;

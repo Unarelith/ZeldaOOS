@@ -123,7 +123,7 @@ void Player::doorCollisions() {
 		m_y = Game::doors[Game::doors[doorID]->nextDoorID]->y;
 		m_direction = Game::doors[Game::doors[doorID]->nextDoorID]->direction;
 		draw();
-		Game::currentMap->init();
+		Game::currentMap->initOTF();
 		Game::currentMap->indoorTrans();
 		inDoor = true;
 	}
