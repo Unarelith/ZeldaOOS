@@ -20,6 +20,7 @@
 #include <nds.h>
 #include <stdio.h>
 #include <sys/stat.h>
+#include <cmath>
 #include "timer.h"
 #include "sprites.h"
 #include "map.h"
@@ -27,6 +28,8 @@
 #include "player.h"
 #include "door.h"
 #include "game.h"
+
+using namespace std;
 
 int Map::nbMaps = 0;
 
@@ -189,6 +192,11 @@ void Map::setTile(s16 tileX, s16 tileY, u16 tile) {
 }
 
 u16 Map::getTile(s16 tileX, s16 tileY) {
-	return m_map[tileX + tileY * m_width];
+	// That's only a bypass
+	if(m_map[tileX + tileY * m_width] < sqrt(m_tileset->tilesLen)) {
+		return m_map[tileX + tileY * m_width];
+	} else {
+		return 0;
+	}
 }
 

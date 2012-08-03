@@ -180,6 +180,8 @@ void Player::testCollisions() {
 	if((m_vy > 0) && ((!passable((m_x + 5) >> 4, (m_y + 15) >> 4)) || (!passable((m_x + 10) >> 4, (m_y + 15) >> 4)))) {
 		m_vy = 0;
 		
+		printf("Truc");
+		
 		// Obstacle left
 		if((!passable((m_x + 5) >> 4, (m_y + 15) >> 4)) && passable((m_x + 10) >> 4, (m_y + 15) >> 4)) {
 			if(m_vx == 0) m_vx = 1;
