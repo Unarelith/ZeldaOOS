@@ -36,12 +36,11 @@ int Map::nbMaps = 0;
 s16 Map::scrollX = 0;
 s16 Map::scrollY = 0;
 
-Map::Map(Tileset *tileset, char *filename, u16 width, u16 height, u16 tileWidth, u16 tileHeight, u8 bg) {
+vector<vector<Map*>> Map::groups;
+
+Map::Map(Tileset *tileset, char *filename, u16 width, u16 height, u16 tileWidth, u16 tileHeight, u8 bg, s16 group, s16 mapX, s16 mapY) {
 	m_id = nbMaps;
 	nbMaps++;
-	
-	m_mapY = m_id / WM_SIZE;
-	m_mapX = m_id - m_mapY * WM_SIZE;
 	
 	m_tileset = tileset;
 	m_filename = filename;
@@ -66,6 +65,26 @@ Map::Map(Tileset *tileset, char *filename, u16 width, u16 height, u16 tileWidth,
 	
 	m_map = table;
 	m_bg = bg;
+	
+	m_group = group;
+	if(m_group != -1) {
+		if((s16)groups.size() == m_group) {
+			vector<Map*> v;
+			v.push_back(this);
+			groups.push_back(v);
+		}
+		else if((s16)groups.size() > m_group) {
+			groups[m_group].push_back(this);
+		} else {
+			consoleClear();
+			printf("Fatal error. Code: 03\n");
+			printf("%d, %d", m_group, groups.size());
+			while(1) swiWaitForVBlank();
+		}
+	}
+	
+	m_mapY = ((mapY == -1) ? (m_id / WM_SIZE) : (mapY));
+	m_mapX = ((mapX == -1) ? (m_id - m_mapY * WM_SIZE) : (mapX));
 }
 
 Map::~Map() {
@@ -109,9 +128,19 @@ void Map::putTile(s16 x, s16 y, const Map* map, s16 mapX, s16 mapY) {
 	mapPtr[screenPos(x * 2 + 1, y * 2 + 1)] = map->map()[mapX + mapY * map->width()] * 4 + 3;
 }
 
+s16 findMapID(s16 mapX, s16 mapY, vector<Map*> group) {
+	for(s16 i = 0 ; i < (s16)group.size() ; i++) {
+		if((group[i]->mapX() == mapX) && (group[i]->mapY() == mapY)) {
+			return i;
+		}
+	}
+	return -1;
+}
+
 void Map::scroll(s16 xx, s16 yy) {
 	if(xx > 0) { // Scroll right
-		m_nextMap = Game::maps[m_mapX + 1 + m_mapY * WM_SIZE]; // Next map to scroll on
+		if(m_group != -1) m_nextMap = Game::maps[groups[m_group][findMapID(m_mapX + 1, m_mapY, groups[m_group])]->id()];
+		else m_nextMap = Game::maps[m_mapX + 1 + m_mapY * WM_SIZE];
 		
 		for(int i = 0 ; (i < xx) && (scrollX < m_width * WM_SIZE * 16 - 256) ; i++) {
 			if(!(scrollX & 15)) {
@@ -125,7 +154,8 @@ void Map::scroll(s16 xx, s16 yy) {
 		REG_BG0HOFS = scrollX & 1023; // Scroll the BG
 	}
 	else if(xx < 0) { // Scroll left
-		m_nextMap = Game::maps[m_mapX - 1 + m_mapY * WM_SIZE]; // Next map to scroll on
+		if(m_group != -1) m_nextMap = Game::maps[groups[m_group][findMapID(m_mapX - 1, m_mapY, groups[m_group])]->id()];
+		else m_nextMap = Game::maps[m_mapX - 1 + m_mapY * WM_SIZE];
 		
 		for(int i = 0 ; (i < -xx) && (scrollX > 0) ; i++) {
 			if(!(scrollX & 15)) {
@@ -140,7 +170,8 @@ void Map::scroll(s16 xx, s16 yy) {
 	}
 	
 	if(yy > 0) { // Scroll down
-		m_nextMap = Game::maps[m_mapX + (m_mapY + 1) * WM_SIZE]; // Next map to scroll on
+		if(m_group != -1) m_nextMap = Game::maps[groups[m_group][findMapID(m_mapX, m_mapY + 1, groups[m_group])]->id()];
+		else m_nextMap = Game::maps[m_mapX + (m_mapY + 1) * WM_SIZE];
 		
 		for(int i = 0 ; (i < yy) && (scrollY < m_height * WM_SIZE * 16 - 192) ; i++) {
 			if(!(scrollY & 15)) {
@@ -154,7 +185,8 @@ void Map::scroll(s16 xx, s16 yy) {
 		REG_BG0VOFS = scrollY & 1023; // Scroll the BG
 	}
 	else if(yy < 0) { // Scroll up
-		m_nextMap = Game::maps[m_mapX + (m_mapY - 1) * WM_SIZE]; // Next map to scroll on
+		if(m_group != -1) m_nextMap = Game::maps[groups[m_group][findMapID(m_mapX, m_mapY - 1, groups[m_group])]->id()];
+		else m_nextMap = Game::maps[m_mapX + (m_mapY - 1) * WM_SIZE];
 		
 		for(int i = 0 ; (i < -yy) && (scrollY > 0) ; i++) {
 			if(!(scrollY & 15)) {

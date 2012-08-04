@@ -3,3 +3,4 @@ Error codes:
 00: All is ok
 01: Unknown error
 02: Door not found
+03: Side map not found

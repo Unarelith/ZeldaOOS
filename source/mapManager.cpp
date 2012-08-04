@@ -116,7 +116,7 @@ u16 undergroundInfo[256] = {
 	0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
 	0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
 	0,0,112,0,112,112,0,0,0,0,0,0,0,0,0,0,
-	0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+	8,9,10,0,0,0,0,0,0,0,0,0,0,0,0,0
 };
 
 Tileset* initTilesets() {
@@ -146,10 +146,11 @@ Map** initMaps(u8 mapBg) {
 	Map* c3 = new Map(&tilesets[0], "/maps/c3.map", 16, 12, 16, 16, mapBg);
 	Map* in1 = new Map(&tilesets[1], "/maps/in1.map", 16, 12, 16, 16, mapBg);
 	Map* in2 = new Map(&tilesets[1], "/maps/in2.map", 16, 12, 16, 16, mapBg);
-	Map* in3a = new Map(&tilesets[2], "/maps/in3a.map", 16, 12, 16, 16, mapBg);
-	Map* in3b = new Map(&tilesets[2], "/maps/in3b.map", 16, 12, 16, 16, mapBg);
+	Map* in3a = new Map(&tilesets[2], "/maps/in3a.map", 16, 12, 16, 16, mapBg, 0, 0, 0);
+	Map* in3b = new Map(&tilesets[2], "/maps/in3b.map", 16, 12, 16, 16, mapBg, 0, 1, 0);
+	Map* in3c = new Map(&tilesets[2], "/maps/in3c.map", 16, 12, 16, 16, mapBg, 0, 1, 1);
 	
-	Map** maps = new Map*[WM_SIZE * WM_SIZE + 4];
+	Map** maps = new Map*[WM_SIZE * WM_SIZE + 5];
 	maps[0] = a1;
 	maps[1] = a2;
 	maps[2] = a3;
@@ -163,6 +164,7 @@ Map** initMaps(u8 mapBg) {
 	maps[MAP_IN(2)] = in2;
 	maps[MAP_IN(3)] = in3a;
 	maps[MAP_IN(4)] = in3b;
+	maps[MAP_IN(5)] = in3c;
 	
 	return maps;
 }

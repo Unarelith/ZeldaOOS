@@ -112,9 +112,7 @@ void Player::doorCollisions() {
 		if(doorID == -1) {
 			printf("Fatal error. Code: 02\n");
 			printf("%d ; %d", m_x >> 4, m_y >> 4);
-			while(1) {
-				swiWaitForVBlank();
-			}
+			while(1) swiWaitForVBlank();
 		}
 		printf("door id: %d\n", doorID);
 		Game::currentMap->indoorTransInit();

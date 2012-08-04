@@ -20,6 +20,8 @@
 #ifndef MAP_H
 #define MAP_H
 
+#include <vector>
+
 typedef struct {
 	const u32 *tiles;
 	u32 tilesLen;
@@ -30,7 +32,7 @@ typedef struct {
 
 class Map {
 	public:
-		Map(Tileset *tileset, char *filename, u16 width, u16 height, u16 tileWidth, u16 tileHeight, u8 bg);
+		Map(Tileset *tileset, char *filename, u16 width, u16 height, u16 tileWidth, u16 tileHeight, u8 bg, s16 group = -1, s16 mapX = -1, s16 mapY = -1);
 		~Map();
 			
 		// Initialize the map
@@ -56,10 +58,10 @@ class Map {
 		Tileset *tileset() const { return m_tileset; }
 		u8 bg() const { return m_bg; }
 		u16 id() const { return m_id; }
-		u16 mapX() const { return m_mapX; }
-		void mapX(u16 mapX) { m_mapX = mapX; }
-		u16 mapY() const { return m_mapY; }
-		void mapY(u16 mapY) { m_mapY = mapY; }
+		s16 mapX() const { return m_mapX; }
+		void mapX(s16 mapX) { m_mapX = mapX; }
+		s16 mapY() const { return m_mapY; }
+		void mapY(s16 mapY) { m_mapY = mapY; }
 		
 		// Number of maps
 		static int nbMaps;
@@ -70,13 +72,15 @@ class Map {
 		static s16 scrollX;
 		static s16 scrollY;
 		
+		static std::vector<std::vector<Map*>> groups;
+		
 	private:
 		// Map id
 		u16 m_id;
 		
 		// Map position
-		u16 m_mapX;
-		u16 m_mapY;
+		s16 m_mapX;
+		s16 m_mapY;
 		
 		// Map
 		u16 *m_map;
@@ -100,6 +104,10 @@ class Map {
 		// Tile size
 		u16 m_tileWidth;
 		u16 m_tileHeight;
+		
+		// Map group
+		s16 m_group;
+		s16 m_groupID;
 		
 		// Put tile
 		void putTile(s16 x, s16 y, const Map *map, s16 mapX, s16 mapY);
