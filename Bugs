@@ -1,0 +1,3 @@
+1- Bug quand on va en haut et qu'on est à 0 en mapY
+2- Bug quand on est en in3c et qu'on va en in3b: La map se charge à l'envers puis correctement
+3- Bug de la porte en in3a: Du côté droit c'est Error code: 02

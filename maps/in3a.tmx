@@ -1,6 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <map version="1.0" orientation="orthogonal" width="16" height="12" tilewidth="16" tileheight="16">
- <tileset firstgid="1" source="../graphics/tilesets/Underground.tsx"/>
+ <tileset firstgid="1" name="underground" tilewidth="16" tileheight="16">
+  <image source="../graphics/tilesets/underground.png" trans="ff00ff" width="256" height="256"/>
+ </tileset>
  <layer name="Calque de Tile 1" width="16" height="12">
   <data encoding="csv">
 167,167,167,167,167,167,167,167,167,167,167,167,167,167,167,167,

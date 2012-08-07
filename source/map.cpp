@@ -142,7 +142,7 @@ void Map::scroll(s16 xx, s16 yy) {
 		if(m_group != -1) m_nextMap = Game::maps[groups[m_group][findMapID(m_mapX + 1, m_mapY, groups[m_group])]->id()];
 		else m_nextMap = Game::maps[m_mapX + 1 + m_mapY * WM_SIZE];
 		
-		for(int i = 0 ; (i < xx) && (scrollX < m_width * WM_SIZE * 16 - 256) ; i++) {
+		for(int i = 0 ; i < xx ; i++) {
 			if(!(scrollX & 15)) {
 				for(int j = scrollY / 16 ; j < scrollY / 16 + 12 ; j++) {
 					putTile(scrollX / 16 + 16, j, m_nextMap, scrollX / 16, j);
@@ -150,14 +150,12 @@ void Map::scroll(s16 xx, s16 yy) {
 			}
 			scrollX++; // Scroll the map
 		}
-		
-		REG_BG0HOFS = scrollX & 1023; // Scroll the BG
 	}
 	else if(xx < 0) { // Scroll left
 		if(m_group != -1) m_nextMap = Game::maps[groups[m_group][findMapID(m_mapX - 1, m_mapY, groups[m_group])]->id()];
 		else m_nextMap = Game::maps[m_mapX - 1 + m_mapY * WM_SIZE];
 		
-		for(int i = 0 ; (i < -xx) && (scrollX > 0) ; i++) {
+		for(int i = 0 ; i < -xx ; i++) {
 			if(!(scrollX & 15)) {
 				for(int j = scrollY / 16 ; j < scrollY / 16 + 12 ; j++) {
 					putTile(scrollX / 16 - 1, j, m_nextMap, scrollX / 16 - 1, j);
@@ -165,15 +163,13 @@ void Map::scroll(s16 xx, s16 yy) {
 			}
 			scrollX--; // Scroll the map
 		}
-		
-		REG_BG0HOFS = scrollX & 1023; // Scroll the BG
 	}
 	
 	if(yy > 0) { // Scroll down
 		if(m_group != -1) m_nextMap = Game::maps[groups[m_group][findMapID(m_mapX, m_mapY + 1, groups[m_group])]->id()];
 		else m_nextMap = Game::maps[m_mapX + (m_mapY + 1) * WM_SIZE];
 		
-		for(int i = 0 ; (i < yy) && (scrollY < m_height * WM_SIZE * 16 - 192) ; i++) {
+		for(int i = 0 ; i < yy ; i++) {
 			if(!(scrollY & 15)) {
 				for(int j = scrollX / 16 ; j < scrollX / 16 + 16 ; j++) {
 					putTile(j, scrollY / 16 + 12, m_nextMap, j, scrollY / 16);
@@ -181,14 +177,12 @@ void Map::scroll(s16 xx, s16 yy) {
 			}
 			scrollY++; // Scroll the map
 		}
-		
-		REG_BG0VOFS = scrollY & 1023; // Scroll the BG
 	}
 	else if(yy < 0) { // Scroll up
 		if(m_group != -1) m_nextMap = Game::maps[groups[m_group][findMapID(m_mapX, m_mapY - 1, groups[m_group])]->id()];
 		else m_nextMap = Game::maps[m_mapX + (m_mapY - 1) * WM_SIZE];
 		
-		for(int i = 0 ; (i < -yy) && (scrollY > 0) ; i++) {
+		for(int i = 0 ; i < -yy ; i++) {
 			if(!(scrollY & 15)) {
 				for(int j = scrollX / 16 ; j < scrollX / 16 + 16 ; j++) {
 					putTile(j, scrollY / 16 - 1, m_nextMap, j, scrollY / 16 - 1);
@@ -196,9 +190,10 @@ void Map::scroll(s16 xx, s16 yy) {
 			}
 			scrollY--; // Scroll the map
 		}
-		
-		REG_BG0VOFS = scrollY & 1023; // Scroll the BG
 	}
+	
+	bgSetScroll(m_bg, scrollX, scrollY);
+	bgUpdate();
 }
 
 void Map::indoorTransInit() {

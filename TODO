@@ -1,8 +1,7 @@
-- Indoor maps
-- Scrolling up down bug
-- Allow talek to wake up anywhere in the world
+- Scrolling extrems bug
 - Solve tile collision bug: Map::getTile bypass, but find the origin of the problem
 - Larger maps
+- Dialogs
 - Special tiles
 - NPCs
 - Enemies

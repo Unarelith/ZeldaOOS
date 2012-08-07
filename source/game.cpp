@@ -117,7 +117,7 @@ void Game::mainLoop() {
 	// Init doors system
 	doors = initDoors();
 	
-	currentMap = maps[0];
+	currentMap = maps[4];
 	currentMap->init();
 	
 	while(!(keysDown() & KEY_A)) {
@@ -138,6 +138,7 @@ void Game::mainLoop() {
 		printf("\x1b[12;15H%d", currentMap->id());
 		printf("\x1b[14;15H%d", currentMap->map()[((talek->x() + 5) >> 4) + ((talek->y() + 15) >> 4) * currentMap->width()]);
 		printf("\x1b[16;15H%d", currentMap->tileset()->info[currentMap->map()[((talek->x() + 5) >> 4) + ((talek->y() + 15) >> 4) * currentMap->width()]]);
+		printf("\x1b[18;13H%d, %d", Map::scrollX, Map::scrollY);
 		
 		swiWaitForVBlank();
 	}
