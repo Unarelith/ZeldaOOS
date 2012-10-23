@@ -85,6 +85,12 @@ Map::Map(Tileset *tileset, char *filename, u16 width, u16 height, u16 tileWidth,
 	
 	m_mapY = ((mapY == -1) ? (m_id / WM_SIZE) : (mapY));
 	m_mapX = ((mapX == -1) ? (m_id - m_mapY * WM_SIZE) : (mapX));
+	
+	scrollX = m_mapX * 256;
+	scrollY = m_mapY * 192;
+	
+	bgSetScroll(m_bg, scrollX, scrollY);
+	bgUpdate();
 }
 
 Map::~Map() {
