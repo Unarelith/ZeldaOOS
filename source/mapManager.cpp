@@ -144,8 +144,8 @@ Map** initMaps(u8 mapBg) {
 	Map* c1 = new Map(&tilesets[0], "/maps/c1.map", 16, 12, 16, 16, mapBg);
 	Map* c2 = new Map(&tilesets[0], "/maps/c2.map", 16, 12, 16, 16, mapBg);
 	Map* c3 = new Map(&tilesets[0], "/maps/c3.map", 16, 12, 16, 16, mapBg);
-	Map* in1 = new Map(&tilesets[1], "/maps/in1.map", 16, 12, 16, 16, mapBg);
-	Map* in2 = new Map(&tilesets[1], "/maps/in2.map", 16, 12, 16, 16, mapBg);
+	Map* in1 = new Map(&tilesets[1], "/maps/in1.map", 16, 12, 16, 16, mapBg, -1, 0, 0);
+	Map* in2 = new Map(&tilesets[1], "/maps/in2.map", 16, 12, 16, 16, mapBg, -1, 0, 0);
 	Map* in3a = new Map(&tilesets[2], "/maps/in3a.map", 16, 12, 16, 16, mapBg, 0, 0, 0);
 	Map* in3b = new Map(&tilesets[2], "/maps/in3b.map", 16, 12, 16, 16, mapBg, 0, 1, 0);
 	Map* in3c = new Map(&tilesets[2], "/maps/in3c.map", 16, 12, 16, 16, mapBg, 0, 1, 1);

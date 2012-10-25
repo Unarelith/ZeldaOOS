@@ -44,7 +44,7 @@ s16 findDoorID(s16 x, s16 y, u16 mapID) {
 	Door** doors = Game::doors;
 	for(u16 i = 0; i < DOORS ; i++) {
 		printf("%d, %d, %d, %d | %d, %d\n", doors[i]->x >> 4, doors[i]->y >> 4, x >> 4, y >> 4, doors[i]->mapID, mapID);
-		if(((doors[i]->x >> 4 == x >> 4) || (doors[i]->x >> 4 == (x >> 4) + 1)) && ((doors[i]->y >> 4 == y >> 4) || (doors[i]->y >> 4 == (y >> 4) + 1)) && (doors[i]->mapID == mapID)) {
+		if(((doors[i]->x >> 4 == x >> 4) || (doors[i]->x >> 4 == (x >> 4) + 1) || (doors[i]->x >> 4 == (x >> 4) - 1)) && ((doors[i]->y >> 4 == y >> 4) || (doors[i]->y >> 4 == (y >> 4) + 1)) && (doors[i]->mapID == mapID)) {
 			return i;
 		}
 	}

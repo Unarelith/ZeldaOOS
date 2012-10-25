@@ -140,6 +140,7 @@ void Game::mainLoop() {
 		printf("\x1b[16;15H%d", currentMap->tileset()->info[currentMap->map()[((talek->x() + 5) >> 4) + ((talek->y() + 15) >> 4) * currentMap->width()]]);
 		printf("\x1b[18;13H%d, %d", Map::scrollX, Map::scrollY);
 		printf("\x1b[20;13H%d, %d", currentMap->mapX(), currentMap->mapY());
+		printf("\x1b[22;10H%d, %d", talek->x() >> 4, talek->y() >> 4);
 		
 		swiWaitForVBlank();
 	}

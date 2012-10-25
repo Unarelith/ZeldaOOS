@@ -121,6 +121,10 @@ void Player::doorCollisions() {
 		m_y = Game::doors[Game::doors[doorID]->nextDoorID]->y;
 		m_direction = Game::doors[Game::doors[doorID]->nextDoorID]->direction;
 		draw();
+		Map::scrollX = Game::currentMap->mapX() * 256;
+		Map::scrollY = Game::currentMap->mapY() * 192;
+		bgSetScroll(Game::currentMap->bg(), Map::scrollX, Map::scrollY);
+		bgUpdate();
 		Game::currentMap->initOTF();
 		Game::currentMap->indoorTrans();
 		inDoor = true;
