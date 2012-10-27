@@ -225,8 +225,7 @@ void Map::setTile(s16 tileX, s16 tileY, u16 tile) {
 }
 
 u16 Map::getTile(s16 tileX, s16 tileY) {
-	// That's only a bypass
-	if(m_map[tileX + tileY * m_width] < sqrt(m_tileset->tilesLen)) {
+	if(tileX + tileY * m_width < m_width * m_height) {
 		return m_map[tileX + tileY * m_width];
 	} else {
 		return 0;
