@@ -23,9 +23,10 @@
 #include <cmath>
 #include "timer.h"
 #include "sprites.h"
+#include "player.h"
+#include "NPC.h"
 #include "map.h"
 #include "mapManager.h"
-#include "player.h"
 #include "door.h"
 #include "game.h"
 
@@ -37,6 +38,8 @@ s16 Map::scrollX = 0;
 s16 Map::scrollY = 0;
 
 vector<vector<Map*>> Map::groups;
+
+NPC **Map::NPCs = initNPCs();
 
 Map::Map(Tileset *tileset, char *filename, u16 width, u16 height, u16 tileWidth, u16 tileHeight, u8 bg, s16 group, s16 mapX, s16 mapY) {
 	m_id = nbMaps;
@@ -83,6 +86,15 @@ Map::Map(Tileset *tileset, char *filename, u16 width, u16 height, u16 tileWidth,
 		}
 	}
 	
+	m_NPCs = new NPC*;
+	m_NPCnb = 0;
+	for(unsigned int i = 0 ; i < NPC::nbNPCs ; i++) {
+		if(NPCs[i]->map() == m_id) {
+			m_NPCs[m_NPCnb] = NPCs[i];
+			m_NPCnb++;
+		}
+	}
+	
 	m_mapY = ((mapY == -1) ? (m_id / WM_SIZE) : (mapY));
 	m_mapX = ((mapX == -1) ? (m_id - m_mapY * WM_SIZE) : (mapX));
 	
@@ -94,6 +106,7 @@ Map::Map(Tileset *tileset, char *filename, u16 width, u16 height, u16 tileWidth,
 }
 
 Map::~Map() {
+	delete m_NPCs;
 }
 
 void Map::init() {
@@ -229,6 +242,13 @@ u16 Map::getTile(s16 tileX, s16 tileY) {
 		return m_map[tileX + tileY * m_width];
 	} else {
 		return 0;
+	}
+}
+
+void Map::drawNPCs() {
+	for(int i = 0 ; i < m_NPCnb ; i++) {
+		m_NPCs[i]->move();
+		m_NPCs[i]->draw();
 	}
 }
 

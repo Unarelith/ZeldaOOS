@@ -21,9 +21,10 @@
 #include <stdio.h>
 #include "timer.h"
 #include "sprites.h"
+#include "player.h"
+#include "NPC.h"
 #include "map.h"
 #include "mapManager.h"
-#include "player.h"
 #include "door.h"
 #include "game.h"
 

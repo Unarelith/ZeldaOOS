@@ -24,9 +24,10 @@
 #include <ctime>
 #include "timer.h"
 #include "sprites.h"
+#include "player.h"
+#include "NPC.h"
 #include "map.h"
 #include "mapManager.h"
-#include "player.h"
 #include "door.h"
 #include "game.h"
 
@@ -130,6 +131,9 @@ void Game::mainLoop() {
 		
 		// Draw sprite
 		talek->draw();
+		
+		// Draw NPCs
+		currentMap->drawNPCs();
 		
 		// Test the scrolling
 		scroll();

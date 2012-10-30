@@ -2,7 +2,6 @@ Eleandra=/home/quentin/devkitPro/projects/Eleandra CD=. filter="*.c *.cpp *.h *.
  Makefile
  TODO
  maps=maps {
-  1.tmx
   a1.tmx
   a2.tmx
   a3.tmx
@@ -12,19 +11,24 @@ Eleandra=/home/quentin/devkitPro/projects/Eleandra CD=. filter="*.c *.cpp *.h *.
   c1.tmx
   c2.tmx
   c3.tmx
-  indoor.cdat
-  plain.cdat
+  in1.tmx
+  in2.tmx
+  in3a.tmx
+  in3b.tmx
+  in3c.tmx
  }
  graphics=graphics {
   characters=characters {
-   link.sgrit
+   link.grit
   }
   tilesets=tilesets {
-   indoor.sgrit
-   plain.sgrit
+   indoor.grit
+   plain.grit
+   underground.grit
   }
  }
  include=include {
+  NPC.h
   door.h
   game.h
   map.h
@@ -34,6 +38,7 @@ Eleandra=/home/quentin/devkitPro/projects/Eleandra CD=. filter="*.c *.cpp *.h *.
   timer.h
  }
  source=source {
+  NPC.cpp
   door.cpp
   game.cpp
   main.cpp

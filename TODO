@@ -1,9 +1,8 @@
-- Solve tile collision bug: Map::getTile bypass, but find the origin of the problem
-	Without getTile, it's possible to find tileID upper than tileset's possible tiles
-	getTile is not a bypass, it's now a solution.
-- NPCs
+- NPCs ( movements )
 - Dialogs
 - Larger maps
 - Enemies
 - Special tiles
+- Inventory
 - Weapons
+- Stats ( Lifes, money )

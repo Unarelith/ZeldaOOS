@@ -19,8 +19,9 @@
 ---------------------------------------------------------------------------------*/
 #include "timer.h"
 #include "sprites.h"
-#include "map.h"
 #include "player.h"
+#include "NPC.h"
+#include "map.h"
 #include "door.h"
 #include "game.h"
 

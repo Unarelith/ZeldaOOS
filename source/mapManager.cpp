@@ -18,11 +18,27 @@
 
 ---------------------------------------------------------------------------------*/
 #include <nds.h>
+
+#include "timer.h"
+#include "sprites.h"
+#include "player.h"
+#include "NPC.h"
+
 #include "map.h"
 #include "mapManager.h"
+
 #include "plain.h"
 #include "indoor.h"
 #include "underground.h"
+
+#include "blue_boy.h"
+#include "blue_men.h"
+#include "farore.h"
+#include "postman.h"
+#include "red_girl.h"
+#include "red_woman.h"
+#include "yellow_oldwoman.h"
+
 
 /*	Tiles informations:
 		0: Passable
@@ -124,7 +140,7 @@ Tileset* initTilesets() {
 	Tileset indoor = {indoorTiles, indoorTilesLen, indoorPal, indoorPalLen, indoorInfo};
 	Tileset underground = {undergroundTiles, undergroundTilesLen, undergroundPal, undergroundPalLen, undergroundInfo};
 	
-	Tileset* tilesets = new Tileset[TILESETS];
+	Tileset *tilesets = new Tileset[TILESETS];
 	tilesets[0] = plain;
 	tilesets[1] = indoor;
 	tilesets[2] = underground;
@@ -132,25 +148,34 @@ Tileset* initTilesets() {
 	return tilesets;
 }
 
+NPC** initNPCs() {
+	NPC *a1_1 = new NPC(10 << 4, 2 << 4, false, 0, DIR_DOWN, blue_boyTiles, blue_boyPal, 0);
+	
+	NPC **NPCs = new NPC*;
+	NPCs[0] = a1_1;
+	
+	return NPCs;
+}
+
 Map** initMaps(u8 mapBg) {
-	Tileset* tilesets = initTilesets();
+	Tileset *tilesets = initTilesets();
 	
-	Map* a1 = new Map(&tilesets[0], "/maps/a1.map", 16, 12, 16, 16, mapBg);
-	Map* a2 = new Map(&tilesets[0], "/maps/a2.map", 16, 12, 16, 16, mapBg);
-	Map* a3 = new Map(&tilesets[0], "/maps/a3.map", 16, 12, 16, 16, mapBg);
-	Map* b1 = new Map(&tilesets[0], "/maps/b1.map", 16, 12, 16, 16, mapBg);
-	Map* b2 = new Map(&tilesets[0], "/maps/b2.map", 16, 12, 16, 16, mapBg);
-	Map* b3 = new Map(&tilesets[0], "/maps/b3.map", 16, 12, 16, 16, mapBg);
-	Map* c1 = new Map(&tilesets[0], "/maps/c1.map", 16, 12, 16, 16, mapBg);
-	Map* c2 = new Map(&tilesets[0], "/maps/c2.map", 16, 12, 16, 16, mapBg);
-	Map* c3 = new Map(&tilesets[0], "/maps/c3.map", 16, 12, 16, 16, mapBg);
-	Map* in1 = new Map(&tilesets[1], "/maps/in1.map", 16, 12, 16, 16, mapBg, -1, 0, 0);
-	Map* in2 = new Map(&tilesets[1], "/maps/in2.map", 16, 12, 16, 16, mapBg, -1, 0, 0);
-	Map* in3a = new Map(&tilesets[2], "/maps/in3a.map", 16, 12, 16, 16, mapBg, 0, 0, 0);
-	Map* in3b = new Map(&tilesets[2], "/maps/in3b.map", 16, 12, 16, 16, mapBg, 0, 1, 0);
-	Map* in3c = new Map(&tilesets[2], "/maps/in3c.map", 16, 12, 16, 16, mapBg, 0, 1, 1);
+	Map *a1 = new Map(&tilesets[0], "/maps/a1.map", 16, 12, 16, 16, mapBg);
+	Map *a2 = new Map(&tilesets[0], "/maps/a2.map", 16, 12, 16, 16, mapBg);
+	Map *a3 = new Map(&tilesets[0], "/maps/a3.map", 16, 12, 16, 16, mapBg);
+	Map *b1 = new Map(&tilesets[0], "/maps/b1.map", 16, 12, 16, 16, mapBg);
+	Map *b2 = new Map(&tilesets[0], "/maps/b2.map", 16, 12, 16, 16, mapBg);
+	Map *b3 = new Map(&tilesets[0], "/maps/b3.map", 16, 12, 16, 16, mapBg);
+	Map *c1 = new Map(&tilesets[0], "/maps/c1.map", 16, 12, 16, 16, mapBg);
+	Map *c2 = new Map(&tilesets[0], "/maps/c2.map", 16, 12, 16, 16, mapBg);
+	Map *c3 = new Map(&tilesets[0], "/maps/c3.map", 16, 12, 16, 16, mapBg);
+	Map *in1 = new Map(&tilesets[1], "/maps/in1.map", 16, 12, 16, 16, mapBg, -1, 0, 0);
+	Map *in2 = new Map(&tilesets[1], "/maps/in2.map", 16, 12, 16, 16, mapBg, -1, 0, 0);
+	Map *in3a = new Map(&tilesets[2], "/maps/in3a.map", 16, 12, 16, 16, mapBg, 0, 0, 0);
+	Map *in3b = new Map(&tilesets[2], "/maps/in3b.map", 16, 12, 16, 16, mapBg, 0, 1, 0);
+	Map *in3c = new Map(&tilesets[2], "/maps/in3c.map", 16, 12, 16, 16, mapBg, 0, 1, 1);
 	
-	Map** maps = new Map*[WM_SIZE * WM_SIZE + 5];
+	Map **maps = new Map*[WM_SIZE * WM_SIZE + 5];
 	maps[0] = a1;
 	maps[1] = a2;
 	maps[2] = a3;

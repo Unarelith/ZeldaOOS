@@ -17,28 +17,19 @@
 	along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
 ---------------------------------------------------------------------------------*/
-#ifndef PLAYER_H
-#define PLAYER_H
+#ifndef NPC_H
+#define NPC_H
 
-// All player's directions
-enum PlayerDirection {
-	DIR_UP = 3,
-	DIR_DOWN = 0,
-	DIR_LEFT = 2,
-	DIR_RIGHT = 1
-};
-
-class Player : public Sprite {
+class NPC : public Sprite {
 	public:
-		Player();
-		~Player();
+		NPC(s16 x, s16 y, bool move, s8 area, PlayerDirection direction, const void *tiles, const void *pal, u16 map);
+		~NPC();
 		
 		// Update functions
 		void move();
 		void draw();
 		
 		// Player's collisions
-		void doorCollisions();
 		void testCollisions();
 		
 		// Attributes functions
@@ -52,26 +43,40 @@ class Player : public Sprite {
 		void vx(s8 vx) { m_vx = vx; }
 		s8 vy() const { return m_vy; }
 		void vy(s8 vy) { m_vy = vy; }
+		u16 map() const { return m_map; }
 		
 		// Static functions
 		static bool inTable(u16 t[], u16 n);
 		static bool passable(s16 caseX, s16 caseY);
 		static bool inTiles(s16 caseX, s16 caseY, u16 t[]);
 		
-	private:
-		// Player lifes
-		int m_lifes;
+		// NPC counter
+		static int nbNPCs;
 		
-		// Player coordinates
+	private:
+		// NPC id
+		int m_id;
+		
+		// NPC coordinates
 		s16 m_x;
 		s16 m_y;
 		
-		// Player movement vectors
+		// NPC movement vectors
 		s8 m_vx;
 		s8 m_vy;
 		
 		// Direction
 		PlayerDirection m_direction;
+		
+		// Movable
+		bool m_move;
+		
+		// Area
+		s8 m_areaX;
+		s8 m_areaY;
+		
+		// Map
+		u16 m_map;
 };
 
-#endif // PLAYER_H
+#endif // NPC_H

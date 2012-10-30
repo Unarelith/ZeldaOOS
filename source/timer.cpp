@@ -65,3 +65,4 @@ void Timer::initTimers() {
 	irqEnable(IRQ_TIMER1);
 	osTime = 0;
 }
+

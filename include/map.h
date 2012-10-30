@@ -74,6 +74,10 @@ class Map {
 		
 		static std::vector<std::vector<Map*>> groups;
 		
+		// NPC management
+		void drawNPCs();
+		static NPC **NPCs;
+		
 	private:
 		// Map id
 		u16 m_id;
@@ -111,6 +115,10 @@ class Map {
 		
 		// Put tile
 		void putTile(s16 x, s16 y, const Map *map, s16 mapX, s16 mapY);
+		
+		// NPC management
+		int m_NPCnb;
+		NPC **m_NPCs;
 };
 
 #endif // MAP_H

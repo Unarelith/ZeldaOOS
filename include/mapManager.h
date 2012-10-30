@@ -45,6 +45,7 @@ typedef struct {
 } SubMap;
 
 Tileset *initTilesets();
+NPC **initNPCs();
 Map **initMaps(u8 mapBg);
 
 #endif // MAPMANAGER_H
