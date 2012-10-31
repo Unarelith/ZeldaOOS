@@ -249,6 +249,7 @@ void Map::drawNPCs() {
 	for(int i = 0 ; i < m_NPCnb ; i++) {
 		m_NPCs[i]->move();
 		m_NPCs[i]->draw();
+		printf("cool");
 	}
 }
 

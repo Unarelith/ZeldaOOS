@@ -28,7 +28,7 @@
 #include "door.h"
 #include "game.h"
 
-int NPC::nbNPCs = 0;
+unsigned int NPC::nbNPCs = 0;
 
 // Fill animations table
 int NPCanimations[4][4] = {
@@ -38,12 +38,9 @@ int NPCanimations[4][4] = {
 	{7,3},
 };
 
-NPC::NPC(s16 x, s16 y, bool move, s8 area, PlayerDirection direction, const void *tiles, const void *pal, u16 map) : Sprite(SCREEN_UP, 0, SprSize_16x16, 0) {
+NPC::NPC(s16 x, s16 y, bool move, s8 area, PlayerDirection direction, const void *tiles, const void *pal, u16 map) : Sprite(SCREEN_UP, nbNPCs + 1, SprSize_16x16, 0) {
 	m_id = nbNPCs;
 	nbNPCs++;
-	
-	loadTiles(SCREEN_UP, 32, 32, SprColors_16, tiles);
-	loadPalette(SCREEN_UP, 1, pal);
 	
 	m_x = x;
 	m_y = y;
@@ -53,6 +50,9 @@ NPC::NPC(s16 x, s16 y, bool move, s8 area, PlayerDirection direction, const void
 	m_areaY = m_areaX = area;
 	m_direction = direction;
 	m_map = map;
+	
+	//loadTiles(SCREEN_UP, 32, 32, SprColors_16, tiles);
+	//loadPalette(SCREEN_UP, 1, pal);
 	
 	// Add animations to player's sprite
 	addAnimation(2, NPCanimations[0], 100); // Down
@@ -189,7 +189,7 @@ void NPC::move() {
 		// Test collisions
 		testCollisions();
 		
-		// Add speed vectors to coordinates ( move the player )
+		// Add speed vectors to coordinates ( move the NPC )
 		m_x += m_vx;
 		m_y += m_vy;
 		
@@ -204,7 +204,7 @@ void NPC::draw() {
 	if(!(keysHeld() & (KEY_UP | KEY_DOWN | KEY_LEFT | KEY_RIGHT))) {
 		drawFrame(m_x, m_y, m_direction); // Draw a simple frame
 	} else {
-		playAnimation(m_x, m_y, m_direction); // Play player's animation
+		playAnimation(m_x, m_y, m_direction); // Play animation
 	}
 }
 

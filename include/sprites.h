@@ -69,9 +69,6 @@ class Sprite {
 		// Get functions
 		int id() const { return s_id; } // Get sprite ID
 		
-		// Static functions
-		static void loadAllIcons(u8 screen);
-		
 	protected:
 		int s_id; // Sprite index
 		u8 s_screen; // Screen on those the sprite is printing

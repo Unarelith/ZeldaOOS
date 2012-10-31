@@ -51,7 +51,7 @@ class NPC : public Sprite {
 		static bool inTiles(s16 caseX, s16 caseY, u16 t[]);
 		
 		// NPC counter
-		static int nbNPCs;
+		static unsigned int nbNPCs;
 		
 	private:
 		// NPC id

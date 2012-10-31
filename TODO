@@ -6,3 +6,7 @@
 - Inventory
 - Weapons
 - Stats ( Lifes, money )
+
+(
+- s_ instead of m_ in sprites.cpp sprites.h
+)

@@ -118,7 +118,7 @@ void Game::mainLoop() {
 	// Init doors system
 	doors = initDoors();
 	
-	currentMap = maps[4];
+	currentMap = maps[0];
 	currentMap->initOTF();
 	
 	while(!(keysDown() & KEY_A)) {
