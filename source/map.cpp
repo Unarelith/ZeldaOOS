@@ -39,7 +39,7 @@ s16 Map::scrollY = 0;
 
 vector<vector<Map*>> Map::groups;
 
-NPC **Map::NPCs = initNPCs();
+NPC **Map::NPCs;
 
 Map::Map(Tileset *tileset, char *filename, u16 width, u16 height, u16 tileWidth, u16 tileHeight, u8 bg, s16 group, s16 mapX, s16 mapY) {
 	m_id = nbMaps;

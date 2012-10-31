@@ -100,6 +100,8 @@ Game::Game() {
 		swiWaitForVBlank();
 	}
 	
+	Map::NPCs = initNPCs();
+	
 	// Go to main loop
 	mainLoop();
 }
