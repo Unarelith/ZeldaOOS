@@ -28,6 +28,14 @@
 #include "door.h"
 #include "game.h"
 
+#include "blue_boy.h"
+#include "blue_man.h"
+#include "farore.h"
+#include "postman.h"
+#include "red_girl.h"
+#include "red_woman.h"
+#include "yellow_oldwoman.h"
+
 unsigned int NPC::nbNPCs = 0;
 
 // Fill animations table
@@ -38,173 +46,57 @@ int NPCanimations[4][4] = {
 	{7,3},
 };
 
-NPC::NPC(s16 x, s16 y, bool move, s8 area, PlayerDirection direction, const void *tiles, const void *pal, u16 map) : Sprite(SCREEN_UP, nbNPCs + 1, SprSize_16x16, 32) {
+void NPC::loadAllNPCs() {
+	loadTiles(SCREEN_UP, 32, 32, SprColors_16, blue_boyTiles);
+	loadTiles(SCREEN_UP, 64, 32, SprColors_16, blue_manTiles);
+	loadTiles(SCREEN_UP, 96, 32, SprColors_16, faroreTiles);
+	loadTiles(SCREEN_UP, 128, 32, SprColors_16, red_girlTiles);
+	loadTiles(SCREEN_UP, 160, 32, SprColors_16, red_womanTiles);
+	loadTiles(SCREEN_UP, 192, 32, SprColors_16, yellow_oldwomanTiles);
+	
+	loadPalette(SCREEN_UP, 1, blue_boyTiles);
+}
+
+NPC::NPC(s16 x, s16 y, PlayerDirection direction, NPCType type, u16 map) : Sprite(SCREEN_UP, nbNPCs + 1, SprSize_16x16, 32) {
 	m_id = nbNPCs;
 	nbNPCs++;
 	
 	m_x = x;
 	m_y = y;
-	m_vx = 0;
-	m_vy = 0;
-	m_move = move;
-	m_areaY = m_areaX = area;
 	m_direction = direction;
 	m_map = map;
+	m_type = type;
 	
-	loadTiles(SCREEN_UP, 32, 32, SprColors_16, tiles);
-	loadPalette(SCREEN_UP, 1, pal);
+	switch(m_type) {
+		case NPC_BLUE_BOY:
+			break;
+		case NPC_BLUE_MEN:
+			break;
+		case NPC_FARORE:
+			break;
+		case NPC_POSTMAN:
+			break;
+		case NPC_RED_GIRL:
+			break;
+		case NPC_RED_WOMAN:
+			break;
+		case NPC_YELLOW_OLDWOMAN:
+			break;
+		default:
+			break;
+	}
 	
 	// Add animations to player's sprite
-	addAnimation(2, NPCanimations[0], 100); // Down
-	addAnimation(2, NPCanimations[1], 100); // Right
-	addAnimation(2, NPCanimations[2], 100); // Left
-	addAnimation(2, NPCanimations[3], 100); // Up
+	addAnimation(2, NPCanimations[0], 250); // Down
+	addAnimation(2, NPCanimations[1], 250); // Right
+	addAnimation(2, NPCanimations[2], 250); // Left
+	addAnimation(2, NPCanimations[3], 250); // Up
 }
 
 NPC::~NPC() {
 }
 
-bool NPC::inTable(u16 t[], u16 n) {
-	int i = 0;
-	while(t[i]) {
-		if(t[i] == n) {
-			return true;
-		}
-		i++;
-	}
-	return false;
-}
-
-bool NPC::passable(s16 caseX, s16 caseY) {
-	if(inTable(nonPassableTiles, Game::currentMap->tileset()->info[Game::currentMap->getTile(caseX, caseY)])) {
-		return false;
-	} else {
-		return true;
-	}
-}
-
-bool NPC::inTiles(s16 caseX, s16 caseY, u16 t[]) {
-	if(inTable(t, Game::currentMap->tileset()->info[Game::currentMap->getTile(caseX, caseY)])) {
-		return true;
-	} else {
-		return false;
-	}
-}
-
-void NPC::testCollisions() {
-	// Right
-	if((m_vx > 0) && ((!passable((m_x + 12) >> 4, (m_y + 8) >> 4)) || (!passable((m_x + 12) >> 4, (m_y + 13) >> 4)))) {
-		m_vx = 0;
-		
-		// Obstacle up
-		if((!passable((m_x + 12) >> 4, (m_y + 8) >> 4)) && passable((m_x + 12) >> 4, (m_y + 13) >> 4)) {
-			if(m_vy == 0) m_vy = 1;
-		}
-		// Obstacle down
-		if((!passable((m_x + 12) >> 4, (m_y + 13) >> 4)) && passable((m_x + 12) >> 4, (m_y + 8) >> 4)) {
-			if(m_vy == 0) m_vy = -1;
-		}
-	}
-	
-	// Left
-	if((m_vx < 0) && ((!passable((m_x + 3) >> 4, (m_y + 8) >> 4)) || (!passable((m_x + 3) >> 4, (m_y + 13) >> 4)))) {
-		m_vx = 0;
-		
-		// Obstacle up
-		if((!passable((m_x + 3) >> 4, (m_y + 8) >> 4)) && passable((m_x + 3) >> 4, (m_y + 13) >> 4)) {
-			if(m_vy == 0) m_vy = 1;
-		}
-		// Obstacle down
-		if((!passable((m_x + 3) >> 4, (m_y + 13) >> 4)) && passable((m_x + 3) >> 4, (m_y + 8) >> 4)) {
-			if(m_vy == 0) m_vy = -1;
-		}
-	}
-	
-	// Up
-	if((m_vy < 0) && ((!passable((m_x + 5) >> 4, (m_y + 5) >> 4)) || (!passable((m_x + 10) >> 4, (m_y + 5) >> 4)))) {
-		m_vy = 0;
-		
-		// Obstacle left
-		if((!passable((m_x + 5) >> 4, (m_y + 5) >> 4)) && passable((m_x + 10) >> 4, (m_y + 5) >> 4)) {
-			if(m_vx == 0) m_vx = 1;
-		}
-		// Obstacle right
-		if((!passable((m_x + 10) >> 4, (m_y + 5) >> 4)) && passable((m_x + 5) >> 4, (m_y + 5) >> 4)) {
-			if(m_vx == 0) m_vx = -1;
-		}
-	}
-	
-	// Down
-	if((m_vy > 0) && ((!passable((m_x + 5) >> 4, (m_y + 15) >> 4)) || (!passable((m_x + 10) >> 4, (m_y + 15) >> 4)))) {
-		m_vy = 0;
-		
-		printf("Truc");
-		
-		// Obstacle left
-		if((!passable((m_x + 5) >> 4, (m_y + 15) >> 4)) && passable((m_x + 10) >> 4, (m_y + 15) >> 4)) {
-			if(m_vx == 0) m_vx = 1;
-		}
-		// Obstacle right
-		if((!passable((m_x + 10) >> 4, (m_y + 15) >> 4)) && passable((m_x + 5) >> 4, (m_y + 15) >> 4)) {
-			if(m_vx == 0) m_vx = -1;
-		}
-	}
-}
-
-void NPC::move() {
-	if(Timer::osTime % 2 == 0) {
-		int dir = rand()%4;
-		if(dir == 0) {
-			m_vy = -1; // Set vertical speed vector negative
-			
-			if((!(keysHeld() & KEY_DOWN)) && (!(keysHeld() & KEY_LEFT)) && (!(keysHeld() & KEY_RIGHT))) {
-				m_direction = DIR_UP; // Set direction to up
-			}
-		}
-		
-		if(dir == 1) {
-			m_vy = 1; // Set vertical speed vector positive
-			
-			if((!(keysHeld() & KEY_UP)) && (!(keysHeld() & KEY_LEFT)) && (!(keysHeld() & KEY_RIGHT))) {
-				m_direction = DIR_DOWN; // Set direction to down
-			}
-		}
-		
-		if(dir == 2) {
-			m_vx = -1; // Set horizontal speed vector negative
-			
-			if((!(keysHeld() & KEY_UP)) && (!(keysHeld() & KEY_DOWN)) && (!(keysHeld() & KEY_RIGHT))) {
-				m_direction = DIR_LEFT; // Set direction to left
-			}
-		}
-		
-		if(dir == 3) {
-			m_vx = 1; // Set horizontal speed vector positive
-			
-			if((!(keysHeld() & KEY_UP)) && (!(keysHeld() & KEY_DOWN)) && (!(keysHeld() & KEY_LEFT))) {
-				m_direction = DIR_RIGHT; // Set direction to right
-			}
-		}
-		
-		// Test collisions
-		testCollisions();
-		
-		// Add speed vectors to coordinates ( move the NPC )
-		m_x += m_vx;
-		m_y += m_vy;
-		
-		// Reset speed vectors
-		m_vx = 0;
-		m_vy = 0;
-	}
-}
-
 void NPC::draw() {
-	// If all directional keys are released
-	if(!(keysHeld() & (KEY_UP | KEY_DOWN | KEY_LEFT | KEY_RIGHT))) {
-		drawFrame(m_x, m_y, m_direction, 1); // Draw a simple frame
-	} else {
-		playAnimation(m_x, m_y, m_direction, 1); // Play animation
-	}
+	playAnimation(m_x, m_y, m_direction, 1); // Play animation
 }
 

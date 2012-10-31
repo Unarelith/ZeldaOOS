@@ -31,15 +31,6 @@
 #include "indoor.h"
 #include "underground.h"
 
-#include "blue_boy.h"
-#include "blue_men.h"
-#include "farore.h"
-#include "postman.h"
-#include "red_girl.h"
-#include "red_woman.h"
-#include "yellow_oldwoman.h"
-
-
 /*	Tiles informations:
 		0: Passable
 		1: Non passable
@@ -149,7 +140,7 @@ Tileset* initTilesets() {
 }
 
 NPC** initNPCs() {
-	NPC *a1_1 = new NPC(10 << 4, 2 << 4, false, 0, DIR_DOWN, blue_boyTiles, blue_boyPal, 0);
+	NPC *a1_1 = new NPC(10 << 4, 2 << 4, DIR_DOWN, NPC_BLUE_BOY, 0);
 	
 	NPC **NPCs = new NPC*;
 	NPCs[0] = a1_1;

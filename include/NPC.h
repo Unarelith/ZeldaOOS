@@ -20,17 +20,23 @@
 #ifndef NPC_H
 #define NPC_H
 
+enum NPCType {
+	NPC_BLUE_BOY,
+	NPC_BLUE_MEN,
+	NPC_FARORE,
+	NPC_POSTMAN,
+	NPC_RED_GIRL,
+	NPC_RED_WOMAN,
+	NPC_YELLOW_OLDWOMAN
+};
+
 class NPC : public Sprite {
 	public:
-		NPC(s16 x, s16 y, bool move, s8 area, PlayerDirection direction, const void *tiles, const void *pal, u16 map);
+		NPC(s16 x, s16 y, PlayerDirection direction, NPCType type, u16 map);
 		~NPC();
 		
 		// Update functions
-		void move();
 		void draw();
-		
-		// Player's collisions
-		void testCollisions();
 		
 		// Attributes functions
 		PlayerDirection direction() const { return m_direction; }
@@ -39,16 +45,10 @@ class NPC : public Sprite {
 		void x(s16 x) { m_x = x; }
 		s16 y() const { return m_y; }
 		void y(s16 y) { m_y = y; }
-		s8 vx() const { return m_vx; }
-		void vx(s8 vx) { m_vx = vx; }
-		s8 vy() const { return m_vy; }
-		void vy(s8 vy) { m_vy = vy; }
 		u16 map() const { return m_map; }
 		
-		// Static functions
-		static bool inTable(u16 t[], u16 n);
-		static bool passable(s16 caseX, s16 caseY);
-		static bool inTiles(s16 caseX, s16 caseY, u16 t[]);
+		// Sprites loading
+		static void loadAllNPCs();
 		
 		// NPC counter
 		static unsigned int nbNPCs;
@@ -61,15 +61,8 @@ class NPC : public Sprite {
 		s16 m_x;
 		s16 m_y;
 		
-		// NPC movement vectors
-		s8 m_vx;
-		s8 m_vy;
-		
 		// Direction
 		PlayerDirection m_direction;
-		
-		// Movable
-		bool m_move;
 		
 		// Area
 		s8 m_areaX;
@@ -77,6 +70,9 @@ class NPC : public Sprite {
 		
 		// Map
 		u16 m_map;
+		
+		// Type
+		NPCType m_type;
 };
 
 #endif // NPC_H
