@@ -38,7 +38,7 @@ int NPCanimations[4][4] = {
 	{7,3},
 };
 
-NPC::NPC(s16 x, s16 y, bool move, s8 area, PlayerDirection direction, const void *tiles, const void *pal, u16 map) : Sprite(SCREEN_UP, nbNPCs + 1, SprSize_16x16, 0) {
+NPC::NPC(s16 x, s16 y, bool move, s8 area, PlayerDirection direction, const void *tiles, const void *pal, u16 map) : Sprite(SCREEN_UP, nbNPCs + 1, SprSize_16x16, 32) {
 	m_id = nbNPCs;
 	nbNPCs++;
 	
@@ -51,8 +51,8 @@ NPC::NPC(s16 x, s16 y, bool move, s8 area, PlayerDirection direction, const void
 	m_direction = direction;
 	m_map = map;
 	
-	//loadTiles(SCREEN_UP, 32, 32, SprColors_16, tiles);
-	//loadPalette(SCREEN_UP, 1, pal);
+	loadTiles(SCREEN_UP, 32, 32, SprColors_16, tiles);
+	loadPalette(SCREEN_UP, 1, pal);
 	
 	// Add animations to player's sprite
 	addAnimation(2, NPCanimations[0], 100); // Down
@@ -202,9 +202,9 @@ void NPC::move() {
 void NPC::draw() {
 	// If all directional keys are released
 	if(!(keysHeld() & (KEY_UP | KEY_DOWN | KEY_LEFT | KEY_RIGHT))) {
-		drawFrame(m_x, m_y, m_direction); // Draw a simple frame
+		drawFrame(m_x, m_y, m_direction, 1); // Draw a simple frame
 	} else {
-		playAnimation(m_x, m_y, m_direction); // Play animation
+		playAnimation(m_x, m_y, m_direction, 1); // Play animation
 	}
 }
 
