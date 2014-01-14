@@ -9,12 +9,14 @@ ZeldaOracle=/home/quentin/devkitPro/projects/ZeldaOracle CD=. filter="*.c *.cpp 
  }
  include=include {
   libs5.h
+  map.h
   sprite.h
   timer.h
  }
  source=source {
   libs5.c
   main.c
+  map.c
   sprite.c
   timer.c
   libs5_asm.s
