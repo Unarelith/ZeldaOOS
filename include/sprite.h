@@ -29,12 +29,12 @@ struct s_animation
   
   struct s_animation *next;
   
-  uint16_t *animation_table;
+  uint8_t *animation_table;
  };
 
 typedef struct s_animation s_animation;
 
-s_animation *animation_new(uint16_t size, uint16_t *animation_table, uint16_t delay);
+s_animation *animation_new(uint16_t size, uint8_t *animation_table, uint16_t delay);
 void animation_free(s_animation *animation);
 
 struct s_sprite
@@ -60,14 +60,14 @@ s_sprite *sprite_new(uint8_t screen, uint8_t id, s5_dimension size, uint8_t base
 void sprite_free(s_sprite *sprite);
 
 void sprite_clear(s_sprite *sprite);
-void sprite_drawFrame(s_sprite *sprite, int16_t x, int16_t y, uint8_t frame);
+void sprite_draw_frame(s_sprite *sprite, int16_t x, int16_t y, uint8_t frame);
 
 void sprite_add_animation(s_sprite *sprite, uint8_t size, uint8_t *anim, uint16_t delay);
-void sprite_get_animation(s_sprite *sprite, uint8_t anim);
+s_animation *sprite_get_animation(s_sprite *sprite, uint8_t anim);
 void sprite_reset_animation(s_sprite *sprite, uint8_t anim);
 void sprite_start_animation(s_sprite *sprite, uint8_t anim);
 void sprite_stop_animation(s_sprite *sprite, uint8_t anim);
-bool sprite_is_animation_at_end(s_sprite *sprite, uint8_t anim);
+bool sprite_animation_at_end(s_sprite *sprite, uint8_t anim);
 void sprite_play_animation(s_sprite *sprite, int16_t x, int16_t y, uint8_t anim);
 
 #endif // SPRITE_H_

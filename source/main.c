@@ -37,17 +37,30 @@ void video_init()
   sprite_system_init();
  }
 
+uint8_t link_animations[12][4] = {
+	{4,0},
+	{5,1},
+	{6,2},
+	{7,3}
+};
+
 int main(void)
  {
   s_sprite *test_sprite;
   
 	 video_init();
   
+  consoleDemoInit();
+  
   test_sprite = sprite_new(SCREEN_UP, 0, SprSize_16x16, 0, 4, 32, 0, linkTiles, linkPal);
+  sprite_add_animation(test_sprite, 2, link_animations[0], 100);
+  sprite_add_animation(test_sprite, 2, link_animations[1], 100);
+  sprite_add_animation(test_sprite, 2, link_animations[2], 100);
+  sprite_add_animation(test_sprite, 2, link_animations[3], 100);
   
   while(1)
    {
-    sprite_drawFrame(test_sprite, SCREEN_UP, 0, 0);
+    sprite_play_animation(test_sprite, 0, 0, 0);
     
 	 	 swiWaitForVBlank();
 	  }

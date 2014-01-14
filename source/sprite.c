@@ -15,13 +15,14 @@
  *
  * =====================================================================================
  */
+#include <stdio.h>
 #include <nds.h>
 #include "libs5.h"
 #include "timer.h"
 #include "sprite.h"
 
 s_animation   *animation_new(uint16_t size,
-                             uint16_t *animation_table,
+                             uint8_t  *animation_table,
                              uint16_t delay)
  {
   s_animation *animation;
@@ -98,7 +99,7 @@ void sprite_clear(s_sprite *sprite)
   clearSprite(sprite->screen, sprite->id);
  }
 
-void sprite_drawFrame(s_sprite *sprite,
+void sprite_draw_frame(s_sprite *sprite,
                       int16_t x,
                       int16_t y,
                       uint8_t frame)
@@ -116,11 +117,11 @@ void          sprite_add_animation(s_sprite *sprite,
   it = sprite->animations;
   if(it)
    {
-    while(it->animations)
+    while(it->next)
      {
-      it = it->animations;
+      it = it->next;
      }
-    it->animations = animation_new(size, anim, delay);
+    it->next = animation_new(size, anim, delay);
    }
   else
    {
@@ -128,35 +129,95 @@ void          sprite_add_animation(s_sprite *sprite,
    }
  }
 
-void sprite_get_animation(s_sprite *sprite, uint8_t anim)
+s_animation   *sprite_get_animation(s_sprite *sprite, uint8_t anim)
  {
   s_animation *ret;
+  uint8_t     i;
   
-  
+  i = 0;
+  ret = sprite->animations;
+  while(ret && i != anim)
+   {
+    ret = ret->next;
+    i++;
+   }
+  return ret;
  }
 
-void sprite_reset_animation(s_sprite *sprite, uint8_t anim)
+void          sprite_reset_animation(s_sprite *sprite, uint8_t anim)
  {
+  s_animation *animation;
   
+  animation = sprite_get_animation(sprite, anim);
+  if(animation)
+   {
+    timer_reset(animation->timer);
+   }
  }
 
-void sprite_start_animation(s_sprite *sprite, uint8_t anim)
+void          sprite_start_animation(s_sprite *sprite, uint8_t anim)
  {
+  s_animation *animation;
   
+  animation = sprite_get_animation(sprite, anim);
+  if(animation)
+   {
+     timer_start(animation->timer);
+   }
  }
 
-void sprite_stop_animation(s_sprite *sprite, uint8_t anim)
+void          sprite_stop_animation(s_sprite *sprite, uint8_t anim)
  {
+  s_animation *animation;
   
+  animation = sprite_get_animation(sprite, anim);
+  if(animation)
+   {
+    timer_stop(animation->timer);
+   }
  }
 
-void sprite_is_animation_at_end(s_sprite *sprite, uint8_t anim)
+bool sprite_animation_at_end(s_sprite *sprite, uint8_t anim)
  {
+  s_animation *animation;
   
+  animation = sprite_get_animation(sprite, anim);
+  if(animation)
+   {
+    return timer_get_time(animation->timer) / animation->delay >= animation->size;
+   }
+  else
+   {
+    return true;
+   }
  }
 
-void sprite_play_animation(s_sprite *sprite, int16_t x, int16_t y, uint8_t anim)
+void          sprite_play_animation(s_sprite *sprite,
+                                    int16_t  x,
+                                    int16_t  y,
+                                    uint8_t  anim)
  {
+  s_animation *animation;
   
+  animation = sprite_get_animation(sprite, anim);
+  if(animation)
+   {
+    if(!animation->playing)
+     {
+      sprite_reset_animation(sprite, anim);
+      sprite_start_animation(sprite, anim);
+      animation->playing = true;
+     }
+    
+    if(sprite_animation_at_end(sprite, anim))
+     {
+      sprite_reset_animation(sprite, anim);
+      sprite_start_animation(sprite, anim);
+     }
+    
+    iprintf("\x1b[0;0Htime: %d\n", timer_get_time(animation->timer));
+    uint8_t frame = animation->animation_table[(int)(timer_get_time(animation->timer) / animation->delay)];
+    sprite_draw_frame(sprite, x, y, frame);
+   }
  }
- 
+
