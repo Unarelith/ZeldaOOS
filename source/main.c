@@ -1,0 +1,54 @@
+/*
+ * =====================================================================================
+ *
+ *   Program name:  ZeldaOracle
+ *       Filename:  main.c
+ *
+ *    Description:  ZeldaOracle is a 2D Zelda: Oracle
+ *                  of-like engine written in pure C
+ *                  with the libnds
+ *
+ *        Version:  1.0
+ *        Created:  06/01/2014 20:31:35
+ *       Revision:  none
+ *       Compiler:  gcc
+ *
+ *         Author:  Quentin BAZIN, <quent42340@gmail.com>
+ *        Company:  Deloptia
+ *
+ * =====================================================================================
+ */
+#include <nds.h>
+#include "libs5.h"
+#include "link.h"
+#include "timer.h"
+#include "sprite.h"
+
+void video_init()
+ {
+  videoSetMode(MODE_5_2D);
+  videoSetModeSub(MODE_5_2D);
+  
+  vramSetBankA(VRAM_A_MAIN_BG_0x06000000);
+  vramSetBankB(VRAM_B_MAIN_SPRITE_0x06400000);
+  vramSetBankC(VRAM_C_SUB_BG_0x06200000);
+  vramSetBankD(VRAM_D_SUB_SPRITE);
+  
+  sprite_system_init();
+ }
+
+int main(void)
+ {
+  s_sprite *test_sprite;
+  
+	 video_init();
+  
+  test_sprite = sprite_new(SCREEN_UP, 0, SprSize_16x16, 0, 4, 32, 0, linkTiles, linkPal);
+  
+  while(1)
+   {
+    sprite_drawFrame(test_sprite, SCREEN_UP, 0, 0);
+    
+	 	 swiWaitForVBlank();
+	  }
+ }
