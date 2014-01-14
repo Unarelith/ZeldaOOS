@@ -215,7 +215,6 @@ void          sprite_play_animation(s_sprite *sprite,
       sprite_start_animation(sprite, anim);
      }
     
-    iprintf("\x1b[0;0Htime: %d\n", timer_get_time(animation->timer));
     uint8_t frame = animation->animation_table[(int)(timer_get_time(animation->timer) / animation->delay)];
     sprite_draw_frame(sprite, x, y, frame);
    }

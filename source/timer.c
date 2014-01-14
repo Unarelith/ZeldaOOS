@@ -62,7 +62,7 @@ void on_timer()
   os_time++;
  }
  
-void init_timers()
+void timer_system_init()
  {
   TIMER1_CR = 0;
   TIMER1_DATA = TIMER_FREQ_1024(1000);

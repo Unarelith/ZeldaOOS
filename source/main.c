@@ -46,6 +46,10 @@ uint8_t link_animations[12][4] = {
 
 int main(void)
  {
+  defaultExceptionHandler();
+  
+  timer_system_init();
+  
   s_sprite *test_sprite;
   
 	 video_init();

@@ -27,7 +27,7 @@ struct s_timer
 
 typedef struct s_timer s_timer;
 
-void init_timers();
+void timer_system_init();
 
 s_timer *timer_new();
 
