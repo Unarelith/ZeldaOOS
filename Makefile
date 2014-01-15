@@ -8,6 +8,10 @@ endif
 
 include $(DEVKITARM)/ds_rules
 
+export GAME_TITLE	    :=	ZeldaOracle
+export GAME_SUBTITLE1	:=	TLOZ:OO-like engine
+export GAME_SUBTITLE2	:=	by Quent42340
+
 #---------------------------------------------------------------------------------
 # TARGET is the name of the output
 # BUILD is the directory where object files & intermediate files will be placed
@@ -16,12 +20,13 @@ include $(DEVKITARM)/ds_rules
 # DATA is a list of directories containing binary files embedded using bin2o
 # GRAPHICS is a list of directories containing image files to be converted with grit
 #---------------------------------------------------------------------------------
-TARGET   :=	$(shell basename $(CURDIR))
-BUILD    :=	build
-SOURCES		:=	source
-INCLUDES	:=	include
-DATA     :=	data  
-GRAPHICS	:=	graphics
+TARGET    :=	$(shell basename $(CURDIR))
+BUILD     :=	build
+SOURCES	 	:=	source
+INCLUDES 	:=	include
+DATA      :=	data  
+GRAPHICS 	:=	graphics
+NITRODATA := nitrofiles
 
 #---------------------------------------------------------------------------------
 # options for code generation
@@ -42,7 +47,7 @@ LDFLAGS	=	-specs=ds_arm9.specs -g $(ARCH) -Wl,-Map,$(notdir $*.map)
 #---------------------------------------------------------------------------------
 # any extra libraries we wish to link with the project (order is important)
 #---------------------------------------------------------------------------------
-LIBS	:= 	-lnds9
+LIBS	:= 	-lfilesystem -lfat -lnds9
  
 #---------------------------------------------------------------------------------
 # list of directories containing libraries, this must be the top level containing
@@ -62,6 +67,10 @@ export OUTPUT	:=	$(CURDIR)/$(TARGET)
 export VPATH	:=	$(foreach dir,$(SOURCES),$(CURDIR)/$(dir)) \
 					$(foreach dir,$(DATA),$(CURDIR)/$(dir)) \
 					$(foreach dir,$(GRAPHICS),$(CURDIR)/$(dir))
+
+ifneq ($(strip $(NITRODATA)),)
+	export NITRO_FILES	:=	$(CURDIR)/$(NITRODATA)
+endif
 
 export DEPSDIR	:=	$(CURDIR)/$(BUILD)
 
@@ -105,7 +114,7 @@ else
 	endif
 endif
  
-.PHONY: $(BUILD) clean
+.PHONY: $(BUILD) clean run debug edit nitro
  
 #---------------------------------------------------------------------------------
 $(BUILD):
@@ -128,7 +137,12 @@ edit:
 clean:
 	@echo clean ...
 	@rm -fr $(BUILD) $(TARGET).elf $(TARGET).nds
-
+	
+#---------------------------------------------------------------------------------
+nitro:
+	@rm $(TARGET).elf $(TARGET).nds
+	@make --no-print-directory
+ 
 #---------------------------------------------------------------------------------
 else
  
@@ -152,7 +166,7 @@ $(OUTPUT).elf	:	$(OFILES)
 #---------------------------------------------------------------------------------
 %.s %.h   : %.png %.grit
 #---------------------------------------------------------------------------------
-	grit $< -fts -o$*
+	grit $< -fts -W1 -gt -gTFF0FF -o$*
 
 -include $(DEPSDIR)/*.d
  

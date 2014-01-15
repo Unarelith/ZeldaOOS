@@ -18,11 +18,16 @@
  *
  * =====================================================================================
  */
+#include <stdio.h>
 #include <nds.h>
+#include <fat.h>
+#include <filesystem.h>
 #include "libs5.h"
 #include "link.h"
 #include "timer.h"
 #include "sprite.h"
+#include "plain.h"
+#include "map.h"
 
 void video_init()
  {
@@ -35,6 +40,8 @@ void video_init()
   vramSetBankD(VRAM_D_SUB_SPRITE);
   
   sprite_system_init();
+  
+  map_system_init();
  }
 
 uint8_t link_animations[12][4] = {
@@ -47,6 +54,21 @@ uint8_t link_animations[12][4] = {
 int main(void)
  {
   defaultExceptionHandler();
+  
+  printf("NitroFS loading...\n");
+	 
+  if(!nitroFSInit())
+   {
+    printf("FATAL ERROR: Bad nitroFS init\n");
+    while(1)
+     {
+      swiWaitForVBlank();
+     }
+   }
+  
+  printf("NitroFS loaded!\n");
+  
+  consoleClear();
   
   timer_system_init();
   
@@ -62,10 +84,22 @@ int main(void)
   sprite_add_animation(test_sprite, 2, link_animations[2], 100);
   sprite_add_animation(test_sprite, 2, link_animations[3], 100);
   
+  s_tileset *plain = tileset_new(NULL, plainTiles, plainTilesLen, plainPal, plainPalLen);
+  
+  s_map *a1 = map_new(plain, "/maps/a1.map", 16, 12, 0, 0, 0);
+  
+  map_load(a1);
+  
   while(1)
    {
     sprite_play_animation(test_sprite, 0, 0, 0);
     
 	 	 swiWaitForVBlank();
 	  }
+  
+  map_free(a1);
+  
+  tileset_free(plain);
+  
+  sprite_free(test_sprite);
  }
