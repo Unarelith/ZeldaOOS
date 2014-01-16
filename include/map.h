@@ -18,22 +18,6 @@
 #ifndef MAP_H_
 #define MAP_H_
 
-struct s_tileset
- {
-  uint8_t *info;
-  
-  const uint32_t *tiles;
-  uint32_t tiles_length;
-  
-  const uint16_t *palette;
-  uint32_t pal_length;
- };
-
-typedef struct s_tileset t_tileset;
-
-t_tileset *tileset_new(uint8_t *info, const uint32_t *tiles, uint32_t tilet_length, const uint16_t *palette, uint32_t pal_length);
-void tileset_free(t_tileset *tileset);
-
 struct s_map
  {
   uint16_t id;

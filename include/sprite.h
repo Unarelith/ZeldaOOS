@@ -18,25 +18,6 @@
 #ifndef SPRITE_H_
 #define SPRITE_H_
 
-struct s_animation
- {
-  uint16_t size;
-  uint16_t delay;
-  
-  bool     playing;
-  
-  t_timer  *timer;
-  
-  struct t_animation *next;
-  
-  uint8_t *animation_table;
- };
-
-typedef struct s_animation t_animation;
-
-t_animation *animation_new(uint16_t size, uint8_t *animation_table, uint16_t delay);
-void animation_free(t_animation *animation);
-
 struct s_sprite
  {
   uint8_t screen;

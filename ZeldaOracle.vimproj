@@ -8,19 +8,25 @@ ZeldaOracle=/home/quentin/devkitPro/projects/ZeldaOracle CD=. filter="*.c *.cpp 
   link.grit
  }
  include=include {
+  animation.h
   character.h
   libs5.h
   map.h
+  player.h
   sprite.h
+  tileset.h
   timer.h
  }
  source=source {
+  animation.c
   character.c
   libs5.c
   main.c
   map.c
+  player.c
   sprite.c
   timer.c
+  tileset.c
   libs5_asm.s
  }
 }

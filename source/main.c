@@ -23,12 +23,15 @@
 #include <fat.h>
 #include <filesystem.h>
 #include "libs5.h"
-#include "link.h"
 #include "timer.h"
+#include "animation.h"
 #include "sprite.h"
-#include "plain.h"
+#include "tileset.h"
 #include "map.h"
 #include "character.h"
+#include "player.h"
+
+#include "plain.h"
 
 void video_init()
  {
@@ -44,13 +47,6 @@ void video_init()
   
   map_system_init();
  }
-
-uint8_t link_animations[12][4] = {
-	{4,0},
-	{5,1},
-	{6,2},
-	{7,3}
-};
 
 int main(void)
  {
@@ -73,17 +69,11 @@ int main(void)
   
   timer_system_init();
   
-  t_character *link;
-  
 	 video_init();
   
   consoleDemoInit();
   
-  link = character_new(SCREEN_UP, 0, 0, direction_down, 0, SprSize_16x16, 0, 4, 32, 0, linkTiles, linkPal);
-  sprite_add_animation(link->sprite, 2, link_animations[0], 100);
-  sprite_add_animation(link->sprite, 2, link_animations[1], 100);
-  sprite_add_animation(link->sprite, 2, link_animations[2], 100);
-  sprite_add_animation(link->sprite, 2, link_animations[3], 100);
+  t_character *link = player_new();
   
   t_tileset *plain = tileset_new(NULL, plainTiles, plainTilesLen, plainPal, plainPalLen);
   
@@ -93,6 +83,10 @@ int main(void)
   
   while(1)
    {
+    scanKeys();
+    
+    character_move(link);
+    
     character_render(link);
     
 	 	 swiWaitForVBlank();
@@ -104,3 +98,4 @@ int main(void)
   
   character_free(link);
  }
+

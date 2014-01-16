@@ -17,40 +17,16 @@
  */
 #include <stdio.h>
 #include <nds.h>
+#include "tileset.h"
 #include "map.h"
 
-uint8_t map_bg;
-uint16_t map_counter = 0;
+static uint8_t g_map_bg;
+static uint16_t g_map_counter = 0;
 
-t_tileset   *tileset_new(uint8_t *info,
-                         const uint32_t *tiles,
-                         uint32_t tiles_length,
-                         const uint16_t *palette,
-                         uint32_t pal_length)
- {
-  t_tileset *tileset;
-  
-  tileset = (t_tileset *)malloc(sizeof(t_tileset));
-  tileset->info = info;
-  tileset->tiles = tiles;
-  tileset->tiles_length = tiles_length;
-  tileset->palette = palette;
-  tileset->pal_length = pal_length;
-  
-  return tileset;
- }
-
-void tileset_free(t_tileset *tileset)
- {
-  if(tileset)
-   {
-    free(tileset);
-   }
- }
 
 void map_system_init()
  {
-  map_bg = bgInit(0, BgType_Text8bpp, BgSize_T_512x512, 8, 2);
+  g_map_bg = bgInit(0, BgType_Text8bpp, BgSize_T_512x512, 8, 2);
  }
 
 t_map   *map_new(t_tileset *tileset,
@@ -65,7 +41,7 @@ t_map   *map_new(t_tileset *tileset,
   FILE  *f;
   
   map = (t_map *)malloc(sizeof(t_map));
-  map->id = map_counter++;
+  map->id = g_map_counter++;
   map->tileset = tileset;
   map->width = width;
   map->height = height;
@@ -108,7 +84,7 @@ void       map_load(t_map *map)
   uint16_t x;
   uint16_t y;
   
-  dmaCopy(map->tileset->tiles, bgGetGfxPtr(map_bg), map->tileset->tiles_length);
+  dmaCopy(map->tileset->tiles, bgGetGfxPtr(g_map_bg), map->tileset->tiles_length);
   dmaCopy(map->tileset->palette, BG_PALETTE, map->tileset->pal_length);
   
   for(y = 0 ; y < map->height ; y++)
@@ -128,9 +104,9 @@ void       map_load_tile(t_map *map, uint16_t x, uint16_t y)
   data_x = x & 15;
   data_y = y % 12;
   
-  ((uint16_t *)bgGetMapPtr(map_bg))[map_bg_pos(x * 2,     y * 2    )] = map->data[data_x + data_y * map->width] * 4;
-  ((uint16_t *)bgGetMapPtr(map_bg))[map_bg_pos(x * 2 + 1, y * 2    )] = map->data[data_x + data_y * map->width] * 4 + 1;
-  ((uint16_t *)bgGetMapPtr(map_bg))[map_bg_pos(x * 2,     y * 2 + 1)] = map->data[data_x + data_y * map->width] * 4 + 2;
-  ((uint16_t *)bgGetMapPtr(map_bg))[map_bg_pos(x * 2 + 1, y * 2 + 1)] = map->data[data_x + data_y * map->width] * 4 + 3;
+  ((uint16_t *)bgGetMapPtr(g_map_bg))[map_bg_pos(x * 2,     y * 2    )] = map->data[data_x + data_y * map->width] * 4;
+  ((uint16_t *)bgGetMapPtr(g_map_bg))[map_bg_pos(x * 2 + 1, y * 2    )] = map->data[data_x + data_y * map->width] * 4 + 1;
+  ((uint16_t *)bgGetMapPtr(g_map_bg))[map_bg_pos(x * 2,     y * 2 + 1)] = map->data[data_x + data_y * map->width] * 4 + 2;
+  ((uint16_t *)bgGetMapPtr(g_map_bg))[map_bg_pos(x * 2 + 1, y * 2 + 1)] = map->data[data_x + data_y * map->width] * 4 + 3;
  }
 

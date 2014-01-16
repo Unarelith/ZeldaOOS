@@ -19,39 +19,8 @@
 #include <nds.h>
 #include "libs5.h"
 #include "timer.h"
+#include "animation.h"
 #include "sprite.h"
-
-t_animation   *animation_new(uint16_t size,
-                             uint8_t  *animation_table,
-                             uint16_t delay)
- {
-  t_animation *animation;
-  
-  animation = (t_animation *)malloc(sizeof(t_animation));
-  animation->timer = timer_new();
-  animation->size = size;
-  animation->delay = delay;
-  animation->animation_table = animation_table;
-  animation->next = NULL;
-  
-  return animation;
- }
-
-void animation_free(t_animation *animation)
- {
-  if(animation->next)
-   {
-    animation_free(animation->next);
-   }
-  if(animation)
-   {
-    if(animation->animation_table)
-     {
-      free(animation->animation_table);
-     }
-    free(animation);
-   }
- }
 
 void sprite_system_init()
  {
