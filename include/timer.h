@@ -25,16 +25,16 @@ struct s_timer
   uint16_t ticks;
  };
 
-typedef struct s_timer s_timer;
+typedef struct s_timer t_timer;
 
 void timer_system_init();
 
-s_timer *timer_new();
+t_timer *timer_new();
 
-void timer_stop(s_timer *tmr);
-void timer_start(s_timer *tmr);
-void timer_reset(s_timer *tmr);
+void timer_stop(t_timer *tmr);
+void timer_start(t_timer *tmr);
+void timer_reset(t_timer *tmr);
 
-uint16_t timer_get_time(s_timer *tmr);
+uint16_t timer_get_time(t_timer *tmr);
 
 #endif // TIMER_H_

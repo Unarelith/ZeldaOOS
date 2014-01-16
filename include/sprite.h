@@ -25,17 +25,17 @@ struct s_animation
   
   bool     playing;
   
-  s_timer  *timer;
+  t_timer  *timer;
   
-  struct s_animation *next;
+  struct t_animation *next;
   
   uint8_t *animation_table;
  };
 
-typedef struct s_animation s_animation;
+typedef struct s_animation t_animation;
 
-s_animation *animation_new(uint16_t size, uint8_t *animation_table, uint16_t delay);
-void animation_free(s_animation *animation);
+t_animation *animation_new(uint16_t size, uint8_t *animation_table, uint16_t delay);
+void animation_free(t_animation *animation);
 
 struct s_sprite
  {
@@ -49,25 +49,25 @@ struct s_sprite
   uint16_t tile_size;
   uint8_t palette;
   
-  s_animation *animations;
+  t_animation *animations;
  };
 
-typedef struct s_sprite s_sprite;
+typedef struct s_sprite t_sprite;
 
 void sprite_system_init();
 
-s_sprite *sprite_new(uint8_t screen, uint8_t id, s5_dimension size, uint8_t base_tile, uint16_t tile_size, uint16_t nb_tiles, uint8_t palette, const void *tiles_data, const void *pal_data);
-void sprite_free(s_sprite *sprite);
+t_sprite *sprite_new(uint8_t screen, uint8_t id, s5_dimension size, uint8_t base_tile, uint16_t tile_size, uint16_t nb_tiles, uint8_t palette, const void *tiles_data, const void *pal_data);
+void sprite_free(t_sprite *sprite);
 
-void sprite_clear(s_sprite *sprite);
-void sprite_draw_frame(s_sprite *sprite, int16_t x, int16_t y, uint8_t frame);
+void sprite_clear(t_sprite *sprite);
+void sprite_draw_frame(t_sprite *sprite, int16_t x, int16_t y, uint8_t frame);
 
-void sprite_add_animation(s_sprite *sprite, uint8_t size, uint8_t *anim, uint16_t delay);
-s_animation *sprite_get_animation(s_sprite *sprite, uint8_t anim);
-void sprite_reset_animation(s_sprite *sprite, uint8_t anim);
-void sprite_start_animation(s_sprite *sprite, uint8_t anim);
-void sprite_stop_animation(s_sprite *sprite, uint8_t anim);
-bool sprite_animation_at_end(s_sprite *sprite, uint8_t anim);
-void sprite_play_animation(s_sprite *sprite, int16_t x, int16_t y, uint8_t anim);
+void sprite_add_animation(t_sprite *sprite, uint8_t size, uint8_t *anim, uint16_t delay);
+t_animation *sprite_get_animation(t_sprite *sprite, uint8_t anim);
+void sprite_reset_animation(t_sprite *sprite, uint8_t anim);
+void sprite_start_animation(t_sprite *sprite, uint8_t anim);
+void sprite_stop_animation(t_sprite *sprite, uint8_t anim);
+bool sprite_animation_at_end(t_sprite *sprite, uint8_t anim);
+void sprite_play_animation(t_sprite *sprite, int16_t x, int16_t y, uint8_t anim);
 
 #endif // SPRITE_H_

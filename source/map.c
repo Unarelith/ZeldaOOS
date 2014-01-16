@@ -22,15 +22,15 @@
 uint8_t map_bg;
 uint16_t map_counter = 0;
 
-s_tileset   *tileset_new(uint8_t *info,
+t_tileset   *tileset_new(uint8_t *info,
                          const uint32_t *tiles,
                          uint32_t tiles_length,
                          const uint16_t *palette,
                          uint32_t pal_length)
  {
-  s_tileset *tileset;
+  t_tileset *tileset;
   
-  tileset = (s_tileset *)malloc(sizeof(s_tileset));
+  tileset = (t_tileset *)malloc(sizeof(t_tileset));
   tileset->info = info;
   tileset->tiles = tiles;
   tileset->tiles_length = tiles_length;
@@ -40,7 +40,7 @@ s_tileset   *tileset_new(uint8_t *info,
   return tileset;
  }
 
-void tileset_free(s_tileset *tileset)
+void tileset_free(t_tileset *tileset)
  {
   if(tileset)
    {
@@ -53,7 +53,7 @@ void map_system_init()
   map_bg = bgInit(0, BgType_Text8bpp, BgSize_T_512x512, 8, 2);
  }
 
-s_map   *map_new(s_tileset *tileset,
+t_map   *map_new(t_tileset *tileset,
                  char      *filename,
                  uint16_t  width,
                  uint16_t  height,
@@ -61,10 +61,10 @@ s_map   *map_new(s_tileset *tileset,
                  uint8_t   x,
                  uint8_t   y)
  {
-  s_map *map;
+  t_map *map;
   FILE  *f;
   
-  map = (s_map *)malloc(sizeof(s_map));
+  map = (t_map *)malloc(sizeof(t_map));
   map->id = map_counter++;
   map->tileset = tileset;
   map->width = width;
@@ -86,7 +86,7 @@ s_map   *map_new(s_tileset *tileset,
   return map;
  }
 
-void map_free(s_map *map)
+void map_free(t_map *map)
  {
   if(map)
    {
@@ -103,7 +103,7 @@ uint16_t map_bg_pos(uint16_t x, uint16_t y)
   return ((x & 31) + ((x & 32) << 5)) + (((y & 31) << 5) + ((y & 32) << 6));
  }
 
-void       map_load(s_map *map)
+void       map_load(t_map *map)
  {
   uint16_t x;
   uint16_t y;
@@ -120,7 +120,7 @@ void       map_load(s_map *map)
    }
  }
 
-void       map_load_tile(s_map *map, uint16_t x, uint16_t y)
+void       map_load_tile(t_map *map, uint16_t x, uint16_t y)
  {
   uint16_t data_x;
   uint16_t data_y;

@@ -29,16 +29,16 @@ struct s_tileset
   uint32_t pal_length;
  };
 
-typedef struct s_tileset s_tileset;
+typedef struct s_tileset t_tileset;
 
-s_tileset *tileset_new(uint8_t *info, const uint32_t *tiles, uint32_t tiles_length, const uint16_t *palette, uint32_t pal_length);
-void tileset_free(s_tileset *tileset);
+t_tileset *tileset_new(uint8_t *info, const uint32_t *tiles, uint32_t tilet_length, const uint16_t *palette, uint32_t pal_length);
+void tileset_free(t_tileset *tileset);
 
 struct s_map
  {
   uint16_t id;
   
-  s_tileset *tileset;
+  t_tileset *tileset;
   
   uint16_t width;
   uint16_t height;
@@ -50,16 +50,16 @@ struct s_map
   uint16_t *data;
  };
 
-typedef struct s_map s_map;
+typedef struct s_map t_map;
 
 void map_system_init();
 
-s_map *map_new(s_tileset *tileset, char *filename, uint16_t width, uint16_t height, uint16_t area, uint8_t x, uint8_t y);
-void map_free(s_map *map);
+t_map *map_new(t_tileset *tileset, char *filename, uint16_t width, uint16_t height, uint16_t area, uint8_t x, uint8_t y);
+void map_free(t_map *map);
 
 uint16_t map_bg_pos(uint16_t x, uint16_t y);
 
-void map_load(s_map *map);
-void map_load_tile(s_map *map, uint16_t x, uint16_t y);
+void map_load(t_map *map);
+void map_load_tile(t_map *map, uint16_t x, uint16_t y);
 
 #endif // MAP_H_

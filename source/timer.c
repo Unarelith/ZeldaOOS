@@ -20,11 +20,11 @@
 
 uint32_t os_time = 0;
 
-s_timer   *timer_new()
+t_timer   *timer_new()
  {
-  s_timer *tmr;
+  t_timer *tmr;
   
-  tmr = (s_timer *)malloc(sizeof(s_timer));
+  tmr = (t_timer *)malloc(sizeof(t_timer));
   tmr->t = os_time;
   tmr->started = false;
   tmr->ticks = 0;
@@ -32,7 +32,7 @@ s_timer   *timer_new()
   return tmr;
  }
 
-void timer_stop(s_timer *tmr)
+void timer_stop(t_timer *tmr)
  {
   if(tmr->started)
    {
@@ -41,7 +41,7 @@ void timer_stop(s_timer *tmr)
    }
  }
 
-void timer_start(s_timer *tmr)
+void timer_start(t_timer *tmr)
  {
   if(!tmr->started)
    {
@@ -50,7 +50,7 @@ void timer_start(s_timer *tmr)
    }
  }
 
-void timer_reset(s_timer *tmr)
+void timer_reset(t_timer *tmr)
  {
   tmr->t = os_time;
   tmr->started = false;
@@ -72,7 +72,7 @@ void timer_system_init()
   os_time = 0;
  }
 
-uint16_t timer_get_time(s_timer *tmr)
+uint16_t timer_get_time(t_timer *tmr)
  {
   return (tmr->started)?(os_time - tmr->t):(tmr->ticks);
  }

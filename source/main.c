@@ -28,6 +28,7 @@
 #include "sprite.h"
 #include "plain.h"
 #include "map.h"
+#include "character.h"
 
 void video_init()
  {
@@ -72,27 +73,27 @@ int main(void)
   
   timer_system_init();
   
-  s_sprite *test_sprite;
+  t_character *link;
   
 	 video_init();
   
   consoleDemoInit();
   
-  test_sprite = sprite_new(SCREEN_UP, 0, SprSize_16x16, 0, 4, 32, 0, linkTiles, linkPal);
-  sprite_add_animation(test_sprite, 2, link_animations[0], 100);
-  sprite_add_animation(test_sprite, 2, link_animations[1], 100);
-  sprite_add_animation(test_sprite, 2, link_animations[2], 100);
-  sprite_add_animation(test_sprite, 2, link_animations[3], 100);
+  link = character_new(SCREEN_UP, 0, 0, direction_down, 0, SprSize_16x16, 0, 4, 32, 0, linkTiles, linkPal);
+  sprite_add_animation(link->sprite, 2, link_animations[0], 100);
+  sprite_add_animation(link->sprite, 2, link_animations[1], 100);
+  sprite_add_animation(link->sprite, 2, link_animations[2], 100);
+  sprite_add_animation(link->sprite, 2, link_animations[3], 100);
   
-  s_tileset *plain = tileset_new(NULL, plainTiles, plainTilesLen, plainPal, plainPalLen);
+  t_tileset *plain = tileset_new(NULL, plainTiles, plainTilesLen, plainPal, plainPalLen);
   
-  s_map *a1 = map_new(plain, "/maps/a1.map", 16, 12, 0, 0, 0);
+  t_map *a1 = map_new(plain, "/maps/a1.map", 16, 12, 0, 0, 0);
   
   map_load(a1);
   
   while(1)
    {
-    sprite_play_animation(test_sprite, 0, 0, 0);
+    character_render(link);
     
 	 	 swiWaitForVBlank();
 	  }
@@ -101,5 +102,5 @@ int main(void)
   
   tileset_free(plain);
   
-  sprite_free(test_sprite);
+  character_free(link);
  }

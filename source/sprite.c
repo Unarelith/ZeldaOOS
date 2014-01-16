@@ -21,13 +21,13 @@
 #include "timer.h"
 #include "sprite.h"
 
-s_animation   *animation_new(uint16_t size,
+t_animation   *animation_new(uint16_t size,
                              uint8_t  *animation_table,
                              uint16_t delay)
  {
-  s_animation *animation;
+  t_animation *animation;
   
-  animation = (s_animation *)malloc(sizeof(s_animation));
+  animation = (t_animation *)malloc(sizeof(t_animation));
   animation->timer = timer_new();
   animation->size = size;
   animation->delay = delay;
@@ -37,7 +37,7 @@ s_animation   *animation_new(uint16_t size,
   return animation;
  }
 
-void animation_free(s_animation *animation)
+void animation_free(t_animation *animation)
  {
   if(animation->next)
    {
@@ -59,7 +59,7 @@ void sprite_system_init()
   enableSprites(1, 0);
  }
 
-s_sprite   *sprite_new(uint8_t      screen,
+t_sprite   *sprite_new(uint8_t      screen,
                        uint8_t      id,
                        s5_dimension size,
                        uint8_t      base_tile,
@@ -69,9 +69,9 @@ s_sprite   *sprite_new(uint8_t      screen,
                        const void   *tiles_data,
                        const void   *pal_data)
  {
-  s_sprite *sprite;
+  t_sprite *sprite;
   
-  sprite = (s_sprite *)malloc(sizeof(s_sprite));
+  sprite = (t_sprite *)malloc(sizeof(t_sprite));
   sprite->screen = screen;
   sprite->id = id;
   sprite->size = size;
@@ -87,19 +87,19 @@ s_sprite   *sprite_new(uint8_t      screen,
   return sprite;
  }
 
-void sprite_free(s_sprite *sprite)
+void sprite_free(t_sprite *sprite)
  {
   animation_free(sprite->animations);
   clearSprite(sprite->screen, sprite->id);
   free(sprite);
  }
 
-void sprite_clear(s_sprite *sprite)
+void sprite_clear(t_sprite *sprite)
  {
   clearSprite(sprite->screen, sprite->id);
  }
 
-void sprite_draw_frame(s_sprite *sprite,
+void sprite_draw_frame(t_sprite *sprite,
                       int16_t x,
                       int16_t y,
                       uint8_t frame)
@@ -107,12 +107,12 @@ void sprite_draw_frame(s_sprite *sprite,
   drawSprite(sprite->screen, sprite->id, x, y, sprite->size, sprite->color, sprite->base_tile + frame * sprite->tile_size, sprite->palette);
  }
 
-void          sprite_add_animation(s_sprite *sprite,
+void          sprite_add_animation(t_sprite *sprite,
                                    uint8_t  size,
                                    uint8_t  *anim,
                                    uint16_t delay)
  {
-  s_animation *it;
+  t_animation *it;
   
   it = sprite->animations;
   if(it)
@@ -129,9 +129,9 @@ void          sprite_add_animation(s_sprite *sprite,
    }
  }
 
-s_animation   *sprite_get_animation(s_sprite *sprite, uint8_t anim)
+t_animation   *sprite_get_animation(t_sprite *sprite, uint8_t anim)
  {
-  s_animation *ret;
+  t_animation *ret;
   uint8_t     i;
   
   i = 0;
@@ -144,9 +144,9 @@ s_animation   *sprite_get_animation(s_sprite *sprite, uint8_t anim)
   return ret;
  }
 
-void          sprite_reset_animation(s_sprite *sprite, uint8_t anim)
+void          sprite_reset_animation(t_sprite *sprite, uint8_t anim)
  {
-  s_animation *animation;
+  t_animation *animation;
   
   animation = sprite_get_animation(sprite, anim);
   if(animation)
@@ -155,9 +155,9 @@ void          sprite_reset_animation(s_sprite *sprite, uint8_t anim)
    }
  }
 
-void          sprite_start_animation(s_sprite *sprite, uint8_t anim)
+void          sprite_start_animation(t_sprite *sprite, uint8_t anim)
  {
-  s_animation *animation;
+  t_animation *animation;
   
   animation = sprite_get_animation(sprite, anim);
   if(animation)
@@ -166,9 +166,9 @@ void          sprite_start_animation(s_sprite *sprite, uint8_t anim)
    }
  }
 
-void          sprite_stop_animation(s_sprite *sprite, uint8_t anim)
+void          sprite_stop_animation(t_sprite *sprite, uint8_t anim)
  {
-  s_animation *animation;
+  t_animation *animation;
   
   animation = sprite_get_animation(sprite, anim);
   if(animation)
@@ -177,9 +177,9 @@ void          sprite_stop_animation(s_sprite *sprite, uint8_t anim)
    }
  }
 
-bool sprite_animation_at_end(s_sprite *sprite, uint8_t anim)
+bool sprite_animation_at_end(t_sprite *sprite, uint8_t anim)
  {
-  s_animation *animation;
+  t_animation *animation;
   
   animation = sprite_get_animation(sprite, anim);
   if(animation)
@@ -192,12 +192,12 @@ bool sprite_animation_at_end(s_sprite *sprite, uint8_t anim)
    }
  }
 
-void          sprite_play_animation(s_sprite *sprite,
+void          sprite_play_animation(t_sprite *sprite,
                                     int16_t  x,
                                     int16_t  y,
                                     uint8_t  anim)
  {
-  s_animation *animation;
+  t_animation *animation;
   
   animation = sprite_get_animation(sprite, anim);
   if(animation)
