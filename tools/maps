@@ -1,0 +1,6 @@
+#!/bin/sh
+
+for i in maps/*.tmx;
+do ./tools/reader/reader $i nitrofiles/${i%.tmx}.map ;
+done
+

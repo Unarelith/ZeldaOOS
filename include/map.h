@@ -47,7 +47,7 @@ struct s_map
   uint8_t x;
   uint8_t y;
   
-  uint8_t *data;
+  uint16_t *data;
  };
 
 typedef struct s_map s_map;

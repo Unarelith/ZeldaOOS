@@ -50,7 +50,7 @@ void tileset_free(s_tileset *tileset)
 
 void map_system_init()
  {
-  map_bg = bgInit(0, BgType_Text8bpp, BgSize_T_512x512, 0, 0);
+  map_bg = bgInit(0, BgType_Text8bpp, BgSize_T_512x512, 8, 2);
  }
 
 s_map   *map_new(s_tileset *tileset,
@@ -72,7 +72,7 @@ s_map   *map_new(s_tileset *tileset,
   map->area = area;
   map->x = x;
   map->y = y;
-  map->data = (uint8_t *)malloc(width * height * sizeof(uint16_t));
+  map->data = (uint16_t *)malloc(width * height * sizeof(uint16_t));
   
   f = fopen(filename, "r");
   if(!f)
