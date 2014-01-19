@@ -47,6 +47,10 @@ static uint8_t plain_info[256] ={
  8,9,10,7,12,13,13,1,14,15,1,16,17,0,18,1
 };
 
+static uint8_t non_passable_tiles[12] = {
+ 1,3,4,5,6,8,9,10,12,16,17,18
+};
+
 void map_manager_load_tilesets()
  {
   g_tilesets = (t_tileset **)malloc(TILESET_NB * sizeof(t_tileset *));
@@ -56,11 +60,11 @@ void map_manager_load_tilesets()
 
 void map_manager_load_maps()
  {
-		g_area_sizes[0] = 9;
+		g_area_sizes[0] = 3;
 		
   g_maps = (t_map ***)malloc(AREA_NB * sizeof(t_map **));
 		
-		g_maps[0] = (t_map **)malloc(g_area_sizes[0] * sizeof(t_map *));
+		g_maps[0] = (t_map **)malloc(g_area_sizes[0] * g_area_sizes[0] * sizeof(t_map *));
 		
 		g_maps[0][0] = map_new(g_tilesets[0], "/maps/a1.map", 16, 12, 0, 0, 0);
 		g_maps[0][1] = map_new(g_tilesets[0], "/maps/a2.map", 16, 12, 0, 1, 0);
@@ -107,5 +111,31 @@ void      map_manager_free_all()
 							}
 					}
 			}
+	}
+
+bool in_table(uint8_t t[], uint8_t n)
+ {
+		uint8_t i = 0;
+		
+		while(t[i])
+		 {
+				if(t[i] == n)
+				 {
+						return true;
+					}
+				i++;
+			}
+		
+		return false;
+	}
+
+bool in_tiles(int16_t tile_x, int16_t tile_y, uint8_t tiles[])
+ {
+		return in_table(tiles, g_current_map->tileset->info[map_get_tile(g_current_map, tile_x, tile_y)]);
+	}
+
+bool passable(int16_t x, int16_t y)
+ {
+		return !in_tiles(x / 16, y / 16, non_passable_tiles);
 	}
 

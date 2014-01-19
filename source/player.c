@@ -20,11 +20,13 @@
 #include "libs5.h"
 #include "tileset.h"
 #include "map.h"
+#include "map_manager.h"
 #include "timer.h"
 #include "animation.h"
 #include "sprite.h"
 #include "character.h"
 #include "player.h"
+
 #include "link.h"
 
 static uint8_t g_link_animations[12][4] = {
@@ -87,6 +89,8 @@ void player_move(t_character *player)
       player->direction = 0;
      }
    }
+		
+		character_test_collisions(player);
   
   player->x += player->vx;
   player->y += player->vy;
@@ -94,7 +98,7 @@ void player_move(t_character *player)
   player->vx = 0;
   player->vy = 0;
 		
-		/*if(player->x > 256 - 16 + 2)
+		if(player->x > 256 - 16 + 2)
 		 {
 				map_change_map(g_current_map, 1, 0);
 			}
@@ -109,6 +113,6 @@ void player_move(t_character *player)
 	 else if(player->y < 0 - 2)
 		 {
 				map_change_map(g_current_map, 0, -1);
-			}*/
+			}
  }
 

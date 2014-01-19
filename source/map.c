@@ -24,10 +24,14 @@
 #include "character.h"
 #include "tileset.h"
 #include "map.h"
+#include "map_manager.h"
+#include "character_manager.h"
 
 static uint8_t g_map_bg;
 static uint16_t g_map_counter = 0;
 
+static int16_t g_map_scroll_x = 0;
+static int16_t g_map_scroll_y = 0;
 
 void map_system_init()
  {
@@ -53,8 +57,6 @@ t_map   *map_new(t_tileset *tileset,
   map->area = area;
   map->x = x;
   map->y = y;
-		map->scroll_x = x * 256;
-		map->scroll_y = y * 192;
   map->data = (uint16_t *)malloc(width * height * sizeof(uint16_t));
   
   f = fopen(filename, "r");
@@ -101,6 +103,9 @@ void       map_load(t_map *map)
       map_load_tile(map, x, y, 0, 0);
      }
    }
+		
+		g_map_scroll_x = map->x * 256;
+		g_map_scroll_y = map->y * 192;
  }
 
 void       map_load_tile(t_map *map, uint16_t x, uint16_t y, int8_t offset_x, int8_t offset_y)
@@ -125,11 +130,10 @@ void       map_change_map(t_map *map, int8_t dx, int8_t dy)
 	 t_map    *next_map;
 		uint16_t i, j, k;
 		
-		//next_map = g_maps[map->area][map->x + dx + (map->y + dy) * g_area_sizes[map->area]];
-		next_map = NULL;
-		
-		//g_player->vx = 0;
-		//g_player->vy = 0;
+		next_map = g_maps[map->area][(map->x + dx) + (map->y + dy) * g_area_sizes[map->area]];
+	 
+		g_player->vx = 0;
+		g_player->vy = 0;
 		
 		if(dx != 0)
 		 {
@@ -137,37 +141,37 @@ void       map_change_map(t_map *map, int8_t dx, int8_t dy)
 				 {
 						if((i & 1) || !(i & 15))
 						 {
-								//g_player->x -= 8 * dx; // With sprites?
+								g_player->x -= 8 * dx; // With sprites?
 							}
 						else
 						 {
-								//g_player->x -= 7 * dx; // With sprites?
+								g_player->x -= 7 * dx; // With sprites?
 							}
 						
 						for(j = 0 ; j < 8 * abs(dx) ; j++)
 						 {
-								if(!(map->scroll_x & 15))
+								if(!(g_map_scroll_x & 15))
 								 {
-          for(k = map->scroll_y / map->tileset->tile_size ; k < map->scroll_y / map->tileset->tile_size + 12 ; k++)
+          for(k = g_map_scroll_y / map->tileset->tile_size ; k < g_map_scroll_y / map->tileset->tile_size + 12 ; k++)
 											{
 												if(dx > 0)
 												 {
-												  map_load_tile(next_map, map->scroll_x / map->tileset->tile_size, k, 16, 0);
+												  map_load_tile(next_map, g_map_scroll_x / map->tileset->tile_size, k, 16, 0);
 													}
 												else
 												 {
-												  map_load_tile(next_map, map->scroll_x / map->tileset->tile_size, k, -1, -1);
+												  map_load_tile(next_map, g_map_scroll_x / map->tileset->tile_size - 1, k, 0, 0);
 													}
 											}
 									}
 								
-								map->scroll_x += dx;
+								g_map_scroll_x += dx;
 							}
 		    
-	    	bgSetScroll(g_map_bg, map->scroll_x, map->scroll_y);
+	    	bgSetScroll(g_map_bg, g_map_scroll_x, g_map_scroll_y);
     		bgUpdate();
 						
-						//character_render(g_player); // With sprites?
+						character_render(g_player); // With sprites?
 						
 						swiWaitForVBlank();
 					}
@@ -178,42 +182,54 @@ void       map_change_map(t_map *map, int8_t dx, int8_t dy)
 				 {
 						if((i & 1) && (i & 7) < 7)
 						 {
-								//g_player->y -= 8 * dy; // With sprites?
+								g_player->y -= 8 * dy; // With sprites?
 							}
 						else
 						 {
-								//g_player->y -= 7 * dy; // With sprites?
+								g_player->y -= 7 * dy; // With sprites?
 							}
 						
 						for(j = 0 ; j < 8 * abs(dy) ; j++)
 						 {
-								if(!(map->scroll_y & 15))
+								if(!(g_map_scroll_y & 15))
 								 {
-          for(k = map->scroll_x / map->tileset->tile_size ; k < map->scroll_x / map->tileset->tile_size + 16 ; k++)
+          for(k = g_map_scroll_x / map->tileset->tile_size ; k < g_map_scroll_x / map->tileset->tile_size + 16 ; k++)
 											{
-												if(dx > 0)
+												if(dy > 0)
 												 {
-												  map_load_tile(next_map, k, map->scroll_y / map->tileset->tile_size, 12, 0);
+												  map_load_tile(next_map, k, g_map_scroll_y / map->tileset->tile_size, 0, 12);
 													}
 												else
 												 {
-												  map_load_tile(next_map, k, map->scroll_y / map->tileset->tile_size, -1, -1);
+												  map_load_tile(next_map, k, g_map_scroll_y / map->tileset->tile_size - 1, 0, 0);
 													}
 											}
 									}
 								
-								map->scroll_x += dx;
+								g_map_scroll_y += dy;
 							}
 		    
-	    	bgSetScroll(g_map_bg, map->scroll_x, map->scroll_y);
+	    	bgSetScroll(g_map_bg, g_map_scroll_x, g_map_scroll_y);
     		bgUpdate();
 						
-						//character_render(g_player); // With sprites?
+						character_render(g_player); // With sprites?
 						
 						swiWaitForVBlank();
 					}
 			}
 		
-		//g_current_map = next_map;
+		g_current_map = next_map;
+	}
+
+uint8_t map_get_tile(t_map *map, int16_t tile_x, int16_t tile_y)
+ {
+	 if(tile_x + tile_y * map->width < map->width * map->height)
+		 {
+				return map->data[tile_x + tile_y * map->width];
+			}
+		else
+		 {
+				return 0;
+			}
 	}
 

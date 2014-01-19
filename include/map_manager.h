@@ -32,4 +32,8 @@ void map_manager_load_maps();
 void map_manager_load_all();
 void map_manager_free_all();
 
+bool in_table(uint8_t t[], uint8_t n);
+bool in_tiles(int16_t tile_x, int16_t tile_y, uint8_t tiles[]);
+bool passable(int16_t x, int16_t y);
+
 #endif // MAP_MANAGER_H_

@@ -10,6 +10,7 @@ ZeldaOracle=/home/linux/devkitPro/projects/ZeldaOracle CD=. filter="*.c *.cpp *.
  include=include {
   animation.h
   character.h
+		character_manager.h
 		game.h
   libs5.h
   map.h
@@ -22,6 +23,7 @@ ZeldaOracle=/home/linux/devkitPro/projects/ZeldaOracle CD=. filter="*.c *.cpp *.
  source=source {
   animation.c
   character.c
+		character_manager.c
   libs5.c
   main.c
   map.c

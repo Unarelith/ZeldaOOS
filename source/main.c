@@ -31,6 +31,7 @@
 #include "tileset.h"
 #include "map.h"
 #include "map_manager.h"
+#include "character_manager.h"
 
 void video_init()
  {
@@ -72,9 +73,9 @@ int main(void)
   
   consoleDemoInit();
   
-  t_character *link = player_new();
-		
 		map_manager_load_all();
+		
+		character_manager_init_all();
   
   map_load(g_current_map);
   
@@ -82,15 +83,15 @@ int main(void)
    {
     scanKeys();
 				
-    character_move(link);
+    character_move(g_player);
     
-    character_render(link);
+    character_render(g_player);
     
 	 	 swiWaitForVBlank();
 	  }
+		
+		character_manager_free_all();
   
 		map_manager_free_all();
-  
-  character_free(link);
  }
 

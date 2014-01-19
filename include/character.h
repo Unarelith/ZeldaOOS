@@ -57,4 +57,7 @@ void character_render(t_character *character);
 
 void character_move(t_character *character);
 
+void character_map_collisions(t_character *character);
+void character_test_collisions(t_character *character);
+
 #endif // CHARACTER_H_

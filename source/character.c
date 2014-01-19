@@ -23,6 +23,16 @@
 #include "sprite.h"
 #include "character.h"
 #include "player.h"
+#include "tileset.h"
+#include "map.h"
+#include "map_manager.h"
+
+uint8_t collision_matrix[4][4] = {
+ {12,8,12,13},
+ {3,8,3,13},
+ {5,5,10,5},
+ {5,15,10,15}
+};
 
 t_character   *character_new(uint8_t      screen,
                              int16_t      x,
@@ -81,4 +91,63 @@ void character_move(t_character *character)
     player_move(character);
    }
  }
+
+void character_test_collisions(t_character *character)
+ {
+		character_map_collisions(character);
+	}
+
+void      character_map_collisions(t_character *character)
+ {
+		uint8_t i;
+		
+		for(i = 0 ; i < 4 ; i++)
+		 {
+    if(((i==0)?(character->vx > 0):((i==1)?(character->vx < 0):((i==2)?(character->vy < 0):(character->vy > 0))))
+				&& (!passable(character->x + collision_matrix[i][0], character->y + collision_matrix[i][1])
+					|| !passable(character->x + collision_matrix[i][2], character->y + collision_matrix[i][3])))
+			  {
+						if(i < 2)
+						 {
+								character->vx = 0;
+							}
+						else
+						 {
+								character->vy = 0;
+							}
+						
+      if( passable(character->x + collision_matrix[i][2], character->y + collision_matrix[i][3])
+						&& !passable(character->x + collision_matrix[i][0], character->y + collision_matrix[i][1]))
+						 {
+        if(((i<2)?(character->vy == 0):(character->vx == 0)))
+								 {
+          if(i<2)
+										 {
+												character->vy = 1;
+											}
+										else
+										 {
+												character->vx = 1;
+											}
+         }
+       }
+      
+						if( passable(character->x + collision_matrix[i][0], character->y + collision_matrix[i][1])
+						&& !passable(character->x + collision_matrix[i][2], character->y + collision_matrix[i][3]))
+						 {
+							 if(((i<2)?(character->vy == 0):(character->vx == 0)))
+								 {
+										if(i<2)
+										 {
+												character->vy = -1;
+										 }
+										else
+										 {
+												character->vx = -1;
+											}
+									}
+							}
+			  }
+			}
+	}
 
