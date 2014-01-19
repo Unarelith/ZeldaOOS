@@ -30,6 +30,9 @@ struct s_map
   uint16_t area;
   uint8_t x;
   uint8_t y;
+		
+		int16_t scroll_x;
+		int16_t scroll_y;
   
   uint16_t *data;
  };
@@ -44,6 +47,8 @@ void map_free(t_map *map);
 uint16_t map_bg_pos(uint16_t x, uint16_t y);
 
 void map_load(t_map *map);
-void map_load_tile(t_map *map, uint16_t x, uint16_t y);
+void map_load_tile(t_map *map, uint16_t x, uint16_t y, int8_t offset_x, int8_t offset_y);
+
+void map_change_map(t_map *map, int8_t dx, int8_t dy);
 
 #endif // MAP_H_

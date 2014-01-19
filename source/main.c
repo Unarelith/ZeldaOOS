@@ -26,12 +26,11 @@
 #include "timer.h"
 #include "animation.h"
 #include "sprite.h"
-#include "tileset.h"
-#include "map.h"
 #include "character.h"
 #include "player.h"
-
-#include "plain.h"
+#include "tileset.h"
+#include "map.h"
+#include "map_manager.h"
 
 void video_init()
  {
@@ -74,17 +73,15 @@ int main(void)
   consoleDemoInit();
   
   t_character *link = player_new();
+		
+		map_manager_load_all();
   
-  t_tileset *plain = tileset_new(NULL, plainTiles, plainTilesLen, plainPal, plainPalLen);
-  
-  t_map *a1 = map_new(plain, "/maps/a1.map", 16, 12, 0, 0, 0);
-  
-  map_load(a1);
+  map_load(g_current_map);
   
   while(1)
    {
     scanKeys();
-    
+				
     character_move(link);
     
     character_render(link);
@@ -92,9 +89,7 @@ int main(void)
 	 	 swiWaitForVBlank();
 	  }
   
-  map_free(a1);
-  
-  tileset_free(plain);
+		map_manager_free_all();
   
   character_free(link);
  }

@@ -123,11 +123,11 @@ $(BUILD):
 
 #---------------------------------------------------------------------------------
 run:
-	@wine "/home/quentin/devkitPro/nocashgba/NOcGBAF.EXE" $(TARGET).nds
+	@wine "/home/linux/devkitPro/nocashgba/NOcGBAF.EXE" $(TARGET).nds
 
 #---------------------------------------------------------------------------------
 debug:
-	@wine "/home/quentin/devkitPro/nocashgba/NOcGBA.EXE" $(TARGET).nds
+	@wine "/home/linux/devkitPro/nocashgba/NOcGBA.EXE" $(TARGET).nds
 	
 #---------------------------------------------------------------------------------
 edit:

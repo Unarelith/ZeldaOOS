@@ -18,6 +18,8 @@
 #include <stdio.h>
 #include <nds.h>
 #include "libs5.h"
+#include "tileset.h"
+#include "map.h"
 #include "timer.h"
 #include "animation.h"
 #include "sprite.h"
@@ -91,5 +93,22 @@ void player_move(t_character *player)
   
   player->vx = 0;
   player->vy = 0;
+		
+		/*if(player->x > 256 - 16 + 2)
+		 {
+				map_change_map(g_current_map, 1, 0);
+			}
+		else if(player->x < 0 - 2)
+		 {
+			 map_change_map(g_current_map, -1, 0);
+			}
+		else if(player->y > 192 - 16 + 1)
+		 {
+				map_change_map(g_current_map, 0, 1);
+			}
+	 else if(player->y < 0 - 2)
+		 {
+				map_change_map(g_current_map, 0, -1);
+			}*/
  }
 

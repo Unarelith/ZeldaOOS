@@ -1,4 +1,4 @@
-ZeldaOracle=/home/quentin/devkitPro/projects/ZeldaOracle CD=. filter="*.c *.cpp *.h *.s *.tmx Makefile TODO graphics maps *.cdat *.*grit" {
+ZeldaOracle=/home/linux/devkitPro/projects/ZeldaOracle CD=. filter="*.c *.cpp *.h *.s *.tmx Makefile TODO graphics maps *.cdat *.*grit" {
  Makefile
  build=build {
   link.h
@@ -10,8 +10,10 @@ ZeldaOracle=/home/quentin/devkitPro/projects/ZeldaOracle CD=. filter="*.c *.cpp 
  include=include {
   animation.h
   character.h
+		game.h
   libs5.h
   map.h
+		map_manager.h
   player.h
   sprite.h
   tileset.h
@@ -23,6 +25,7 @@ ZeldaOracle=/home/quentin/devkitPro/projects/ZeldaOracle CD=. filter="*.c *.cpp 
   libs5.c
   main.c
   map.c
+		map_manager.c
   player.c
   sprite.c
   timer.c

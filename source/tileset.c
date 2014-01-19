@@ -21,6 +21,7 @@
 
 
 t_tileset   *tileset_new(uint8_t *info,
+		                       uint8_t tile_size,
                          const uint32_t *tiles,
                          uint32_t tiles_length,
                          const uint16_t *palette,
@@ -30,6 +31,7 @@ t_tileset   *tileset_new(uint8_t *info,
   
   tileset = (t_tileset *)malloc(sizeof(t_tileset));
   tileset->info = info;
+		tileset->tile_size = tile_size;
   tileset->tiles = tiles;
   tileset->tiles_length = tiles_length;
   tileset->palette = palette;
