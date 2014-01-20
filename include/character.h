@@ -46,6 +46,8 @@ struct s_character
   bool moving;
   
   uint8_t type;
+		
+		bool in_door;
  };
 
 typedef struct s_character t_character;

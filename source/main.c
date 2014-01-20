@@ -76,6 +76,8 @@ int main(void)
 		map_manager_load_all();
 		
 		character_manager_init_all();
+		
+		door_manager_init_all();
   
   map_load(g_current_map);
   
@@ -89,6 +91,8 @@ int main(void)
     
 	 	 swiWaitForVBlank();
 	  }
+		
+		door_manager_free_all();
 		
 		character_manager_free_all();
   

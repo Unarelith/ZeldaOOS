@@ -59,6 +59,7 @@ t_character   *character_new(uint8_t      screen,
   character->sprite = sprite_new(screen, id, size, base_tile, tile_size, nb_tiles, palette, tiles_data, pal_data);
   character->moving = false;
   character->type = type;
+		character->in_door = false;
   
   return character;
  }
@@ -95,6 +96,10 @@ void character_move(t_character *character)
 void character_test_collisions(t_character *character)
  {
 		character_map_collisions(character);
+		if(character->type == 0)
+		 {
+				player_door_collisions(character);
+			}
 	}
 
 void      character_map_collisions(t_character *character)

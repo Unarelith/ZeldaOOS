@@ -27,15 +27,20 @@
 #include "map_manager.h"
 #include "character_manager.h"
 
-static uint8_t g_map_bg;
-static uint16_t g_map_counter = 0;
+uint8_t g_map_bg;
+uint8_t g_transition_bg;
 
-static int16_t g_map_scroll_x = 0;
-static int16_t g_map_scroll_y = 0;
+int16_t g_map_scroll_x = 0;
+int16_t g_map_scroll_y = 0;
+
+static uint16_t g_map_counter = 0;
 
 void map_system_init()
  {
-  g_map_bg = bgInit(0, BgType_Text8bpp, BgSize_T_512x512, 8, 2);
+  g_map_bg = bgInit(0, BgType_Text8bpp, BgSize_T_512x512, 0, 1);
+		g_transition_bg = bgInit(1, BgType_Text8bpp, BgSize_T_256x256, 4, 5);
+		bgSetPriority(g_map_bg, 1);
+		bgSetPriority(g_transition_bg, 0);
  }
 
 t_map   *map_new(t_tileset *tileset,
@@ -95,17 +100,20 @@ void       map_load(t_map *map)
   
   dmaCopy(map->tileset->tiles, bgGetGfxPtr(g_map_bg), map->tileset->tiles_length);
   dmaCopy(map->tileset->palette, BG_PALETTE, map->tileset->pal_length);
+		
+		g_map_scroll_x = map->x * 256;
+		g_map_scroll_y = map->y * 192;
   
-  for(y = 0 ; y < map->height ; y++)
+  for(y = g_map_scroll_y >> 4 ; y < (g_map_scroll_y >> 4) + map->height ; y++)
    {
-    for(x = 0 ; x < map->width ; x++)
+    for(x = g_map_scroll_x >> 4 ; x < (g_map_scroll_x >> 4) + map->width ; x++)
      {
       map_load_tile(map, x, y, 0, 0);
      }
    }
 		
-		g_map_scroll_x = map->x * 256;
-		g_map_scroll_y = map->y * 192;
+		bgSetScroll(g_map_bg, g_map_scroll_x, g_map_scroll_y);
+		bgUpdate();
  }
 
 void       map_load_tile(t_map *map, uint16_t x, uint16_t y, int8_t offset_x, int8_t offset_y)
@@ -231,5 +239,39 @@ uint8_t map_get_tile(t_map *map, int16_t tile_x, int16_t tile_y)
 		 {
 				return 0;
 			}
+	}
+
+uint16_t   map_get_id_by_position(uint16_t area, uint8_t map_x, uint8_t map_y)
+ {
+	 uint16_t i;
+		uint16_t offset;
+		
+		offset = 0;
+		for(i = 0 ; i < area ; i++)
+		 {
+				offset += (g_area_sizes[i] * g_area_sizes[i]);
+			}
+		
+		//printf("(%d):(%d;%d) => (%d)\n", area, map_x, map_y, offset + map_x + map_y * g_area_sizes[area]);
+		return offset + map_x + map_y * g_area_sizes[area];
+	}
+
+t_map      *map_get_by_id(uint16_t id)
+ {
+  uint16_t i;
+		uint16_t temp_id;
+		
+		temp_id = 0;
+		for(i = 0 ; i < AREA_NB ; i++)
+		 {
+    if(temp_id >= id)
+				 {
+						printf("%d / %d / %d - %d\n", i, id, temp_id, temp_id - id);
+						//return g_maps[1][0];
+						return g_maps[i][temp_id - id];
+					}
+		  temp_id += (g_area_sizes[i] * g_area_sizes[i]);
+			}
+		return NULL;
 	}
 

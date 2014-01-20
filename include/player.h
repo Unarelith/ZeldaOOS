@@ -22,4 +22,6 @@ t_character *player_new();
 
 void player_move(t_character *player);
 
+void player_door_collisions(t_character *player);
+
 #endif // PLAYER_H_

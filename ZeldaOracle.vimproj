@@ -11,6 +11,8 @@ ZeldaOracle=/home/linux/devkitPro/projects/ZeldaOracle CD=. filter="*.c *.cpp *.
   animation.h
   character.h
 		character_manager.h
+		door.h
+		door_manager.h
 		game.h
   libs5.h
   map.h
@@ -24,6 +26,8 @@ ZeldaOracle=/home/linux/devkitPro/projects/ZeldaOracle CD=. filter="*.c *.cpp *.
   animation.c
   character.c
 		character_manager.c
+		door.c
+		door_manager.c
   libs5.c
   main.c
   map.c

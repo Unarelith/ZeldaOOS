@@ -21,6 +21,8 @@
 #include "tileset.h"
 #include "map.h"
 #include "map_manager.h"
+#include "door.h"
+#include "door_manager.h"
 #include "timer.h"
 #include "animation.h"
 #include "sprite.h"
@@ -115,4 +117,40 @@ void player_move(t_character *player)
 				map_change_map(g_current_map, 0, -1);
 			}
  }
+
+void       player_door_collisions(t_character *player)
+ {
+		uint16_t door_id;
+		
+	 if(in_tiles((player->x + 8) >> 4, (player->y + 8) >> 4, g_change_map_tiles) && !player->in_door)
+		 {
+				player->vx = 0;
+				player->vy = 0;
+				
+				door_id = door_manager_find_door_id(player->x, player->y, g_current_map->area, g_current_map->x, g_current_map->y);
+				
+				map_manager_init_transition();
+				g_current_map = map_get_by_id(g_doors[g_doors[door_id]->next_door_id]->map_id);
+				if(!g_current_map)
+				 {
+						fprintf(stderr, "Fatal error, could not load map with id: %d\n", g_doors[g_doors[door_id]->next_door_id]->map_id);
+						while(1)
+						 {
+								swiWaitForVBlank();
+							}
+					}
+				player->x = g_doors[g_doors[door_id]->next_door_id]->x;
+				player->y = g_doors[g_doors[door_id]->next_door_id]->y;
+				player->direction = g_doors[g_doors[door_id]->next_door_id]->direction;
+				character_render(player);
+				map_load(g_current_map);
+				map_manager_transition();
+				player->in_door = true;
+			}
+  if((!in_tiles((player->x +  2) >> 4, (player->y +  2) >> 4, g_change_map_tiles))
+  && (!in_tiles((player->x + 14) >> 4, (player->y + 14) >> 4, g_change_map_tiles)))
+		 {
+				player->in_door = false;
+			}
+	}
 
