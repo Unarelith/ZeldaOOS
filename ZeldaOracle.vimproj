@@ -1,5 +1,6 @@
 ZeldaOracle=/home/linux/devkitPro/projects/ZeldaOracle CD=. filter="*.c *.cpp *.h *.s *.tmx Makefile TODO graphics maps *.cdat *.*grit" {
  Makefile
+	TODO
  build=build {
   link.h
   link.s

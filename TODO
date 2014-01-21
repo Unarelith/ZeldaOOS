@@ -1,0 +1,3 @@
+- FIXME: Link appears during indoor map transition
+- FIXME: Bottom of placards are 'passable'
+- FIXME: Collisions must be managed by 8x8 tiles, of half tiles ( doors ), hmm...

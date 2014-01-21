@@ -262,15 +262,17 @@ t_map      *map_get_by_id(uint16_t id)
 		uint16_t temp_id;
 		
 		temp_id = 0;
-		for(i = 0 ; i < AREA_NB ; i++)
+		for(i = 0 ; i <= AREA_NB ; i++)
 		 {
-    if(temp_id >= id)
+    if(temp_id > id)
 				 {
-						printf("%d / %d / %d - %d\n", i, id, temp_id, temp_id - id);
-						//return g_maps[1][0];
-						return g_maps[i][temp_id - id];
+						//printf("%d / %d / %d - %d\n", i - 1, id, temp_id, id - (temp_id - g_area_sizes[i - 1] * g_area_sizes[i - 1]));
+						return g_maps[i - 1][id - (temp_id - g_area_sizes[i - 1] * g_area_sizes[i - 1])];
 					}
-		  temp_id += (g_area_sizes[i] * g_area_sizes[i]);
+				if(i < AREA_NB)
+				 {
+		    temp_id += (g_area_sizes[i] * g_area_sizes[i]);
+					}
 			}
 		return NULL;
 	}
