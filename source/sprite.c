@@ -22,10 +22,17 @@
 #include "animation.h"
 #include "sprite.h"
 
-void sprite_system_init()
+void      sprite_system_init()
  {
+		uint8_t i;
+		
   enableSprites(0, 0);
   enableSprites(1, 0);
+	 
+  for(i = 0 ; i < 128 ; i++)
+		 {
+    setSpritePriority(0, i, 1);
+   }
  }
 
 t_sprite   *sprite_new(uint8_t      screen,
