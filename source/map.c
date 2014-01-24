@@ -67,6 +67,7 @@ t_map   *map_new(t_tileset *tileset,
   f = fopen(filename, "r");
   if(!f)
    {
+				fprintf(stderr, "ERROR: Couldn't load %s\n", filename);
     map_free(map);
     return NULL;
    }
@@ -266,7 +267,7 @@ t_map      *map_get_by_id(uint16_t id)
 		 {
     if(temp_id > id)
 				 {
-						//printf("%d / %d / %d - %d\n", i - 1, id, temp_id, id - (temp_id - g_area_sizes[i - 1] * g_area_sizes[i - 1]));
+						//printf("g_maps[%d][%d] is map: %p\n", i - 1, id - (temp_id - g_area_sizes[i - 1] * g_area_sizes[i - 1]), (void *)g_maps[i - 1][id - (temp_id - g_area_sizes[i - 1] * g_area_sizes[i - 1])]);
 						return g_maps[i - 1][id - (temp_id - g_area_sizes[i - 1] * g_area_sizes[i - 1])];
 					}
 				if(i < AREA_NB)

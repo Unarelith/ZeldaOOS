@@ -35,7 +35,13 @@ void door_manager_init_all()
 		g_doors[3] = door_new(1, 1, 0, 4 << 4, 8 << 4, 3, 2);
 		
 		g_doors[4] = door_new(0, 1, 2, 2 << 4, 7 << 4, 0, 5);
-		g_doors[5] = door_new(2, 0, 0, (7 << 4) + 8, 11 << 4, 3, 4);
+		g_doors[5] = door_new(2, 0, 0, (7 << 4) + 8, 10 << 4, 3, 4);
+		
+		g_doors[6] = door_new(0, 0, 2, 4 << 4, 10 << 4, 1, 7);
+		g_doors[7] = door_new(3, 0, 1, 12 << 4, 8 << 4, 1, 6);
+		
+		g_doors[8] = door_new(2, 1, 1, 4 << 4, 2 << 4, 0, 9);
+		g_doors[9] = door_new(3, 1, 0, 8 << 4, 1 << 4, 0, 8);
 	}
 
 void      door_manager_free_all()
@@ -65,6 +71,6 @@ uint16_t   door_manager_find_door_id(int16_t x, int16_t y, uint16_t area, uint8_
 						return i;
 					}
 			}
-		return 6;
+		return 0;
 	}
 

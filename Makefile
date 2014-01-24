@@ -114,8 +114,8 @@ else
 	endif
 endif
  
-.PHONY: $(BUILD) clean run debug edit nitro
- 
+.PHONY: $(BUILD) clean run debug edit nitro maps
+
 #---------------------------------------------------------------------------------
 $(BUILD):
 	@[ -d $@ ] || mkdir -p $@
@@ -142,7 +142,13 @@ clean:
 nitro:
 	@rm $(TARGET).elf $(TARGET).nds
 	@make --no-print-directory
- 
+	
+#---------------------------------------------------------------------------------
+maps:
+	@echo converting maps...
+	@./tools/maps
+	@echo done
+	
 #---------------------------------------------------------------------------------
 else
  

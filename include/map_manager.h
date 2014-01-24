@@ -18,7 +18,7 @@
 #ifndef MAP_MANAGER_H_
 #define MAP_MANAGER_H_
 
-#define AREA_NB 3
+#define AREA_NB 4
 #define TILESET_NB 3
 
 extern uint8_t g_area_sizes[AREA_NB];

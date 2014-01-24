@@ -32,6 +32,8 @@
 #include "map.h"
 #include "map_manager.h"
 #include "character_manager.h"
+#include "door.h"
+#include "door_manager.h"
 
 void video_init()
  {

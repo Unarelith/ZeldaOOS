@@ -18,7 +18,7 @@
 #ifndef DOOR_MANAGER_H
 #define DOOR_MANAGER_H
 
-#define DOOR_NB 6
+#define DOOR_NB 10
 
 extern t_door **g_doors;
 

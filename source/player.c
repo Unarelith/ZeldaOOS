@@ -18,6 +18,7 @@
 #include <stdio.h>
 #include <nds.h>
 #include "libs5.h"
+#include "tools.h"
 #include "tileset.h"
 #include "map.h"
 #include "map_manager.h"
@@ -146,6 +147,7 @@ void       player_door_collisions(t_character *player)
 				map_load(g_current_map);
 				map_manager_transition();
 				player->in_door = true;
+				nds_delay(250);
 			}
   if((!in_tiles((player->x +  2) >> 4, (player->y +  2) >> 4, g_change_map_tiles))
   && (!in_tiles((player->x + 14) >> 4, (player->y + 14) >> 4, g_change_map_tiles)))
