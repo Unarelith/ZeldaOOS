@@ -20,6 +20,7 @@
 
 #define AREA_NB 4
 #define TILESET_NB 3
+#define TILE_NB 12
 
 extern uint8_t g_area_sizes[AREA_NB];
 extern t_tileset **g_tilesets;
@@ -30,8 +31,7 @@ extern uint8_t g_plain_info[256];
 extern uint8_t g_indoor_info[256];
 extern uint8_t g_underground_info[256];
 
-extern uint8_t g_non_passable_tiles[13];
-extern uint8_t g_change_map_tiles[3];
+extern uint8_t g_tiles_info[TILE_NB][4];
 
 void map_manager_load_tilesets();
 void map_manager_load_maps();
@@ -44,6 +44,9 @@ void map_manager_transition();
 
 bool in_table(uint8_t t[], uint8_t n);
 bool in_tiles(int16_t tile_x, int16_t tile_y, uint8_t tiles[]);
+
 bool passable(int16_t x, int16_t y);
+bool change_map(int16_t x, int16_t y);
+bool slowing_tile(int16_t x, int16_t y);
 
 #endif // MAP_MANAGER_H_

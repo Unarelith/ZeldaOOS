@@ -154,5 +154,13 @@ void      character_map_collisions(t_character *character)
 							}
 			  }
 			}
+		if(slowing_tile(character->x +  2, character->y +  2)
+		|| slowing_tile(character->x + 14, character->y +  2)
+		|| slowing_tile(character->x +  2, character->y + 14)
+		|| slowing_tile(character->x + 14, character->y + 14))
+		 {
+				character->vx /= 2;
+				character->vy /= 2;
+			}
 	}
 

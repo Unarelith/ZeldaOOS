@@ -123,7 +123,7 @@ void       player_door_collisions(t_character *player)
  {
 		uint16_t door_id;
 		
-	 if(in_tiles((player->x + 8) >> 4, (player->y + 8) >> 4, g_change_map_tiles) && !player->in_door)
+	 if(change_map(player->x + 8, player->y + 8) && !player->in_door)
 		 {
 				player->vx = 0;
 				player->vy = 0;
@@ -149,8 +149,10 @@ void       player_door_collisions(t_character *player)
 				player->in_door = true;
 				nds_delay(250);
 			}
-  if((!in_tiles((player->x +  2) >> 4, (player->y +  2) >> 4, g_change_map_tiles))
-  && (!in_tiles((player->x + 14) >> 4, (player->y + 14) >> 4, g_change_map_tiles)))
+  if((!change_map(player->x +  2, player->y +  2))
+  && (!change_map(player->x + 14, player->y +  2))
+  && (!change_map(player->x +  2, player->y + 14))
+  && (!change_map(player->x + 14, player->y + 14)))
 		 {
 				player->in_door = false;
 			}

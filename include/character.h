@@ -33,11 +33,11 @@
 
 struct s_character
  {
-  int16_t x;
-  int16_t y;
+  float x;
+  float y;
   
-  int8_t vx;
-  int8_t vy;
+  float vx;
+  float vy;
   
   uint8_t direction;
   
