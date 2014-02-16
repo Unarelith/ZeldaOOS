@@ -58,7 +58,10 @@ t_sprite   *sprite_new(uint8_t      screen,
   sprite->animations = NULL;
   
   loadTiles(screen, base_tile, nb_tiles, sprite->color, tiles_data);
-  loadPalette(screen, palette, pal_data);
+  if(pal_data != NULL)
+		 {
+    loadPalette(screen, palette, pal_data);
+			}
   
   return sprite;
  }

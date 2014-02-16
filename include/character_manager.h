@@ -20,6 +20,9 @@
 
 extern t_character *g_player;
 
+extern t_sprite *g_grass_effect;
+extern t_sprite *g_low_water_effect;
+
 void character_manager_init_all();
 void character_manager_free_all();
 

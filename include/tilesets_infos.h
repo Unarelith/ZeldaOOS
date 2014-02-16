@@ -1,12 +1,12 @@
 /*
 	* =====================================================================================
 	*
-	*       Filename:  tools.h
+	*       Filename:  tilesets_infos.h
 	*
-	*    Description:  Simple tools for nds programming
+	*    Description:  Tilesets informations
 	*
 	*        Version:  1.0
-	*        Created:  24/01/2014 13:45:42
+	*        Created:  25/01/2014 00:00:54
 	*       Revision:  none
 	*       Compiler:  gcc
 	*
@@ -15,9 +15,11 @@
 	*
 	* =====================================================================================
 	*/
-#ifndef TOOLS_H_
-#define TOOLS_H_
+#ifndef TILESETS_INFOS_H_
+#define TILESETS_INFOS_H_
 
-void nds_delay(uint32_t delay);
+extern uint8_t g_plain_info[256];
+extern uint8_t g_indoor_info[256];
+extern uint8_t g_underground_info[256];
 
-#endif // TOOLS_H_
+#endif // TILESETS_INFOS_H_

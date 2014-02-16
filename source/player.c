@@ -43,7 +43,7 @@ t_character   *player_new()
  {
   t_character *player;
   
-  player = character_new(SCREEN_UP, (10 << 4), (5 << 4), 0, 0, SprSize_16x16, 0, 4, 32, 0, linkTiles, linkPal, 0);
+  player = character_new(SCREEN_UP, (10 << 4), (5 << 4), 0, 2, SprSize_16x16, 32, 4, 32, 0, linkTiles, linkPal, 0);
   sprite_add_animation(player->sprite, 2, g_link_animations[0], 100);
   sprite_add_animation(player->sprite, 2, g_link_animations[1], 100);
   sprite_add_animation(player->sprite, 2, g_link_animations[2], 100);

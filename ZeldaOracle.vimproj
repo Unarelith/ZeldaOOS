@@ -1,45 +1,77 @@
 ZeldaOracle=/home/linux/devkitPro/projects/ZeldaOracle CD=. filter="*.c *.cpp *.h *.s *.tmx Makefile TODO graphics maps *.cdat *.*grit" {
  Makefile
-	TODO
+ TODO
  build=build {
+  blue_boy.h
+  blue_man.h
+  farore.h
+  grass_destroy.h
+  indoor.h
   link.h
+  plain.h
+  postman.h
+  red_girl.h
+  red_woman.h
+  sword.h
+  underground.h
+  yellow_oldwoman.h
+  blue_boy.s
+  blue_man.s
+  farore.s
+  grass_destroy.s
+  indoor.s
   link.s
+  plain.s
+  postman.s
+  red_girl.s
+  red_woman.s
+  sword.s
+  underground.s
+  yellow_oldwoman.s
  }
  graphics=graphics {
-  link.grit
  }
  include=include {
   animation.h
   character.h
-		character_manager.h
-		door.h
-		door_manager.h
-		game.h
+  character_manager.h
+  door.h
+  door_manager.h
+  grass_effect.h
   libs5.h
+  link.h
   map.h
-		map_manager.h
+  map_manager.h
   player.h
   sprite.h
+  tiles_infos.h
   tileset.h
+  tilesets_infos.h
   timer.h
-		tools.h
+  tools.h
+  water_effect.h
  }
  source=source {
   animation.c
   character.c
-		character_manager.c
-		door.c
-		door_manager.c
+  character_manager.c
+  door.c
+  door_manager.c
   libs5.c
   main.c
   map.c
-		map_manager.c
+  map_manager.c
   player.c
   sprite.c
-  timer.c
+  tiles_infos.c
   tileset.c
-		tools.c
+  tilesets_infos.c
+  timer.c
+  tools.c
+  grass_effect.s
   libs5_asm.s
+  link.s
+  water_effect.s
  }
 }
 

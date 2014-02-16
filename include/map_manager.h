@@ -18,20 +18,16 @@
 #ifndef MAP_MANAGER_H_
 #define MAP_MANAGER_H_
 
+#include "tiles_infos.h"
+#include "tilesets_infos.h"
+
 #define AREA_NB 4
 #define TILESET_NB 3
-#define TILE_NB 12
 
 extern uint8_t g_area_sizes[AREA_NB];
 extern t_tileset **g_tilesets;
 extern t_map ***g_maps;
 extern t_map *g_current_map;
-
-extern uint8_t g_plain_info[256];
-extern uint8_t g_indoor_info[256];
-extern uint8_t g_underground_info[256];
-
-extern uint8_t g_tiles_info[TILE_NB][4];
 
 void map_manager_load_tilesets();
 void map_manager_load_maps();
@@ -48,5 +44,7 @@ bool in_tiles(int16_t tile_x, int16_t tile_y, uint8_t tiles[]);
 bool passable(int16_t x, int16_t y);
 bool change_map(int16_t x, int16_t y);
 bool slowing_tile(int16_t x, int16_t y);
+bool grass_tile(int16_t x, int16_t y);
+bool low_water_tile(int16_t x, int16_t y);
 
 #endif // MAP_MANAGER_H_

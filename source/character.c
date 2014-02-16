@@ -22,6 +22,7 @@
 #include "animation.h"
 #include "sprite.h"
 #include "character.h"
+#include "character_manager.h"
 #include "player.h"
 #include "tileset.h"
 #include "map.h"
@@ -154,13 +155,44 @@ void      character_map_collisions(t_character *character)
 							}
 			  }
 			}
-		if(slowing_tile(character->x +  2, character->y +  2)
-		|| slowing_tile(character->x + 14, character->y +  2)
-		|| slowing_tile(character->x +  2, character->y + 14)
-		|| slowing_tile(character->x + 14, character->y + 14))
+		if((slowing_tile(character->x +  2, character->y +  2)
+		||  slowing_tile(character->x + 14, character->y +  2)
+		||  slowing_tile(character->x +  2, character->y + 14)
+		||  slowing_tile(character->x + 14, character->y + 14))
+		&& character->vy != 0)
 		 {
 				character->vx /= 2;
 				character->vy /= 2;
+			}
+		// TODO: Improve grass tile detection
+		if(grass_tile(character->x +  2, character->y +  2)
+		|| grass_tile(character->x + 14, character->y +  2)
+		|| grass_tile(character->x +  2, character->y + 14)
+		|| grass_tile(character->x + 14, character->y + 14))
+		 {
+				character->vx /= 4;
+				character->vx *= 3;
+				
+				character->vy /= 4;
+				character->vy *= 3;
+				
+				sprite_draw_frame(g_grass_effect, character->x, character->y, 0);
+			}
+		else
+		 {
+				clearSprite(SCREEN_UP, g_grass_effect->id);
+			}
+		// TODO: Improve low water tile detection
+		if(low_water_tile(character->x +  2, character->y +  2)
+		|| low_water_tile(character->x + 14, character->y +  2)
+		|| low_water_tile(character->x +  2, character->y + 14)
+		|| low_water_tile(character->x + 14, character->y + 14))
+		 {
+				sprite_play_animation(g_low_water_effect, character->x, character->y + 8, 0);
+			}
+		else
+		 {
+				clearSprite(SCREEN_UP, g_low_water_effect->id);
 			}
 	}
 

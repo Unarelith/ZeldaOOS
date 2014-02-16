@@ -25,7 +25,7 @@ BUILD     :=	build
 SOURCES	 	:=	source
 INCLUDES 	:=	include
 DATA      :=	data  
-GRAPHICS 	:=	graphics graphics/characters graphics/tilesets
+GRAPHICS 	:=	graphics graphics/animations graphics/characters graphics/tilesets
 NITRODATA := nitrofiles
 
 #---------------------------------------------------------------------------------
