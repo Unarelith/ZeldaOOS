@@ -63,7 +63,7 @@ bool Sprite::isAnimationAtEnd(u8 anim) {
 }
 
 void Sprite::playAnimation(s16 x, s16 y, u8 anim) {
-	if(m_animations[anim].isPlaying) {
+	if(!m_animations[anim].isPlaying) {
 		resetAnimation(anim);
 		startAnimation(anim);
 		m_animations[anim].isPlaying = true;

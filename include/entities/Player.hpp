@@ -25,8 +25,7 @@ class Player : public Character {
 		Player();
 		~Player();
 		
-	private:
-		
+		void move();
 };
 
 #endif // PLAYER_HPP_

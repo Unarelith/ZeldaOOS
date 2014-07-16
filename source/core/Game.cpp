@@ -85,6 +85,8 @@ void Game::mainLoop() {
 	while(1) {
 		scanKeys();
 		
+		CharacterManager::player->move();
+		
 		CharacterManager::player->draw();
 		
 		swiWaitForVBlank();
