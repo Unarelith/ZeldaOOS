@@ -1,1 +1,0 @@
-indoor.o: indoor.s

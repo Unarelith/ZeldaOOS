@@ -1,1 +1,0 @@
-plain.o: plain.s
