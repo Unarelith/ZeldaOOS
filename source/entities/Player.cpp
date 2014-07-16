@@ -15,6 +15,8 @@
  *
  * =====================================================================================
  */
+#include <math.h>
+
 #include "Tools.hpp"
 #include "MapManager.hpp"
 #include "DoorManager.hpp"
@@ -57,7 +59,7 @@ void Player::doorCollisions() {
 		
 		MapManager::initDoorTransition();
 		
-		MapManager::currentMap = MapManager::maps[nextDoor.zone][nextDoor.mapX + nextDoor.mapY * MapManager::maps[nextDoor.zone].size()];
+		MapManager::currentMap = MapManager::maps[nextDoor.zone][nextDoor.mapX + nextDoor.mapY * sqrt(MapManager::maps[nextDoor.zone].size())];
 		
 		m_x = nextDoor.spawnX;
 		m_y = nextDoor.spawnY;

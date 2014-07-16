@@ -40,8 +40,8 @@ void MapManager::init() {
 	mapBg = bgInit(0, BgType_Text8bpp, BgSize_T_512x512, 0, 1);
 	transitionBg = bgInit(1, BgType_Text8bpp, BgSize_T_256x256, 4, 5);
 	
-	bgSetPriority(mapBg, 0);
-	bgSetPriority(transitionBg, 1);
+	bgSetPriority(mapBg, 1);
+	bgSetPriority(transitionBg, 0);
 	
 	initTilesets();
 	
@@ -86,6 +86,20 @@ void MapManager::initMaps() {
 	indoor.push_back(nullptr);
 	indoor.push_back(nullptr);
 	maps.push_back(indoor);
+	
+	std::vector<Map*> cave1;
+	cave1.push_back(new Map(tilesets[2], "/maps/ca1a1.map", 16, 12, 2, 0, 0));
+	cave1.push_back(new Map(tilesets[2], "/maps/ca1a2.map", 16, 12, 2, 1, 0));
+	cave1.push_back(nullptr);
+	cave1.push_back(new Map(tilesets[2], "/maps/ca1b2.map", 16, 12, 2, 1, 1));
+	maps.push_back(cave1);
+	
+	std::vector<Map*> cave2;
+	cave2.push_back(new Map(tilesets[2], "/maps/ca2a1.map", 16, 12, 3, 0, 0));
+	cave2.push_back(new Map(tilesets[2], "/maps/ca2a2.map", 16, 12, 3, 1, 0));
+	cave2.push_back(new Map(tilesets[2], "/maps/ca2b1.map", 16, 12, 3, 0, 1));
+	cave2.push_back(nullptr);
+	maps.push_back(cave2);
 }
 
 void MapManager::scrollMaps(s8 dx, s8 dy) {
