@@ -41,7 +41,7 @@ class Character : public Sprite {
 		s8 m_vx;
 		s8 m_vy;
 		
-		u8 direction;
+		u8 m_direction;
 		
 		bool m_moving;
 };

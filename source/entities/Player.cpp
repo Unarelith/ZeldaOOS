@@ -17,7 +17,9 @@
  */
 #include "Player.hpp"
 
-Player::Player() : Character() {
+#include "link.h"
+
+Player::Player() : Character(0, (10 << 4), (5 << 4), 0, 2, SprSize_16x16, 32, 4, 32, 0, linkTiles, linkPal) {
 }
 
 Player::~Player() {
