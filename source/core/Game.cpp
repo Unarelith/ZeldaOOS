@@ -20,8 +20,8 @@
 #include <nds.h>
 #include <filesystem.h>
 
-#include "Timer.hpp"
 #include "MapManager.hpp"
+#include "CharacterManager.hpp"
 #include "Game.hpp"
 
 Game::Game() {
@@ -31,7 +31,7 @@ Game::Game() {
 	
 	initVideo();
 	
-	Timer::initSystemTime();
+	Timer::initSystemTimer();
 	
 	MapManager::init();
 	

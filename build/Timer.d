@@ -1,10 +1,4 @@
-CharacterManager.o: \
- /home/linux/Projects/ZeldaOODS/source/managers/CharacterManager.cpp \
- /home/linux/Projects/ZeldaOODS/include/managers/CharacterManager.hpp \
- /home/linux/Projects/ZeldaOODS/include/entities/Player.hpp \
- /home/linux/Projects/ZeldaOODS/include/entities/Character.hpp \
- /home/linux/Projects/ZeldaOODS/include/display/Sprite.hpp \
- /home/linux/Projects/ZeldaOODS/include/display/SpriteAnimation.hpp \
+Timer.o: /home/linux/Projects/ZeldaOODS/source/core/Timer.cpp \
  /home/linux/Projects/ZeldaOODS/include/core/Timer.hpp \
  /home/linux/devkitPro/libnds/include/nds.h \
  /home/linux/devkitPro/libnds/include/nds/libversion.h \
@@ -63,16 +57,6 @@ CharacterManager.o: \
  /home/linux/devkitPro/libnds/include/nds/arm9/trig_lut.h \
  /home/linux/devkitPro/libnds/include/nds/arm9/video.h \
  /home/linux/devkitPro/libnds/include/nds/arm9/videoGL.h
-
-/home/linux/Projects/ZeldaOODS/include/managers/CharacterManager.hpp:
-
-/home/linux/Projects/ZeldaOODS/include/entities/Player.hpp:
-
-/home/linux/Projects/ZeldaOODS/include/entities/Character.hpp:
-
-/home/linux/Projects/ZeldaOODS/include/display/Sprite.hpp:
-
-/home/linux/Projects/ZeldaOODS/include/display/SpriteAnimation.hpp:
 
 /home/linux/Projects/ZeldaOODS/include/core/Timer.hpp:
 

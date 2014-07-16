@@ -60,6 +60,12 @@ Game.o: /home/linux/Projects/ZeldaOODS/source/core/Game.cpp \
  /home/linux/Projects/ZeldaOODS/include/managers/MapManager.hpp \
  /home/linux/Projects/ZeldaOODS/include/display/Map.hpp \
  /home/linux/Projects/ZeldaOODS/include/display/Tileset.hpp \
+ /home/linux/Projects/ZeldaOODS/include/managers/CharacterManager.hpp \
+ /home/linux/Projects/ZeldaOODS/include/entities/Player.hpp \
+ /home/linux/Projects/ZeldaOODS/include/entities/Character.hpp \
+ /home/linux/Projects/ZeldaOODS/include/display/Sprite.hpp \
+ /home/linux/Projects/ZeldaOODS/include/display/SpriteAnimation.hpp \
+ /home/linux/Projects/ZeldaOODS/include/core/Timer.hpp \
  /home/linux/Projects/ZeldaOODS/include/core/Game.hpp
 
 /home/linux/devkitPro/libnds/include/nds.h:
@@ -183,5 +189,17 @@ Game.o: /home/linux/Projects/ZeldaOODS/source/core/Game.cpp \
 /home/linux/Projects/ZeldaOODS/include/display/Map.hpp:
 
 /home/linux/Projects/ZeldaOODS/include/display/Tileset.hpp:
+
+/home/linux/Projects/ZeldaOODS/include/managers/CharacterManager.hpp:
+
+/home/linux/Projects/ZeldaOODS/include/entities/Player.hpp:
+
+/home/linux/Projects/ZeldaOODS/include/entities/Character.hpp:
+
+/home/linux/Projects/ZeldaOODS/include/display/Sprite.hpp:
+
+/home/linux/Projects/ZeldaOODS/include/display/SpriteAnimation.hpp:
+
+/home/linux/Projects/ZeldaOODS/include/core/Timer.hpp:
 
 /home/linux/Projects/ZeldaOODS/include/core/Game.hpp:

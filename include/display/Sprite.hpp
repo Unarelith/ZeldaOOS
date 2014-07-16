@@ -15,4 +15,15 @@
  *
  * =====================================================================================
  */
+#ifndef SPRITE_HPP_
+#define SPRITE_HPP_
 
+#include "SpriteAnimation.hpp"
+
+class Sprite {
+	public:
+		Sprite();
+		~Sprite();
+};
+
+#endif // SPRITE_HPP_

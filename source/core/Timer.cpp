@@ -51,7 +51,7 @@ void OnTimer() {
 	Timer::systemTime++;
 }
 
-void Timer::initSystemTime() {
+void Timer::initSystemTimer() {
 	TIMER1_CR = 0;
 	TIMER1_DATA = TIMER_FREQ_1024(1000);
 	TIMER1_CR = TIMER_ENABLE | TIMER_DIV_1024 | TIMER_IRQ_REQ;

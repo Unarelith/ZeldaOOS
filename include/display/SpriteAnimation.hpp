@@ -20,6 +20,8 @@
 
 #include <vector>
 
+#include "Timer.hpp"
+
 struct SpriteAnimation {
 	SpriteAnimation(u16 _size, u16 *_tabAnim, u16 _delay, bool _isPlaying = false) :
 		size(_size), tabAnim(_tabAnim), delay(_delay), isPlaying(_isPlaying) {}

@@ -18,6 +18,8 @@
 #ifndef TIMER_HPP_
 #define TIMER_HPP_
 
+#include <nds.h>
+
 class Timer {
 	public:
 		Timer();
