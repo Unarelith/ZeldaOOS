@@ -32,6 +32,7 @@ namespace MapManager {
 	void scrollMaps(s8 dx, s8 dy);
 	
 	extern u16 mapBg;
+	extern u16 transitionBg;
 	
 	extern std::vector<Tileset*> tilesets;
 	extern std::vector<std::vector<Map*>> maps;

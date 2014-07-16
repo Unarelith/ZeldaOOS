@@ -21,6 +21,7 @@
 #include <filesystem.h>
 
 #include "MapManager.hpp"
+#include "DoorManager.hpp"
 #include "CharacterManager.hpp"
 #include "Game.hpp"
 
@@ -35,6 +36,8 @@ Game::Game() {
 	
 	MapManager::init();
 	
+	DoorManager::init();
+	
 	CharacterManager::init();
 	
 	m_continue = true;
@@ -42,6 +45,8 @@ Game::Game() {
 
 Game::~Game() {
 	CharacterManager::free();
+	
+	DoorManager::free();
 	
 	MapManager::free();
 }

@@ -15,7 +15,9 @@
  *
  * =====================================================================================
  */
+#include "Tools.hpp"
 #include "MapManager.hpp"
+#include "DoorManager.hpp"
 #include "Player.hpp"
 
 #include "link.h"
@@ -50,9 +52,34 @@ void Player::doorCollisions() {
 		m_vx = 0;
 		m_vy = 0;
 		
-		u16 doorID = DoorManager::findDoorID(m_x, m_y, MapManager::currentMap->area(), MapManager::currentMap->x(), MapManager::currentMap->y());
+		Door *door = DoorManager::findDoor(m_x, m_y, MapManager::currentMap->zone(), MapManager::currentMap->x(), MapManager::currentMap->y());
+		Door nextDoor = DoorManager::doors[door->nextDoorID];
 		
 		MapManager::initDoorTransition();
+		
+		MapManager::currentMap = MapManager::maps[nextDoor.zone][nextDoor.mapX + nextDoor.mapY * MapManager::maps[nextDoor.zone].size()];
+		
+		m_x = nextDoor.spawnX;
+		m_y = nextDoor.spawnY;
+		
+		m_direction = nextDoor.spawnDirection;
+		
+		draw();
+		
+		MapManager::currentMap->load();
+		
+		MapManager::doorTransition();
+		
+		m_inDoor = true;
+		
+		ndsDelay(250);
+	}
+	
+	if(!onDoor(m_x +  2, m_y +  2)
+	&& !onDoor(m_x + 14, m_y +  2)
+	&& !onDoor(m_x +  2, m_y + 14)
+	&& !onDoor(m_x + 14, m_y + 14)) {
+		m_inDoor = false;
 	}
 }
 

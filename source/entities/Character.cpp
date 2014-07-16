@@ -33,10 +33,15 @@ Character::Character(u8 screen, s16 x, s16 y, u8 direction, u8 id, s5_dimension 
 Character::~Character() {
 }
 
+#include <nds.h>
+#include "Tools.hpp"
+
 void Character::draw() {
 	if(m_moving) {
+		nocashMessage((to_string(m_x) + " - " + to_string(m_y) + " - " + to_string(m_direction)).c_str());
 		playAnimation(m_x, m_y, m_direction);
 	} else {
+		nocashMessage((to_string(m_x) + " - " + to_string(m_y) + " - " + to_string(m_direction)).c_str());
 		drawFrame(m_x, m_y, m_direction);
 	}
 }
