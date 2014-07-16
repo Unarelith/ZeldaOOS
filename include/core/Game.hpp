@@ -25,6 +25,7 @@ class Game {
 		
 		void initNitroFS();
 		void initVideo();
+		void initSpriteSystem();
 		
 		void mainLoop();
 		

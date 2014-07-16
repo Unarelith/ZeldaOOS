@@ -22,8 +22,17 @@
 
 class Character : public Sprite {
 	public:
-		Character();
+		Character(u8 screen, s16 x, s16 y, u8 direction, u8 id, s5_dimension size, u8 baseTile, u16 tileSize, u16 nbTiles, u8 paletteSlot, const void *tilesData, const void *palData);
 		~Character();
+		
+		void draw();
+		
+		enum Direction {
+			Down,
+			Right,
+			Left,
+			Up
+		};
 		
 	protected:
 		s16 m_x;
@@ -31,6 +40,8 @@ class Character : public Sprite {
 		
 		s8 m_vx;
 		s8 m_vy;
+		
+		u8 direction;
 		
 		bool m_moving;
 };

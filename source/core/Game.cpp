@@ -28,8 +28,8 @@ Game::Game() {
 	defaultExceptionHandler();
 	
 	initNitroFS();
-	
 	initVideo();
+	initSpriteSystem();
 	
 	Timer::initSystemTimer();
 	
@@ -68,6 +68,15 @@ void Game::initVideo() {
 	vramSetBankB(VRAM_B_MAIN_SPRITE_0x06400000);
 	vramSetBankC(VRAM_C_SUB_BG_0x06200000);
 	vramSetBankD(VRAM_D_SUB_SPRITE);
+}
+
+void Game::initSpriteSystem() {
+	enableSprites(0, 0);
+	enableSprites(1, 0);
+	
+	for(u8 i = 0 ; i < 128 ; i++) {
+		setSpritePriority(0, i, 1);
+	}
 }
 
 void Game::mainLoop() {
