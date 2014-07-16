@@ -32,10 +32,15 @@ Game::Game() {
 	
 	MapManager::init();
 	
+	CharacterManager::init();
+	
 	m_continue = true;
 }
 
 Game::~Game() {
+	CharacterManager::free();
+	
+	MapManager::free();
 }
 
 void Game::initNitroFS() {
@@ -67,22 +72,6 @@ void Game::mainLoop() {
 	
 	while(1) {
 		scanKeys();
-		
-		if(keysHeld() & KEY_LEFT) {
-			MapManager::scrollMaps(-1, 0);
-		}
-		
-		if(keysHeld() & KEY_RIGHT) {
-			MapManager::scrollMaps(1, 0);
-		}
-		
-		if(keysHeld() & KEY_UP) {
-			MapManager::scrollMaps(0, -1);
-		}
-		
-		if(keysHeld() & KEY_DOWN) {
-			MapManager::scrollMaps(0, 1);
-		}
 		
 		swiWaitForVBlank();
 	}

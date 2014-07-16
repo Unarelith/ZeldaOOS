@@ -73,7 +73,7 @@ Archive member included because of file (symbol)
 /home/linux/devkitPro/libnds/lib/libnds9.a(video.o)
                               /home/linux/devkitPro/libnds/lib/libnds9.a(initSystem.o) (vramDefault)
 /home/linux/devkitPro/devkitARM/bin/../lib/gcc/arm-none-eabi/4.8.2/../../../../arm-none-eabi/lib/thumb/libstdc++.a(new_op.o)
-                              MapManager.o (operator new(unsigned int))
+                              CharacterManager.o (operator new(unsigned int))
 /home/linux/devkitPro/devkitARM/bin/../lib/gcc/arm-none-eabi/4.8.2/../../../../arm-none-eabi/lib/thumb/libstdc++.a(eh_call.o)
                               /home/linux/devkitPro/devkitARM/bin/../lib/gcc/arm-none-eabi/4.8.2/../../../../arm-none-eabi/lib/thumb/libstdc++.a(new_op.o) (__cxa_call_unexpected)
 /home/linux/devkitPro/devkitARM/bin/../lib/gcc/arm-none-eabi/4.8.2/../../../../arm-none-eabi/lib/thumb/libstdc++.a(new_opv.o)
@@ -81,7 +81,7 @@ Archive member included because of file (symbol)
 /home/linux/devkitPro/devkitARM/bin/../lib/gcc/arm-none-eabi/4.8.2/../../../../arm-none-eabi/lib/thumb/libstdc++.a(eh_personality.o)
                               /home/linux/devkitPro/devkitARM/bin/../lib/gcc/arm-none-eabi/4.8.2/../../../../arm-none-eabi/lib/thumb/libstdc++.a(new_op.o) (__gxx_personality_v0)
 /home/linux/devkitPro/devkitARM/bin/../lib/gcc/arm-none-eabi/4.8.2/../../../../arm-none-eabi/lib/thumb/libstdc++.a(del_op.o)
-                              MapManager.o (operator delete(void*))
+                              CharacterManager.o (operator delete(void*))
 /home/linux/devkitPro/devkitARM/bin/../lib/gcc/arm-none-eabi/4.8.2/../../../../arm-none-eabi/lib/thumb/libstdc++.a(atexit_arm.o)
                               MapManager.o (__aeabi_atexit)
 /home/linux/devkitPro/devkitARM/bin/../lib/gcc/arm-none-eabi/4.8.2/../../../../arm-none-eabi/lib/thumb/libstdc++.a(eh_terminate.o)
@@ -699,7 +699,7 @@ Linker script and memory map
  .text          0x0000000002000310        0x0 underground.o
  .text          0x0000000002000310        0x0 indoor.o
  .text          0x0000000002000310        0x0 main.o
- .text          0x0000000002000310      0x148 Game.o
+ .text          0x0000000002000310       0xe4 Game.o
                 0x0000000002000310                Game::~Game()
                 0x0000000002000310                Game::~Game()
                 0x0000000002000314                Game::initNitroFS()
@@ -707,236 +707,249 @@ Linker script and memory map
                 0x000000000200034c                Game::Game()
                 0x00000000020003a0                Game::initVideo()
                 0x00000000020003dc                Game::mainLoop()
- .text          0x0000000002000458      0x3a4 Map.o
-                0x0000000002000458                Map::Map(Tileset*, std::string, unsigned short, unsigned short, unsigned short, unsigned short, unsigned short)
-                0x0000000002000458                Map::Map(Tileset*, std::string, unsigned short, unsigned short, unsigned short, unsigned short, unsigned short)
-                0x00000000020004d4                Map::~Map()
-                0x00000000020004d4                Map::~Map()
-                0x00000000020004e8                Map::screenPos(short, short) const
-                0x000000000200050c                Map::loadTile(short, short, signed char, signed char)
-                0x0000000002000670                Map::load()
- .text          0x00000000020007fc      0x7e0 MapManager.o
-                0x00000000020007fc                MapManager::free()
-                0x000000000200085c                MapManager::scrollMaps(signed char, signed char)
-                0x0000000002000b18                MapManager::initTilesets()
-                0x0000000002000b74                MapManager::initMaps()
-                0x0000000002000f64                MapManager::init()
- .text          0x0000000002000fdc      0x350 libs5.o
-                0x0000000002000fdc                enableSprites
-                0x0000000002001070                clearSprite
-                0x00000000020010b8                drawSprite
-                0x0000000002001158                moveSprite
-                0x000000000200119c                getSpriteX
-                0x00000000020011bc                getSpriteY
-                0x00000000020011d8                setSpritePriority
-                0x0000000002001208                setSpriteFlip
-                0x0000000002001240                setSpritePalette
-                0x0000000002001268                enableSpriteAlpha
-                0x000000000200128c                disableSpriteAlpha
-                0x00000000020012b0                enableSpriteMosaic
-                0x00000000020012d4                disableSpriteMosaic
-                0x00000000020012f8                setSpriteMosaic
- .text          0x000000000200132c      0x1d0 libs5_asm.o
-                0x000000000200132c                loadTiles
-                0x0000000002001370                loadPalette
-                0x00000000020013a0                loadPalette256
-                0x000000000200142c                loadExtPalette
- .text          0x00000000020014fc        0x0 link.o
- .text          0x00000000020014fc        0x0 grass_effect.o
- .text          0x00000000020014fc        0x0 water_effect.o
- .text          0x00000000020014fc      0x9f4 /home/linux/devkitPro/libnds/lib/libfilesystem.a(nitrofs.o)
-                0x0000000002001de4                nitroFSInit
- .text          0x0000000002001ef0      0x33c /home/linux/devkitPro/libnds/lib/libfat.a(libfat.o)
-                0x0000000002001ef0                fatMount
-                0x0000000002001fac                fatMountSimple
-                0x0000000002001fc0                fatUnmount
-                0x0000000002001ff4                fatInit
-                0x0000000002002140                fatInitDefault
-                0x000000000200214c                fatGetVolumeLabel
- .text          0x000000000200222c      0x728 /home/linux/devkitPro/libnds/lib/libfat.a(partition.o)
-                0x000000000200222c                FindFirstValidPartition_buf
-                0x00000000020023b4                FindFirstValidPartition
-                0x00000000020023dc                _FAT_partition_getPartitionFromPath
-                0x00000000020023f0                _FAT_partition_createFSinfo
-                0x00000000020024ac                _FAT_partition_readFSinfo
-                0x0000000002002564                _FAT_partition_constructor_buf
-                0x000000000200280c                _FAT_partition_constructor
-                0x000000000200284c                _FAT_partition_writeFSinfo
-                0x00000000020028f8                _FAT_partition_destructor
-                0x0000000002002938                _FAT_getCwdClusterPtr
- .text          0x0000000002002954      0x4ac /home/linux/devkitPro/libnds/lib/libfat.a(cache.o)
-                0x0000000002002a44                _FAT_cache_constructor
-                0x0000000002002ae0                _FAT_cache_readSectors
-                0x0000000002002b44                _FAT_cache_readPartialSector
-                0x0000000002002b80                _FAT_cache_readLittleEndianValue
-                0x0000000002002be4                _FAT_cache_writePartialSector
-                0x0000000002002c2c                _FAT_cache_writeLittleEndianValue
-                0x0000000002002c7c                _FAT_cache_eraseWritePartialSector
-                0x0000000002002cd4                _FAT_cache_writeSectors
-                0x0000000002002d40                _FAT_cache_flush
-                0x0000000002002d9c                _FAT_cache_destructor
-                0x0000000002002dd0                _FAT_cache_invalidate
- .text          0x0000000002002e00     0x1444 /home/linux/devkitPro/libnds/lib/libfat.a(directory.o)
-                0x00000000020030a4                _FAT_directory_entryGetCluster
-                0x00000000020030c0                _FAT_directory_getNextEntry
-                0x0000000002003334                _FAT_directory_getFirstEntry
-                0x0000000002003354                _FAT_directory_getRootEntry
-                0x00000000020033b0                _FAT_directory_getVolumeLabel
-                0x0000000002003470                _FAT_directory_entryFromPosition
-                0x00000000020035a0                _FAT_directory_entryFromPath
-                0x00000000020037dc                _FAT_directory_removeEntry
-                0x00000000020038ac                _FAT_directory_addEntry
-                0x000000000200411c                _FAT_directory_chdir
-                0x000000000200416c                _FAT_directory_entryStat
- .text          0x0000000002004244        0x8 /home/linux/devkitPro/libnds/lib/libfat.a(disc.o)
- .text          0x000000000200424c      0x950 /home/linux/devkitPro/libnds/lib/libfat.a(fatdir.o)
-                0x000000000200424c                _FAT_stat_r
-                0x00000000020042e8                _FAT_link_r
-                0x00000000020042f4                _FAT_unlink_r
-                0x0000000002004468                _FAT_chdir_r
-                0x00000000020044d8                _FAT_rename_r
-                0x00000000020046a4                _FAT_mkdir_r
-                0x0000000002004964                _FAT_statvfs_r
-                0x00000000020049ec                _FAT_diropen_r
-                0x0000000002004aac                _FAT_dirreset_r
-                0x0000000002004af8                _FAT_dirnext_r
-                0x0000000002004b7c                _FAT_dirclose_r
- .text          0x0000000002004b9c     0x13a8 /home/linux/devkitPro/libnds/lib/libfat.a(fatfile.o)
-                0x0000000002004ee4                _FAT_findEntry
-                0x0000000002004f20                FAT_getAttr
-                0x0000000002004f48                FAT_setAttr
-                0x0000000002004fe8                _FAT_open_r
-                0x0000000002005328                _FAT_syncToDisc
-                0x0000000002005348                _FAT_close_r
-                0x00000000020053c0                _FAT_read_r
-                0x00000000020056ec                _FAT_write_r
-                0x0000000002005b88                _FAT_seek_r
-                0x0000000002005cfc                _FAT_fstat_r
-                0x0000000002005d94                _FAT_ftruncate_r
-                0x0000000002005efc                _FAT_fsync_r
- .text          0x0000000002005f44      0x4c0 /home/linux/devkitPro/libnds/lib/libfat.a(file_allocation_table.o)
-                0x0000000002006094                _FAT_fat_nextCluster
-                0x00000000020061b0                _FAT_fat_linkFreeCluster
-                0x0000000002006248                _FAT_fat_linkFreeClusterCleared
-                0x00000000020062b8                _FAT_fat_clearLinks
-                0x000000000200631c                _FAT_fat_trimChain
-                0x00000000020063a4                _FAT_fat_lastCluster
-                0x00000000020063d8                _FAT_fat_freeClusterCount
- .text          0x0000000002006404       0xb8 /home/linux/devkitPro/libnds/lib/libfat.a(filetime.o)
-                0x0000000002006404                _FAT_filetime_getTimeFromRTC
-                0x0000000002006444                _FAT_filetime_getDateFromRTC
-                0x0000000002006484                _FAT_filetime_to_time_t
- .text          0x00000000020064bc       0x10 /home/linux/devkitPro/libnds/lib/libfat.a(lock.o)
-                0x00000000020064bc                _FAT_lock_init
-                0x00000000020064c0                _FAT_lock_deinit
-                0x00000000020064c4                _FAT_lock
-                0x00000000020064c8                _FAT_unlock
- .text          0x00000000020064cc      0x334 /home/linux/devkitPro/libnds/lib/libnds9.a(background.o)
-                0x00000000020064cc                bgIsText
-                0x00000000020064d8                checkIfText
-                0x0000000002006530                bgUpdate
-                0x0000000002006634                bgInit_call
-                0x0000000002006714                bgInitSub_call
- .text          0x0000000002006800      0xa28 /home/linux/devkitPro/libnds/lib/libnds9.a(console.o)
-                0x00000000020068ac                nocash_write
-                0x00000000020068bc                consoleGetDefault
-                0x00000000020068c8                consoleSelect
-                0x00000000020068d8                consoleDebugInit
-                0x000000000200692c                consolePrintChar
-                0x0000000002006af8                consoleLoadFont
-                0x0000000002006d88                consoleSetFont
-                0x0000000002006da8                consoleInit
-                0x0000000002006f10                consoleDemoInit
-                0x0000000002006f54                con_write
-                0x00000000020071f4                consoleClear
-                0x0000000002007204                consoleSetWindow
- .text          0x0000000002007228      0x358 /home/linux/devkitPro/libnds/lib/libnds9.a(gurumeditation.o)
-                0x0000000002007228                ARMShift
-                0x00000000020072a0                getExceptionAddress
-                0x0000000002007454                guruMeditationDump
-                0x0000000002007570                defaultExceptionHandler
- .text          0x0000000002007580      0x104 /home/linux/devkitPro/libnds/lib/libnds9.a(keys.o)
-                0x0000000002007580                scanKeys
-                0x00000000020075f4                keysHeld
-                0x0000000002007600                keysDown
-                0x0000000002007610                keysDownRepeat
-                0x0000000002007620                keysSetRepeat
-                0x0000000002007638                keysUp
-                0x0000000002007648                keysCurrent
- .text          0x0000000002007684       0x30 /home/linux/devkitPro/libnds/lib/libnds9.a(sassert.o)
-                0x0000000002007684                __sassert
- .text          0x00000000020076b4      0x240 /home/linux/devkitPro/libnds/lib/libnds9.a(trig.o)
-                0x00000000020076b4                asinComp
-                0x00000000020076dc                sinLutLookup
-                0x0000000002007714                sinLerp
-                0x000000000200774c                cosLerp
-                0x0000000002007760                tanLutLookup
-                0x0000000002007798                tanLerp
-                0x000000000200783c                asinLerp
-                0x00000000020078b8                acosLerp
-                0x00000000020078cc                atanComp
- .text          0x00000000020078f4      0x234 /home/linux/devkitPro/libnds/lib/libnds9.a(dldi.o)
-                0x00000000020078f4                dldiGetInternal
-                0x000000000200792c                dldiIsValid
-                0x0000000002007964                dldiFixDriverAddresses
-                0x0000000002007a40                dldiLoadFromFile
-                0x0000000002007b1c                dldiFree
- .text          0x0000000002007b28      0x148 /home/linux/devkitPro/libnds/lib/libnds9.a(dsi_sd.o)
-                0x0000000002007b28                sdio_ClearStatus
-                0x0000000002007b38                sdio_Shutdown
-                0x0000000002007b48                sdio_Startup
-                0x0000000002007b94                sdio_IsInserted
-                0x0000000002007bc8                sdio_ReadSectors
-                0x0000000002007c1c                sdio_WriteSectors
- .text          0x0000000002007c70      0x140 /home/linux/devkitPro/libnds/lib/libnds9.a(initSystem.o)
-                0x0000000002007c70                initSystem
- .text          0x0000000002007db0      0x23c /home/linux/devkitPro/libnds/lib/libnds9.a(card.o)
-                0x0000000002007db0                cardWriteCommand
-                0x0000000002007dd4                cardPolledTransfer
-                0x0000000002007e24                cardStartTransfer
-                0x0000000002007e80                cardWriteAndRead
-                0x0000000002007ec4                cardParamCommand
-                0x0000000002007ef4                cardReadID
-                0x0000000002007f1c                cardReset
-                0x0000000002007f90                cardReadHeader
- .text          0x0000000002007fec      0xce0 /home/linux/devkitPro/libnds/lib/libnds9.a(fifosystem.o)
-                0x0000000002008264                fifoSendAddress
-                0x0000000002008290                fifoSendValue32
-                0x00000000020082cc                fifoSendDatamsg
-                0x000000000200833c                fifoGetAddress
-                0x00000000020083b0                fifoSetAddressHandler
-                0x000000000200842c                fifoGetValue32
-                0x00000000020084a0                fifoSetValue32Handler
-                0x000000000200851c                fifoGetDatamsg
-                0x00000000020089c0                fifoSetDatamsgHandler
-                0x0000000002008a64                fifoCheckAddress
-                0x0000000002008a8c                fifoCheckDatamsg
-                0x0000000002008ab4                fifoCheckDatamsgLength
-                0x0000000002008aec                fifoCheckValue32
-                0x0000000002008b14                fifoInit
- .text          0x0000000002008ccc      0x1ec /home/linux/devkitPro/libnds/lib/libnds9.a(interrupts.o)
-                0x0000000002008ccc                irqDummy
-                0x0000000002008cd0                irqSet
-                0x0000000002008d3c                irqInit
-                0x0000000002008d88                irqInitHandler
-                0x0000000002008db8                irqEnable
-                0x0000000002008e1c                irqDisable
-                0x0000000002008e80                irqClear
- .text          0x0000000002008eb8       0x58 /home/linux/devkitPro/libnds/lib/libnds9.a(libnds_exit.arm.o)
-                0x0000000002008eb8                systemErrorExit
-                0x0000000002008ebc                __libnds_exit
- .text          0x0000000002008f10       0x70 /home/linux/devkitPro/libnds/lib/libnds9.a(dcache.o)
-                0x0000000002008f10                DC_FlushAll
-                0x0000000002008f3c                DC_FlushRange
-                0x0000000002008f58                DC_InvalidateAll
-                0x0000000002008f64                DC_InvalidateRange
- .text          0x0000000002008f80       0xdc /home/linux/devkitPro/libnds/lib/libnds9.a(exceptionHandler.o)
-                0x0000000002008f80                getCPSR
-                0x0000000002008f88                enterException
-                0x0000000002008ffc                exceptionC
-                0x0000000002009000                exceptionStack
-                0x0000000002009004                exceptionRegisters
- *fill*         0x000000000200905c       0x24 ff
+ .text          0x00000000020003f4      0x3a4 Map.o
+                0x00000000020003f4                Map::Map(Tileset*, std::string, unsigned short, unsigned short, unsigned short, unsigned short, unsigned short)
+                0x00000000020003f4                Map::Map(Tileset*, std::string, unsigned short, unsigned short, unsigned short, unsigned short, unsigned short)
+                0x0000000002000470                Map::~Map()
+                0x0000000002000470                Map::~Map()
+                0x0000000002000484                Map::screenPos(short, short) const
+                0x00000000020004a8                Map::loadTile(short, short, signed char, signed char)
+                0x000000000200060c                Map::load()
+ .text          0x0000000002000798       0x18 Player.o
+                0x0000000002000798                Player::Player()
+                0x0000000002000798                Player::Player()
+                0x00000000020007a4                Player::~Player()
+                0x00000000020007a4                Player::~Player()
+ .text          0x00000000020007b0        0x8 Character.o
+                0x00000000020007b0                Character::Character()
+                0x00000000020007b0                Character::Character()
+                0x00000000020007b4                Character::~Character()
+                0x00000000020007b4                Character::~Character()
+ .text          0x00000000020007b8       0x34 CharacterManager.o
+                0x00000000020007b8                CharacterManager::init()
+                0x00000000020007d0                CharacterManager::free()
+ .text          0x00000000020007ec      0x7e0 MapManager.o
+                0x00000000020007ec                MapManager::free()
+                0x000000000200084c                MapManager::scrollMaps(signed char, signed char)
+                0x0000000002000b08                MapManager::initTilesets()
+                0x0000000002000b64                MapManager::initMaps()
+                0x0000000002000f54                MapManager::init()
+ .text          0x0000000002000fcc      0x350 libs5.o
+                0x0000000002000fcc                enableSprites
+                0x0000000002001060                clearSprite
+                0x00000000020010a8                drawSprite
+                0x0000000002001148                moveSprite
+                0x000000000200118c                getSpriteX
+                0x00000000020011ac                getSpriteY
+                0x00000000020011c8                setSpritePriority
+                0x00000000020011f8                setSpriteFlip
+                0x0000000002001230                setSpritePalette
+                0x0000000002001258                enableSpriteAlpha
+                0x000000000200127c                disableSpriteAlpha
+                0x00000000020012a0                enableSpriteMosaic
+                0x00000000020012c4                disableSpriteMosaic
+                0x00000000020012e8                setSpriteMosaic
+ .text          0x000000000200131c      0x1d0 libs5_asm.o
+                0x000000000200131c                loadTiles
+                0x0000000002001360                loadPalette
+                0x0000000002001390                loadPalette256
+                0x000000000200141c                loadExtPalette
+ .text          0x00000000020014ec        0x0 link.o
+ .text          0x00000000020014ec        0x0 grass_effect.o
+ .text          0x00000000020014ec        0x0 water_effect.o
+ .text          0x00000000020014ec      0x9f4 /home/linux/devkitPro/libnds/lib/libfilesystem.a(nitrofs.o)
+                0x0000000002001dd4                nitroFSInit
+ .text          0x0000000002001ee0      0x33c /home/linux/devkitPro/libnds/lib/libfat.a(libfat.o)
+                0x0000000002001ee0                fatMount
+                0x0000000002001f9c                fatMountSimple
+                0x0000000002001fb0                fatUnmount
+                0x0000000002001fe4                fatInit
+                0x0000000002002130                fatInitDefault
+                0x000000000200213c                fatGetVolumeLabel
+ .text          0x000000000200221c      0x728 /home/linux/devkitPro/libnds/lib/libfat.a(partition.o)
+                0x000000000200221c                FindFirstValidPartition_buf
+                0x00000000020023a4                FindFirstValidPartition
+                0x00000000020023cc                _FAT_partition_getPartitionFromPath
+                0x00000000020023e0                _FAT_partition_createFSinfo
+                0x000000000200249c                _FAT_partition_readFSinfo
+                0x0000000002002554                _FAT_partition_constructor_buf
+                0x00000000020027fc                _FAT_partition_constructor
+                0x000000000200283c                _FAT_partition_writeFSinfo
+                0x00000000020028e8                _FAT_partition_destructor
+                0x0000000002002928                _FAT_getCwdClusterPtr
+ .text          0x0000000002002944      0x4ac /home/linux/devkitPro/libnds/lib/libfat.a(cache.o)
+                0x0000000002002a34                _FAT_cache_constructor
+                0x0000000002002ad0                _FAT_cache_readSectors
+                0x0000000002002b34                _FAT_cache_readPartialSector
+                0x0000000002002b70                _FAT_cache_readLittleEndianValue
+                0x0000000002002bd4                _FAT_cache_writePartialSector
+                0x0000000002002c1c                _FAT_cache_writeLittleEndianValue
+                0x0000000002002c6c                _FAT_cache_eraseWritePartialSector
+                0x0000000002002cc4                _FAT_cache_writeSectors
+                0x0000000002002d30                _FAT_cache_flush
+                0x0000000002002d8c                _FAT_cache_destructor
+                0x0000000002002dc0                _FAT_cache_invalidate
+ .text          0x0000000002002df0     0x1444 /home/linux/devkitPro/libnds/lib/libfat.a(directory.o)
+                0x0000000002003094                _FAT_directory_entryGetCluster
+                0x00000000020030b0                _FAT_directory_getNextEntry
+                0x0000000002003324                _FAT_directory_getFirstEntry
+                0x0000000002003344                _FAT_directory_getRootEntry
+                0x00000000020033a0                _FAT_directory_getVolumeLabel
+                0x0000000002003460                _FAT_directory_entryFromPosition
+                0x0000000002003590                _FAT_directory_entryFromPath
+                0x00000000020037cc                _FAT_directory_removeEntry
+                0x000000000200389c                _FAT_directory_addEntry
+                0x000000000200410c                _FAT_directory_chdir
+                0x000000000200415c                _FAT_directory_entryStat
+ .text          0x0000000002004234        0x8 /home/linux/devkitPro/libnds/lib/libfat.a(disc.o)
+ .text          0x000000000200423c      0x950 /home/linux/devkitPro/libnds/lib/libfat.a(fatdir.o)
+                0x000000000200423c                _FAT_stat_r
+                0x00000000020042d8                _FAT_link_r
+                0x00000000020042e4                _FAT_unlink_r
+                0x0000000002004458                _FAT_chdir_r
+                0x00000000020044c8                _FAT_rename_r
+                0x0000000002004694                _FAT_mkdir_r
+                0x0000000002004954                _FAT_statvfs_r
+                0x00000000020049dc                _FAT_diropen_r
+                0x0000000002004a9c                _FAT_dirreset_r
+                0x0000000002004ae8                _FAT_dirnext_r
+                0x0000000002004b6c                _FAT_dirclose_r
+ .text          0x0000000002004b8c     0x13a8 /home/linux/devkitPro/libnds/lib/libfat.a(fatfile.o)
+                0x0000000002004ed4                _FAT_findEntry
+                0x0000000002004f10                FAT_getAttr
+                0x0000000002004f38                FAT_setAttr
+                0x0000000002004fd8                _FAT_open_r
+                0x0000000002005318                _FAT_syncToDisc
+                0x0000000002005338                _FAT_close_r
+                0x00000000020053b0                _FAT_read_r
+                0x00000000020056dc                _FAT_write_r
+                0x0000000002005b78                _FAT_seek_r
+                0x0000000002005cec                _FAT_fstat_r
+                0x0000000002005d84                _FAT_ftruncate_r
+                0x0000000002005eec                _FAT_fsync_r
+ .text          0x0000000002005f34      0x4c0 /home/linux/devkitPro/libnds/lib/libfat.a(file_allocation_table.o)
+                0x0000000002006084                _FAT_fat_nextCluster
+                0x00000000020061a0                _FAT_fat_linkFreeCluster
+                0x0000000002006238                _FAT_fat_linkFreeClusterCleared
+                0x00000000020062a8                _FAT_fat_clearLinks
+                0x000000000200630c                _FAT_fat_trimChain
+                0x0000000002006394                _FAT_fat_lastCluster
+                0x00000000020063c8                _FAT_fat_freeClusterCount
+ .text          0x00000000020063f4       0xb8 /home/linux/devkitPro/libnds/lib/libfat.a(filetime.o)
+                0x00000000020063f4                _FAT_filetime_getTimeFromRTC
+                0x0000000002006434                _FAT_filetime_getDateFromRTC
+                0x0000000002006474                _FAT_filetime_to_time_t
+ .text          0x00000000020064ac       0x10 /home/linux/devkitPro/libnds/lib/libfat.a(lock.o)
+                0x00000000020064ac                _FAT_lock_init
+                0x00000000020064b0                _FAT_lock_deinit
+                0x00000000020064b4                _FAT_lock
+                0x00000000020064b8                _FAT_unlock
+ .text          0x00000000020064bc      0x334 /home/linux/devkitPro/libnds/lib/libnds9.a(background.o)
+                0x00000000020064bc                bgIsText
+                0x00000000020064c8                checkIfText
+                0x0000000002006520                bgUpdate
+                0x0000000002006624                bgInit_call
+                0x0000000002006704                bgInitSub_call
+ .text          0x00000000020067f0      0xa28 /home/linux/devkitPro/libnds/lib/libnds9.a(console.o)
+                0x000000000200689c                nocash_write
+                0x00000000020068ac                consoleGetDefault
+                0x00000000020068b8                consoleSelect
+                0x00000000020068c8                consoleDebugInit
+                0x000000000200691c                consolePrintChar
+                0x0000000002006ae8                consoleLoadFont
+                0x0000000002006d78                consoleSetFont
+                0x0000000002006d98                consoleInit
+                0x0000000002006f00                consoleDemoInit
+                0x0000000002006f44                con_write
+                0x00000000020071e4                consoleClear
+                0x00000000020071f4                consoleSetWindow
+ .text          0x0000000002007218      0x358 /home/linux/devkitPro/libnds/lib/libnds9.a(gurumeditation.o)
+                0x0000000002007218                ARMShift
+                0x0000000002007290                getExceptionAddress
+                0x0000000002007444                guruMeditationDump
+                0x0000000002007560                defaultExceptionHandler
+ .text          0x0000000002007570      0x104 /home/linux/devkitPro/libnds/lib/libnds9.a(keys.o)
+                0x0000000002007570                scanKeys
+                0x00000000020075e4                keysHeld
+                0x00000000020075f0                keysDown
+                0x0000000002007600                keysDownRepeat
+                0x0000000002007610                keysSetRepeat
+                0x0000000002007628                keysUp
+                0x0000000002007638                keysCurrent
+ .text          0x0000000002007674       0x30 /home/linux/devkitPro/libnds/lib/libnds9.a(sassert.o)
+                0x0000000002007674                __sassert
+ .text          0x00000000020076a4      0x240 /home/linux/devkitPro/libnds/lib/libnds9.a(trig.o)
+                0x00000000020076a4                asinComp
+                0x00000000020076cc                sinLutLookup
+                0x0000000002007704                sinLerp
+                0x000000000200773c                cosLerp
+                0x0000000002007750                tanLutLookup
+                0x0000000002007788                tanLerp
+                0x000000000200782c                asinLerp
+                0x00000000020078a8                acosLerp
+                0x00000000020078bc                atanComp
+ .text          0x00000000020078e4      0x234 /home/linux/devkitPro/libnds/lib/libnds9.a(dldi.o)
+                0x00000000020078e4                dldiGetInternal
+                0x000000000200791c                dldiIsValid
+                0x0000000002007954                dldiFixDriverAddresses
+                0x0000000002007a30                dldiLoadFromFile
+                0x0000000002007b0c                dldiFree
+ .text          0x0000000002007b18      0x148 /home/linux/devkitPro/libnds/lib/libnds9.a(dsi_sd.o)
+                0x0000000002007b18                sdio_ClearStatus
+                0x0000000002007b28                sdio_Shutdown
+                0x0000000002007b38                sdio_Startup
+                0x0000000002007b84                sdio_IsInserted
+                0x0000000002007bb8                sdio_ReadSectors
+                0x0000000002007c0c                sdio_WriteSectors
+ .text          0x0000000002007c60      0x140 /home/linux/devkitPro/libnds/lib/libnds9.a(initSystem.o)
+                0x0000000002007c60                initSystem
+ .text          0x0000000002007da0      0x23c /home/linux/devkitPro/libnds/lib/libnds9.a(card.o)
+                0x0000000002007da0                cardWriteCommand
+                0x0000000002007dc4                cardPolledTransfer
+                0x0000000002007e14                cardStartTransfer
+                0x0000000002007e70                cardWriteAndRead
+                0x0000000002007eb4                cardParamCommand
+                0x0000000002007ee4                cardReadID
+                0x0000000002007f0c                cardReset
+                0x0000000002007f80                cardReadHeader
+ .text          0x0000000002007fdc      0xce0 /home/linux/devkitPro/libnds/lib/libnds9.a(fifosystem.o)
+                0x0000000002008254                fifoSendAddress
+                0x0000000002008280                fifoSendValue32
+                0x00000000020082bc                fifoSendDatamsg
+                0x000000000200832c                fifoGetAddress
+                0x00000000020083a0                fifoSetAddressHandler
+                0x000000000200841c                fifoGetValue32
+                0x0000000002008490                fifoSetValue32Handler
+                0x000000000200850c                fifoGetDatamsg
+                0x00000000020089b0                fifoSetDatamsgHandler
+                0x0000000002008a54                fifoCheckAddress
+                0x0000000002008a7c                fifoCheckDatamsg
+                0x0000000002008aa4                fifoCheckDatamsgLength
+                0x0000000002008adc                fifoCheckValue32
+                0x0000000002008b04                fifoInit
+ .text          0x0000000002008cbc      0x1ec /home/linux/devkitPro/libnds/lib/libnds9.a(interrupts.o)
+                0x0000000002008cbc                irqDummy
+                0x0000000002008cc0                irqSet
+                0x0000000002008d2c                irqInit
+                0x0000000002008d78                irqInitHandler
+                0x0000000002008da8                irqEnable
+                0x0000000002008e0c                irqDisable
+                0x0000000002008e70                irqClear
+ .text          0x0000000002008ea8       0x58 /home/linux/devkitPro/libnds/lib/libnds9.a(libnds_exit.arm.o)
+                0x0000000002008ea8                systemErrorExit
+                0x0000000002008eac                __libnds_exit
+ .text          0x0000000002008f00       0x70 /home/linux/devkitPro/libnds/lib/libnds9.a(dcache.o)
+                0x0000000002008f00                DC_FlushAll
+                0x0000000002008f2c                DC_FlushRange
+                0x0000000002008f48                DC_InvalidateAll
+                0x0000000002008f54                DC_InvalidateRange
+ .text          0x0000000002008f70       0xdc /home/linux/devkitPro/libnds/lib/libnds9.a(exceptionHandler.o)
+                0x0000000002008f70                getCPSR
+                0x0000000002008f78                enterException
+                0x0000000002008fec                exceptionC
+                0x0000000002008ff0                exceptionStack
+                0x0000000002008ff4                exceptionRegisters
+ *fill*         0x000000000200904c       0x34 ff
  .text          0x0000000002009080     0x8000 /home/linux/devkitPro/libnds/lib/libnds9.a(dldi_stub.o)
                 0x0000000002009080                _io_dldi_stub
  .text          0x0000000002011080      0x1b4 /home/linux/devkitPro/libnds/lib/libnds9.a(mpu_setup.o)
@@ -4736,6 +4749,9 @@ ARM.exidx       0x000000000206867c      0x5f0
  .data          0x0000000002068c88        0x0 main.o
  .data          0x0000000002068c88        0x0 Game.o
  .data          0x0000000002068c88        0x0 Map.o
+ .data          0x0000000002068c88        0x0 Player.o
+ .data          0x0000000002068c88        0x0 Character.o
+ .data          0x0000000002068c88        0x0 CharacterManager.o
  .data          0x0000000002068c88        0x0 MapManager.o
  .data          0x0000000002068c88        0x0 libs5.o
  .data          0x0000000002068c88        0x0 libs5_asm.o
@@ -5065,66 +5081,69 @@ ARM.exidx       0x000000000206867c      0x5f0
  .bss           0x000000000206a858        0x4 Map.o
                 0x000000000206a858                Map::scrollX
                 0x000000000206a85a                Map::scrollY
- .bss           0x000000000206a85c       0x20 MapManager.o
-                0x000000000206a85c                MapManager::maps
-                0x000000000206a868                MapManager::currentMap
-                0x000000000206a86c                MapManager::mapBg
-                0x000000000206a870                MapManager::tilesets
- .bss           0x000000000206a87c        0x0 libs5.o
- .bss           0x000000000206a87c        0x0 libs5_asm.o
- .bss           0x000000000206a87c        0x0 link.o
- .bss           0x000000000206a87c        0x0 grass_effect.o
- .bss           0x000000000206a87c        0x0 water_effect.o
- .bss           0x000000000206a87c      0x214 /home/linux/devkitPro/libnds/lib/libfilesystem.a(nitrofs.o)
- .bss           0x000000000206aa90        0x0 /home/linux/devkitPro/libnds/lib/libfat.a(libfat.o)
- .bss           0x000000000206aa90        0x0 /home/linux/devkitPro/libnds/lib/libfat.a(partition.o)
- .bss           0x000000000206aa90        0x4 /home/linux/devkitPro/libnds/lib/libfat.a(cache.o)
- .bss           0x000000000206aa94        0x0 /home/linux/devkitPro/libnds/lib/libfat.a(directory.o)
- .bss           0x000000000206aa94        0x0 /home/linux/devkitPro/libnds/lib/libfat.a(disc.o)
- .bss           0x000000000206aa94        0x0 /home/linux/devkitPro/libnds/lib/libfat.a(fatdir.o)
- .bss           0x000000000206aa94        0x0 /home/linux/devkitPro/libnds/lib/libfat.a(fatfile.o)
- .bss           0x000000000206aa94        0x0 /home/linux/devkitPro/libnds/lib/libfat.a(file_allocation_table.o)
- .bss           0x000000000206aa94        0x0 /home/linux/devkitPro/libnds/lib/libfat.a(filetime.o)
- .bss           0x000000000206aa94        0x0 /home/linux/devkitPro/libnds/lib/libfat.a(lock.o)
- .bss           0x000000000206aa94        0x0 /home/linux/devkitPro/libnds/lib/libnds9.a(background.o)
- .bss           0x000000000206aa94        0x0 /home/linux/devkitPro/libnds/lib/libnds9.a(console.o)
- .bss           0x000000000206aa94        0x0 /home/linux/devkitPro/libnds/lib/libnds9.a(gurumeditation.o)
- .bss           0x000000000206aa94        0x6 /home/linux/devkitPro/libnds/lib/libnds9.a(keys.o)
- .bss           0x000000000206aa9a        0x0 /home/linux/devkitPro/libnds/lib/libnds9.a(sassert.o)
- .bss           0x000000000206aa9a        0x0 /home/linux/devkitPro/libnds/lib/libnds9.a(trig.o)
- .bss           0x000000000206aa9a        0x0 /home/linux/devkitPro/libnds/lib/libnds9.a(dldi.o)
- .bss           0x000000000206aa9a        0x0 /home/linux/devkitPro/libnds/lib/libnds9.a(dsi_sd.o)
- .bss           0x000000000206aa9a        0x0 /home/linux/devkitPro/libnds/lib/libnds9.a(initSystem.o)
- .bss           0x000000000206aa9a        0x0 /home/linux/devkitPro/libnds/lib/libnds9.a(card.o)
- *fill*         0x000000000206aa9a        0x2 
- .bss           0x000000000206aa9c        0x8 /home/linux/devkitPro/libnds/lib/libnds9.a(fifosystem.o)
-                0x000000000206aaa0                processing
- .bss           0x000000000206aaa4        0x0 /home/linux/devkitPro/libnds/lib/libnds9.a(interrupts.o)
- .bss           0x000000000206aaa4        0x0 /home/linux/devkitPro/libnds/lib/libnds9.a(libnds_exit.arm.o)
- .bss           0x000000000206aaa4        0x0 /home/linux/devkitPro/libnds/lib/libnds9.a(dcache.o)
- .bss           0x000000000206aaa4        0x0 /home/linux/devkitPro/libnds/lib/libnds9.a(exceptionHandler.o)
- .bss           0x000000000206aaa4        0x0 /home/linux/devkitPro/libnds/lib/libnds9.a(dldi_stub.o)
- .bss           0x000000000206aaa4        0x0 /home/linux/devkitPro/libnds/lib/libnds9.a(mpu_setup.o)
- .bss           0x000000000206aaa4        0x0 /home/linux/devkitPro/libnds/lib/libnds9.a(biosCalls.o)
- .bss           0x000000000206aaa4        0x0 /home/linux/devkitPro/libnds/lib/libnds9.a(debugprint.o)
- .bss           0x000000000206aaa4        0x0 /home/linux/devkitPro/libnds/lib/libnds9.a(interruptDispatcher.o)
- .bss           0x000000000206aaa4        0x0 /home/linux/devkitPro/libnds/lib/libnds9.a(swiSoftReset.o)
- .bss           0x000000000206aaa4        0x0 /home/linux/devkitPro/libnds/lib/libnds9.a(default_font.bin.o)
- .bss           0x000000000206aaa4        0x0 /home/linux/devkitPro/libnds/lib/libnds9.a(exceptions.o)
- .bss           0x000000000206aaa4        0x4 /home/linux/devkitPro/libnds/lib/libnds9.a(system.o)
- .bss           0x000000000206aaa8        0x0 /home/linux/devkitPro/libnds/lib/libnds9.a(video.o)
- .bss           0x000000000206aaa8        0x0 /home/linux/devkitPro/devkitARM/bin/../lib/gcc/arm-none-eabi/4.8.2/../../../../arm-none-eabi/lib/thumb/libstdc++.a(new_op.o)
- .bss           0x000000000206aaa8        0x0 /home/linux/devkitPro/devkitARM/bin/../lib/gcc/arm-none-eabi/4.8.2/../../../../arm-none-eabi/lib/thumb/libstdc++.a(eh_call.o)
- .bss           0x000000000206aaa8        0x0 /home/linux/devkitPro/devkitARM/bin/../lib/gcc/arm-none-eabi/4.8.2/../../../../arm-none-eabi/lib/thumb/libstdc++.a(new_opv.o)
- .bss           0x000000000206aaa8        0x0 /home/linux/devkitPro/devkitARM/bin/../lib/gcc/arm-none-eabi/4.8.2/../../../../arm-none-eabi/lib/thumb/libstdc++.a(eh_personality.o)
- .bss           0x000000000206aaa8        0x0 /home/linux/devkitPro/devkitARM/bin/../lib/gcc/arm-none-eabi/4.8.2/../../../../arm-none-eabi/lib/thumb/libstdc++.a(del_op.o)
- .bss           0x000000000206aaa8        0x0 /home/linux/devkitPro/devkitARM/bin/../lib/gcc/arm-none-eabi/4.8.2/../../../../arm-none-eabi/lib/thumb/libstdc++.a(atexit_arm.o)
- .bss           0x000000000206aaa8        0x0 /home/linux/devkitPro/devkitARM/bin/../lib/gcc/arm-none-eabi/4.8.2/../../../../arm-none-eabi/lib/thumb/libstdc++.a(eh_terminate.o)
- .bss           0x000000000206aaa8        0x0 /home/linux/devkitPro/devkitARM/bin/../lib/gcc/arm-none-eabi/4.8.2/../../../../arm-none-eabi/lib/thumb/libstdc++.a(eh_exception.o)
- .bss           0x000000000206aaa8        0x0 /home/linux/devkitPro/devkitARM/bin/../lib/gcc/arm-none-eabi/4.8.2/../../../../arm-none-eabi/lib/thumb/libstdc++.a(eh_alloc.o)
+ .bss           0x000000000206a85c        0x0 Player.o
+ .bss           0x000000000206a85c        0x0 Character.o
+ .bss           0x000000000206a85c        0x4 CharacterManager.o
+                0x000000000206a85c                CharacterManager::player
+ .bss           0x000000000206a860       0x20 MapManager.o
+                0x000000000206a860                MapManager::maps
+                0x000000000206a86c                MapManager::currentMap
+                0x000000000206a870                MapManager::mapBg
+                0x000000000206a874                MapManager::tilesets
+ .bss           0x000000000206a880        0x0 libs5.o
+ .bss           0x000000000206a880        0x0 libs5_asm.o
+ .bss           0x000000000206a880        0x0 link.o
+ .bss           0x000000000206a880        0x0 grass_effect.o
+ .bss           0x000000000206a880        0x0 water_effect.o
+ .bss           0x000000000206a880      0x214 /home/linux/devkitPro/libnds/lib/libfilesystem.a(nitrofs.o)
+ .bss           0x000000000206aa94        0x0 /home/linux/devkitPro/libnds/lib/libfat.a(libfat.o)
+ .bss           0x000000000206aa94        0x0 /home/linux/devkitPro/libnds/lib/libfat.a(partition.o)
+ .bss           0x000000000206aa94        0x4 /home/linux/devkitPro/libnds/lib/libfat.a(cache.o)
+ .bss           0x000000000206aa98        0x0 /home/linux/devkitPro/libnds/lib/libfat.a(directory.o)
+ .bss           0x000000000206aa98        0x0 /home/linux/devkitPro/libnds/lib/libfat.a(disc.o)
+ .bss           0x000000000206aa98        0x0 /home/linux/devkitPro/libnds/lib/libfat.a(fatdir.o)
+ .bss           0x000000000206aa98        0x0 /home/linux/devkitPro/libnds/lib/libfat.a(fatfile.o)
+ .bss           0x000000000206aa98        0x0 /home/linux/devkitPro/libnds/lib/libfat.a(file_allocation_table.o)
+ .bss           0x000000000206aa98        0x0 /home/linux/devkitPro/libnds/lib/libfat.a(filetime.o)
+ .bss           0x000000000206aa98        0x0 /home/linux/devkitPro/libnds/lib/libfat.a(lock.o)
+ .bss           0x000000000206aa98        0x0 /home/linux/devkitPro/libnds/lib/libnds9.a(background.o)
+ .bss           0x000000000206aa98        0x0 /home/linux/devkitPro/libnds/lib/libnds9.a(console.o)
+ .bss           0x000000000206aa98        0x0 /home/linux/devkitPro/libnds/lib/libnds9.a(gurumeditation.o)
+ .bss           0x000000000206aa98        0x6 /home/linux/devkitPro/libnds/lib/libnds9.a(keys.o)
+ .bss           0x000000000206aa9e        0x0 /home/linux/devkitPro/libnds/lib/libnds9.a(sassert.o)
+ .bss           0x000000000206aa9e        0x0 /home/linux/devkitPro/libnds/lib/libnds9.a(trig.o)
+ .bss           0x000000000206aa9e        0x0 /home/linux/devkitPro/libnds/lib/libnds9.a(dldi.o)
+ .bss           0x000000000206aa9e        0x0 /home/linux/devkitPro/libnds/lib/libnds9.a(dsi_sd.o)
+ .bss           0x000000000206aa9e        0x0 /home/linux/devkitPro/libnds/lib/libnds9.a(initSystem.o)
+ .bss           0x000000000206aa9e        0x0 /home/linux/devkitPro/libnds/lib/libnds9.a(card.o)
+ *fill*         0x000000000206aa9e        0x2 
+ .bss           0x000000000206aaa0        0x8 /home/linux/devkitPro/libnds/lib/libnds9.a(fifosystem.o)
+                0x000000000206aaa4                processing
+ .bss           0x000000000206aaa8        0x0 /home/linux/devkitPro/libnds/lib/libnds9.a(interrupts.o)
+ .bss           0x000000000206aaa8        0x0 /home/linux/devkitPro/libnds/lib/libnds9.a(libnds_exit.arm.o)
+ .bss           0x000000000206aaa8        0x0 /home/linux/devkitPro/libnds/lib/libnds9.a(dcache.o)
+ .bss           0x000000000206aaa8        0x0 /home/linux/devkitPro/libnds/lib/libnds9.a(exceptionHandler.o)
+ .bss           0x000000000206aaa8        0x0 /home/linux/devkitPro/libnds/lib/libnds9.a(dldi_stub.o)
+ .bss           0x000000000206aaa8        0x0 /home/linux/devkitPro/libnds/lib/libnds9.a(mpu_setup.o)
+ .bss           0x000000000206aaa8        0x0 /home/linux/devkitPro/libnds/lib/libnds9.a(biosCalls.o)
+ .bss           0x000000000206aaa8        0x0 /home/linux/devkitPro/libnds/lib/libnds9.a(debugprint.o)
+ .bss           0x000000000206aaa8        0x0 /home/linux/devkitPro/libnds/lib/libnds9.a(interruptDispatcher.o)
+ .bss           0x000000000206aaa8        0x0 /home/linux/devkitPro/libnds/lib/libnds9.a(swiSoftReset.o)
+ .bss           0x000000000206aaa8        0x0 /home/linux/devkitPro/libnds/lib/libnds9.a(default_font.bin.o)
+ .bss           0x000000000206aaa8        0x0 /home/linux/devkitPro/libnds/lib/libnds9.a(exceptions.o)
+ .bss           0x000000000206aaa8        0x4 /home/linux/devkitPro/libnds/lib/libnds9.a(system.o)
+ .bss           0x000000000206aaac        0x0 /home/linux/devkitPro/libnds/lib/libnds9.a(video.o)
+ .bss           0x000000000206aaac        0x0 /home/linux/devkitPro/devkitARM/bin/../lib/gcc/arm-none-eabi/4.8.2/../../../../arm-none-eabi/lib/thumb/libstdc++.a(new_op.o)
+ .bss           0x000000000206aaac        0x0 /home/linux/devkitPro/devkitARM/bin/../lib/gcc/arm-none-eabi/4.8.2/../../../../arm-none-eabi/lib/thumb/libstdc++.a(eh_call.o)
+ .bss           0x000000000206aaac        0x0 /home/linux/devkitPro/devkitARM/bin/../lib/gcc/arm-none-eabi/4.8.2/../../../../arm-none-eabi/lib/thumb/libstdc++.a(new_opv.o)
+ .bss           0x000000000206aaac        0x0 /home/linux/devkitPro/devkitARM/bin/../lib/gcc/arm-none-eabi/4.8.2/../../../../arm-none-eabi/lib/thumb/libstdc++.a(eh_personality.o)
+ .bss           0x000000000206aaac        0x0 /home/linux/devkitPro/devkitARM/bin/../lib/gcc/arm-none-eabi/4.8.2/../../../../arm-none-eabi/lib/thumb/libstdc++.a(del_op.o)
+ .bss           0x000000000206aaac        0x0 /home/linux/devkitPro/devkitARM/bin/../lib/gcc/arm-none-eabi/4.8.2/../../../../arm-none-eabi/lib/thumb/libstdc++.a(atexit_arm.o)
+ .bss           0x000000000206aaac        0x0 /home/linux/devkitPro/devkitARM/bin/../lib/gcc/arm-none-eabi/4.8.2/../../../../arm-none-eabi/lib/thumb/libstdc++.a(eh_terminate.o)
+ .bss           0x000000000206aaac        0x0 /home/linux/devkitPro/devkitARM/bin/../lib/gcc/arm-none-eabi/4.8.2/../../../../arm-none-eabi/lib/thumb/libstdc++.a(eh_exception.o)
+ .bss           0x000000000206aaac        0x0 /home/linux/devkitPro/devkitARM/bin/../lib/gcc/arm-none-eabi/4.8.2/../../../../arm-none-eabi/lib/thumb/libstdc++.a(eh_alloc.o)
  .bss._ZL15dependents_used
-                0x000000000206aaa8        0x4 /home/linux/devkitPro/devkitARM/bin/../lib/gcc/arm-none-eabi/4.8.2/../../../../arm-none-eabi/lib/thumb/libstdc++.a(eh_alloc.o)
- *fill*         0x000000000206aaac        0x4 
+                0x000000000206aaac        0x4 /home/linux/devkitPro/devkitARM/bin/../lib/gcc/arm-none-eabi/4.8.2/../../../../arm-none-eabi/lib/thumb/libstdc++.a(eh_alloc.o)
  .bss._ZL17dependents_buffer
                 0x000000000206aab0      0x1e0 /home/linux/devkitPro/devkitARM/bin/../lib/gcc/arm-none-eabi/4.8.2/../../../../arm-none-eabi/lib/thumb/libstdc++.a(eh_alloc.o)
  .bss._ZL14emergency_used
@@ -5393,6 +5412,9 @@ ARM.exidx       0x000000000206867c      0x5f0
  .comment       0x0000000000000000       0x23 main.o
  .comment       0x0000000000000000       0x23 Game.o
  .comment       0x0000000000000000       0x23 Map.o
+ .comment       0x0000000000000000       0x23 Player.o
+ .comment       0x0000000000000000       0x23 Character.o
+ .comment       0x0000000000000000       0x23 CharacterManager.o
  .comment       0x0000000000000000       0x23 MapManager.o
  .comment       0x0000000000000000       0x23 libs5.o
  .comment       0x0000000000000000       0x23 /home/linux/devkitPro/libnds/lib/libfilesystem.a(nitrofs.o)
@@ -5619,465 +5641,471 @@ ARM.exidx       0x000000000206867c      0x5f0
  .ARM.attributes
                 0x0000000000000106       0x27 Map.o
  .ARM.attributes
-                0x000000000000012d       0x27 MapManager.o
+                0x000000000000012d       0x27 Player.o
  .ARM.attributes
-                0x0000000000000154       0x27 libs5.o
+                0x0000000000000154       0x27 Character.o
  .ARM.attributes
-                0x000000000000017b       0x1b libs5_asm.o
+                0x000000000000017b       0x27 CharacterManager.o
  .ARM.attributes
-                0x0000000000000196       0x1b link.o
+                0x00000000000001a2       0x27 MapManager.o
  .ARM.attributes
-                0x00000000000001b1       0x1b grass_effect.o
+                0x00000000000001c9       0x27 libs5.o
  .ARM.attributes
-                0x00000000000001cc       0x1b water_effect.o
+                0x00000000000001f0       0x1b libs5_asm.o
  .ARM.attributes
-                0x00000000000001e7       0x27 /home/linux/devkitPro/libnds/lib/libfilesystem.a(nitrofs.o)
+                0x000000000000020b       0x1b link.o
  .ARM.attributes
-                0x000000000000020e       0x27 /home/linux/devkitPro/libnds/lib/libfat.a(libfat.o)
+                0x0000000000000226       0x1b grass_effect.o
  .ARM.attributes
-                0x0000000000000235       0x27 /home/linux/devkitPro/libnds/lib/libfat.a(partition.o)
+                0x0000000000000241       0x1b water_effect.o
  .ARM.attributes
-                0x000000000000025c       0x27 /home/linux/devkitPro/libnds/lib/libfat.a(cache.o)
+                0x000000000000025c       0x27 /home/linux/devkitPro/libnds/lib/libfilesystem.a(nitrofs.o)
  .ARM.attributes
-                0x0000000000000283       0x27 /home/linux/devkitPro/libnds/lib/libfat.a(directory.o)
+                0x0000000000000283       0x27 /home/linux/devkitPro/libnds/lib/libfat.a(libfat.o)
  .ARM.attributes
-                0x00000000000002aa       0x27 /home/linux/devkitPro/libnds/lib/libfat.a(disc.o)
+                0x00000000000002aa       0x27 /home/linux/devkitPro/libnds/lib/libfat.a(partition.o)
  .ARM.attributes
-                0x00000000000002d1       0x27 /home/linux/devkitPro/libnds/lib/libfat.a(fatdir.o)
+                0x00000000000002d1       0x27 /home/linux/devkitPro/libnds/lib/libfat.a(cache.o)
  .ARM.attributes
-                0x00000000000002f8       0x27 /home/linux/devkitPro/libnds/lib/libfat.a(fatfile.o)
+                0x00000000000002f8       0x27 /home/linux/devkitPro/libnds/lib/libfat.a(directory.o)
  .ARM.attributes
-                0x000000000000031f       0x27 /home/linux/devkitPro/libnds/lib/libfat.a(file_allocation_table.o)
+                0x000000000000031f       0x27 /home/linux/devkitPro/libnds/lib/libfat.a(disc.o)
  .ARM.attributes
-                0x0000000000000346       0x27 /home/linux/devkitPro/libnds/lib/libfat.a(filetime.o)
+                0x0000000000000346       0x27 /home/linux/devkitPro/libnds/lib/libfat.a(fatdir.o)
  .ARM.attributes
-                0x000000000000036d       0x27 /home/linux/devkitPro/libnds/lib/libfat.a(lock.o)
+                0x000000000000036d       0x27 /home/linux/devkitPro/libnds/lib/libfat.a(fatfile.o)
  .ARM.attributes
-                0x0000000000000394       0x27 /home/linux/devkitPro/libnds/lib/libnds9.a(background.o)
+                0x0000000000000394       0x27 /home/linux/devkitPro/libnds/lib/libfat.a(file_allocation_table.o)
  .ARM.attributes
-                0x00000000000003bb       0x27 /home/linux/devkitPro/libnds/lib/libnds9.a(console.o)
+                0x00000000000003bb       0x27 /home/linux/devkitPro/libnds/lib/libfat.a(filetime.o)
  .ARM.attributes
-                0x00000000000003e2       0x27 /home/linux/devkitPro/libnds/lib/libnds9.a(gurumeditation.o)
+                0x00000000000003e2       0x27 /home/linux/devkitPro/libnds/lib/libfat.a(lock.o)
  .ARM.attributes
-                0x0000000000000409       0x27 /home/linux/devkitPro/libnds/lib/libnds9.a(keys.o)
+                0x0000000000000409       0x27 /home/linux/devkitPro/libnds/lib/libnds9.a(background.o)
  .ARM.attributes
-                0x0000000000000430       0x27 /home/linux/devkitPro/libnds/lib/libnds9.a(sassert.o)
+                0x0000000000000430       0x27 /home/linux/devkitPro/libnds/lib/libnds9.a(console.o)
  .ARM.attributes
-                0x0000000000000457       0x27 /home/linux/devkitPro/libnds/lib/libnds9.a(trig.o)
+                0x0000000000000457       0x27 /home/linux/devkitPro/libnds/lib/libnds9.a(gurumeditation.o)
  .ARM.attributes
-                0x000000000000047e       0x27 /home/linux/devkitPro/libnds/lib/libnds9.a(dldi.o)
+                0x000000000000047e       0x27 /home/linux/devkitPro/libnds/lib/libnds9.a(keys.o)
  .ARM.attributes
-                0x00000000000004a5       0x27 /home/linux/devkitPro/libnds/lib/libnds9.a(dsi_sd.o)
+                0x00000000000004a5       0x27 /home/linux/devkitPro/libnds/lib/libnds9.a(sassert.o)
  .ARM.attributes
-                0x00000000000004cc       0x27 /home/linux/devkitPro/libnds/lib/libnds9.a(initSystem.o)
+                0x00000000000004cc       0x27 /home/linux/devkitPro/libnds/lib/libnds9.a(trig.o)
  .ARM.attributes
-                0x00000000000004f3       0x27 /home/linux/devkitPro/libnds/lib/libnds9.a(card.o)
+                0x00000000000004f3       0x27 /home/linux/devkitPro/libnds/lib/libnds9.a(dldi.o)
  .ARM.attributes
-                0x000000000000051a       0x27 /home/linux/devkitPro/libnds/lib/libnds9.a(fifosystem.o)
+                0x000000000000051a       0x27 /home/linux/devkitPro/libnds/lib/libnds9.a(dsi_sd.o)
  .ARM.attributes
-                0x0000000000000541       0x27 /home/linux/devkitPro/libnds/lib/libnds9.a(interrupts.o)
+                0x0000000000000541       0x27 /home/linux/devkitPro/libnds/lib/libnds9.a(initSystem.o)
  .ARM.attributes
-                0x0000000000000568       0x27 /home/linux/devkitPro/libnds/lib/libnds9.a(libnds_exit.arm.o)
+                0x0000000000000568       0x27 /home/linux/devkitPro/libnds/lib/libnds9.a(card.o)
  .ARM.attributes
-                0x000000000000058f       0x1b /home/linux/devkitPro/libnds/lib/libnds9.a(dcache.o)
+                0x000000000000058f       0x27 /home/linux/devkitPro/libnds/lib/libnds9.a(fifosystem.o)
  .ARM.attributes
-                0x00000000000005aa       0x1b /home/linux/devkitPro/libnds/lib/libnds9.a(exceptionHandler.o)
+                0x00000000000005b6       0x27 /home/linux/devkitPro/libnds/lib/libnds9.a(interrupts.o)
  .ARM.attributes
-                0x00000000000005c5       0x1b /home/linux/devkitPro/libnds/lib/libnds9.a(dldi_stub.o)
+                0x00000000000005dd       0x27 /home/linux/devkitPro/libnds/lib/libnds9.a(libnds_exit.arm.o)
  .ARM.attributes
-                0x00000000000005e0       0x21 /home/linux/devkitPro/libnds/lib/libnds9.a(mpu_setup.o)
+                0x0000000000000604       0x1b /home/linux/devkitPro/libnds/lib/libnds9.a(dcache.o)
  .ARM.attributes
-                0x0000000000000601       0x1b /home/linux/devkitPro/libnds/lib/libnds9.a(biosCalls.o)
+                0x000000000000061f       0x1b /home/linux/devkitPro/libnds/lib/libnds9.a(exceptionHandler.o)
  .ARM.attributes
-                0x000000000000061c       0x1b /home/linux/devkitPro/libnds/lib/libnds9.a(debugprint.o)
+                0x000000000000063a       0x1b /home/linux/devkitPro/libnds/lib/libnds9.a(dldi_stub.o)
  .ARM.attributes
-                0x0000000000000637       0x1b /home/linux/devkitPro/libnds/lib/libnds9.a(interruptDispatcher.o)
+                0x0000000000000655       0x21 /home/linux/devkitPro/libnds/lib/libnds9.a(mpu_setup.o)
  .ARM.attributes
-                0x0000000000000652       0x21 /home/linux/devkitPro/libnds/lib/libnds9.a(swiSoftReset.o)
+                0x0000000000000676       0x1b /home/linux/devkitPro/libnds/lib/libnds9.a(biosCalls.o)
  .ARM.attributes
-                0x0000000000000673       0x14 /home/linux/devkitPro/libnds/lib/libnds9.a(default_font.bin.o)
+                0x0000000000000691       0x1b /home/linux/devkitPro/libnds/lib/libnds9.a(debugprint.o)
  .ARM.attributes
-                0x0000000000000687       0x27 /home/linux/devkitPro/libnds/lib/libnds9.a(exceptions.o)
+                0x00000000000006ac       0x1b /home/linux/devkitPro/libnds/lib/libnds9.a(interruptDispatcher.o)
  .ARM.attributes
-                0x00000000000006ae       0x27 /home/linux/devkitPro/libnds/lib/libnds9.a(system.o)
+                0x00000000000006c7       0x21 /home/linux/devkitPro/libnds/lib/libnds9.a(swiSoftReset.o)
  .ARM.attributes
-                0x00000000000006d5       0x27 /home/linux/devkitPro/libnds/lib/libnds9.a(video.o)
+                0x00000000000006e8       0x14 /home/linux/devkitPro/libnds/lib/libnds9.a(default_font.bin.o)
  .ARM.attributes
-                0x00000000000006fc       0x30 /home/linux/devkitPro/devkitARM/bin/../lib/gcc/arm-none-eabi/4.8.2/../../../../arm-none-eabi/lib/thumb/libstdc++.a(new_op.o)
+                0x00000000000006fc       0x27 /home/linux/devkitPro/libnds/lib/libnds9.a(exceptions.o)
  .ARM.attributes
-                0x000000000000072c       0x30 /home/linux/devkitPro/devkitARM/bin/../lib/gcc/arm-none-eabi/4.8.2/../../../../arm-none-eabi/lib/thumb/libstdc++.a(eh_call.o)
+                0x0000000000000723       0x27 /home/linux/devkitPro/libnds/lib/libnds9.a(system.o)
  .ARM.attributes
-                0x000000000000075c       0x30 /home/linux/devkitPro/devkitARM/bin/../lib/gcc/arm-none-eabi/4.8.2/../../../../arm-none-eabi/lib/thumb/libstdc++.a(new_opv.o)
+                0x000000000000074a       0x27 /home/linux/devkitPro/libnds/lib/libnds9.a(video.o)
  .ARM.attributes
-                0x000000000000078c       0x30 /home/linux/devkitPro/devkitARM/bin/../lib/gcc/arm-none-eabi/4.8.2/../../../../arm-none-eabi/lib/thumb/libstdc++.a(eh_personality.o)
+                0x0000000000000771       0x30 /home/linux/devkitPro/devkitARM/bin/../lib/gcc/arm-none-eabi/4.8.2/../../../../arm-none-eabi/lib/thumb/libstdc++.a(new_op.o)
  .ARM.attributes
-                0x00000000000007bc       0x30 /home/linux/devkitPro/devkitARM/bin/../lib/gcc/arm-none-eabi/4.8.2/../../../../arm-none-eabi/lib/thumb/libstdc++.a(del_op.o)
+                0x00000000000007a1       0x30 /home/linux/devkitPro/devkitARM/bin/../lib/gcc/arm-none-eabi/4.8.2/../../../../arm-none-eabi/lib/thumb/libstdc++.a(eh_call.o)
  .ARM.attributes
-                0x00000000000007ec       0x30 /home/linux/devkitPro/devkitARM/bin/../lib/gcc/arm-none-eabi/4.8.2/../../../../arm-none-eabi/lib/thumb/libstdc++.a(atexit_arm.o)
+                0x00000000000007d1       0x30 /home/linux/devkitPro/devkitARM/bin/../lib/gcc/arm-none-eabi/4.8.2/../../../../arm-none-eabi/lib/thumb/libstdc++.a(new_opv.o)
  .ARM.attributes
-                0x000000000000081c       0x30 /home/linux/devkitPro/devkitARM/bin/../lib/gcc/arm-none-eabi/4.8.2/../../../../arm-none-eabi/lib/thumb/libstdc++.a(eh_terminate.o)
+                0x0000000000000801       0x30 /home/linux/devkitPro/devkitARM/bin/../lib/gcc/arm-none-eabi/4.8.2/../../../../arm-none-eabi/lib/thumb/libstdc++.a(eh_personality.o)
  .ARM.attributes
-                0x000000000000084c       0x30 /home/linux/devkitPro/devkitARM/bin/../lib/gcc/arm-none-eabi/4.8.2/../../../../arm-none-eabi/lib/thumb/libstdc++.a(eh_exception.o)
+                0x0000000000000831       0x30 /home/linux/devkitPro/devkitARM/bin/../lib/gcc/arm-none-eabi/4.8.2/../../../../arm-none-eabi/lib/thumb/libstdc++.a(del_op.o)
  .ARM.attributes
-                0x000000000000087c       0x30 /home/linux/devkitPro/devkitARM/bin/../lib/gcc/arm-none-eabi/4.8.2/../../../../arm-none-eabi/lib/thumb/libstdc++.a(eh_alloc.o)
+                0x0000000000000861       0x30 /home/linux/devkitPro/devkitARM/bin/../lib/gcc/arm-none-eabi/4.8.2/../../../../arm-none-eabi/lib/thumb/libstdc++.a(atexit_arm.o)
  .ARM.attributes
-                0x00000000000008ac       0x30 /home/linux/devkitPro/devkitARM/bin/../lib/gcc/arm-none-eabi/4.8.2/../../../../arm-none-eabi/lib/thumb/libstdc++.a(bad_alloc.o)
+                0x0000000000000891       0x30 /home/linux/devkitPro/devkitARM/bin/../lib/gcc/arm-none-eabi/4.8.2/../../../../arm-none-eabi/lib/thumb/libstdc++.a(eh_terminate.o)
  .ARM.attributes
-                0x00000000000008dc       0x30 /home/linux/devkitPro/devkitARM/bin/../lib/gcc/arm-none-eabi/4.8.2/../../../../arm-none-eabi/lib/thumb/libstdc++.a(del_opv.o)
+                0x00000000000008c1       0x30 /home/linux/devkitPro/devkitARM/bin/../lib/gcc/arm-none-eabi/4.8.2/../../../../arm-none-eabi/lib/thumb/libstdc++.a(eh_exception.o)
  .ARM.attributes
-                0x000000000000090c       0x30 /home/linux/devkitPro/devkitARM/bin/../lib/gcc/arm-none-eabi/4.8.2/../../../../arm-none-eabi/lib/thumb/libstdc++.a(class_type_info.o)
+                0x00000000000008f1       0x30 /home/linux/devkitPro/devkitARM/bin/../lib/gcc/arm-none-eabi/4.8.2/../../../../arm-none-eabi/lib/thumb/libstdc++.a(eh_alloc.o)
  .ARM.attributes
-                0x000000000000093c       0x30 /home/linux/devkitPro/devkitARM/bin/../lib/gcc/arm-none-eabi/4.8.2/../../../../arm-none-eabi/lib/thumb/libstdc++.a(new_handler.o)
+                0x0000000000000921       0x30 /home/linux/devkitPro/devkitARM/bin/../lib/gcc/arm-none-eabi/4.8.2/../../../../arm-none-eabi/lib/thumb/libstdc++.a(bad_alloc.o)
  .ARM.attributes
-                0x000000000000096c       0x30 /home/linux/devkitPro/devkitARM/bin/../lib/gcc/arm-none-eabi/4.8.2/../../../../arm-none-eabi/lib/thumb/libstdc++.a(string-inst.o)
+                0x0000000000000951       0x30 /home/linux/devkitPro/devkitARM/bin/../lib/gcc/arm-none-eabi/4.8.2/../../../../arm-none-eabi/lib/thumb/libstdc++.a(del_opv.o)
  .ARM.attributes
-                0x000000000000099c       0x30 /home/linux/devkitPro/devkitARM/bin/../lib/gcc/arm-none-eabi/4.8.2/../../../../arm-none-eabi/lib/thumb/libstdc++.a(functexcept.o)
+                0x0000000000000981       0x30 /home/linux/devkitPro/devkitARM/bin/../lib/gcc/arm-none-eabi/4.8.2/../../../../arm-none-eabi/lib/thumb/libstdc++.a(class_type_info.o)
  .ARM.attributes
-                0x00000000000009cc       0x30 /home/linux/devkitPro/devkitARM/bin/../lib/gcc/arm-none-eabi/4.8.2/../../../../arm-none-eabi/lib/thumb/libstdc++.a(eh_arm.o)
+                0x00000000000009b1       0x30 /home/linux/devkitPro/devkitARM/bin/../lib/gcc/arm-none-eabi/4.8.2/../../../../arm-none-eabi/lib/thumb/libstdc++.a(new_handler.o)
  .ARM.attributes
-                0x00000000000009fc       0x30 /home/linux/devkitPro/devkitARM/bin/../lib/gcc/arm-none-eabi/4.8.2/../../../../arm-none-eabi/lib/thumb/libstdc++.a(eh_throw.o)
+                0x00000000000009e1       0x30 /home/linux/devkitPro/devkitARM/bin/../lib/gcc/arm-none-eabi/4.8.2/../../../../arm-none-eabi/lib/thumb/libstdc++.a(string-inst.o)
  .ARM.attributes
-                0x0000000000000a2c       0x30 /home/linux/devkitPro/devkitARM/bin/../lib/gcc/arm-none-eabi/4.8.2/../../../../arm-none-eabi/lib/thumb/libstdc++.a(pure.o)
+                0x0000000000000a11       0x30 /home/linux/devkitPro/devkitARM/bin/../lib/gcc/arm-none-eabi/4.8.2/../../../../arm-none-eabi/lib/thumb/libstdc++.a(functexcept.o)
  .ARM.attributes
-                0x0000000000000a5c       0x30 /home/linux/devkitPro/devkitARM/bin/../lib/gcc/arm-none-eabi/4.8.2/../../../../arm-none-eabi/lib/thumb/libstdc++.a(bad_cast.o)
+                0x0000000000000a41       0x30 /home/linux/devkitPro/devkitARM/bin/../lib/gcc/arm-none-eabi/4.8.2/../../../../arm-none-eabi/lib/thumb/libstdc++.a(eh_arm.o)
  .ARM.attributes
-                0x0000000000000a8c       0x30 /home/linux/devkitPro/devkitARM/bin/../lib/gcc/arm-none-eabi/4.8.2/../../../../arm-none-eabi/lib/thumb/libstdc++.a(eh_globals.o)
+                0x0000000000000a71       0x30 /home/linux/devkitPro/devkitARM/bin/../lib/gcc/arm-none-eabi/4.8.2/../../../../arm-none-eabi/lib/thumb/libstdc++.a(eh_throw.o)
  .ARM.attributes
-                0x0000000000000abc       0x30 /home/linux/devkitPro/devkitARM/bin/../lib/gcc/arm-none-eabi/4.8.2/../../../../arm-none-eabi/lib/thumb/libstdc++.a(eh_catch.o)
+                0x0000000000000aa1       0x30 /home/linux/devkitPro/devkitARM/bin/../lib/gcc/arm-none-eabi/4.8.2/../../../../arm-none-eabi/lib/thumb/libstdc++.a(pure.o)
  .ARM.attributes
-                0x0000000000000aec       0x30 /home/linux/devkitPro/devkitARM/bin/../lib/gcc/arm-none-eabi/4.8.2/../../../../arm-none-eabi/lib/thumb/libstdc++.a(si_class_type_info.o)
+                0x0000000000000ad1       0x30 /home/linux/devkitPro/devkitARM/bin/../lib/gcc/arm-none-eabi/4.8.2/../../../../arm-none-eabi/lib/thumb/libstdc++.a(bad_cast.o)
  .ARM.attributes
-                0x0000000000000b1c       0x30 /home/linux/devkitPro/devkitARM/bin/../lib/gcc/arm-none-eabi/4.8.2/../../../../arm-none-eabi/lib/thumb/libstdc++.a(eh_unex_handler.o)
+                0x0000000000000b01       0x30 /home/linux/devkitPro/devkitARM/bin/../lib/gcc/arm-none-eabi/4.8.2/../../../../arm-none-eabi/lib/thumb/libstdc++.a(eh_globals.o)
  .ARM.attributes
-                0x0000000000000b4c       0x30 /home/linux/devkitPro/devkitARM/bin/../lib/gcc/arm-none-eabi/4.8.2/../../../../arm-none-eabi/lib/thumb/libstdc++.a(tinfo.o)
+                0x0000000000000b31       0x30 /home/linux/devkitPro/devkitARM/bin/../lib/gcc/arm-none-eabi/4.8.2/../../../../arm-none-eabi/lib/thumb/libstdc++.a(eh_catch.o)
  .ARM.attributes
-                0x0000000000000b7c       0x30 /home/linux/devkitPro/devkitARM/bin/../lib/gcc/arm-none-eabi/4.8.2/../../../../arm-none-eabi/lib/thumb/libstdc++.a(bad_typeid.o)
+                0x0000000000000b61       0x30 /home/linux/devkitPro/devkitARM/bin/../lib/gcc/arm-none-eabi/4.8.2/../../../../arm-none-eabi/lib/thumb/libstdc++.a(si_class_type_info.o)
  .ARM.attributes
-                0x0000000000000bac       0x30 /home/linux/devkitPro/devkitARM/bin/../lib/gcc/arm-none-eabi/4.8.2/../../../../arm-none-eabi/lib/thumb/libstdc++.a(eh_term_handler.o)
+                0x0000000000000b91       0x30 /home/linux/devkitPro/devkitARM/bin/../lib/gcc/arm-none-eabi/4.8.2/../../../../arm-none-eabi/lib/thumb/libstdc++.a(eh_unex_handler.o)
  .ARM.attributes
-                0x0000000000000bdc       0x30 /home/linux/devkitPro/devkitARM/bin/../lib/gcc/arm-none-eabi/4.8.2/../../../../arm-none-eabi/lib/thumb/libstdc++.a(ios_failure.o)
+                0x0000000000000bc1       0x30 /home/linux/devkitPro/devkitARM/bin/../lib/gcc/arm-none-eabi/4.8.2/../../../../arm-none-eabi/lib/thumb/libstdc++.a(tinfo.o)
  .ARM.attributes
-                0x0000000000000c0c       0x30 /home/linux/devkitPro/devkitARM/bin/../lib/gcc/arm-none-eabi/4.8.2/../../../../arm-none-eabi/lib/thumb/libstdc++.a(stdexcept.o)
+                0x0000000000000bf1       0x30 /home/linux/devkitPro/devkitARM/bin/../lib/gcc/arm-none-eabi/4.8.2/../../../../arm-none-eabi/lib/thumb/libstdc++.a(bad_typeid.o)
  .ARM.attributes
-                0x0000000000000c3c       0x30 /home/linux/devkitPro/devkitARM/bin/../lib/gcc/arm-none-eabi/4.8.2/../../../../arm-none-eabi/lib/thumb/libstdc++.a(functional.o)
+                0x0000000000000c21       0x30 /home/linux/devkitPro/devkitARM/bin/../lib/gcc/arm-none-eabi/4.8.2/../../../../arm-none-eabi/lib/thumb/libstdc++.a(eh_term_handler.o)
  .ARM.attributes
-                0x0000000000000c6c       0x30 /home/linux/devkitPro/devkitARM/bin/../lib/gcc/arm-none-eabi/4.8.2/../../../../arm-none-eabi/lib/thumb/libstdc++.a(future.o)
+                0x0000000000000c51       0x30 /home/linux/devkitPro/devkitARM/bin/../lib/gcc/arm-none-eabi/4.8.2/../../../../arm-none-eabi/lib/thumb/libstdc++.a(ios_failure.o)
  .ARM.attributes
-                0x0000000000000c9c       0x30 /home/linux/devkitPro/devkitARM/bin/../lib/gcc/arm-none-eabi/4.8.2/../../../../arm-none-eabi/lib/thumb/libstdc++.a(regex.o)
+                0x0000000000000c81       0x30 /home/linux/devkitPro/devkitARM/bin/../lib/gcc/arm-none-eabi/4.8.2/../../../../arm-none-eabi/lib/thumb/libstdc++.a(stdexcept.o)
  .ARM.attributes
-                0x0000000000000ccc       0x30 /home/linux/devkitPro/devkitARM/bin/../lib/gcc/arm-none-eabi/4.8.2/../../../../arm-none-eabi/lib/thumb/libstdc++.a(system_error.o)
+                0x0000000000000cb1       0x30 /home/linux/devkitPro/devkitARM/bin/../lib/gcc/arm-none-eabi/4.8.2/../../../../arm-none-eabi/lib/thumb/libstdc++.a(functional.o)
  .ARM.attributes
-                0x0000000000000cfc       0x30 /home/linux/devkitPro/devkitARM/bin/../lib/gcc/arm-none-eabi/4.8.2/../../../../arm-none-eabi/lib/thumb/libstdc++.a(guard.o)
+                0x0000000000000ce1       0x30 /home/linux/devkitPro/devkitARM/bin/../lib/gcc/arm-none-eabi/4.8.2/../../../../arm-none-eabi/lib/thumb/libstdc++.a(future.o)
  .ARM.attributes
-                0x0000000000000d2c       0x30 /home/linux/devkitPro/devkitARM/bin/../lib/gcc/arm-none-eabi/4.8.2/../../../../arm-none-eabi/lib/thumb/libstdc++.a(vterminate.o)
+                0x0000000000000d11       0x30 /home/linux/devkitPro/devkitARM/bin/../lib/gcc/arm-none-eabi/4.8.2/../../../../arm-none-eabi/lib/thumb/libstdc++.a(regex.o)
  .ARM.attributes
-                0x0000000000000d5c       0x30 /home/linux/devkitPro/devkitARM/bin/../lib/gcc/arm-none-eabi/4.8.2/../../../../arm-none-eabi/lib/thumb/libstdc++.a(guard_error.o)
+                0x0000000000000d41       0x30 /home/linux/devkitPro/devkitARM/bin/../lib/gcc/arm-none-eabi/4.8.2/../../../../arm-none-eabi/lib/thumb/libstdc++.a(system_error.o)
  .ARM.attributes
-                0x0000000000000d8c       0x30 /home/linux/devkitPro/devkitARM/bin/../lib/gcc/arm-none-eabi/4.8.2/../../../../arm-none-eabi/lib/thumb/libstdc++.a(eh_type.o)
+                0x0000000000000d71       0x30 /home/linux/devkitPro/devkitARM/bin/../lib/gcc/arm-none-eabi/4.8.2/../../../../arm-none-eabi/lib/thumb/libstdc++.a(guard.o)
  .ARM.attributes
-                0x0000000000000dbc       0x30 /home/linux/devkitPro/devkitARM/bin/../lib/gcc/arm-none-eabi/4.8.2/../../../../arm-none-eabi/lib/thumb/libstdc++.a(cp-demangle.o)
+                0x0000000000000da1       0x30 /home/linux/devkitPro/devkitARM/bin/../lib/gcc/arm-none-eabi/4.8.2/../../../../arm-none-eabi/lib/thumb/libstdc++.a(vterminate.o)
  .ARM.attributes
-                0x0000000000000dec       0x30 /home/linux/devkitPro/devkitARM/bin/../lib/gcc/arm-none-eabi/4.8.2/../../../../arm-none-eabi/lib/thumb/libm.a(lib_a-w_sqrt.o)
+                0x0000000000000dd1       0x30 /home/linux/devkitPro/devkitARM/bin/../lib/gcc/arm-none-eabi/4.8.2/../../../../arm-none-eabi/lib/thumb/libstdc++.a(guard_error.o)
  .ARM.attributes
-                0x0000000000000e1c       0x30 /home/linux/devkitPro/devkitARM/bin/../lib/gcc/arm-none-eabi/4.8.2/../../../../arm-none-eabi/lib/thumb/libm.a(lib_a-e_sqrt.o)
+                0x0000000000000e01       0x30 /home/linux/devkitPro/devkitARM/bin/../lib/gcc/arm-none-eabi/4.8.2/../../../../arm-none-eabi/lib/thumb/libstdc++.a(eh_type.o)
  .ARM.attributes
-                0x0000000000000e4c       0x30 /home/linux/devkitPro/devkitARM/bin/../lib/gcc/arm-none-eabi/4.8.2/../../../../arm-none-eabi/lib/thumb/libm.a(lib_a-s_fpclassify.o)
+                0x0000000000000e31       0x30 /home/linux/devkitPro/devkitARM/bin/../lib/gcc/arm-none-eabi/4.8.2/../../../../arm-none-eabi/lib/thumb/libstdc++.a(cp-demangle.o)
  .ARM.attributes
-                0x0000000000000e7c       0x30 /home/linux/devkitPro/devkitARM/bin/../lib/gcc/arm-none-eabi/4.8.2/../../../../arm-none-eabi/lib/thumb/libm.a(lib_a-s_lib_ver.o)
+                0x0000000000000e61       0x30 /home/linux/devkitPro/devkitARM/bin/../lib/gcc/arm-none-eabi/4.8.2/../../../../arm-none-eabi/lib/thumb/libm.a(lib_a-w_sqrt.o)
  .ARM.attributes
-                0x0000000000000eac       0x30 /home/linux/devkitPro/devkitARM/bin/../lib/gcc/arm-none-eabi/4.8.2/../../../../arm-none-eabi/lib/thumb/libm.a(lib_a-s_matherr.o)
+                0x0000000000000e91       0x30 /home/linux/devkitPro/devkitARM/bin/../lib/gcc/arm-none-eabi/4.8.2/../../../../arm-none-eabi/lib/thumb/libm.a(lib_a-e_sqrt.o)
  .ARM.attributes
-                0x0000000000000edc       0x18 /home/linux/devkitPro/devkitARM/bin/../lib/gcc/arm-none-eabi/4.8.2/thumb/libgcc.a(_udivsi3.o)
+                0x0000000000000ec1       0x30 /home/linux/devkitPro/devkitARM/bin/../lib/gcc/arm-none-eabi/4.8.2/../../../../arm-none-eabi/lib/thumb/libm.a(lib_a-s_fpclassify.o)
  .ARM.attributes
-                0x0000000000000ef4       0x18 /home/linux/devkitPro/devkitARM/bin/../lib/gcc/arm-none-eabi/4.8.2/thumb/libgcc.a(_divsi3.o)
+                0x0000000000000ef1       0x30 /home/linux/devkitPro/devkitARM/bin/../lib/gcc/arm-none-eabi/4.8.2/../../../../arm-none-eabi/lib/thumb/libm.a(lib_a-s_lib_ver.o)
  .ARM.attributes
-                0x0000000000000f0c       0x16 /home/linux/devkitPro/devkitARM/bin/../lib/gcc/arm-none-eabi/4.8.2/thumb/libgcc.a(_dvmd_tls.o)
+                0x0000000000000f21       0x30 /home/linux/devkitPro/devkitARM/bin/../lib/gcc/arm-none-eabi/4.8.2/../../../../arm-none-eabi/lib/thumb/libm.a(lib_a-s_matherr.o)
  .ARM.attributes
-                0x0000000000000f22       0x18 /home/linux/devkitPro/devkitARM/bin/../lib/gcc/arm-none-eabi/4.8.2/thumb/libgcc.a(_arm_addsubdf3.o)
+                0x0000000000000f51       0x18 /home/linux/devkitPro/devkitARM/bin/../lib/gcc/arm-none-eabi/4.8.2/thumb/libgcc.a(_udivsi3.o)
  .ARM.attributes
-                0x0000000000000f3a       0x18 /home/linux/devkitPro/devkitARM/bin/../lib/gcc/arm-none-eabi/4.8.2/thumb/libgcc.a(_arm_muldivdf3.o)
+                0x0000000000000f69       0x18 /home/linux/devkitPro/devkitARM/bin/../lib/gcc/arm-none-eabi/4.8.2/thumb/libgcc.a(_divsi3.o)
  .ARM.attributes
-                0x0000000000000f52       0x18 /home/linux/devkitPro/devkitARM/bin/../lib/gcc/arm-none-eabi/4.8.2/thumb/libgcc.a(_arm_cmpdf2.o)
+                0x0000000000000f81       0x16 /home/linux/devkitPro/devkitARM/bin/../lib/gcc/arm-none-eabi/4.8.2/thumb/libgcc.a(_dvmd_tls.o)
  .ARM.attributes
-                0x0000000000000f6a       0x18 /home/linux/devkitPro/devkitARM/bin/../lib/gcc/arm-none-eabi/4.8.2/thumb/libgcc.a(_arm_fixunsdfsi.o)
+                0x0000000000000f97       0x18 /home/linux/devkitPro/devkitARM/bin/../lib/gcc/arm-none-eabi/4.8.2/thumb/libgcc.a(_arm_addsubdf3.o)
  .ARM.attributes
-                0x0000000000000f82       0x30 /home/linux/devkitPro/devkitARM/bin/../lib/gcc/arm-none-eabi/4.8.2/thumb/libgcc.a(_muldi3.o)
+                0x0000000000000faf       0x18 /home/linux/devkitPro/devkitARM/bin/../lib/gcc/arm-none-eabi/4.8.2/thumb/libgcc.a(_arm_muldivdf3.o)
  .ARM.attributes
-                0x0000000000000fb2       0x30 /home/linux/devkitPro/devkitARM/bin/../lib/gcc/arm-none-eabi/4.8.2/thumb/libgcc.a(unwind-arm.o)
+                0x0000000000000fc7       0x18 /home/linux/devkitPro/devkitARM/bin/../lib/gcc/arm-none-eabi/4.8.2/thumb/libgcc.a(_arm_cmpdf2.o)
  .ARM.attributes
-                0x0000000000000fe2       0x1c /home/linux/devkitPro/devkitARM/bin/../lib/gcc/arm-none-eabi/4.8.2/thumb/libgcc.a(libunwind.o)
+                0x0000000000000fdf       0x18 /home/linux/devkitPro/devkitARM/bin/../lib/gcc/arm-none-eabi/4.8.2/thumb/libgcc.a(_arm_fixunsdfsi.o)
  .ARM.attributes
-                0x0000000000000ffe       0x30 /home/linux/devkitPro/devkitARM/bin/../lib/gcc/arm-none-eabi/4.8.2/thumb/libgcc.a(pr-support.o)
+                0x0000000000000ff7       0x30 /home/linux/devkitPro/devkitARM/bin/../lib/gcc/arm-none-eabi/4.8.2/thumb/libgcc.a(_muldi3.o)
  .ARM.attributes
-                0x000000000000102e       0x30 /home/linux/devkitPro/devkitARM/bin/../lib/gcc/arm-none-eabi/4.8.2/../../../../arm-none-eabi/lib/thumb/libg.a(lib_a-abort.o)
+                0x0000000000001027       0x30 /home/linux/devkitPro/devkitARM/bin/../lib/gcc/arm-none-eabi/4.8.2/thumb/libgcc.a(unwind-arm.o)
  .ARM.attributes
-                0x000000000000105e       0x30 /home/linux/devkitPro/devkitARM/bin/../lib/gcc/arm-none-eabi/4.8.2/../../../../arm-none-eabi/lib/thumb/libg.a(lib_a-bsearch.o)
+                0x0000000000001057       0x1c /home/linux/devkitPro/devkitARM/bin/../lib/gcc/arm-none-eabi/4.8.2/thumb/libgcc.a(libunwind.o)
  .ARM.attributes
-                0x000000000000108e       0x30 /home/linux/devkitPro/devkitARM/bin/../lib/gcc/arm-none-eabi/4.8.2/../../../../arm-none-eabi/lib/thumb/libg.a(lib_a-ctype_.o)
+                0x0000000000001073       0x30 /home/linux/devkitPro/devkitARM/bin/../lib/gcc/arm-none-eabi/4.8.2/thumb/libgcc.a(pr-support.o)
  .ARM.attributes
-                0x00000000000010be       0x30 /home/linux/devkitPro/devkitARM/bin/../lib/gcc/arm-none-eabi/4.8.2/../../../../arm-none-eabi/lib/thumb/libg.a(lib_a-cxa_atexit.o)
+                0x00000000000010a3       0x30 /home/linux/devkitPro/devkitARM/bin/../lib/gcc/arm-none-eabi/4.8.2/../../../../arm-none-eabi/lib/thumb/libg.a(lib_a-abort.o)
  .ARM.attributes
-                0x00000000000010ee       0x30 /home/linux/devkitPro/devkitARM/bin/../lib/gcc/arm-none-eabi/4.8.2/../../../../arm-none-eabi/lib/thumb/libg.a(lib_a-errno.o)
+                0x00000000000010d3       0x30 /home/linux/devkitPro/devkitARM/bin/../lib/gcc/arm-none-eabi/4.8.2/../../../../arm-none-eabi/lib/thumb/libg.a(lib_a-bsearch.o)
  .ARM.attributes
-                0x000000000000111e       0x30 /home/linux/devkitPro/devkitARM/bin/../lib/gcc/arm-none-eabi/4.8.2/../../../../arm-none-eabi/lib/thumb/libg.a(lib_a-fclose.o)
+                0x0000000000001103       0x30 /home/linux/devkitPro/devkitARM/bin/../lib/gcc/arm-none-eabi/4.8.2/../../../../arm-none-eabi/lib/thumb/libg.a(lib_a-ctype_.o)
  .ARM.attributes
-                0x000000000000114e       0x30 /home/linux/devkitPro/devkitARM/bin/../lib/gcc/arm-none-eabi/4.8.2/../../../../arm-none-eabi/lib/thumb/libg.a(lib_a-fflush.o)
+                0x0000000000001133       0x30 /home/linux/devkitPro/devkitARM/bin/../lib/gcc/arm-none-eabi/4.8.2/../../../../arm-none-eabi/lib/thumb/libg.a(lib_a-cxa_atexit.o)
  .ARM.attributes
-                0x000000000000117e       0x30 /home/linux/devkitPro/devkitARM/bin/../lib/gcc/arm-none-eabi/4.8.2/../../../../arm-none-eabi/lib/thumb/libg.a(lib_a-findfp.o)
+                0x0000000000001163       0x30 /home/linux/devkitPro/devkitARM/bin/../lib/gcc/arm-none-eabi/4.8.2/../../../../arm-none-eabi/lib/thumb/libg.a(lib_a-errno.o)
  .ARM.attributes
-                0x00000000000011ae       0x30 /home/linux/devkitPro/devkitARM/bin/../lib/gcc/arm-none-eabi/4.8.2/../../../../arm-none-eabi/lib/thumb/libg.a(lib_a-fopen.o)
+                0x0000000000001193       0x30 /home/linux/devkitPro/devkitARM/bin/../lib/gcc/arm-none-eabi/4.8.2/../../../../arm-none-eabi/lib/thumb/libg.a(lib_a-fclose.o)
  .ARM.attributes
-                0x00000000000011de       0x30 /home/linux/devkitPro/devkitARM/bin/../lib/gcc/arm-none-eabi/4.8.2/../../../../arm-none-eabi/lib/thumb/libg.a(lib_a-fputc.o)
+                0x00000000000011c3       0x30 /home/linux/devkitPro/devkitARM/bin/../lib/gcc/arm-none-eabi/4.8.2/../../../../arm-none-eabi/lib/thumb/libg.a(lib_a-fflush.o)
  .ARM.attributes
-                0x000000000000120e       0x30 /home/linux/devkitPro/devkitARM/bin/../lib/gcc/arm-none-eabi/4.8.2/../../../../arm-none-eabi/lib/thumb/libg.a(lib_a-fputs.o)
+                0x00000000000011f3       0x30 /home/linux/devkitPro/devkitARM/bin/../lib/gcc/arm-none-eabi/4.8.2/../../../../arm-none-eabi/lib/thumb/libg.a(lib_a-findfp.o)
  .ARM.attributes
-                0x000000000000123e       0x30 /home/linux/devkitPro/devkitARM/bin/../lib/gcc/arm-none-eabi/4.8.2/../../../../arm-none-eabi/lib/thumb/libg.a(lib_a-fread.o)
+                0x0000000000001223       0x30 /home/linux/devkitPro/devkitARM/bin/../lib/gcc/arm-none-eabi/4.8.2/../../../../arm-none-eabi/lib/thumb/libg.a(lib_a-fopen.o)
  .ARM.attributes
-                0x000000000000126e       0x30 /home/linux/devkitPro/devkitARM/bin/../lib/gcc/arm-none-eabi/4.8.2/../../../../arm-none-eabi/lib/thumb/libg.a(lib_a-freer.o)
+                0x0000000000001253       0x30 /home/linux/devkitPro/devkitARM/bin/../lib/gcc/arm-none-eabi/4.8.2/../../../../arm-none-eabi/lib/thumb/libg.a(lib_a-fputc.o)
  .ARM.attributes
-                0x000000000000129e       0x30 /home/linux/devkitPro/devkitARM/bin/../lib/gcc/arm-none-eabi/4.8.2/../../../../arm-none-eabi/lib/thumb/libg.a(lib_a-fseek.o)
+                0x0000000000001283       0x30 /home/linux/devkitPro/devkitARM/bin/../lib/gcc/arm-none-eabi/4.8.2/../../../../arm-none-eabi/lib/thumb/libg.a(lib_a-fputs.o)
  .ARM.attributes
-                0x00000000000012ce       0x30 /home/linux/devkitPro/devkitARM/bin/../lib/gcc/arm-none-eabi/4.8.2/../../../../arm-none-eabi/lib/thumb/libg.a(lib_a-fseeko.o)
+                0x00000000000012b3       0x30 /home/linux/devkitPro/devkitARM/bin/../lib/gcc/arm-none-eabi/4.8.2/../../../../arm-none-eabi/lib/thumb/libg.a(lib_a-fread.o)
  .ARM.attributes
-                0x00000000000012fe       0x30 /home/linux/devkitPro/devkitARM/bin/../lib/gcc/arm-none-eabi/4.8.2/../../../../arm-none-eabi/lib/thumb/libg.a(lib_a-fvwrite.o)
+                0x00000000000012e3       0x30 /home/linux/devkitPro/devkitARM/bin/../lib/gcc/arm-none-eabi/4.8.2/../../../../arm-none-eabi/lib/thumb/libg.a(lib_a-freer.o)
  .ARM.attributes
-                0x000000000000132e       0x30 /home/linux/devkitPro/devkitARM/bin/../lib/gcc/arm-none-eabi/4.8.2/../../../../arm-none-eabi/lib/thumb/libg.a(lib_a-fwalk.o)
+                0x0000000000001313       0x30 /home/linux/devkitPro/devkitARM/bin/../lib/gcc/arm-none-eabi/4.8.2/../../../../arm-none-eabi/lib/thumb/libg.a(lib_a-fseek.o)
  .ARM.attributes
-                0x000000000000135e       0x30 /home/linux/devkitPro/devkitARM/bin/../lib/gcc/arm-none-eabi/4.8.2/../../../../arm-none-eabi/lib/thumb/libg.a(lib_a-fwrite.o)
+                0x0000000000001343       0x30 /home/linux/devkitPro/devkitARM/bin/../lib/gcc/arm-none-eabi/4.8.2/../../../../arm-none-eabi/lib/thumb/libg.a(lib_a-fseeko.o)
  .ARM.attributes
-                0x000000000000138e       0x30 /home/linux/devkitPro/devkitARM/bin/../lib/gcc/arm-none-eabi/4.8.2/../../../../arm-none-eabi/lib/thumb/libg.a(lib_a-impure.o)
+                0x0000000000001373       0x30 /home/linux/devkitPro/devkitARM/bin/../lib/gcc/arm-none-eabi/4.8.2/../../../../arm-none-eabi/lib/thumb/libg.a(lib_a-fvwrite.o)
  .ARM.attributes
-                0x00000000000013be       0x30 /home/linux/devkitPro/devkitARM/bin/../lib/gcc/arm-none-eabi/4.8.2/../../../../arm-none-eabi/lib/thumb/libg.a(lib_a-init.o)
+                0x00000000000013a3       0x30 /home/linux/devkitPro/devkitARM/bin/../lib/gcc/arm-none-eabi/4.8.2/../../../../arm-none-eabi/lib/thumb/libg.a(lib_a-fwalk.o)
  .ARM.attributes
-                0x00000000000013ee       0x30 /home/linux/devkitPro/devkitARM/bin/../lib/gcc/arm-none-eabi/4.8.2/../../../../arm-none-eabi/lib/thumb/libg.a(lib_a-iprintf.o)
+                0x00000000000013d3       0x30 /home/linux/devkitPro/devkitARM/bin/../lib/gcc/arm-none-eabi/4.8.2/../../../../arm-none-eabi/lib/thumb/libg.a(lib_a-fwrite.o)
  .ARM.attributes
-                0x000000000000141e       0x30 /home/linux/devkitPro/devkitARM/bin/../lib/gcc/arm-none-eabi/4.8.2/../../../../arm-none-eabi/lib/thumb/libg.a(lib_a-lcltime_r.o)
+                0x0000000000001403       0x30 /home/linux/devkitPro/devkitARM/bin/../lib/gcc/arm-none-eabi/4.8.2/../../../../arm-none-eabi/lib/thumb/libg.a(lib_a-impure.o)
  .ARM.attributes
-                0x000000000000144e       0x30 /home/linux/devkitPro/devkitARM/bin/../lib/gcc/arm-none-eabi/4.8.2/../../../../arm-none-eabi/lib/thumb/libg.a(lib_a-locale.o)
+                0x0000000000001433       0x30 /home/linux/devkitPro/devkitARM/bin/../lib/gcc/arm-none-eabi/4.8.2/../../../../arm-none-eabi/lib/thumb/libg.a(lib_a-init.o)
  .ARM.attributes
-                0x000000000000147e       0x30 /home/linux/devkitPro/devkitARM/bin/../lib/gcc/arm-none-eabi/4.8.2/../../../../arm-none-eabi/lib/thumb/libg.a(lib_a-makebuf.o)
+                0x0000000000001463       0x30 /home/linux/devkitPro/devkitARM/bin/../lib/gcc/arm-none-eabi/4.8.2/../../../../arm-none-eabi/lib/thumb/libg.a(lib_a-iprintf.o)
  .ARM.attributes
-                0x00000000000014ae       0x30 /home/linux/devkitPro/devkitARM/bin/../lib/gcc/arm-none-eabi/4.8.2/../../../../arm-none-eabi/lib/thumb/libg.a(lib_a-malloc.o)
+                0x0000000000001493       0x30 /home/linux/devkitPro/devkitARM/bin/../lib/gcc/arm-none-eabi/4.8.2/../../../../arm-none-eabi/lib/thumb/libg.a(lib_a-lcltime_r.o)
  .ARM.attributes
-                0x00000000000014de       0x30 /home/linux/devkitPro/devkitARM/bin/../lib/gcc/arm-none-eabi/4.8.2/../../../../arm-none-eabi/lib/thumb/libg.a(lib_a-mallocr.o)
+                0x00000000000014c3       0x30 /home/linux/devkitPro/devkitARM/bin/../lib/gcc/arm-none-eabi/4.8.2/../../../../arm-none-eabi/lib/thumb/libg.a(lib_a-locale.o)
  .ARM.attributes
-                0x000000000000150e       0x30 /home/linux/devkitPro/devkitARM/bin/../lib/gcc/arm-none-eabi/4.8.2/../../../../arm-none-eabi/lib/thumb/libg.a(lib_a-mbrtowc.o)
+                0x00000000000014f3       0x30 /home/linux/devkitPro/devkitARM/bin/../lib/gcc/arm-none-eabi/4.8.2/../../../../arm-none-eabi/lib/thumb/libg.a(lib_a-makebuf.o)
  .ARM.attributes
-                0x000000000000153e       0x30 /home/linux/devkitPro/devkitARM/bin/../lib/gcc/arm-none-eabi/4.8.2/../../../../arm-none-eabi/lib/thumb/libg.a(lib_a-mbsrtowcs.o)
+                0x0000000000001523       0x30 /home/linux/devkitPro/devkitARM/bin/../lib/gcc/arm-none-eabi/4.8.2/../../../../arm-none-eabi/lib/thumb/libg.a(lib_a-malloc.o)
  .ARM.attributes
-                0x000000000000156e       0x30 /home/linux/devkitPro/devkitARM/bin/../lib/gcc/arm-none-eabi/4.8.2/../../../../arm-none-eabi/lib/thumb/libg.a(lib_a-mbtowc_r.o)
+                0x0000000000001553       0x30 /home/linux/devkitPro/devkitARM/bin/../lib/gcc/arm-none-eabi/4.8.2/../../../../arm-none-eabi/lib/thumb/libg.a(lib_a-mallocr.o)
  .ARM.attributes
-                0x000000000000159e       0x30 /home/linux/devkitPro/devkitARM/bin/../lib/gcc/arm-none-eabi/4.8.2/../../../../arm-none-eabi/lib/thumb/libg.a(lib_a-memchr-stub.o)
+                0x0000000000001583       0x30 /home/linux/devkitPro/devkitARM/bin/../lib/gcc/arm-none-eabi/4.8.2/../../../../arm-none-eabi/lib/thumb/libg.a(lib_a-mbrtowc.o)
  .ARM.attributes
-                0x00000000000015ce       0x30 /home/linux/devkitPro/devkitARM/bin/../lib/gcc/arm-none-eabi/4.8.2/../../../../arm-none-eabi/lib/thumb/libg.a(lib_a-memcmp.o)
+                0x00000000000015b3       0x30 /home/linux/devkitPro/devkitARM/bin/../lib/gcc/arm-none-eabi/4.8.2/../../../../arm-none-eabi/lib/thumb/libg.a(lib_a-mbsrtowcs.o)
  .ARM.attributes
-                0x00000000000015fe       0x30 /home/linux/devkitPro/devkitARM/bin/../lib/gcc/arm-none-eabi/4.8.2/../../../../arm-none-eabi/lib/thumb/libg.a(lib_a-memcpy-stub.o)
+                0x00000000000015e3       0x30 /home/linux/devkitPro/devkitARM/bin/../lib/gcc/arm-none-eabi/4.8.2/../../../../arm-none-eabi/lib/thumb/libg.a(lib_a-mbtowc_r.o)
  .ARM.attributes
-                0x000000000000162e       0x30 /home/linux/devkitPro/devkitARM/bin/../lib/gcc/arm-none-eabi/4.8.2/../../../../arm-none-eabi/lib/thumb/libg.a(lib_a-memmove.o)
+                0x0000000000001613       0x30 /home/linux/devkitPro/devkitARM/bin/../lib/gcc/arm-none-eabi/4.8.2/../../../../arm-none-eabi/lib/thumb/libg.a(lib_a-memchr-stub.o)
  .ARM.attributes
-                0x000000000000165e       0x30 /home/linux/devkitPro/devkitARM/bin/../lib/gcc/arm-none-eabi/4.8.2/../../../../arm-none-eabi/lib/thumb/libg.a(lib_a-memset.o)
+                0x0000000000001643       0x30 /home/linux/devkitPro/devkitARM/bin/../lib/gcc/arm-none-eabi/4.8.2/../../../../arm-none-eabi/lib/thumb/libg.a(lib_a-memcmp.o)
  .ARM.attributes
-                0x000000000000168e       0x30 /home/linux/devkitPro/devkitARM/bin/../lib/gcc/arm-none-eabi/4.8.2/../../../../arm-none-eabi/lib/thumb/libg.a(lib_a-mktime.o)
+                0x0000000000001673       0x30 /home/linux/devkitPro/devkitARM/bin/../lib/gcc/arm-none-eabi/4.8.2/../../../../arm-none-eabi/lib/thumb/libg.a(lib_a-memcpy-stub.o)
  .ARM.attributes
-                0x00000000000016be       0x30 /home/linux/devkitPro/devkitARM/bin/../lib/gcc/arm-none-eabi/4.8.2/../../../../arm-none-eabi/lib/thumb/libg.a(lib_a-mktm_r.o)
+                0x00000000000016a3       0x30 /home/linux/devkitPro/devkitARM/bin/../lib/gcc/arm-none-eabi/4.8.2/../../../../arm-none-eabi/lib/thumb/libg.a(lib_a-memmove.o)
  .ARM.attributes
-                0x00000000000016ee       0x30 /home/linux/devkitPro/devkitARM/bin/../lib/gcc/arm-none-eabi/4.8.2/../../../../arm-none-eabi/lib/thumb/libg.a(lib_a-mlock.o)
+                0x00000000000016d3       0x30 /home/linux/devkitPro/devkitARM/bin/../lib/gcc/arm-none-eabi/4.8.2/../../../../arm-none-eabi/lib/thumb/libg.a(lib_a-memset.o)
  .ARM.attributes
-                0x000000000000171e       0x30 /home/linux/devkitPro/devkitARM/bin/../lib/gcc/arm-none-eabi/4.8.2/../../../../arm-none-eabi/lib/thumb/libg.a(lib_a-printf.o)
+                0x0000000000001703       0x30 /home/linux/devkitPro/devkitARM/bin/../lib/gcc/arm-none-eabi/4.8.2/../../../../arm-none-eabi/lib/thumb/libg.a(lib_a-mktime.o)
  .ARM.attributes
-                0x000000000000174e       0x30 /home/linux/devkitPro/devkitARM/bin/../lib/gcc/arm-none-eabi/4.8.2/../../../../arm-none-eabi/lib/thumb/libg.a(lib_a-putc.o)
+                0x0000000000001733       0x30 /home/linux/devkitPro/devkitARM/bin/../lib/gcc/arm-none-eabi/4.8.2/../../../../arm-none-eabi/lib/thumb/libg.a(lib_a-mktm_r.o)
  .ARM.attributes
-                0x000000000000177e       0x30 /home/linux/devkitPro/devkitARM/bin/../lib/gcc/arm-none-eabi/4.8.2/../../../../arm-none-eabi/lib/thumb/libg.a(lib_a-puts.o)
+                0x0000000000001763       0x30 /home/linux/devkitPro/devkitARM/bin/../lib/gcc/arm-none-eabi/4.8.2/../../../../arm-none-eabi/lib/thumb/libg.a(lib_a-mlock.o)
  .ARM.attributes
-                0x00000000000017ae       0x30 /home/linux/devkitPro/devkitARM/bin/../lib/gcc/arm-none-eabi/4.8.2/../../../../arm-none-eabi/lib/thumb/libg.a(lib_a-realloc.o)
+                0x0000000000001793       0x30 /home/linux/devkitPro/devkitARM/bin/../lib/gcc/arm-none-eabi/4.8.2/../../../../arm-none-eabi/lib/thumb/libg.a(lib_a-printf.o)
  .ARM.attributes
-                0x00000000000017de       0x30 /home/linux/devkitPro/devkitARM/bin/../lib/gcc/arm-none-eabi/4.8.2/../../../../arm-none-eabi/lib/thumb/libg.a(lib_a-reallocr.o)
+                0x00000000000017c3       0x30 /home/linux/devkitPro/devkitARM/bin/../lib/gcc/arm-none-eabi/4.8.2/../../../../arm-none-eabi/lib/thumb/libg.a(lib_a-putc.o)
  .ARM.attributes
-                0x000000000000180e       0x30 /home/linux/devkitPro/devkitARM/bin/../lib/gcc/arm-none-eabi/4.8.2/../../../../arm-none-eabi/lib/thumb/libg.a(lib_a-refill.o)
+                0x00000000000017f3       0x30 /home/linux/devkitPro/devkitARM/bin/../lib/gcc/arm-none-eabi/4.8.2/../../../../arm-none-eabi/lib/thumb/libg.a(lib_a-puts.o)
  .ARM.attributes
-                0x000000000000183e       0x30 /home/linux/devkitPro/devkitARM/bin/../lib/gcc/arm-none-eabi/4.8.2/../../../../arm-none-eabi/lib/thumb/libg.a(lib_a-setvbuf.o)
+                0x0000000000001823       0x30 /home/linux/devkitPro/devkitARM/bin/../lib/gcc/arm-none-eabi/4.8.2/../../../../arm-none-eabi/lib/thumb/libg.a(lib_a-realloc.o)
  .ARM.attributes
-                0x000000000000186e       0x30 /home/linux/devkitPro/devkitARM/bin/../lib/gcc/arm-none-eabi/4.8.2/../../../../arm-none-eabi/lib/thumb/libg.a(lib_a-signal.o)
+                0x0000000000001853       0x30 /home/linux/devkitPro/devkitARM/bin/../lib/gcc/arm-none-eabi/4.8.2/../../../../arm-none-eabi/lib/thumb/libg.a(lib_a-reallocr.o)
  .ARM.attributes
-                0x000000000000189e       0x30 /home/linux/devkitPro/devkitARM/bin/../lib/gcc/arm-none-eabi/4.8.2/../../../../arm-none-eabi/lib/thumb/libg.a(lib_a-siscanf.o)
+                0x0000000000001883       0x30 /home/linux/devkitPro/devkitARM/bin/../lib/gcc/arm-none-eabi/4.8.2/../../../../arm-none-eabi/lib/thumb/libg.a(lib_a-refill.o)
  .ARM.attributes
-                0x00000000000018ce       0x30 /home/linux/devkitPro/devkitARM/bin/../lib/gcc/arm-none-eabi/4.8.2/../../../../arm-none-eabi/lib/thumb/libg.a(lib_a-sprintf.o)
+                0x00000000000018b3       0x30 /home/linux/devkitPro/devkitARM/bin/../lib/gcc/arm-none-eabi/4.8.2/../../../../arm-none-eabi/lib/thumb/libg.a(lib_a-setvbuf.o)
  .ARM.attributes
-                0x00000000000018fe       0x30 /home/linux/devkitPro/devkitARM/bin/../lib/gcc/arm-none-eabi/4.8.2/../../../../arm-none-eabi/lib/thumb/libg.a(lib_a-stdio.o)
+                0x00000000000018e3       0x30 /home/linux/devkitPro/devkitARM/bin/../lib/gcc/arm-none-eabi/4.8.2/../../../../arm-none-eabi/lib/thumb/libg.a(lib_a-signal.o)
  .ARM.attributes
-                0x000000000000192e       0x30 /home/linux/devkitPro/devkitARM/bin/../lib/gcc/arm-none-eabi/4.8.2/../../../../arm-none-eabi/lib/thumb/libg.a(lib_a-stpcpy.o)
+                0x0000000000001913       0x30 /home/linux/devkitPro/devkitARM/bin/../lib/gcc/arm-none-eabi/4.8.2/../../../../arm-none-eabi/lib/thumb/libg.a(lib_a-siscanf.o)
  .ARM.attributes
-                0x000000000000195e       0x30 /home/linux/devkitPro/devkitARM/bin/../lib/gcc/arm-none-eabi/4.8.2/../../../../arm-none-eabi/lib/thumb/libg.a(lib_a-strcasecmp.o)
+                0x0000000000001943       0x30 /home/linux/devkitPro/devkitARM/bin/../lib/gcc/arm-none-eabi/4.8.2/../../../../arm-none-eabi/lib/thumb/libg.a(lib_a-sprintf.o)
  .ARM.attributes
-                0x000000000000198e       0x30 /home/linux/devkitPro/devkitARM/bin/../lib/gcc/arm-none-eabi/4.8.2/../../../../arm-none-eabi/lib/thumb/libg.a(lib_a-strcat.o)
+                0x0000000000001973       0x30 /home/linux/devkitPro/devkitARM/bin/../lib/gcc/arm-none-eabi/4.8.2/../../../../arm-none-eabi/lib/thumb/libg.a(lib_a-stdio.o)
  .ARM.attributes
-                0x00000000000019be       0x30 /home/linux/devkitPro/devkitARM/bin/../lib/gcc/arm-none-eabi/4.8.2/../../../../arm-none-eabi/lib/thumb/libg.a(lib_a-strchr.o)
+                0x00000000000019a3       0x30 /home/linux/devkitPro/devkitARM/bin/../lib/gcc/arm-none-eabi/4.8.2/../../../../arm-none-eabi/lib/thumb/libg.a(lib_a-stpcpy.o)
  .ARM.attributes
-                0x00000000000019ee       0x1c /home/linux/devkitPro/devkitARM/bin/../lib/gcc/arm-none-eabi/4.8.2/../../../../arm-none-eabi/lib/thumb/libg.a(lib_a-strcmp.o)
+                0x00000000000019d3       0x30 /home/linux/devkitPro/devkitARM/bin/../lib/gcc/arm-none-eabi/4.8.2/../../../../arm-none-eabi/lib/thumb/libg.a(lib_a-strcasecmp.o)
  .ARM.attributes
-                0x0000000000001a0a       0x30 /home/linux/devkitPro/devkitARM/bin/../lib/gcc/arm-none-eabi/4.8.2/../../../../arm-none-eabi/lib/thumb/libg.a(lib_a-strcpy.o)
+                0x0000000000001a03       0x30 /home/linux/devkitPro/devkitARM/bin/../lib/gcc/arm-none-eabi/4.8.2/../../../../arm-none-eabi/lib/thumb/libg.a(lib_a-strcat.o)
  .ARM.attributes
-                0x0000000000001a3a       0x30 /home/linux/devkitPro/devkitARM/bin/../lib/gcc/arm-none-eabi/4.8.2/../../../../arm-none-eabi/lib/thumb/libg.a(lib_a-strdup.o)
+                0x0000000000001a33       0x30 /home/linux/devkitPro/devkitARM/bin/../lib/gcc/arm-none-eabi/4.8.2/../../../../arm-none-eabi/lib/thumb/libg.a(lib_a-strchr.o)
  .ARM.attributes
-                0x0000000000001a6a       0x30 /home/linux/devkitPro/devkitARM/bin/../lib/gcc/arm-none-eabi/4.8.2/../../../../arm-none-eabi/lib/thumb/libg.a(lib_a-strdup_r.o)
+                0x0000000000001a63       0x1c /home/linux/devkitPro/devkitARM/bin/../lib/gcc/arm-none-eabi/4.8.2/../../../../arm-none-eabi/lib/thumb/libg.a(lib_a-strcmp.o)
  .ARM.attributes
-                0x0000000000001a9a       0x30 /home/linux/devkitPro/devkitARM/bin/../lib/gcc/arm-none-eabi/4.8.2/../../../../arm-none-eabi/lib/thumb/libg.a(lib_a-strerror.o)
+                0x0000000000001a7f       0x30 /home/linux/devkitPro/devkitARM/bin/../lib/gcc/arm-none-eabi/4.8.2/../../../../arm-none-eabi/lib/thumb/libg.a(lib_a-strcpy.o)
  .ARM.attributes
-                0x0000000000001aca       0x30 /home/linux/devkitPro/devkitARM/bin/../lib/gcc/arm-none-eabi/4.8.2/../../../../arm-none-eabi/lib/thumb/libg.a(lib_a-strlcpy.o)
+                0x0000000000001aaf       0x30 /home/linux/devkitPro/devkitARM/bin/../lib/gcc/arm-none-eabi/4.8.2/../../../../arm-none-eabi/lib/thumb/libg.a(lib_a-strdup.o)
  .ARM.attributes
-                0x0000000000001afa       0x30 /home/linux/devkitPro/devkitARM/bin/../lib/gcc/arm-none-eabi/4.8.2/../../../../arm-none-eabi/lib/thumb/libg.a(lib_a-strlen.o)
+                0x0000000000001adf       0x30 /home/linux/devkitPro/devkitARM/bin/../lib/gcc/arm-none-eabi/4.8.2/../../../../arm-none-eabi/lib/thumb/libg.a(lib_a-strdup_r.o)
  .ARM.attributes
-                0x0000000000001b2a       0x30 /home/linux/devkitPro/devkitARM/bin/../lib/gcc/arm-none-eabi/4.8.2/../../../../arm-none-eabi/lib/thumb/libg.a(lib_a-strncasecmp.o)
+                0x0000000000001b0f       0x30 /home/linux/devkitPro/devkitARM/bin/../lib/gcc/arm-none-eabi/4.8.2/../../../../arm-none-eabi/lib/thumb/libg.a(lib_a-strerror.o)
  .ARM.attributes
-                0x0000000000001b5a       0x30 /home/linux/devkitPro/devkitARM/bin/../lib/gcc/arm-none-eabi/4.8.2/../../../../arm-none-eabi/lib/thumb/libg.a(lib_a-strncmp.o)
+                0x0000000000001b3f       0x30 /home/linux/devkitPro/devkitARM/bin/../lib/gcc/arm-none-eabi/4.8.2/../../../../arm-none-eabi/lib/thumb/libg.a(lib_a-strlcpy.o)
  .ARM.attributes
-                0x0000000000001b8a       0x30 /home/linux/devkitPro/devkitARM/bin/../lib/gcc/arm-none-eabi/4.8.2/../../../../arm-none-eabi/lib/thumb/libg.a(lib_a-strncpy.o)
+                0x0000000000001b6f       0x30 /home/linux/devkitPro/devkitARM/bin/../lib/gcc/arm-none-eabi/4.8.2/../../../../arm-none-eabi/lib/thumb/libg.a(lib_a-strlen.o)
  .ARM.attributes
-                0x0000000000001bba       0x30 /home/linux/devkitPro/devkitARM/bin/../lib/gcc/arm-none-eabi/4.8.2/../../../../arm-none-eabi/lib/thumb/libg.a(lib_a-strnlen.o)
+                0x0000000000001b9f       0x30 /home/linux/devkitPro/devkitARM/bin/../lib/gcc/arm-none-eabi/4.8.2/../../../../arm-none-eabi/lib/thumb/libg.a(lib_a-strncasecmp.o)
  .ARM.attributes
-                0x0000000000001bea       0x30 /home/linux/devkitPro/devkitARM/bin/../lib/gcc/arm-none-eabi/4.8.2/../../../../arm-none-eabi/lib/thumb/libg.a(lib_a-strpbrk.o)
+                0x0000000000001bcf       0x30 /home/linux/devkitPro/devkitARM/bin/../lib/gcc/arm-none-eabi/4.8.2/../../../../arm-none-eabi/lib/thumb/libg.a(lib_a-strncmp.o)
  .ARM.attributes
-                0x0000000000001c1a       0x30 /home/linux/devkitPro/devkitARM/bin/../lib/gcc/arm-none-eabi/4.8.2/../../../../arm-none-eabi/lib/thumb/libg.a(lib_a-strrchr.o)
+                0x0000000000001bff       0x30 /home/linux/devkitPro/devkitARM/bin/../lib/gcc/arm-none-eabi/4.8.2/../../../../arm-none-eabi/lib/thumb/libg.a(lib_a-strncpy.o)
  .ARM.attributes
-                0x0000000000001c4a       0x30 /home/linux/devkitPro/devkitARM/bin/../lib/gcc/arm-none-eabi/4.8.2/../../../../arm-none-eabi/lib/thumb/libg.a(lib_a-strtol.o)
+                0x0000000000001c2f       0x30 /home/linux/devkitPro/devkitARM/bin/../lib/gcc/arm-none-eabi/4.8.2/../../../../arm-none-eabi/lib/thumb/libg.a(lib_a-strnlen.o)
  .ARM.attributes
-                0x0000000000001c7a       0x30 /home/linux/devkitPro/devkitARM/bin/../lib/gcc/arm-none-eabi/4.8.2/../../../../arm-none-eabi/lib/thumb/libg.a(lib_a-svfiscanf.o)
+                0x0000000000001c5f       0x30 /home/linux/devkitPro/devkitARM/bin/../lib/gcc/arm-none-eabi/4.8.2/../../../../arm-none-eabi/lib/thumb/libg.a(lib_a-strpbrk.o)
  .ARM.attributes
-                0x0000000000001caa       0x30 /home/linux/devkitPro/devkitARM/bin/../lib/gcc/arm-none-eabi/4.8.2/../../../../arm-none-eabi/lib/thumb/libg.a(lib_a-svfprintf.o)
+                0x0000000000001c8f       0x30 /home/linux/devkitPro/devkitARM/bin/../lib/gcc/arm-none-eabi/4.8.2/../../../../arm-none-eabi/lib/thumb/libg.a(lib_a-strrchr.o)
  .ARM.attributes
-                0x0000000000001cda       0x30 /home/linux/devkitPro/devkitARM/bin/../lib/gcc/arm-none-eabi/4.8.2/../../../../arm-none-eabi/lib/thumb/libg.a(lib_a-sysclose.o)
+                0x0000000000001cbf       0x30 /home/linux/devkitPro/devkitARM/bin/../lib/gcc/arm-none-eabi/4.8.2/../../../../arm-none-eabi/lib/thumb/libg.a(lib_a-strtol.o)
  .ARM.attributes
-                0x0000000000001d0a       0x30 /home/linux/devkitPro/devkitARM/bin/../lib/gcc/arm-none-eabi/4.8.2/../../../../arm-none-eabi/lib/thumb/libg.a(lib_a-syslseek.o)
+                0x0000000000001cef       0x30 /home/linux/devkitPro/devkitARM/bin/../lib/gcc/arm-none-eabi/4.8.2/../../../../arm-none-eabi/lib/thumb/libg.a(lib_a-svfiscanf.o)
  .ARM.attributes
-                0x0000000000001d3a       0x30 /home/linux/devkitPro/devkitARM/bin/../lib/gcc/arm-none-eabi/4.8.2/../../../../arm-none-eabi/lib/thumb/libg.a(lib_a-sysopen.o)
+                0x0000000000001d1f       0x30 /home/linux/devkitPro/devkitARM/bin/../lib/gcc/arm-none-eabi/4.8.2/../../../../arm-none-eabi/lib/thumb/libg.a(lib_a-svfprintf.o)
  .ARM.attributes
-                0x0000000000001d6a       0x30 /home/linux/devkitPro/devkitARM/bin/../lib/gcc/arm-none-eabi/4.8.2/../../../../arm-none-eabi/lib/thumb/libg.a(lib_a-sysread.o)
+                0x0000000000001d4f       0x30 /home/linux/devkitPro/devkitARM/bin/../lib/gcc/arm-none-eabi/4.8.2/../../../../arm-none-eabi/lib/thumb/libg.a(lib_a-sysclose.o)
  .ARM.attributes
-                0x0000000000001d9a       0x30 /home/linux/devkitPro/devkitARM/bin/../lib/gcc/arm-none-eabi/4.8.2/../../../../arm-none-eabi/lib/thumb/libg.a(lib_a-syswrite.o)
+                0x0000000000001d7f       0x30 /home/linux/devkitPro/devkitARM/bin/../lib/gcc/arm-none-eabi/4.8.2/../../../../arm-none-eabi/lib/thumb/libg.a(lib_a-syslseek.o)
  .ARM.attributes
-                0x0000000000001dca       0x30 /home/linux/devkitPro/devkitARM/bin/../lib/gcc/arm-none-eabi/4.8.2/../../../../arm-none-eabi/lib/thumb/libg.a(lib_a-time.o)
+                0x0000000000001daf       0x30 /home/linux/devkitPro/devkitARM/bin/../lib/gcc/arm-none-eabi/4.8.2/../../../../arm-none-eabi/lib/thumb/libg.a(lib_a-sysopen.o)
  .ARM.attributes
-                0x0000000000001dfa       0x30 /home/linux/devkitPro/devkitARM/bin/../lib/gcc/arm-none-eabi/4.8.2/../../../../arm-none-eabi/lib/thumb/libg.a(lib_a-towlower.o)
+                0x0000000000001ddf       0x30 /home/linux/devkitPro/devkitARM/bin/../lib/gcc/arm-none-eabi/4.8.2/../../../../arm-none-eabi/lib/thumb/libg.a(lib_a-sysread.o)
  .ARM.attributes
-                0x0000000000001e2a       0x30 /home/linux/devkitPro/devkitARM/bin/../lib/gcc/arm-none-eabi/4.8.2/../../../../arm-none-eabi/lib/thumb/libg.a(lib_a-towupper.o)
+                0x0000000000001e0f       0x30 /home/linux/devkitPro/devkitARM/bin/../lib/gcc/arm-none-eabi/4.8.2/../../../../arm-none-eabi/lib/thumb/libg.a(lib_a-syswrite.o)
  .ARM.attributes
-                0x0000000000001e5a       0x30 /home/linux/devkitPro/devkitARM/bin/../lib/gcc/arm-none-eabi/4.8.2/../../../../arm-none-eabi/lib/thumb/libg.a(lib_a-tzlock.o)
+                0x0000000000001e3f       0x30 /home/linux/devkitPro/devkitARM/bin/../lib/gcc/arm-none-eabi/4.8.2/../../../../arm-none-eabi/lib/thumb/libg.a(lib_a-time.o)
  .ARM.attributes
-                0x0000000000001e8a       0x30 /home/linux/devkitPro/devkitARM/bin/../lib/gcc/arm-none-eabi/4.8.2/../../../../arm-none-eabi/lib/thumb/libg.a(lib_a-tzvars.o)
+                0x0000000000001e6f       0x30 /home/linux/devkitPro/devkitARM/bin/../lib/gcc/arm-none-eabi/4.8.2/../../../../arm-none-eabi/lib/thumb/libg.a(lib_a-towlower.o)
  .ARM.attributes
-                0x0000000000001eba       0x30 /home/linux/devkitPro/devkitARM/bin/../lib/gcc/arm-none-eabi/4.8.2/../../../../arm-none-eabi/lib/thumb/libg.a(lib_a-ungetc.o)
+                0x0000000000001e9f       0x30 /home/linux/devkitPro/devkitARM/bin/../lib/gcc/arm-none-eabi/4.8.2/../../../../arm-none-eabi/lib/thumb/libg.a(lib_a-towupper.o)
  .ARM.attributes
-                0x0000000000001eea       0x30 /home/linux/devkitPro/devkitARM/bin/../lib/gcc/arm-none-eabi/4.8.2/../../../../arm-none-eabi/lib/thumb/libg.a(lib_a-u_strerr.o)
+                0x0000000000001ecf       0x30 /home/linux/devkitPro/devkitARM/bin/../lib/gcc/arm-none-eabi/4.8.2/../../../../arm-none-eabi/lib/thumb/libg.a(lib_a-tzlock.o)
  .ARM.attributes
-                0x0000000000001f1a       0x30 /home/linux/devkitPro/devkitARM/bin/../lib/gcc/arm-none-eabi/4.8.2/../../../../arm-none-eabi/lib/thumb/libg.a(lib_a-vfiprintf.o)
+                0x0000000000001eff       0x30 /home/linux/devkitPro/devkitARM/bin/../lib/gcc/arm-none-eabi/4.8.2/../../../../arm-none-eabi/lib/thumb/libg.a(lib_a-tzvars.o)
  .ARM.attributes
-                0x0000000000001f4a       0x30 /home/linux/devkitPro/devkitARM/bin/../lib/gcc/arm-none-eabi/4.8.2/../../../../arm-none-eabi/lib/thumb/libg.a(lib_a-vfprintf.o)
+                0x0000000000001f2f       0x30 /home/linux/devkitPro/devkitARM/bin/../lib/gcc/arm-none-eabi/4.8.2/../../../../arm-none-eabi/lib/thumb/libg.a(lib_a-ungetc.o)
  .ARM.attributes
-                0x0000000000001f7a       0x30 /home/linux/devkitPro/devkitARM/bin/../lib/gcc/arm-none-eabi/4.8.2/../../../../arm-none-eabi/lib/thumb/libg.a(lib_a-viprintf.o)
+                0x0000000000001f5f       0x30 /home/linux/devkitPro/devkitARM/bin/../lib/gcc/arm-none-eabi/4.8.2/../../../../arm-none-eabi/lib/thumb/libg.a(lib_a-u_strerr.o)
  .ARM.attributes
-                0x0000000000001faa       0x30 /home/linux/devkitPro/devkitARM/bin/../lib/gcc/arm-none-eabi/4.8.2/../../../../arm-none-eabi/lib/thumb/libg.a(lib_a-wbuf.o)
+                0x0000000000001f8f       0x30 /home/linux/devkitPro/devkitARM/bin/../lib/gcc/arm-none-eabi/4.8.2/../../../../arm-none-eabi/lib/thumb/libg.a(lib_a-vfiprintf.o)
  .ARM.attributes
-                0x0000000000001fda       0x30 /home/linux/devkitPro/devkitARM/bin/../lib/gcc/arm-none-eabi/4.8.2/../../../../arm-none-eabi/lib/thumb/libg.a(lib_a-wcrtomb.o)
+                0x0000000000001fbf       0x30 /home/linux/devkitPro/devkitARM/bin/../lib/gcc/arm-none-eabi/4.8.2/../../../../arm-none-eabi/lib/thumb/libg.a(lib_a-vfprintf.o)
  .ARM.attributes
-                0x000000000000200a       0x30 /home/linux/devkitPro/devkitARM/bin/../lib/gcc/arm-none-eabi/4.8.2/../../../../arm-none-eabi/lib/thumb/libg.a(lib_a-wcsrtombs.o)
+                0x0000000000001fef       0x30 /home/linux/devkitPro/devkitARM/bin/../lib/gcc/arm-none-eabi/4.8.2/../../../../arm-none-eabi/lib/thumb/libg.a(lib_a-viprintf.o)
  .ARM.attributes
-                0x000000000000203a       0x30 /home/linux/devkitPro/devkitARM/bin/../lib/gcc/arm-none-eabi/4.8.2/../../../../arm-none-eabi/lib/thumb/libg.a(lib_a-wctob.o)
+                0x000000000000201f       0x30 /home/linux/devkitPro/devkitARM/bin/../lib/gcc/arm-none-eabi/4.8.2/../../../../arm-none-eabi/lib/thumb/libg.a(lib_a-wbuf.o)
  .ARM.attributes
-                0x000000000000206a       0x30 /home/linux/devkitPro/devkitARM/bin/../lib/gcc/arm-none-eabi/4.8.2/../../../../arm-none-eabi/lib/thumb/libg.a(lib_a-wctomb_r.o)
+                0x000000000000204f       0x30 /home/linux/devkitPro/devkitARM/bin/../lib/gcc/arm-none-eabi/4.8.2/../../../../arm-none-eabi/lib/thumb/libg.a(lib_a-wcrtomb.o)
  .ARM.attributes
-                0x000000000000209a       0x30 /home/linux/devkitPro/devkitARM/bin/../lib/gcc/arm-none-eabi/4.8.2/../../../../arm-none-eabi/lib/thumb/libg.a(lib_a-wsetup.o)
+                0x000000000000207f       0x30 /home/linux/devkitPro/devkitARM/bin/../lib/gcc/arm-none-eabi/4.8.2/../../../../arm-none-eabi/lib/thumb/libg.a(lib_a-wcsrtombs.o)
  .ARM.attributes
-                0x00000000000020ca       0x30 /home/linux/devkitPro/devkitARM/bin/../lib/gcc/arm-none-eabi/4.8.2/../../../../arm-none-eabi/lib/thumb/libg.a(lib_a-__atexit.o)
+                0x00000000000020af       0x30 /home/linux/devkitPro/devkitARM/bin/../lib/gcc/arm-none-eabi/4.8.2/../../../../arm-none-eabi/lib/thumb/libg.a(lib_a-wctob.o)
  .ARM.attributes
-                0x00000000000020fa       0x30 /home/linux/devkitPro/devkitARM/bin/../lib/gcc/arm-none-eabi/4.8.2/../../../../arm-none-eabi/lib/thumb/libg.a(lib_a-div.o)
+                0x00000000000020df       0x30 /home/linux/devkitPro/devkitARM/bin/../lib/gcc/arm-none-eabi/4.8.2/../../../../arm-none-eabi/lib/thumb/libg.a(lib_a-wctomb_r.o)
  .ARM.attributes
-                0x000000000000212a       0x30 /home/linux/devkitPro/devkitARM/bin/../lib/gcc/arm-none-eabi/4.8.2/../../../../arm-none-eabi/lib/thumb/libg.a(lib_a-dtoa.o)
+                0x000000000000210f       0x30 /home/linux/devkitPro/devkitARM/bin/../lib/gcc/arm-none-eabi/4.8.2/../../../../arm-none-eabi/lib/thumb/libg.a(lib_a-wsetup.o)
  .ARM.attributes
-                0x000000000000215a       0x30 /home/linux/devkitPro/devkitARM/bin/../lib/gcc/arm-none-eabi/4.8.2/../../../../arm-none-eabi/lib/thumb/libg.a(lib_a-flags.o)
+                0x000000000000213f       0x30 /home/linux/devkitPro/devkitARM/bin/../lib/gcc/arm-none-eabi/4.8.2/../../../../arm-none-eabi/lib/thumb/libg.a(lib_a-__atexit.o)
  .ARM.attributes
-                0x000000000000218a       0x30 /home/linux/devkitPro/devkitARM/bin/../lib/gcc/arm-none-eabi/4.8.2/../../../../arm-none-eabi/lib/thumb/libg.a(lib_a-fputwc.o)
+                0x000000000000216f       0x30 /home/linux/devkitPro/devkitARM/bin/../lib/gcc/arm-none-eabi/4.8.2/../../../../arm-none-eabi/lib/thumb/libg.a(lib_a-div.o)
  .ARM.attributes
-                0x00000000000021ba       0x30 /home/linux/devkitPro/devkitARM/bin/../lib/gcc/arm-none-eabi/4.8.2/../../../../arm-none-eabi/lib/thumb/libg.a(lib_a-getenv_r.o)
+                0x000000000000219f       0x30 /home/linux/devkitPro/devkitARM/bin/../lib/gcc/arm-none-eabi/4.8.2/../../../../arm-none-eabi/lib/thumb/libg.a(lib_a-dtoa.o)
  .ARM.attributes
-                0x00000000000021ea       0x30 /home/linux/devkitPro/devkitARM/bin/../lib/gcc/arm-none-eabi/4.8.2/../../../../arm-none-eabi/lib/thumb/libg.a(lib_a-gettzinfo.o)
+                0x00000000000021cf       0x30 /home/linux/devkitPro/devkitARM/bin/../lib/gcc/arm-none-eabi/4.8.2/../../../../arm-none-eabi/lib/thumb/libg.a(lib_a-flags.o)
  .ARM.attributes
-                0x000000000000221a       0x30 /home/linux/devkitPro/devkitARM/bin/../lib/gcc/arm-none-eabi/4.8.2/../../../../arm-none-eabi/lib/thumb/libg.a(lib_a-iswspace.o)
+                0x00000000000021ff       0x30 /home/linux/devkitPro/devkitARM/bin/../lib/gcc/arm-none-eabi/4.8.2/../../../../arm-none-eabi/lib/thumb/libg.a(lib_a-fputwc.o)
  .ARM.attributes
-                0x000000000000224a       0x30 /home/linux/devkitPro/devkitARM/bin/../lib/gcc/arm-none-eabi/4.8.2/../../../../arm-none-eabi/lib/thumb/libg.a(lib_a-jp2uc.o)
+                0x000000000000222f       0x30 /home/linux/devkitPro/devkitARM/bin/../lib/gcc/arm-none-eabi/4.8.2/../../../../arm-none-eabi/lib/thumb/libg.a(lib_a-getenv_r.o)
  .ARM.attributes
-                0x000000000000227a       0x30 /home/linux/devkitPro/devkitARM/bin/../lib/gcc/arm-none-eabi/4.8.2/../../../../arm-none-eabi/lib/thumb/libg.a(lib_a-mbsnrtowcs.o)
+                0x000000000000225f       0x30 /home/linux/devkitPro/devkitARM/bin/../lib/gcc/arm-none-eabi/4.8.2/../../../../arm-none-eabi/lib/thumb/libg.a(lib_a-gettzinfo.o)
  .ARM.attributes
-                0x00000000000022aa       0x30 /home/linux/devkitPro/devkitARM/bin/../lib/gcc/arm-none-eabi/4.8.2/../../../../arm-none-eabi/lib/thumb/libg.a(lib_a-mprec.o)
+                0x000000000000228f       0x30 /home/linux/devkitPro/devkitARM/bin/../lib/gcc/arm-none-eabi/4.8.2/../../../../arm-none-eabi/lib/thumb/libg.a(lib_a-iswspace.o)
  .ARM.attributes
-                0x00000000000022da       0x30 /home/linux/devkitPro/devkitARM/bin/../lib/gcc/arm-none-eabi/4.8.2/../../../../arm-none-eabi/lib/thumb/libg.a(lib_a-sccl.o)
+                0x00000000000022bf       0x30 /home/linux/devkitPro/devkitARM/bin/../lib/gcc/arm-none-eabi/4.8.2/../../../../arm-none-eabi/lib/thumb/libg.a(lib_a-jp2uc.o)
  .ARM.attributes
-                0x000000000000230a       0x30 /home/linux/devkitPro/devkitARM/bin/../lib/gcc/arm-none-eabi/4.8.2/../../../../arm-none-eabi/lib/thumb/libg.a(lib_a-strtoll_r.o)
+                0x00000000000022ef       0x30 /home/linux/devkitPro/devkitARM/bin/../lib/gcc/arm-none-eabi/4.8.2/../../../../arm-none-eabi/lib/thumb/libg.a(lib_a-mbsnrtowcs.o)
  .ARM.attributes
-                0x000000000000233a       0x30 /home/linux/devkitPro/devkitARM/bin/../lib/gcc/arm-none-eabi/4.8.2/../../../../arm-none-eabi/lib/thumb/libg.a(lib_a-strtoull_r.o)
+                0x000000000000231f       0x30 /home/linux/devkitPro/devkitARM/bin/../lib/gcc/arm-none-eabi/4.8.2/../../../../arm-none-eabi/lib/thumb/libg.a(lib_a-mprec.o)
  .ARM.attributes
-                0x000000000000236a       0x30 /home/linux/devkitPro/devkitARM/bin/../lib/gcc/arm-none-eabi/4.8.2/../../../../arm-none-eabi/lib/thumb/libg.a(lib_a-strtoul.o)
+                0x000000000000234f       0x30 /home/linux/devkitPro/devkitARM/bin/../lib/gcc/arm-none-eabi/4.8.2/../../../../arm-none-eabi/lib/thumb/libg.a(lib_a-sccl.o)
  .ARM.attributes
-                0x000000000000239a       0x30 /home/linux/devkitPro/devkitARM/bin/../lib/gcc/arm-none-eabi/4.8.2/../../../../arm-none-eabi/lib/thumb/libg.a(lib_a-svfiprintf.o)
+                0x000000000000237f       0x30 /home/linux/devkitPro/devkitARM/bin/../lib/gcc/arm-none-eabi/4.8.2/../../../../arm-none-eabi/lib/thumb/libg.a(lib_a-strtoll_r.o)
  .ARM.attributes
-                0x00000000000023ca       0x30 /home/linux/devkitPro/devkitARM/bin/../lib/gcc/arm-none-eabi/4.8.2/../../../../arm-none-eabi/lib/thumb/libg.a(lib_a-wcsnrtombs.o)
+                0x00000000000023af       0x30 /home/linux/devkitPro/devkitARM/bin/../lib/gcc/arm-none-eabi/4.8.2/../../../../arm-none-eabi/lib/thumb/libg.a(lib_a-strtoull_r.o)
  .ARM.attributes
-                0x00000000000023fa       0x30 /home/linux/devkitPro/devkitARM/bin/../lib/gcc/arm-none-eabi/4.8.2/../../../../arm-none-eabi/lib/thumb/libg.a(lib_a-callocr.o)
+                0x00000000000023df       0x30 /home/linux/devkitPro/devkitARM/bin/../lib/gcc/arm-none-eabi/4.8.2/../../../../arm-none-eabi/lib/thumb/libg.a(lib_a-strtoul.o)
  .ARM.attributes
-                0x000000000000242a       0x30 /home/linux/devkitPro/devkitARM/bin/../lib/gcc/arm-none-eabi/4.8.2/../../../../arm-none-eabi/lib/thumb/libg.a(lib_a-environ.o)
+                0x000000000000240f       0x30 /home/linux/devkitPro/devkitARM/bin/../lib/gcc/arm-none-eabi/4.8.2/../../../../arm-none-eabi/lib/thumb/libg.a(lib_a-svfiprintf.o)
  .ARM.attributes
-                0x000000000000245a       0x30 /home/linux/devkitPro/devkitARM/bin/../lib/gcc/arm-none-eabi/4.8.2/../../../../arm-none-eabi/lib/thumb/libg.a(lib_a-envlock.o)
+                0x000000000000243f       0x30 /home/linux/devkitPro/devkitARM/bin/../lib/gcc/arm-none-eabi/4.8.2/../../../../arm-none-eabi/lib/thumb/libg.a(lib_a-wcsnrtombs.o)
  .ARM.attributes
-                0x000000000000248a       0x30 /home/linux/devkitPro/devkitARM/bin/../lib/gcc/arm-none-eabi/4.8.2/../../../../arm-none-eabi/lib/thumb/libsysbase.a(iosupport.o)
+                0x000000000000246f       0x30 /home/linux/devkitPro/devkitARM/bin/../lib/gcc/arm-none-eabi/4.8.2/../../../../arm-none-eabi/lib/thumb/libg.a(lib_a-callocr.o)
  .ARM.attributes
-                0x00000000000024ba       0x30 /home/linux/devkitPro/devkitARM/bin/../lib/gcc/arm-none-eabi/4.8.2/../../../../arm-none-eabi/lib/thumb/libsysbase.a(close.o)
+                0x000000000000249f       0x30 /home/linux/devkitPro/devkitARM/bin/../lib/gcc/arm-none-eabi/4.8.2/../../../../arm-none-eabi/lib/thumb/libg.a(lib_a-environ.o)
  .ARM.attributes
-                0x00000000000024ea       0x30 /home/linux/devkitPro/devkitARM/bin/../lib/gcc/arm-none-eabi/4.8.2/../../../../arm-none-eabi/lib/thumb/libsysbase.a(fstat.o)
+                0x00000000000024cf       0x30 /home/linux/devkitPro/devkitARM/bin/../lib/gcc/arm-none-eabi/4.8.2/../../../../arm-none-eabi/lib/thumb/libg.a(lib_a-envlock.o)
  .ARM.attributes
-                0x000000000000251a       0x30 /home/linux/devkitPro/devkitARM/bin/../lib/gcc/arm-none-eabi/4.8.2/../../../../arm-none-eabi/lib/thumb/libsysbase.a(getpid.o)
+                0x00000000000024ff       0x30 /home/linux/devkitPro/devkitARM/bin/../lib/gcc/arm-none-eabi/4.8.2/../../../../arm-none-eabi/lib/thumb/libsysbase.a(iosupport.o)
  .ARM.attributes
-                0x000000000000254a       0x30 /home/linux/devkitPro/devkitARM/bin/../lib/gcc/arm-none-eabi/4.8.2/../../../../arm-none-eabi/lib/thumb/libsysbase.a(isatty.o)
+                0x000000000000252f       0x30 /home/linux/devkitPro/devkitARM/bin/../lib/gcc/arm-none-eabi/4.8.2/../../../../arm-none-eabi/lib/thumb/libsysbase.a(close.o)
  .ARM.attributes
-                0x000000000000257a       0x30 /home/linux/devkitPro/devkitARM/bin/../lib/gcc/arm-none-eabi/4.8.2/../../../../arm-none-eabi/lib/thumb/libsysbase.a(kill.o)
+                0x000000000000255f       0x30 /home/linux/devkitPro/devkitARM/bin/../lib/gcc/arm-none-eabi/4.8.2/../../../../arm-none-eabi/lib/thumb/libsysbase.a(fstat.o)
  .ARM.attributes
-                0x00000000000025aa       0x30 /home/linux/devkitPro/devkitARM/bin/../lib/gcc/arm-none-eabi/4.8.2/../../../../arm-none-eabi/lib/thumb/libsysbase.a(lseek.o)
+                0x000000000000258f       0x30 /home/linux/devkitPro/devkitARM/bin/../lib/gcc/arm-none-eabi/4.8.2/../../../../arm-none-eabi/lib/thumb/libsysbase.a(getpid.o)
  .ARM.attributes
-                0x00000000000025da       0x30 /home/linux/devkitPro/devkitARM/bin/../lib/gcc/arm-none-eabi/4.8.2/../../../../arm-none-eabi/lib/thumb/libsysbase.a(open.o)
+                0x00000000000025bf       0x30 /home/linux/devkitPro/devkitARM/bin/../lib/gcc/arm-none-eabi/4.8.2/../../../../arm-none-eabi/lib/thumb/libsysbase.a(isatty.o)
  .ARM.attributes
-                0x000000000000260a       0x30 /home/linux/devkitPro/devkitARM/bin/../lib/gcc/arm-none-eabi/4.8.2/../../../../arm-none-eabi/lib/thumb/libsysbase.a(read.o)
+                0x00000000000025ef       0x30 /home/linux/devkitPro/devkitARM/bin/../lib/gcc/arm-none-eabi/4.8.2/../../../../arm-none-eabi/lib/thumb/libsysbase.a(kill.o)
  .ARM.attributes
-                0x000000000000263a       0x30 /home/linux/devkitPro/devkitARM/bin/../lib/gcc/arm-none-eabi/4.8.2/../../../../arm-none-eabi/lib/thumb/libsysbase.a(sbrk.o)
+                0x000000000000261f       0x30 /home/linux/devkitPro/devkitARM/bin/../lib/gcc/arm-none-eabi/4.8.2/../../../../arm-none-eabi/lib/thumb/libsysbase.a(lseek.o)
  .ARM.attributes
-                0x000000000000266a       0x30 /home/linux/devkitPro/devkitARM/bin/../lib/gcc/arm-none-eabi/4.8.2/../../../../arm-none-eabi/lib/thumb/libsysbase.a(times.o)
+                0x000000000000264f       0x30 /home/linux/devkitPro/devkitARM/bin/../lib/gcc/arm-none-eabi/4.8.2/../../../../arm-none-eabi/lib/thumb/libsysbase.a(open.o)
  .ARM.attributes
-                0x000000000000269a       0x30 /home/linux/devkitPro/devkitARM/bin/../lib/gcc/arm-none-eabi/4.8.2/../../../../arm-none-eabi/lib/thumb/libsysbase.a(write.o)
+                0x000000000000267f       0x30 /home/linux/devkitPro/devkitARM/bin/../lib/gcc/arm-none-eabi/4.8.2/../../../../arm-none-eabi/lib/thumb/libsysbase.a(read.o)
  .ARM.attributes
-                0x00000000000026ca       0x30 /home/linux/devkitPro/devkitARM/bin/../lib/gcc/arm-none-eabi/4.8.2/../../../../arm-none-eabi/lib/thumb/libsysbase.a(_exit.o)
+                0x00000000000026af       0x30 /home/linux/devkitPro/devkitARM/bin/../lib/gcc/arm-none-eabi/4.8.2/../../../../arm-none-eabi/lib/thumb/libsysbase.a(sbrk.o)
  .ARM.attributes
-                0x00000000000026fa       0x30 /home/linux/devkitPro/devkitARM/bin/../lib/gcc/arm-none-eabi/4.8.2/../../../../arm-none-eabi/lib/thumb/libsysbase.a(malloc_vars.o)
+                0x00000000000026df       0x30 /home/linux/devkitPro/devkitARM/bin/../lib/gcc/arm-none-eabi/4.8.2/../../../../arm-none-eabi/lib/thumb/libsysbase.a(times.o)
  .ARM.attributes
-                0x000000000000272a       0x30 /home/linux/devkitPro/devkitARM/bin/../lib/gcc/arm-none-eabi/4.8.2/../../../../arm-none-eabi/lib/thumb/libsysbase.a(chdir.o)
+                0x000000000000270f       0x30 /home/linux/devkitPro/devkitARM/bin/../lib/gcc/arm-none-eabi/4.8.2/../../../../arm-none-eabi/lib/thumb/libsysbase.a(write.o)
  .ARM.attributes
-                0x000000000000275a       0x30 /home/linux/devkitPro/devkitARM/bin/../lib/gcc/arm-none-eabi/4.8.2/../../../../arm-none-eabi/lib/thumb/libsysbase.a(build_argv.o)
+                0x000000000000273f       0x30 /home/linux/devkitPro/devkitARM/bin/../lib/gcc/arm-none-eabi/4.8.2/../../../../arm-none-eabi/lib/thumb/libsysbase.a(_exit.o)
  .ARM.attributes
-                0x000000000000278a       0x30 /home/linux/devkitPro/devkitARM/bin/../lib/gcc/arm-none-eabi/4.8.2/../../../../arm-none-eabi/lib/thumb/libsysbase.a(syscall_support.o)
+                0x000000000000276f       0x30 /home/linux/devkitPro/devkitARM/bin/../lib/gcc/arm-none-eabi/4.8.2/../../../../arm-none-eabi/lib/thumb/libsysbase.a(malloc_vars.o)
  .ARM.attributes
-                0x00000000000027ba       0x30 /home/linux/devkitPro/devkitARM/bin/../lib/gcc/arm-none-eabi/4.8.2/../../../../arm-none-eabi/lib/thumb/libsysbase.a(handle_manager.o)
+                0x000000000000279f       0x30 /home/linux/devkitPro/devkitARM/bin/../lib/gcc/arm-none-eabi/4.8.2/../../../../arm-none-eabi/lib/thumb/libsysbase.a(chdir.o)
  .ARM.attributes
-                0x00000000000027ea       0x18 /home/linux/devkitPro/devkitARM/bin/../lib/gcc/arm-none-eabi/4.8.2/thumb/libgcc.a(_arm_fixdfsi.o)
+                0x00000000000027cf       0x30 /home/linux/devkitPro/devkitARM/bin/../lib/gcc/arm-none-eabi/4.8.2/../../../../arm-none-eabi/lib/thumb/libsysbase.a(build_argv.o)
  .ARM.attributes
-                0x0000000000002802       0x18 /home/linux/devkitPro/devkitARM/bin/../lib/gcc/arm-none-eabi/4.8.2/thumb/libgcc.a(_aeabi_uldivmod.o)
+                0x00000000000027ff       0x30 /home/linux/devkitPro/devkitARM/bin/../lib/gcc/arm-none-eabi/4.8.2/../../../../arm-none-eabi/lib/thumb/libsysbase.a(syscall_support.o)
  .ARM.attributes
-                0x000000000000281a       0x30 /home/linux/devkitPro/devkitARM/bin/../lib/gcc/arm-none-eabi/4.8.2/thumb/libgcc.a(bpabi.o)
+                0x000000000000282f       0x30 /home/linux/devkitPro/devkitARM/bin/../lib/gcc/arm-none-eabi/4.8.2/../../../../arm-none-eabi/lib/thumb/libsysbase.a(handle_manager.o)
  .ARM.attributes
-                0x000000000000284a       0x30 /home/linux/devkitPro/devkitARM/bin/../lib/gcc/arm-none-eabi/4.8.2/thumb/libgcc.a(_divdi3.o)
+                0x000000000000285f       0x18 /home/linux/devkitPro/devkitARM/bin/../lib/gcc/arm-none-eabi/4.8.2/thumb/libgcc.a(_arm_fixdfsi.o)
  .ARM.attributes
-                0x000000000000287a       0x30 /home/linux/devkitPro/devkitARM/bin/../lib/gcc/arm-none-eabi/4.8.2/thumb/libgcc.a(_udivdi3.o)
+                0x0000000000002877       0x18 /home/linux/devkitPro/devkitARM/bin/../lib/gcc/arm-none-eabi/4.8.2/thumb/libgcc.a(_aeabi_uldivmod.o)
  .ARM.attributes
-                0x00000000000028aa       0x18 /home/linux/devkitPro/devkitARM/bin/../lib/gcc/arm-none-eabi/4.8.2/thumb/libgcc.a(_clzsi2.o)
+                0x000000000000288f       0x30 /home/linux/devkitPro/devkitARM/bin/../lib/gcc/arm-none-eabi/4.8.2/thumb/libgcc.a(bpabi.o)
  .ARM.attributes
-                0x00000000000028c2       0x30 /home/linux/devkitPro/devkitARM/bin/../lib/gcc/arm-none-eabi/4.8.2/thumb/crtend.o
+                0x00000000000028bf       0x30 /home/linux/devkitPro/devkitARM/bin/../lib/gcc/arm-none-eabi/4.8.2/thumb/libgcc.a(_divdi3.o)
  .ARM.attributes
-                0x00000000000028f2       0x16 /home/linux/devkitPro/devkitARM/bin/../lib/gcc/arm-none-eabi/4.8.2/thumb/crtn.o
+                0x00000000000028ef       0x30 /home/linux/devkitPro/devkitARM/bin/../lib/gcc/arm-none-eabi/4.8.2/thumb/libgcc.a(_udivdi3.o)
+ .ARM.attributes
+                0x000000000000291f       0x18 /home/linux/devkitPro/devkitARM/bin/../lib/gcc/arm-none-eabi/4.8.2/thumb/libgcc.a(_clzsi2.o)
+ .ARM.attributes
+                0x0000000000002937       0x30 /home/linux/devkitPro/devkitARM/bin/../lib/gcc/arm-none-eabi/4.8.2/thumb/crtend.o
+ .ARM.attributes
+                0x0000000000002967       0x16 /home/linux/devkitPro/devkitARM/bin/../lib/gcc/arm-none-eabi/4.8.2/thumb/crtn.o
 
 .debug
  *(.debug)
@@ -6091,7 +6119,7 @@ ARM.exidx       0x000000000206867c      0x5f0
 .debug_sfnames
  *(.debug_sfnames)
 
-.debug_aranges  0x0000000000000000      0x558
+.debug_aranges  0x0000000000000000      0x5b8
  *(.debug_aranges)
  .debug_aranges
                 0x0000000000000000       0x20 main.o
@@ -6100,349 +6128,374 @@ ARM.exidx       0x000000000206867c      0x5f0
  .debug_aranges
                 0x0000000000000040       0x20 Map.o
  .debug_aranges
-                0x0000000000000060       0x58 MapManager.o
+                0x0000000000000060       0x20 Player.o
  .debug_aranges
-                0x00000000000000b8       0x20 libs5.o
+                0x0000000000000080       0x20 Character.o
  .debug_aranges
-                0x00000000000000d8       0x20 libs5_asm.o
+                0x00000000000000a0       0x20 CharacterManager.o
  .debug_aranges
-                0x00000000000000f8       0x20 /home/linux/devkitPro/libnds/lib/libfilesystem.a(nitrofs.o)
+                0x00000000000000c0       0x58 MapManager.o
  .debug_aranges
-                0x0000000000000118       0x20 /home/linux/devkitPro/libnds/lib/libfat.a(libfat.o)
+                0x0000000000000118       0x20 libs5.o
  .debug_aranges
-                0x0000000000000138       0x20 /home/linux/devkitPro/libnds/lib/libfat.a(partition.o)
+                0x0000000000000138       0x20 libs5_asm.o
  .debug_aranges
-                0x0000000000000158       0x20 /home/linux/devkitPro/libnds/lib/libfat.a(cache.o)
+                0x0000000000000158       0x20 /home/linux/devkitPro/libnds/lib/libfilesystem.a(nitrofs.o)
  .debug_aranges
-                0x0000000000000178       0x20 /home/linux/devkitPro/libnds/lib/libfat.a(directory.o)
+                0x0000000000000178       0x20 /home/linux/devkitPro/libnds/lib/libfat.a(libfat.o)
  .debug_aranges
-                0x0000000000000198       0x20 /home/linux/devkitPro/libnds/lib/libfat.a(disc.o)
+                0x0000000000000198       0x20 /home/linux/devkitPro/libnds/lib/libfat.a(partition.o)
  .debug_aranges
-                0x00000000000001b8       0x20 /home/linux/devkitPro/libnds/lib/libfat.a(fatdir.o)
+                0x00000000000001b8       0x20 /home/linux/devkitPro/libnds/lib/libfat.a(cache.o)
  .debug_aranges
-                0x00000000000001d8       0x20 /home/linux/devkitPro/libnds/lib/libfat.a(fatfile.o)
+                0x00000000000001d8       0x20 /home/linux/devkitPro/libnds/lib/libfat.a(directory.o)
  .debug_aranges
-                0x00000000000001f8       0x20 /home/linux/devkitPro/libnds/lib/libfat.a(file_allocation_table.o)
+                0x00000000000001f8       0x20 /home/linux/devkitPro/libnds/lib/libfat.a(disc.o)
  .debug_aranges
-                0x0000000000000218       0x20 /home/linux/devkitPro/libnds/lib/libfat.a(filetime.o)
+                0x0000000000000218       0x20 /home/linux/devkitPro/libnds/lib/libfat.a(fatdir.o)
  .debug_aranges
-                0x0000000000000238       0x20 /home/linux/devkitPro/libnds/lib/libfat.a(lock.o)
+                0x0000000000000238       0x20 /home/linux/devkitPro/libnds/lib/libfat.a(fatfile.o)
  .debug_aranges
-                0x0000000000000258       0x20 /home/linux/devkitPro/libnds/lib/libnds9.a(background.o)
+                0x0000000000000258       0x20 /home/linux/devkitPro/libnds/lib/libfat.a(file_allocation_table.o)
  .debug_aranges
-                0x0000000000000278       0x20 /home/linux/devkitPro/libnds/lib/libnds9.a(console.o)
+                0x0000000000000278       0x20 /home/linux/devkitPro/libnds/lib/libfat.a(filetime.o)
  .debug_aranges
-                0x0000000000000298       0x20 /home/linux/devkitPro/libnds/lib/libnds9.a(gurumeditation.o)
+                0x0000000000000298       0x20 /home/linux/devkitPro/libnds/lib/libfat.a(lock.o)
  .debug_aranges
-                0x00000000000002b8       0x20 /home/linux/devkitPro/libnds/lib/libnds9.a(keys.o)
+                0x00000000000002b8       0x20 /home/linux/devkitPro/libnds/lib/libnds9.a(background.o)
  .debug_aranges
-                0x00000000000002d8       0x20 /home/linux/devkitPro/libnds/lib/libnds9.a(sassert.o)
+                0x00000000000002d8       0x20 /home/linux/devkitPro/libnds/lib/libnds9.a(console.o)
  .debug_aranges
-                0x00000000000002f8       0x20 /home/linux/devkitPro/libnds/lib/libnds9.a(trig.o)
+                0x00000000000002f8       0x20 /home/linux/devkitPro/libnds/lib/libnds9.a(gurumeditation.o)
  .debug_aranges
-                0x0000000000000318       0x20 /home/linux/devkitPro/libnds/lib/libnds9.a(dldi.o)
+                0x0000000000000318       0x20 /home/linux/devkitPro/libnds/lib/libnds9.a(keys.o)
  .debug_aranges
-                0x0000000000000338       0x20 /home/linux/devkitPro/libnds/lib/libnds9.a(dsi_sd.o)
+                0x0000000000000338       0x20 /home/linux/devkitPro/libnds/lib/libnds9.a(sassert.o)
  .debug_aranges
-                0x0000000000000358       0x20 /home/linux/devkitPro/libnds/lib/libnds9.a(initSystem.o)
+                0x0000000000000358       0x20 /home/linux/devkitPro/libnds/lib/libnds9.a(trig.o)
  .debug_aranges
-                0x0000000000000378       0x20 /home/linux/devkitPro/libnds/lib/libnds9.a(card.o)
+                0x0000000000000378       0x20 /home/linux/devkitPro/libnds/lib/libnds9.a(dldi.o)
  .debug_aranges
-                0x0000000000000398       0x20 /home/linux/devkitPro/libnds/lib/libnds9.a(fifosystem.o)
+                0x0000000000000398       0x20 /home/linux/devkitPro/libnds/lib/libnds9.a(dsi_sd.o)
  .debug_aranges
-                0x00000000000003b8       0x20 /home/linux/devkitPro/libnds/lib/libnds9.a(interrupts.o)
+                0x00000000000003b8       0x20 /home/linux/devkitPro/libnds/lib/libnds9.a(initSystem.o)
  .debug_aranges
-                0x00000000000003d8       0x20 /home/linux/devkitPro/libnds/lib/libnds9.a(libnds_exit.arm.o)
+                0x00000000000003d8       0x20 /home/linux/devkitPro/libnds/lib/libnds9.a(card.o)
  .debug_aranges
-                0x00000000000003f8       0x20 /home/linux/devkitPro/libnds/lib/libnds9.a(dcache.o)
+                0x00000000000003f8       0x20 /home/linux/devkitPro/libnds/lib/libnds9.a(fifosystem.o)
  .debug_aranges
-                0x0000000000000418       0x20 /home/linux/devkitPro/libnds/lib/libnds9.a(exceptionHandler.o)
+                0x0000000000000418       0x20 /home/linux/devkitPro/libnds/lib/libnds9.a(interrupts.o)
  .debug_aranges
-                0x0000000000000438       0x20 /home/linux/devkitPro/libnds/lib/libnds9.a(dldi_stub.o)
+                0x0000000000000438       0x20 /home/linux/devkitPro/libnds/lib/libnds9.a(libnds_exit.arm.o)
  .debug_aranges
-                0x0000000000000458       0x20 /home/linux/devkitPro/libnds/lib/libnds9.a(mpu_setup.o)
+                0x0000000000000458       0x20 /home/linux/devkitPro/libnds/lib/libnds9.a(dcache.o)
  .debug_aranges
-                0x0000000000000478       0x20 /home/linux/devkitPro/libnds/lib/libnds9.a(biosCalls.o)
+                0x0000000000000478       0x20 /home/linux/devkitPro/libnds/lib/libnds9.a(exceptionHandler.o)
  .debug_aranges
-                0x0000000000000498       0x20 /home/linux/devkitPro/libnds/lib/libnds9.a(debugprint.o)
+                0x0000000000000498       0x20 /home/linux/devkitPro/libnds/lib/libnds9.a(dldi_stub.o)
  .debug_aranges
-                0x00000000000004b8       0x20 /home/linux/devkitPro/libnds/lib/libnds9.a(interruptDispatcher.o)
+                0x00000000000004b8       0x20 /home/linux/devkitPro/libnds/lib/libnds9.a(mpu_setup.o)
  .debug_aranges
-                0x00000000000004d8       0x20 /home/linux/devkitPro/libnds/lib/libnds9.a(swiSoftReset.o)
+                0x00000000000004d8       0x20 /home/linux/devkitPro/libnds/lib/libnds9.a(biosCalls.o)
  .debug_aranges
-                0x00000000000004f8       0x20 /home/linux/devkitPro/libnds/lib/libnds9.a(exceptions.o)
+                0x00000000000004f8       0x20 /home/linux/devkitPro/libnds/lib/libnds9.a(debugprint.o)
  .debug_aranges
-                0x0000000000000518       0x20 /home/linux/devkitPro/libnds/lib/libnds9.a(system.o)
+                0x0000000000000518       0x20 /home/linux/devkitPro/libnds/lib/libnds9.a(interruptDispatcher.o)
  .debug_aranges
-                0x0000000000000538       0x20 /home/linux/devkitPro/libnds/lib/libnds9.a(video.o)
+                0x0000000000000538       0x20 /home/linux/devkitPro/libnds/lib/libnds9.a(swiSoftReset.o)
+ .debug_aranges
+                0x0000000000000558       0x20 /home/linux/devkitPro/libnds/lib/libnds9.a(exceptions.o)
+ .debug_aranges
+                0x0000000000000578       0x20 /home/linux/devkitPro/libnds/lib/libnds9.a(system.o)
+ .debug_aranges
+                0x0000000000000598       0x20 /home/linux/devkitPro/libnds/lib/libnds9.a(video.o)
 
 .debug_pubnames
  *(.debug_pubnames)
 
-.debug_info     0x0000000000000000    0x33ce5
+.debug_info     0x0000000000000000    0x33faf
  *(.debug_info)
  .debug_info    0x0000000000000000      0x167 main.o
- .debug_info    0x0000000000000167     0x49b6 Game.o
- .debug_info    0x0000000000004b1d     0x48b6 Map.o
- .debug_info    0x00000000000093d3     0xf744 MapManager.o
- .debug_info    0x0000000000018b17      0x66e libs5.o
- .debug_info    0x0000000000019185       0x7f libs5_asm.o
- .debug_info    0x0000000000019204     0x28a3 /home/linux/devkitPro/libnds/lib/libfilesystem.a(nitrofs.o)
- .debug_info    0x000000000001baa7     0x1cf3 /home/linux/devkitPro/libnds/lib/libfat.a(libfat.o)
- .debug_info    0x000000000001d79a     0x27ae /home/linux/devkitPro/libnds/lib/libfat.a(partition.o)
- .debug_info    0x000000000001ff48      0xe1e /home/linux/devkitPro/libnds/lib/libfat.a(cache.o)
- .debug_info    0x0000000000020d66     0x2a8c /home/linux/devkitPro/libnds/lib/libfat.a(directory.o)
- .debug_info    0x00000000000237f2      0x24b /home/linux/devkitPro/libnds/lib/libfat.a(disc.o)
- .debug_info    0x0000000000023a3d     0x2537 /home/linux/devkitPro/libnds/lib/libfat.a(fatdir.o)
- .debug_info    0x0000000000025f74     0x2fd9 /home/linux/devkitPro/libnds/lib/libfat.a(fatfile.o)
- .debug_info    0x0000000000028f4d      0xd21 /home/linux/devkitPro/libnds/lib/libfat.a(file_allocation_table.o)
- .debug_info    0x0000000000029c6e      0x28d /home/linux/devkitPro/libnds/lib/libfat.a(filetime.o)
- .debug_info    0x0000000000029efb      0x124 /home/linux/devkitPro/libnds/lib/libfat.a(lock.o)
- .debug_info    0x000000000002a01f      0x91a /home/linux/devkitPro/libnds/lib/libnds9.a(background.o)
- .debug_info    0x000000000002a939     0x2230 /home/linux/devkitPro/libnds/lib/libnds9.a(console.o)
- .debug_info    0x000000000002cb69      0x8df /home/linux/devkitPro/libnds/lib/libnds9.a(gurumeditation.o)
- .debug_info    0x000000000002d448      0x414 /home/linux/devkitPro/libnds/lib/libnds9.a(keys.o)
- .debug_info    0x000000000002d85c      0x56a /home/linux/devkitPro/libnds/lib/libnds9.a(sassert.o)
- .debug_info    0x000000000002ddc6      0x552 /home/linux/devkitPro/libnds/lib/libnds9.a(trig.o)
- .debug_info    0x000000000002e318      0x798 /home/linux/devkitPro/libnds/lib/libnds9.a(dldi.o)
- .debug_info    0x000000000002eab0      0x94f /home/linux/devkitPro/libnds/lib/libnds9.a(dsi_sd.o)
- .debug_info    0x000000000002f3ff      0xf4e /home/linux/devkitPro/libnds/lib/libnds9.a(initSystem.o)
- .debug_info    0x000000000003034d      0x4c2 /home/linux/devkitPro/libnds/lib/libnds9.a(card.o)
- .debug_info    0x000000000003080f     0x1522 /home/linux/devkitPro/libnds/lib/libnds9.a(fifosystem.o)
- .debug_info    0x0000000000031d31      0x5ac /home/linux/devkitPro/libnds/lib/libnds9.a(interrupts.o)
- .debug_info    0x00000000000322dd      0x327 /home/linux/devkitPro/libnds/lib/libnds9.a(libnds_exit.arm.o)
- .debug_info    0x0000000000032604       0xba /home/linux/devkitPro/libnds/lib/libnds9.a(dcache.o)
- .debug_info    0x00000000000326be       0xc4 /home/linux/devkitPro/libnds/lib/libnds9.a(exceptionHandler.o)
- .debug_info    0x0000000000032782       0xc2 /home/linux/devkitPro/libnds/lib/libnds9.a(dldi_stub.o)
- .debug_info    0x0000000000032844       0xc4 /home/linux/devkitPro/libnds/lib/libnds9.a(mpu_setup.o)
- .debug_info    0x0000000000032908       0xbf /home/linux/devkitPro/libnds/lib/libnds9.a(biosCalls.o)
- .debug_info    0x00000000000329c7       0xc0 /home/linux/devkitPro/libnds/lib/libnds9.a(debugprint.o)
- .debug_info    0x0000000000032a87       0xc9 /home/linux/devkitPro/libnds/lib/libnds9.a(interruptDispatcher.o)
- .debug_info    0x0000000000032b50       0xc2 /home/linux/devkitPro/libnds/lib/libnds9.a(swiSoftReset.o)
- .debug_info    0x0000000000032c12       0xed /home/linux/devkitPro/libnds/lib/libnds9.a(exceptions.o)
- .debug_info    0x0000000000032cff      0x8be /home/linux/devkitPro/libnds/lib/libnds9.a(system.o)
- .debug_info    0x00000000000335bd      0x728 /home/linux/devkitPro/libnds/lib/libnds9.a(video.o)
+ .debug_info    0x0000000000000167     0x488b Game.o
+ .debug_info    0x00000000000049f2     0x48b6 Map.o
+ .debug_info    0x00000000000092a8      0x167 Player.o
+ .debug_info    0x000000000000940f       0xfc Character.o
+ .debug_info    0x000000000000950b      0x192 CharacterManager.o
+ .debug_info    0x000000000000969d     0xf744 MapManager.o
+ .debug_info    0x0000000000018de1      0x66e libs5.o
+ .debug_info    0x000000000001944f       0x7f libs5_asm.o
+ .debug_info    0x00000000000194ce     0x28a3 /home/linux/devkitPro/libnds/lib/libfilesystem.a(nitrofs.o)
+ .debug_info    0x000000000001bd71     0x1cf3 /home/linux/devkitPro/libnds/lib/libfat.a(libfat.o)
+ .debug_info    0x000000000001da64     0x27ae /home/linux/devkitPro/libnds/lib/libfat.a(partition.o)
+ .debug_info    0x0000000000020212      0xe1e /home/linux/devkitPro/libnds/lib/libfat.a(cache.o)
+ .debug_info    0x0000000000021030     0x2a8c /home/linux/devkitPro/libnds/lib/libfat.a(directory.o)
+ .debug_info    0x0000000000023abc      0x24b /home/linux/devkitPro/libnds/lib/libfat.a(disc.o)
+ .debug_info    0x0000000000023d07     0x2537 /home/linux/devkitPro/libnds/lib/libfat.a(fatdir.o)
+ .debug_info    0x000000000002623e     0x2fd9 /home/linux/devkitPro/libnds/lib/libfat.a(fatfile.o)
+ .debug_info    0x0000000000029217      0xd21 /home/linux/devkitPro/libnds/lib/libfat.a(file_allocation_table.o)
+ .debug_info    0x0000000000029f38      0x28d /home/linux/devkitPro/libnds/lib/libfat.a(filetime.o)
+ .debug_info    0x000000000002a1c5      0x124 /home/linux/devkitPro/libnds/lib/libfat.a(lock.o)
+ .debug_info    0x000000000002a2e9      0x91a /home/linux/devkitPro/libnds/lib/libnds9.a(background.o)
+ .debug_info    0x000000000002ac03     0x2230 /home/linux/devkitPro/libnds/lib/libnds9.a(console.o)
+ .debug_info    0x000000000002ce33      0x8df /home/linux/devkitPro/libnds/lib/libnds9.a(gurumeditation.o)
+ .debug_info    0x000000000002d712      0x414 /home/linux/devkitPro/libnds/lib/libnds9.a(keys.o)
+ .debug_info    0x000000000002db26      0x56a /home/linux/devkitPro/libnds/lib/libnds9.a(sassert.o)
+ .debug_info    0x000000000002e090      0x552 /home/linux/devkitPro/libnds/lib/libnds9.a(trig.o)
+ .debug_info    0x000000000002e5e2      0x798 /home/linux/devkitPro/libnds/lib/libnds9.a(dldi.o)
+ .debug_info    0x000000000002ed7a      0x94f /home/linux/devkitPro/libnds/lib/libnds9.a(dsi_sd.o)
+ .debug_info    0x000000000002f6c9      0xf4e /home/linux/devkitPro/libnds/lib/libnds9.a(initSystem.o)
+ .debug_info    0x0000000000030617      0x4c2 /home/linux/devkitPro/libnds/lib/libnds9.a(card.o)
+ .debug_info    0x0000000000030ad9     0x1522 /home/linux/devkitPro/libnds/lib/libnds9.a(fifosystem.o)
+ .debug_info    0x0000000000031ffb      0x5ac /home/linux/devkitPro/libnds/lib/libnds9.a(interrupts.o)
+ .debug_info    0x00000000000325a7      0x327 /home/linux/devkitPro/libnds/lib/libnds9.a(libnds_exit.arm.o)
+ .debug_info    0x00000000000328ce       0xba /home/linux/devkitPro/libnds/lib/libnds9.a(dcache.o)
+ .debug_info    0x0000000000032988       0xc4 /home/linux/devkitPro/libnds/lib/libnds9.a(exceptionHandler.o)
+ .debug_info    0x0000000000032a4c       0xc2 /home/linux/devkitPro/libnds/lib/libnds9.a(dldi_stub.o)
+ .debug_info    0x0000000000032b0e       0xc4 /home/linux/devkitPro/libnds/lib/libnds9.a(mpu_setup.o)
+ .debug_info    0x0000000000032bd2       0xbf /home/linux/devkitPro/libnds/lib/libnds9.a(biosCalls.o)
+ .debug_info    0x0000000000032c91       0xc0 /home/linux/devkitPro/libnds/lib/libnds9.a(debugprint.o)
+ .debug_info    0x0000000000032d51       0xc9 /home/linux/devkitPro/libnds/lib/libnds9.a(interruptDispatcher.o)
+ .debug_info    0x0000000000032e1a       0xc2 /home/linux/devkitPro/libnds/lib/libnds9.a(swiSoftReset.o)
+ .debug_info    0x0000000000032edc       0xed /home/linux/devkitPro/libnds/lib/libnds9.a(exceptions.o)
+ .debug_info    0x0000000000032fc9      0x8be /home/linux/devkitPro/libnds/lib/libnds9.a(system.o)
+ .debug_info    0x0000000000033887      0x728 /home/linux/devkitPro/libnds/lib/libnds9.a(video.o)
 
-.debug_abbrev   0x0000000000000000     0x66d8
+.debug_abbrev   0x0000000000000000     0x698c
  *(.debug_abbrev)
  .debug_abbrev  0x0000000000000000      0x110 main.o
- .debug_abbrev  0x0000000000000110      0x799 Game.o
- .debug_abbrev  0x00000000000008a9      0x878 Map.o
- .debug_abbrev  0x0000000000001121      0xbbc MapManager.o
- .debug_abbrev  0x0000000000001cdd      0x150 libs5.o
- .debug_abbrev  0x0000000000001e2d       0x14 libs5_asm.o
- .debug_abbrev  0x0000000000001e41      0x4bc /home/linux/devkitPro/libnds/lib/libfilesystem.a(nitrofs.o)
- .debug_abbrev  0x00000000000022fd      0x3b9 /home/linux/devkitPro/libnds/lib/libfat.a(libfat.o)
- .debug_abbrev  0x00000000000026b6      0x46f /home/linux/devkitPro/libnds/lib/libfat.a(partition.o)
- .debug_abbrev  0x0000000000002b25      0x316 /home/linux/devkitPro/libnds/lib/libfat.a(cache.o)
- .debug_abbrev  0x0000000000002e3b      0x4a7 /home/linux/devkitPro/libnds/lib/libfat.a(directory.o)
- .debug_abbrev  0x00000000000032e2       0xe3 /home/linux/devkitPro/libnds/lib/libfat.a(disc.o)
- .debug_abbrev  0x00000000000033c5      0x39a /home/linux/devkitPro/libnds/lib/libfat.a(fatdir.o)
- .debug_abbrev  0x000000000000375f      0x4de /home/linux/devkitPro/libnds/lib/libfat.a(fatfile.o)
- .debug_abbrev  0x0000000000003c3d      0x2f8 /home/linux/devkitPro/libnds/lib/libfat.a(file_allocation_table.o)
- .debug_abbrev  0x0000000000003f35       0xf0 /home/linux/devkitPro/libnds/lib/libfat.a(filetime.o)
- .debug_abbrev  0x0000000000004025       0x7f /home/linux/devkitPro/libnds/lib/libfat.a(lock.o)
- .debug_abbrev  0x00000000000040a4      0x2a6 /home/linux/devkitPro/libnds/lib/libnds9.a(background.o)
- .debug_abbrev  0x000000000000434a      0x51b /home/linux/devkitPro/libnds/lib/libnds9.a(console.o)
- .debug_abbrev  0x0000000000004865      0x25b /home/linux/devkitPro/libnds/lib/libnds9.a(gurumeditation.o)
- .debug_abbrev  0x0000000000004ac0      0x16b /home/linux/devkitPro/libnds/lib/libnds9.a(keys.o)
- .debug_abbrev  0x0000000000004c2b      0x1c3 /home/linux/devkitPro/libnds/lib/libnds9.a(sassert.o)
- .debug_abbrev  0x0000000000004dee      0x1ff /home/linux/devkitPro/libnds/lib/libnds9.a(trig.o)
- .debug_abbrev  0x0000000000004fed      0x26f /home/linux/devkitPro/libnds/lib/libnds9.a(dldi.o)
- .debug_abbrev  0x000000000000525c      0x21d /home/linux/devkitPro/libnds/lib/libnds9.a(dsi_sd.o)
- .debug_abbrev  0x0000000000005479      0x2fa /home/linux/devkitPro/libnds/lib/libnds9.a(initSystem.o)
- .debug_abbrev  0x0000000000005773      0x1d5 /home/linux/devkitPro/libnds/lib/libnds9.a(card.o)
- .debug_abbrev  0x0000000000005948      0x469 /home/linux/devkitPro/libnds/lib/libnds9.a(fifosystem.o)
- .debug_abbrev  0x0000000000005db1      0x239 /home/linux/devkitPro/libnds/lib/libnds9.a(interrupts.o)
- .debug_abbrev  0x0000000000005fea      0x175 /home/linux/devkitPro/libnds/lib/libnds9.a(libnds_exit.arm.o)
- .debug_abbrev  0x000000000000615f       0x14 /home/linux/devkitPro/libnds/lib/libnds9.a(dcache.o)
- .debug_abbrev  0x0000000000006173       0x14 /home/linux/devkitPro/libnds/lib/libnds9.a(exceptionHandler.o)
- .debug_abbrev  0x0000000000006187       0x14 /home/linux/devkitPro/libnds/lib/libnds9.a(dldi_stub.o)
- .debug_abbrev  0x000000000000619b       0x14 /home/linux/devkitPro/libnds/lib/libnds9.a(mpu_setup.o)
- .debug_abbrev  0x00000000000061af       0x14 /home/linux/devkitPro/libnds/lib/libnds9.a(biosCalls.o)
- .debug_abbrev  0x00000000000061c3       0x14 /home/linux/devkitPro/libnds/lib/libnds9.a(debugprint.o)
- .debug_abbrev  0x00000000000061d7       0x14 /home/linux/devkitPro/libnds/lib/libnds9.a(interruptDispatcher.o)
- .debug_abbrev  0x00000000000061eb       0x14 /home/linux/devkitPro/libnds/lib/libnds9.a(swiSoftReset.o)
- .debug_abbrev  0x00000000000061ff       0x9a /home/linux/devkitPro/libnds/lib/libnds9.a(exceptions.o)
- .debug_abbrev  0x0000000000006299      0x250 /home/linux/devkitPro/libnds/lib/libnds9.a(system.o)
- .debug_abbrev  0x00000000000064e9      0x1ef /home/linux/devkitPro/libnds/lib/libnds9.a(video.o)
+ .debug_abbrev  0x0000000000000110      0x76b Game.o
+ .debug_abbrev  0x000000000000087b      0x878 Map.o
+ .debug_abbrev  0x00000000000010f3       0xe7 Player.o
+ .debug_abbrev  0x00000000000011da       0xc7 Character.o
+ .debug_abbrev  0x00000000000012a1      0x134 CharacterManager.o
+ .debug_abbrev  0x00000000000013d5      0xbbc MapManager.o
+ .debug_abbrev  0x0000000000001f91      0x150 libs5.o
+ .debug_abbrev  0x00000000000020e1       0x14 libs5_asm.o
+ .debug_abbrev  0x00000000000020f5      0x4bc /home/linux/devkitPro/libnds/lib/libfilesystem.a(nitrofs.o)
+ .debug_abbrev  0x00000000000025b1      0x3b9 /home/linux/devkitPro/libnds/lib/libfat.a(libfat.o)
+ .debug_abbrev  0x000000000000296a      0x46f /home/linux/devkitPro/libnds/lib/libfat.a(partition.o)
+ .debug_abbrev  0x0000000000002dd9      0x316 /home/linux/devkitPro/libnds/lib/libfat.a(cache.o)
+ .debug_abbrev  0x00000000000030ef      0x4a7 /home/linux/devkitPro/libnds/lib/libfat.a(directory.o)
+ .debug_abbrev  0x0000000000003596       0xe3 /home/linux/devkitPro/libnds/lib/libfat.a(disc.o)
+ .debug_abbrev  0x0000000000003679      0x39a /home/linux/devkitPro/libnds/lib/libfat.a(fatdir.o)
+ .debug_abbrev  0x0000000000003a13      0x4de /home/linux/devkitPro/libnds/lib/libfat.a(fatfile.o)
+ .debug_abbrev  0x0000000000003ef1      0x2f8 /home/linux/devkitPro/libnds/lib/libfat.a(file_allocation_table.o)
+ .debug_abbrev  0x00000000000041e9       0xf0 /home/linux/devkitPro/libnds/lib/libfat.a(filetime.o)
+ .debug_abbrev  0x00000000000042d9       0x7f /home/linux/devkitPro/libnds/lib/libfat.a(lock.o)
+ .debug_abbrev  0x0000000000004358      0x2a6 /home/linux/devkitPro/libnds/lib/libnds9.a(background.o)
+ .debug_abbrev  0x00000000000045fe      0x51b /home/linux/devkitPro/libnds/lib/libnds9.a(console.o)
+ .debug_abbrev  0x0000000000004b19      0x25b /home/linux/devkitPro/libnds/lib/libnds9.a(gurumeditation.o)
+ .debug_abbrev  0x0000000000004d74      0x16b /home/linux/devkitPro/libnds/lib/libnds9.a(keys.o)
+ .debug_abbrev  0x0000000000004edf      0x1c3 /home/linux/devkitPro/libnds/lib/libnds9.a(sassert.o)
+ .debug_abbrev  0x00000000000050a2      0x1ff /home/linux/devkitPro/libnds/lib/libnds9.a(trig.o)
+ .debug_abbrev  0x00000000000052a1      0x26f /home/linux/devkitPro/libnds/lib/libnds9.a(dldi.o)
+ .debug_abbrev  0x0000000000005510      0x21d /home/linux/devkitPro/libnds/lib/libnds9.a(dsi_sd.o)
+ .debug_abbrev  0x000000000000572d      0x2fa /home/linux/devkitPro/libnds/lib/libnds9.a(initSystem.o)
+ .debug_abbrev  0x0000000000005a27      0x1d5 /home/linux/devkitPro/libnds/lib/libnds9.a(card.o)
+ .debug_abbrev  0x0000000000005bfc      0x469 /home/linux/devkitPro/libnds/lib/libnds9.a(fifosystem.o)
+ .debug_abbrev  0x0000000000006065      0x239 /home/linux/devkitPro/libnds/lib/libnds9.a(interrupts.o)
+ .debug_abbrev  0x000000000000629e      0x175 /home/linux/devkitPro/libnds/lib/libnds9.a(libnds_exit.arm.o)
+ .debug_abbrev  0x0000000000006413       0x14 /home/linux/devkitPro/libnds/lib/libnds9.a(dcache.o)
+ .debug_abbrev  0x0000000000006427       0x14 /home/linux/devkitPro/libnds/lib/libnds9.a(exceptionHandler.o)
+ .debug_abbrev  0x000000000000643b       0x14 /home/linux/devkitPro/libnds/lib/libnds9.a(dldi_stub.o)
+ .debug_abbrev  0x000000000000644f       0x14 /home/linux/devkitPro/libnds/lib/libnds9.a(mpu_setup.o)
+ .debug_abbrev  0x0000000000006463       0x14 /home/linux/devkitPro/libnds/lib/libnds9.a(biosCalls.o)
+ .debug_abbrev  0x0000000000006477       0x14 /home/linux/devkitPro/libnds/lib/libnds9.a(debugprint.o)
+ .debug_abbrev  0x000000000000648b       0x14 /home/linux/devkitPro/libnds/lib/libnds9.a(interruptDispatcher.o)
+ .debug_abbrev  0x000000000000649f       0x14 /home/linux/devkitPro/libnds/lib/libnds9.a(swiSoftReset.o)
+ .debug_abbrev  0x00000000000064b3       0x9a /home/linux/devkitPro/libnds/lib/libnds9.a(exceptions.o)
+ .debug_abbrev  0x000000000000654d      0x250 /home/linux/devkitPro/libnds/lib/libnds9.a(system.o)
+ .debug_abbrev  0x000000000000679d      0x1ef /home/linux/devkitPro/libnds/lib/libnds9.a(video.o)
 
-.debug_line     0x0000000000000000     0x8992
+.debug_line     0x0000000000000000     0x8c07
  *(.debug_line)
  .debug_line    0x0000000000000000       0x9a main.o
- .debug_line    0x000000000000009a      0x698 Game.o
- .debug_line    0x0000000000000732      0x704 Map.o
- .debug_line    0x0000000000000e36      0xd7b MapManager.o
- .debug_line    0x0000000000001bb1      0x212 libs5.o
- .debug_line    0x0000000000001dc3       0xdc libs5_asm.o
- .debug_line    0x0000000000001e9f      0x5c7 /home/linux/devkitPro/libnds/lib/libfilesystem.a(nitrofs.o)
- .debug_line    0x0000000000002466      0x3a7 /home/linux/devkitPro/libnds/lib/libfat.a(libfat.o)
- .debug_line    0x000000000000280d      0x66d /home/linux/devkitPro/libnds/lib/libfat.a(partition.o)
- .debug_line    0x0000000000002e7a      0x3aa /home/linux/devkitPro/libnds/lib/libfat.a(cache.o)
- .debug_line    0x0000000000003224      0x9d5 /home/linux/devkitPro/libnds/lib/libfat.a(directory.o)
- .debug_line    0x0000000000003bf9      0x12c /home/linux/devkitPro/libnds/lib/libfat.a(disc.o)
- .debug_line    0x0000000000003d25      0x5c2 /home/linux/devkitPro/libnds/lib/libfat.a(fatdir.o)
- .debug_line    0x00000000000042e7      0x9c6 /home/linux/devkitPro/libnds/lib/libfat.a(fatfile.o)
- .debug_line    0x0000000000004cad      0x389 /home/linux/devkitPro/libnds/lib/libfat.a(file_allocation_table.o)
- .debug_line    0x0000000000005036      0x171 /home/linux/devkitPro/libnds/lib/libfat.a(filetime.o)
- .debug_line    0x00000000000051a7       0x72 /home/linux/devkitPro/libnds/lib/libfat.a(lock.o)
- .debug_line    0x0000000000005219      0x2f1 /home/linux/devkitPro/libnds/lib/libnds9.a(background.o)
- .debug_line    0x000000000000550a      0x6af /home/linux/devkitPro/libnds/lib/libnds9.a(console.o)
- .debug_line    0x0000000000005bb9      0x306 /home/linux/devkitPro/libnds/lib/libnds9.a(gurumeditation.o)
- .debug_line    0x0000000000005ebf      0x24e /home/linux/devkitPro/libnds/lib/libnds9.a(keys.o)
- .debug_line    0x000000000000610d      0x23f /home/linux/devkitPro/libnds/lib/libnds9.a(sassert.o)
- .debug_line    0x000000000000634c      0x2d7 /home/linux/devkitPro/libnds/lib/libnds9.a(trig.o)
- .debug_line    0x0000000000006623      0x3af /home/linux/devkitPro/libnds/lib/libnds9.a(dldi.o)
- .debug_line    0x00000000000069d2      0x24b /home/linux/devkitPro/libnds/lib/libnds9.a(dsi_sd.o)
- .debug_line    0x0000000000006c1d      0x386 /home/linux/devkitPro/libnds/lib/libnds9.a(initSystem.o)
- .debug_line    0x0000000000006fa3      0x21b /home/linux/devkitPro/libnds/lib/libnds9.a(card.o)
- .debug_line    0x00000000000071be      0x6fa /home/linux/devkitPro/libnds/lib/libnds9.a(fifosystem.o)
- .debug_line    0x00000000000078b8      0x28e /home/linux/devkitPro/libnds/lib/libnds9.a(interrupts.o)
- .debug_line    0x0000000000007b46      0x1dd /home/linux/devkitPro/libnds/lib/libnds9.a(libnds_exit.arm.o)
- .debug_line    0x0000000000007d23       0xa2 /home/linux/devkitPro/libnds/lib/libnds9.a(dcache.o)
- .debug_line    0x0000000000007dc5       0xb8 /home/linux/devkitPro/libnds/lib/libnds9.a(exceptionHandler.o)
- .debug_line    0x0000000000007e7d       0x8b /home/linux/devkitPro/libnds/lib/libnds9.a(dldi_stub.o)
- .debug_line    0x0000000000007f08      0x101 /home/linux/devkitPro/libnds/lib/libnds9.a(mpu_setup.o)
- .debug_line    0x0000000000008009       0xc3 /home/linux/devkitPro/libnds/lib/libnds9.a(biosCalls.o)
- .debug_line    0x00000000000080cc       0x9f /home/linux/devkitPro/libnds/lib/libnds9.a(debugprint.o)
- .debug_line    0x000000000000816b       0xc7 /home/linux/devkitPro/libnds/lib/libnds9.a(interruptDispatcher.o)
- .debug_line    0x0000000000008232       0x97 /home/linux/devkitPro/libnds/lib/libnds9.a(swiSoftReset.o)
- .debug_line    0x00000000000082c9      0x1c6 /home/linux/devkitPro/libnds/lib/libnds9.a(exceptions.o)
- .debug_line    0x000000000000848f      0x295 /home/linux/devkitPro/libnds/lib/libnds9.a(system.o)
- .debug_line    0x0000000000008724      0x26e /home/linux/devkitPro/libnds/lib/libnds9.a(video.o)
+ .debug_line    0x000000000000009a      0x684 Game.o
+ .debug_line    0x000000000000071e      0x704 Map.o
+ .debug_line    0x0000000000000e22       0xbf Player.o
+ .debug_line    0x0000000000000ee1       0xb0 Character.o
+ .debug_line    0x0000000000000f91      0x11a CharacterManager.o
+ .debug_line    0x00000000000010ab      0xd7b MapManager.o
+ .debug_line    0x0000000000001e26      0x212 libs5.o
+ .debug_line    0x0000000000002038       0xdc libs5_asm.o
+ .debug_line    0x0000000000002114      0x5c7 /home/linux/devkitPro/libnds/lib/libfilesystem.a(nitrofs.o)
+ .debug_line    0x00000000000026db      0x3a7 /home/linux/devkitPro/libnds/lib/libfat.a(libfat.o)
+ .debug_line    0x0000000000002a82      0x66d /home/linux/devkitPro/libnds/lib/libfat.a(partition.o)
+ .debug_line    0x00000000000030ef      0x3aa /home/linux/devkitPro/libnds/lib/libfat.a(cache.o)
+ .debug_line    0x0000000000003499      0x9d5 /home/linux/devkitPro/libnds/lib/libfat.a(directory.o)
+ .debug_line    0x0000000000003e6e      0x12c /home/linux/devkitPro/libnds/lib/libfat.a(disc.o)
+ .debug_line    0x0000000000003f9a      0x5c2 /home/linux/devkitPro/libnds/lib/libfat.a(fatdir.o)
+ .debug_line    0x000000000000455c      0x9c6 /home/linux/devkitPro/libnds/lib/libfat.a(fatfile.o)
+ .debug_line    0x0000000000004f22      0x389 /home/linux/devkitPro/libnds/lib/libfat.a(file_allocation_table.o)
+ .debug_line    0x00000000000052ab      0x171 /home/linux/devkitPro/libnds/lib/libfat.a(filetime.o)
+ .debug_line    0x000000000000541c       0x72 /home/linux/devkitPro/libnds/lib/libfat.a(lock.o)
+ .debug_line    0x000000000000548e      0x2f1 /home/linux/devkitPro/libnds/lib/libnds9.a(background.o)
+ .debug_line    0x000000000000577f      0x6af /home/linux/devkitPro/libnds/lib/libnds9.a(console.o)
+ .debug_line    0x0000000000005e2e      0x306 /home/linux/devkitPro/libnds/lib/libnds9.a(gurumeditation.o)
+ .debug_line    0x0000000000006134      0x24e /home/linux/devkitPro/libnds/lib/libnds9.a(keys.o)
+ .debug_line    0x0000000000006382      0x23f /home/linux/devkitPro/libnds/lib/libnds9.a(sassert.o)
+ .debug_line    0x00000000000065c1      0x2d7 /home/linux/devkitPro/libnds/lib/libnds9.a(trig.o)
+ .debug_line    0x0000000000006898      0x3af /home/linux/devkitPro/libnds/lib/libnds9.a(dldi.o)
+ .debug_line    0x0000000000006c47      0x24b /home/linux/devkitPro/libnds/lib/libnds9.a(dsi_sd.o)
+ .debug_line    0x0000000000006e92      0x386 /home/linux/devkitPro/libnds/lib/libnds9.a(initSystem.o)
+ .debug_line    0x0000000000007218      0x21b /home/linux/devkitPro/libnds/lib/libnds9.a(card.o)
+ .debug_line    0x0000000000007433      0x6fa /home/linux/devkitPro/libnds/lib/libnds9.a(fifosystem.o)
+ .debug_line    0x0000000000007b2d      0x28e /home/linux/devkitPro/libnds/lib/libnds9.a(interrupts.o)
+ .debug_line    0x0000000000007dbb      0x1dd /home/linux/devkitPro/libnds/lib/libnds9.a(libnds_exit.arm.o)
+ .debug_line    0x0000000000007f98       0xa2 /home/linux/devkitPro/libnds/lib/libnds9.a(dcache.o)
+ .debug_line    0x000000000000803a       0xb8 /home/linux/devkitPro/libnds/lib/libnds9.a(exceptionHandler.o)
+ .debug_line    0x00000000000080f2       0x8b /home/linux/devkitPro/libnds/lib/libnds9.a(dldi_stub.o)
+ .debug_line    0x000000000000817d      0x101 /home/linux/devkitPro/libnds/lib/libnds9.a(mpu_setup.o)
+ .debug_line    0x000000000000827e       0xc3 /home/linux/devkitPro/libnds/lib/libnds9.a(biosCalls.o)
+ .debug_line    0x0000000000008341       0x9f /home/linux/devkitPro/libnds/lib/libnds9.a(debugprint.o)
+ .debug_line    0x00000000000083e0       0xc7 /home/linux/devkitPro/libnds/lib/libnds9.a(interruptDispatcher.o)
+ .debug_line    0x00000000000084a7       0x97 /home/linux/devkitPro/libnds/lib/libnds9.a(swiSoftReset.o)
+ .debug_line    0x000000000000853e      0x1c6 /home/linux/devkitPro/libnds/lib/libnds9.a(exceptions.o)
+ .debug_line    0x0000000000008704      0x295 /home/linux/devkitPro/libnds/lib/libnds9.a(system.o)
+ .debug_line    0x0000000000008999      0x26e /home/linux/devkitPro/libnds/lib/libnds9.a(video.o)
 
-.debug_frame    0x0000000000000000     0x1e40
+.debug_frame    0x0000000000000000     0x1eec
  *(.debug_frame)
  .debug_frame   0x0000000000000000       0x28 main.o
- .debug_frame   0x0000000000000028       0x7c Game.o
- .debug_frame   0x00000000000000a4       0xb0 Map.o
- .debug_frame   0x0000000000000154      0x17c MapManager.o
- .debug_frame   0x00000000000002d0      0x188 libs5.o
- .debug_frame   0x0000000000000458      0x1a4 /home/linux/devkitPro/libnds/lib/libfilesystem.a(nitrofs.o)
- .debug_frame   0x00000000000005fc       0xd8 /home/linux/devkitPro/libnds/lib/libfat.a(libfat.o)
- .debug_frame   0x00000000000006d4      0x14c /home/linux/devkitPro/libnds/lib/libfat.a(partition.o)
- .debug_frame   0x0000000000000820      0x1b0 /home/linux/devkitPro/libnds/lib/libfat.a(cache.o)
- .debug_frame   0x00000000000009d0      0x280 /home/linux/devkitPro/libnds/lib/libfat.a(directory.o)
- .debug_frame   0x0000000000000c50       0x20 /home/linux/devkitPro/libnds/lib/libfat.a(disc.o)
- .debug_frame   0x0000000000000c70      0x17c /home/linux/devkitPro/libnds/lib/libfat.a(fatdir.o)
- .debug_frame   0x0000000000000dec      0x234 /home/linux/devkitPro/libnds/lib/libfat.a(fatfile.o)
- .debug_frame   0x0000000000001020      0x120 /home/linux/devkitPro/libnds/lib/libfat.a(file_allocation_table.o)
- .debug_frame   0x0000000000001140       0x58 /home/linux/devkitPro/libnds/lib/libfat.a(filetime.o)
- .debug_frame   0x0000000000001198       0x50 /home/linux/devkitPro/libnds/lib/libfat.a(lock.o)
- .debug_frame   0x00000000000011e8       0xb4 /home/linux/devkitPro/libnds/lib/libnds9.a(background.o)
- .debug_frame   0x000000000000129c      0x1ac /home/linux/devkitPro/libnds/lib/libnds9.a(console.o)
- .debug_frame   0x0000000000001448       0x94 /home/linux/devkitPro/libnds/lib/libnds9.a(gurumeditation.o)
- .debug_frame   0x00000000000014dc       0x8c /home/linux/devkitPro/libnds/lib/libnds9.a(keys.o)
- .debug_frame   0x0000000000001568       0x34 /home/linux/devkitPro/libnds/lib/libnds9.a(sassert.o)
- .debug_frame   0x000000000000159c       0xf0 /home/linux/devkitPro/libnds/lib/libnds9.a(trig.o)
- .debug_frame   0x000000000000168c       0x94 /home/linux/devkitPro/libnds/lib/libnds9.a(dldi.o)
- .debug_frame   0x0000000000001720       0xa0 /home/linux/devkitPro/libnds/lib/libnds9.a(dsi_sd.o)
- .debug_frame   0x00000000000017c0       0x2c /home/linux/devkitPro/libnds/lib/libnds9.a(initSystem.o)
- .debug_frame   0x00000000000017ec       0xf4 /home/linux/devkitPro/libnds/lib/libnds9.a(card.o)
- .debug_frame   0x00000000000018e0      0x2c8 /home/linux/devkitPro/libnds/lib/libnds9.a(fifosystem.o)
- .debug_frame   0x0000000000001ba8       0xb4 /home/linux/devkitPro/libnds/lib/libnds9.a(interrupts.o)
- .debug_frame   0x0000000000001c5c       0x38 /home/linux/devkitPro/libnds/lib/libnds9.a(libnds_exit.arm.o)
- .debug_frame   0x0000000000001c94       0x20 /home/linux/devkitPro/libnds/lib/libnds9.a(exceptions.o)
- .debug_frame   0x0000000000001cb4       0xc8 /home/linux/devkitPro/libnds/lib/libnds9.a(system.o)
- .debug_frame   0x0000000000001d7c       0xc4 /home/linux/devkitPro/libnds/lib/libnds9.a(video.o)
+ .debug_frame   0x0000000000000028       0x78 Game.o
+ .debug_frame   0x00000000000000a0       0xb0 Map.o
+ .debug_frame   0x0000000000000150       0x40 Player.o
+ .debug_frame   0x0000000000000190       0x30 Character.o
+ .debug_frame   0x00000000000001c0       0x40 CharacterManager.o
+ .debug_frame   0x0000000000000200      0x17c MapManager.o
+ .debug_frame   0x000000000000037c      0x188 libs5.o
+ .debug_frame   0x0000000000000504      0x1a4 /home/linux/devkitPro/libnds/lib/libfilesystem.a(nitrofs.o)
+ .debug_frame   0x00000000000006a8       0xd8 /home/linux/devkitPro/libnds/lib/libfat.a(libfat.o)
+ .debug_frame   0x0000000000000780      0x14c /home/linux/devkitPro/libnds/lib/libfat.a(partition.o)
+ .debug_frame   0x00000000000008cc      0x1b0 /home/linux/devkitPro/libnds/lib/libfat.a(cache.o)
+ .debug_frame   0x0000000000000a7c      0x280 /home/linux/devkitPro/libnds/lib/libfat.a(directory.o)
+ .debug_frame   0x0000000000000cfc       0x20 /home/linux/devkitPro/libnds/lib/libfat.a(disc.o)
+ .debug_frame   0x0000000000000d1c      0x17c /home/linux/devkitPro/libnds/lib/libfat.a(fatdir.o)
+ .debug_frame   0x0000000000000e98      0x234 /home/linux/devkitPro/libnds/lib/libfat.a(fatfile.o)
+ .debug_frame   0x00000000000010cc      0x120 /home/linux/devkitPro/libnds/lib/libfat.a(file_allocation_table.o)
+ .debug_frame   0x00000000000011ec       0x58 /home/linux/devkitPro/libnds/lib/libfat.a(filetime.o)
+ .debug_frame   0x0000000000001244       0x50 /home/linux/devkitPro/libnds/lib/libfat.a(lock.o)
+ .debug_frame   0x0000000000001294       0xb4 /home/linux/devkitPro/libnds/lib/libnds9.a(background.o)
+ .debug_frame   0x0000000000001348      0x1ac /home/linux/devkitPro/libnds/lib/libnds9.a(console.o)
+ .debug_frame   0x00000000000014f4       0x94 /home/linux/devkitPro/libnds/lib/libnds9.a(gurumeditation.o)
+ .debug_frame   0x0000000000001588       0x8c /home/linux/devkitPro/libnds/lib/libnds9.a(keys.o)
+ .debug_frame   0x0000000000001614       0x34 /home/linux/devkitPro/libnds/lib/libnds9.a(sassert.o)
+ .debug_frame   0x0000000000001648       0xf0 /home/linux/devkitPro/libnds/lib/libnds9.a(trig.o)
+ .debug_frame   0x0000000000001738       0x94 /home/linux/devkitPro/libnds/lib/libnds9.a(dldi.o)
+ .debug_frame   0x00000000000017cc       0xa0 /home/linux/devkitPro/libnds/lib/libnds9.a(dsi_sd.o)
+ .debug_frame   0x000000000000186c       0x2c /home/linux/devkitPro/libnds/lib/libnds9.a(initSystem.o)
+ .debug_frame   0x0000000000001898       0xf4 /home/linux/devkitPro/libnds/lib/libnds9.a(card.o)
+ .debug_frame   0x000000000000198c      0x2c8 /home/linux/devkitPro/libnds/lib/libnds9.a(fifosystem.o)
+ .debug_frame   0x0000000000001c54       0xb4 /home/linux/devkitPro/libnds/lib/libnds9.a(interrupts.o)
+ .debug_frame   0x0000000000001d08       0x38 /home/linux/devkitPro/libnds/lib/libnds9.a(libnds_exit.arm.o)
+ .debug_frame   0x0000000000001d40       0x20 /home/linux/devkitPro/libnds/lib/libnds9.a(exceptions.o)
+ .debug_frame   0x0000000000001d60       0xc8 /home/linux/devkitPro/libnds/lib/libnds9.a(system.o)
+ .debug_frame   0x0000000000001e28       0xc4 /home/linux/devkitPro/libnds/lib/libnds9.a(video.o)
 
-.debug_str      0x0000000000000000     0xf955
+.debug_str      0x0000000000000000     0xfacf
  *(.debug_str)
  .debug_str     0x0000000000000000      0x139 main.o
                                         0x14d (size before relaxing)
- .debug_str     0x0000000000000139     0x316b Game.o
-                                       0x36a3 (size before relaxing)
- .debug_str     0x00000000000032a4      0x1bf Map.o
+ .debug_str     0x0000000000000139     0x30be Game.o
+                                       0x35f6 (size before relaxing)
+ .debug_str     0x00000000000031f7      0x1bf Map.o
                                        0x303c (size before relaxing)
- .debug_str     0x0000000000003463     0x7fb7 MapManager.o
+ .debug_str     0x00000000000033b6       0x6b Player.o
+                                        0x120 (size before relaxing)
+ .debug_str     0x0000000000003421       0x61 Character.o
+                                        0x11a (size before relaxing)
+ .debug_str     0x0000000000003482       0xde CharacterManager.o
+                                        0x1ae (size before relaxing)
+ .debug_str     0x0000000000003560     0x7fb1 MapManager.o
                                        0xafad (size before relaxing)
- .debug_str     0x000000000000b41a      0x294 libs5.o
+ .debug_str     0x000000000000b511      0x294 libs5.o
                                         0x380 (size before relaxing)
- .debug_str     0x000000000000b6ae      0x77e /home/linux/devkitPro/libnds/lib/libfilesystem.a(nitrofs.o)
+ .debug_str     0x000000000000b7a5      0x77e /home/linux/devkitPro/libnds/lib/libfilesystem.a(nitrofs.o)
                                         0xd80 (size before relaxing)
- .debug_str     0x000000000000be2c      0x52a /home/linux/devkitPro/libnds/lib/libfat.a(libfat.o)
+ .debug_str     0x000000000000bf23      0x52a /home/linux/devkitPro/libnds/lib/libfat.a(libfat.o)
                                         0xdf8 (size before relaxing)
- .debug_str     0x000000000000c356      0x5a5 /home/linux/devkitPro/libnds/lib/libfat.a(partition.o)
+ .debug_str     0x000000000000c44d      0x5a5 /home/linux/devkitPro/libnds/lib/libfat.a(partition.o)
                                        0x11cb (size before relaxing)
- .debug_str     0x000000000000c8fb      0x1ce /home/linux/devkitPro/libnds/lib/libfat.a(cache.o)
+ .debug_str     0x000000000000c9f2      0x1ce /home/linux/devkitPro/libnds/lib/libfat.a(cache.o)
                                         0x59d (size before relaxing)
- .debug_str     0x000000000000cac9      0x7cc /home/linux/devkitPro/libnds/lib/libfat.a(directory.o)
+ .debug_str     0x000000000000cbc0      0x7cc /home/linux/devkitPro/libnds/lib/libfat.a(directory.o)
                                         0xee1 (size before relaxing)
- .debug_str     0x000000000000d295       0x54 /home/linux/devkitPro/libnds/lib/libfat.a(disc.o)
+ .debug_str     0x000000000000d38c       0x54 /home/linux/devkitPro/libnds/lib/libfat.a(disc.o)
                                         0x2a8 (size before relaxing)
- .debug_str     0x000000000000d2e9      0x1f9 /home/linux/devkitPro/libnds/lib/libfat.a(fatdir.o)
+ .debug_str     0x000000000000d3e0      0x1f9 /home/linux/devkitPro/libnds/lib/libfat.a(fatdir.o)
                                         0xf77 (size before relaxing)
- .debug_str     0x000000000000d4e2      0x229 /home/linux/devkitPro/libnds/lib/libfat.a(fatfile.o)
+ .debug_str     0x000000000000d5d9      0x229 /home/linux/devkitPro/libnds/lib/libfat.a(fatfile.o)
                                        0x1025 (size before relaxing)
- .debug_str     0x000000000000d70b       0xb5 /home/linux/devkitPro/libnds/lib/libfat.a(file_allocation_table.o)
+ .debug_str     0x000000000000d802       0xb5 /home/linux/devkitPro/libnds/lib/libfat.a(file_allocation_table.o)
                                         0x673 (size before relaxing)
- .debug_str     0x000000000000d7c0       0x67 /home/linux/devkitPro/libnds/lib/libfat.a(filetime.o)
+ .debug_str     0x000000000000d8b7       0x67 /home/linux/devkitPro/libnds/lib/libfat.a(filetime.o)
                                         0x232 (size before relaxing)
- .debug_str     0x000000000000d827       0x42 /home/linux/devkitPro/libnds/lib/libfat.a(lock.o)
+ .debug_str     0x000000000000d91e       0x42 /home/linux/devkitPro/libnds/lib/libfat.a(lock.o)
                                         0x193 (size before relaxing)
- .debug_str     0x000000000000d869      0x2d6 /home/linux/devkitPro/libnds/lib/libnds9.a(background.o)
+ .debug_str     0x000000000000d960      0x2d6 /home/linux/devkitPro/libnds/lib/libnds9.a(background.o)
                                         0x71d (size before relaxing)
- .debug_str     0x000000000000db3f      0x2e0 /home/linux/devkitPro/libnds/lib/libnds9.a(console.o)
+ .debug_str     0x000000000000dc36      0x2e0 /home/linux/devkitPro/libnds/lib/libnds9.a(console.o)
                                        0x1151 (size before relaxing)
- .debug_str     0x000000000000de1f      0x139 /home/linux/devkitPro/libnds/lib/libnds9.a(gurumeditation.o)
+ .debug_str     0x000000000000df16      0x139 /home/linux/devkitPro/libnds/lib/libnds9.a(gurumeditation.o)
                                         0x526 (size before relaxing)
- .debug_str     0x000000000000df58      0x154 /home/linux/devkitPro/libnds/lib/libnds9.a(keys.o)
+ .debug_str     0x000000000000e04f      0x1d7 /home/linux/devkitPro/libnds/lib/libnds9.a(keys.o)
                                         0x38c (size before relaxing)
- .debug_str     0x000000000000e0ac       0x87 /home/linux/devkitPro/libnds/lib/libnds9.a(sassert.o)
+ .debug_str     0x000000000000e226       0x87 /home/linux/devkitPro/libnds/lib/libnds9.a(sassert.o)
                                         0x448 (size before relaxing)
- .debug_str     0x000000000000e133       0xfe /home/linux/devkitPro/libnds/lib/libnds9.a(trig.o)
+ .debug_str     0x000000000000e2ad       0xfe /home/linux/devkitPro/libnds/lib/libnds9.a(trig.o)
                                         0x278 (size before relaxing)
- .debug_str     0x000000000000e231      0x1cf /home/linux/devkitPro/libnds/lib/libnds9.a(dldi.o)
+ .debug_str     0x000000000000e3ab      0x1cf /home/linux/devkitPro/libnds/lib/libnds9.a(dldi.o)
                                         0x497 (size before relaxing)
- .debug_str     0x000000000000e400      0x36f /home/linux/devkitPro/libnds/lib/libnds9.a(dsi_sd.o)
+ .debug_str     0x000000000000e57a      0x36f /home/linux/devkitPro/libnds/lib/libnds9.a(dsi_sd.o)
                                         0x602 (size before relaxing)
- .debug_str     0x000000000000e76f      0x2c6 /home/linux/devkitPro/libnds/lib/libnds9.a(initSystem.o)
+ .debug_str     0x000000000000e8e9      0x2c6 /home/linux/devkitPro/libnds/lib/libnds9.a(initSystem.o)
                                         0xaa0 (size before relaxing)
- .debug_str     0x000000000000ea35       0xdd /home/linux/devkitPro/libnds/lib/libnds9.a(card.o)
+ .debug_str     0x000000000000ebaf       0xdd /home/linux/devkitPro/libnds/lib/libnds9.a(card.o)
                                         0x277 (size before relaxing)
- .debug_str     0x000000000000eb12      0x4ae /home/linux/devkitPro/libnds/lib/libnds9.a(fifosystem.o)
+ .debug_str     0x000000000000ec8c      0x4ae /home/linux/devkitPro/libnds/lib/libnds9.a(fifosystem.o)
                                         0x82c (size before relaxing)
- .debug_str     0x000000000000efc0      0x10e /home/linux/devkitPro/libnds/lib/libnds9.a(interrupts.o)
+ .debug_str     0x000000000000f13a      0x10e /home/linux/devkitPro/libnds/lib/libnds9.a(interrupts.o)
                                         0x415 (size before relaxing)
- .debug_str     0x000000000000f0ce      0x1b6 /home/linux/devkitPro/libnds/lib/libnds9.a(libnds_exit.arm.o)
+ .debug_str     0x000000000000f248      0x1b6 /home/linux/devkitPro/libnds/lib/libnds9.a(libnds_exit.arm.o)
                                         0x359 (size before relaxing)
- .debug_str     0x000000000000f284       0x70 /home/linux/devkitPro/libnds/lib/libnds9.a(exceptions.o)
+ .debug_str     0x000000000000f3fe       0x70 /home/linux/devkitPro/libnds/lib/libnds9.a(exceptions.o)
                                         0x1a6 (size before relaxing)
- .debug_str     0x000000000000f2f4      0x125 /home/linux/devkitPro/libnds/lib/libnds9.a(system.o)
+ .debug_str     0x000000000000f46e      0x125 /home/linux/devkitPro/libnds/lib/libnds9.a(system.o)
                                         0x674 (size before relaxing)
- .debug_str     0x000000000000f419      0x53c /home/linux/devkitPro/libnds/lib/libnds9.a(video.o)
+ .debug_str     0x000000000000f593      0x53c /home/linux/devkitPro/libnds/lib/libnds9.a(video.o)
                                         0xbdb (size before relaxing)
 
-.debug_loc      0x0000000000000000    0x1535b
+.debug_loc      0x0000000000000000    0x153ad
  *(.debug_loc)
  .debug_loc     0x0000000000000000       0x42 main.o
  .debug_loc     0x0000000000000042       0x89 Game.o
  .debug_loc     0x00000000000000cb      0x681 Map.o
- .debug_loc     0x000000000000074c     0x3d69 MapManager.o
- .debug_loc     0x00000000000044b5      0xa7d libs5.o
- .debug_loc     0x0000000000004f32     0x1c73 /home/linux/devkitPro/libnds/lib/libfilesystem.a(nitrofs.o)
- .debug_loc     0x0000000000006ba5      0x4f6 /home/linux/devkitPro/libnds/lib/libfat.a(libfat.o)
- .debug_loc     0x000000000000709b      0xee3 /home/linux/devkitPro/libnds/lib/libfat.a(partition.o)
- .debug_loc     0x0000000000007f7e      0xf9a /home/linux/devkitPro/libnds/lib/libfat.a(cache.o)
- .debug_loc     0x0000000000008f18     0x31ce /home/linux/devkitPro/libnds/lib/libfat.a(directory.o)
- .debug_loc     0x000000000000c0e6     0x1391 /home/linux/devkitPro/libnds/lib/libfat.a(fatdir.o)
- .debug_loc     0x000000000000d477     0x2ff1 /home/linux/devkitPro/libnds/lib/libfat.a(fatfile.o)
- .debug_loc     0x0000000000010468      0xb28 /home/linux/devkitPro/libnds/lib/libfat.a(file_allocation_table.o)
- .debug_loc     0x0000000000010f90       0x42 /home/linux/devkitPro/libnds/lib/libfat.a(filetime.o)
- .debug_loc     0x0000000000010fd2      0x3b8 /home/linux/devkitPro/libnds/lib/libnds9.a(background.o)
- .debug_loc     0x000000000001138a      0xf51 /home/linux/devkitPro/libnds/lib/libnds9.a(console.o)
- .debug_loc     0x00000000000122db      0x8b5 /home/linux/devkitPro/libnds/lib/libnds9.a(gurumeditation.o)
- .debug_loc     0x0000000000012b90       0x5a /home/linux/devkitPro/libnds/lib/libnds9.a(sassert.o)
- .debug_loc     0x0000000000012bea      0x83c /home/linux/devkitPro/libnds/lib/libnds9.a(trig.o)
- .debug_loc     0x0000000000013426      0x2d9 /home/linux/devkitPro/libnds/lib/libnds9.a(dldi.o)
- .debug_loc     0x00000000000136ff      0x25a /home/linux/devkitPro/libnds/lib/libnds9.a(dsi_sd.o)
- .debug_loc     0x0000000000013959       0x1f /home/linux/devkitPro/libnds/lib/libnds9.a(initSystem.o)
- .debug_loc     0x0000000000013978      0x340 /home/linux/devkitPro/libnds/lib/libnds9.a(card.o)
- .debug_loc     0x0000000000013cb8     0x10f2 /home/linux/devkitPro/libnds/lib/libnds9.a(fifosystem.o)
- .debug_loc     0x0000000000014daa      0x16a /home/linux/devkitPro/libnds/lib/libnds9.a(interrupts.o)
- .debug_loc     0x0000000000014f14       0x58 /home/linux/devkitPro/libnds/lib/libnds9.a(libnds_exit.arm.o)
- .debug_loc     0x0000000000014f6c      0x1ee /home/linux/devkitPro/libnds/lib/libnds9.a(system.o)
- .debug_loc     0x000000000001515a      0x201 /home/linux/devkitPro/libnds/lib/libnds9.a(video.o)
+ .debug_loc     0x000000000000074c       0x52 Player.o
+ .debug_loc     0x000000000000079e     0x3d69 MapManager.o
+ .debug_loc     0x0000000000004507      0xa7d libs5.o
+ .debug_loc     0x0000000000004f84     0x1c73 /home/linux/devkitPro/libnds/lib/libfilesystem.a(nitrofs.o)
+ .debug_loc     0x0000000000006bf7      0x4f6 /home/linux/devkitPro/libnds/lib/libfat.a(libfat.o)
+ .debug_loc     0x00000000000070ed      0xee3 /home/linux/devkitPro/libnds/lib/libfat.a(partition.o)
+ .debug_loc     0x0000000000007fd0      0xf9a /home/linux/devkitPro/libnds/lib/libfat.a(cache.o)
+ .debug_loc     0x0000000000008f6a     0x31ce /home/linux/devkitPro/libnds/lib/libfat.a(directory.o)
+ .debug_loc     0x000000000000c138     0x1391 /home/linux/devkitPro/libnds/lib/libfat.a(fatdir.o)
+ .debug_loc     0x000000000000d4c9     0x2ff1 /home/linux/devkitPro/libnds/lib/libfat.a(fatfile.o)
+ .debug_loc     0x00000000000104ba      0xb28 /home/linux/devkitPro/libnds/lib/libfat.a(file_allocation_table.o)
+ .debug_loc     0x0000000000010fe2       0x42 /home/linux/devkitPro/libnds/lib/libfat.a(filetime.o)
+ .debug_loc     0x0000000000011024      0x3b8 /home/linux/devkitPro/libnds/lib/libnds9.a(background.o)
+ .debug_loc     0x00000000000113dc      0xf51 /home/linux/devkitPro/libnds/lib/libnds9.a(console.o)
+ .debug_loc     0x000000000001232d      0x8b5 /home/linux/devkitPro/libnds/lib/libnds9.a(gurumeditation.o)
+ .debug_loc     0x0000000000012be2       0x5a /home/linux/devkitPro/libnds/lib/libnds9.a(sassert.o)
+ .debug_loc     0x0000000000012c3c      0x83c /home/linux/devkitPro/libnds/lib/libnds9.a(trig.o)
+ .debug_loc     0x0000000000013478      0x2d9 /home/linux/devkitPro/libnds/lib/libnds9.a(dldi.o)
+ .debug_loc     0x0000000000013751      0x25a /home/linux/devkitPro/libnds/lib/libnds9.a(dsi_sd.o)
+ .debug_loc     0x00000000000139ab       0x1f /home/linux/devkitPro/libnds/lib/libnds9.a(initSystem.o)
+ .debug_loc     0x00000000000139ca      0x340 /home/linux/devkitPro/libnds/lib/libnds9.a(card.o)
+ .debug_loc     0x0000000000013d0a     0x10f2 /home/linux/devkitPro/libnds/lib/libnds9.a(fifosystem.o)
+ .debug_loc     0x0000000000014dfc      0x16a /home/linux/devkitPro/libnds/lib/libnds9.a(interrupts.o)
+ .debug_loc     0x0000000000014f66       0x58 /home/linux/devkitPro/libnds/lib/libnds9.a(libnds_exit.arm.o)
+ .debug_loc     0x0000000000014fbe      0x1ee /home/linux/devkitPro/libnds/lib/libnds9.a(system.o)
+ .debug_loc     0x00000000000151ac      0x201 /home/linux/devkitPro/libnds/lib/libnds9.a(video.o)
 
 .debug_macinfo
  *(.debug_macinfo)
@@ -6471,6 +6524,9 @@ LOAD indoor.o
 LOAD main.o
 LOAD Game.o
 LOAD Map.o
+LOAD Player.o
+LOAD Character.o
+LOAD CharacterManager.o
 LOAD MapManager.o
 LOAD libs5.o
 LOAD libs5_asm.o

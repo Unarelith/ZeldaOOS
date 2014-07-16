@@ -15,7 +15,7 @@ export GAME_SUBTITLE2	:=	by Quent42340
 #---------------------------------------------------------------------------------
 # Source sub-folders
 #---------------------------------------------------------------------------------
-SUBFOLDERS	:=	core display managers
+SUBFOLDERS	:=	core display entities managers
 
 #---------------------------------------------------------------------------------
 # TARGET is the name of the output
