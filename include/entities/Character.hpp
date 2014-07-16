@@ -27,6 +27,9 @@ class Character : public Sprite {
 		
 		void draw();
 		
+		void testCollisions();
+		void mapCollisions();
+		
 		enum Direction {
 			Down,
 			Right,

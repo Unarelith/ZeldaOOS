@@ -18,6 +18,8 @@
 #ifndef TILESET_HPP_
 #define TILESET_HPP_
 
+#include <nds.h>
+
 struct Tileset {
 	Tileset(u8 *_info, const unsigned int *_tiles, u32 _tilesLength, const u16 *_palette, u32 _palLength) :
 		info(_info), tiles(_tiles), tilesLength(_tilesLength), palette(_palette), palLength(_palLength) {}

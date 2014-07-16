@@ -75,6 +75,8 @@ void Player::move() {
 		}
 	}
 	
+	testCollisions();
+	
 	m_x += m_vx;
 	m_y += m_vy;
 	

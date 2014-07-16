@@ -19,6 +19,8 @@
 
 #include <nds.h>
 
+#include "TilesInfos.hpp"
+#include "TilesetsInfos.hpp"
 #include "MapManager.hpp"
 
 #include "plain.h"
@@ -54,7 +56,7 @@ void MapManager::free() {
 }
 
 void MapManager::initTilesets() {
-	tilesets.push_back(new Tileset(NULL, plainTiles, plainTilesLen, plainPal, plainPalLen));
+	tilesets.push_back(new Tileset(TilesetsInfos::plainInfo, plainTiles, plainTilesLen, plainPal, plainPalLen));
 }
 
 void MapManager::initMaps() {
@@ -122,5 +124,29 @@ void MapManager::scrollMaps(s8 dx, s8 dy) {
 	}
 	
 	currentMap = nextMap;
+}
+
+bool inTable(u8 t[], u8 n) {
+	while(*t) {
+		if(*t == n) {
+			return true;
+		}
+		t++;
+	}
+	return false;
+}
+
+bool inTiles(s16 tileX, s16 tileY, u8 tiles[]) {
+	return true;
+}
+
+bool passable(s16 x, s16 y) {
+	u8 tile = MapManager::currentMap->tileset()->info[MapManager::currentMap->getTile(x >> 4, y >> 4)];
+	// TODO: Understand why I wrote that
+	if(tilesInfo[tile][((x - ((x >> 4) << 4)) >> 3) + ((y - ((y >> 4) << 4)) >> 3) * 2] == 1) {
+		return false;
+	} else {
+		return true;
+	}
 }
 

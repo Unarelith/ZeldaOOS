@@ -90,3 +90,11 @@ void Map::loadTile(s16 x, s16 y, s8 offsetX, s8 offsetY) {
 	mapPtr[screenPos(x * 2 + 1, y * 2 + 1)] = m_data[dataX + dataY * m_width] * 4 + 3;
 }
 
+u16 Map::getTile(u16 tileX, u16 tileY) {
+	if(tileX + tileY * m_width < m_width * m_height) {
+		return m_data[tileX + tileY * m_width];
+	} else {
+		return 0;
+	}
+}
+

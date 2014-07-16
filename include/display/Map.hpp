@@ -32,8 +32,12 @@ class Map {
 		void load();
 		void loadTile(s16 x, s16 y, s8 offsetX = 0, s8 offsetY = 0);
 		
+		u16 getTile(u16 tileX, u16 tileY);
+		
 		static s16 scrollX;
 		static s16 scrollY;
+		
+		Tileset *tileset() const { return m_tileset; }
 		
 		u16 zone() const { return m_zone; }
 		
