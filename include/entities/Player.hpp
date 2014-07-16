@@ -25,7 +25,13 @@ class Player : public Character {
 		Player();
 		~Player();
 		
+		void testCollisions();
+		void doorCollisions();
+		
 		void move();
+		
+	private:
+		bool m_inDoor;
 };
 
 #endif // PLAYER_HPP_

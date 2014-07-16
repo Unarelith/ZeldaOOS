@@ -32,9 +32,28 @@ Player::Player() : Character(0, (10 << 4), (5 << 4), 0, 2, SprSize_16x16, 32, 4,
 	addAnimation(2, linkAnimations[1], 100);
 	addAnimation(2, linkAnimations[2], 100);
 	addAnimation(2, linkAnimations[3], 100);
+	
+	m_inDoor = false;
 }
 
 Player::~Player() {
+}
+
+void Player::testCollisions() {
+	Character::testCollisions();
+	
+	doorCollisions();
+}
+
+void Player::doorCollisions() {
+	if(onDoor(m_x + 8, m_y + 8) && !m_inDoor) {
+		m_vx = 0;
+		m_vy = 0;
+		
+		u16 doorID = DoorManager::findDoorID(m_x, m_y, MapManager::currentMap->area(), MapManager::currentMap->x(), MapManager::currentMap->y());
+		
+		MapManager::initDoorTransition();
+	}
 }
 
 void Player::move() {

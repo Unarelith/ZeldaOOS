@@ -146,6 +146,22 @@ void MapManager::scrollMaps(s8 dx, s8 dy) {
 	currentMap = nextMap;
 }
 
+void MapManager::initDoorTransition() {
+	dmaFillWords(0xFFFFFFFF, bgGetGfxPtr(transitionBg) + 32, 64);
+	dmaFillWords(0x00010001, bgGetGfxPtr(transitionBg), 32 * 24 * 2);
+}
+
+void MapManager::doorTransition() {
+	for(u8 x = 0 ; x < 16 ; x++) {
+		swiWaitForVBlank();
+		
+		for(u8 y = 0 ; y < 24 ; y++) {
+			((u16*)bgGetMapPtr(transitionBg))[(15 - x) + (y << 5)] = 0;
+			((u16*)bgGetMapPtr(transitionBg))[(16 + x) + (y << 5)] = 0;
+		}
+	}
+}
+
 bool inTable(u8 t[], u8 n) {
 	while(*t) {
 		if(*t == n) {
@@ -157,13 +173,23 @@ bool inTable(u8 t[], u8 n) {
 }
 
 bool inTiles(s16 tileX, s16 tileY, u8 tiles[]) {
-	return true;
+	return inTable(tiles, MapManager::currentMap->tileset()->info[MapManager::currentMap->getTile(tileX, tileY)]);
 }
 
 bool passable(s16 x, s16 y) {
 	u8 tile = MapManager::currentMap->tileset()->info[MapManager::currentMap->getTile(x >> 4, y >> 4)];
 	// TODO: Understand why I wrote that
 	if(tilesInfo[tile][((x - ((x >> 4) << 4)) >> 3) + ((y - ((y >> 4) << 4)) >> 3) * 2] == 1) {
+		return false;
+	} else {
+		return true;
+	}
+}
+
+bool onDoor(s16 x, s16 y) {
+	u8 tile = MapManager::currentMap->tileset()->info[MapManager::currentMap->getTile(x >> 4, y >> 4)];
+	// TODO: Understand why I wrote that
+	if(tilesInfo[tile][((x - ((x >> 4) << 4)) >> 3) + ((y - ((y >> 4) << 4)) >> 3) * 2] == 2) {
 		return false;
 	} else {
 		return true;
