@@ -22,6 +22,7 @@
 #include "TilesInfos.hpp"
 #include "TilesetsInfos.hpp"
 #include "MapManager.hpp"
+#include "CharacterManager.hpp"
 
 #include "plain.h"
 
@@ -77,8 +78,17 @@ void MapManager::initMaps() {
 void MapManager::scrollMaps(s8 dx, s8 dy) {
 	Map *nextMap = maps[currentMap->zone()][currentMap->x() + dx + (currentMap->y() + dy) * sqrt(maps[currentMap->zone()].size())];
 	
+	CharacterManager::player->vx(0);
+	CharacterManager::player->vy(0);
+	
 	if(dx != 0) {
 		for(u8 i = 0 ; i < 32 ; i++) {
+			if((i & 1) || !(1 & 15)) {
+				CharacterManager::player->x(CharacterManager::player->x() - 8 * dx);
+			} else {
+				CharacterManager::player->x(CharacterManager::player->x() - 7 * dx);
+			}
+			
 			for(u8 j = 0 ; j < 8 * abs(dx) ; j++) {
 				if(!(Map::scrollX & 15)) {
 					for(u16 k = Map::scrollY / 16 ; k < Map::scrollY / 16 + 12 ; k++) {
@@ -96,12 +106,20 @@ void MapManager::scrollMaps(s8 dx, s8 dy) {
 			bgSetScroll(mapBg, Map::scrollX, Map::scrollY);
 			bgUpdate();
 			
+			CharacterManager::player->draw();
+			
 			swiWaitForVBlank();
 		}
 	}
 	
 	if(dy != 0) {
 		for(u8 i = 0 ; i < 24 ; i++) {
+			if((i & 1) && (i & 7) < 7) {
+				CharacterManager::player->y(CharacterManager::player->y() - 8 * dy);
+			} else {
+				CharacterManager::player->y(CharacterManager::player->y() - 7 * dy);
+			}
+			
 			for(u8 j = 0 ; j < 8 * abs(dy) ; j++) {
 				if(!(Map::scrollY & 15)) {
 					for(u16 k = Map::scrollX/ 16 ; k < Map::scrollX / 16 + 16 ; k++) {
@@ -118,6 +136,8 @@ void MapManager::scrollMaps(s8 dx, s8 dy) {
 			
 			bgSetScroll(mapBg, Map::scrollX, Map::scrollY);
 			bgUpdate();
+			
+			CharacterManager::player->draw();
 			
 			swiWaitForVBlank();
 		}

@@ -15,15 +15,16 @@
  *
  * =====================================================================================
  */
+#include "MapManager.hpp"
 #include "Player.hpp"
 
 #include "link.h"
 
 u8 linkAnimations[4][4] = {
-	{4,0},
-	{5,1},
-	{6,2},
-	{7,3}
+	{4, 0},
+	{5, 1},
+	{6, 2},
+	{7, 3}
 };
 
 Player::Player() : Character(0, (10 << 4), (5 << 4), 0, 2, SprSize_16x16, 32, 4, 32, 0, linkTiles, linkPal) {
@@ -82,5 +83,18 @@ void Player::move() {
 	
 	m_vx = 0;
 	m_vy = 0;
+	
+	if(m_x > 256 - 16 + 2) {
+		MapManager::scrollMaps(1, 0);
+	}
+	else if(m_x < -2) {
+		MapManager::scrollMaps(-1, 0);
+	}
+	else if(m_y > 192 - 16 + 1) {
+		MapManager::scrollMaps(0, 1);
+	}
+	else if(m_y < 0) {
+		MapManager::scrollMaps(0, -1);
+	}
 }
 

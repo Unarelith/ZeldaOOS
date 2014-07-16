@@ -30,6 +30,15 @@ class Character : public Sprite {
 		void testCollisions();
 		void mapCollisions();
 		
+		s16 x() const { return m_x; }
+		s16 y() const { return m_y; }
+		
+		void x(s16 x) { m_x = x; }
+		void y(s16 y) { m_y = y; }
+		
+		void vx(s8 vx) { m_vx = vx; }
+		void vy(s8 vy) { m_vy = vy; }
+		
 		enum Direction {
 			Down,
 			Right,
