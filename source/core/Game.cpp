@@ -20,6 +20,7 @@
 #include <nds.h>
 #include <filesystem.h>
 
+#include "Timer.hpp"
 #include "MapManager.hpp"
 #include "Game.hpp"
 
@@ -29,6 +30,8 @@ Game::Game() {
 	initNitroFS();
 	
 	initVideo();
+	
+	Timer::initSystemTime();
 	
 	MapManager::init();
 	

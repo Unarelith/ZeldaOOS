@@ -1,12 +1,12 @@
 /*
  * =====================================================================================
  *
- *       Filename:  Character.hpp
+ *       Filename:  Timer.hpp
  *
  *    Description:  
  *
  *        Version:  1.0
- *        Created:  16/07/2014 15:30:11
+ *        Created:  16/07/2014 15:39:29
  *       Revision:  none
  *       Compiler:  gcc
  *
@@ -15,24 +15,29 @@
  *
  * =====================================================================================
  */
-#ifndef CHARACTER_HPP_
-#define CHARACTER_HPP_
+#ifndef TIMER_HPP_
+#define TIMER_HPP_
 
-#include "Sprite.hpp"
-
-class Character : public Sprite {
+class Timer {
 	public:
-		Character();
-		~Character();
+		Timer();
+		~Timer();
 		
-	protected:
-		s16 m_x;
-		s16 m_y;
+		void stop();
+		void start();
+		void reset();
 		
-		s8 m_vx;
-		s8 m_vy;
+		u32 time() { return (m_isStarted) ? systemTime - m_t : m_tick; }
 		
-		bool m_moving;
+		static u32 systemTime;
+		
+		static void initSystemTimer();
+		
+	private:
+		u32 m_t;
+		u32 m_tick;
+		
+		bool m_isStarted;
 };
 
-#endif // CHARACTER_HPP_
+#endif // TIMER_HPP_
