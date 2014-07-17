@@ -78,10 +78,6 @@ void Game::initVideo() {
 void Game::initSpriteSystem() {
 	enableSprites(0, 0);
 	enableSprites(1, 0);
-	
-	//for(u8 i = 0 ; i < 128 ; i++) {
-	//	setSpritePriority(0, i, 1);
-	//}
 }
 
 void Game::mainLoop() {

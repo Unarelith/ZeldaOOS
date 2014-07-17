@@ -40,7 +40,7 @@ void MapManager::init() {
 	mapBg = bgInit(0, BgType_Text8bpp, BgSize_T_512x512, 0, 1);
 	transitionBg = bgInit(1, BgType_Text8bpp, BgSize_T_256x256, 4, 5);
 	
-	bgSetPriority(mapBg, 1);
+	bgSetPriority(mapBg, 2);
 	bgSetPriority(transitionBg, 0);
 	
 	initTilesets();

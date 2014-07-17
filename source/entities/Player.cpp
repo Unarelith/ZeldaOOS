@@ -31,11 +31,13 @@ u8 linkAnimations[4][4] = {
 	{7, 3}
 };
 
-Player::Player() : Character(0, (10 << 4), (5 << 4), 0, 2, SprSize_16x16, 32, 4, 32, 0, linkTiles, linkPal) {
-	addAnimation(2, linkAnimations[0], 100);
-	addAnimation(2, linkAnimations[1], 100);
-	addAnimation(2, linkAnimations[2], 100);
-	addAnimation(2, linkAnimations[3], 100);
+Player::Player() : Character(0, (10 << 4), (5 << 4), 0, 0, SprSize_16x16, 0, 4, 32, 0, linkTiles, linkPal) {
+	addAnimation(2, linkAnimations[0], 150);
+	addAnimation(2, linkAnimations[1], 150);
+	addAnimation(2, linkAnimations[2], 150);
+	addAnimation(2, linkAnimations[3], 150);
+	
+	setSpritePriority(m_screen, m_id, 1);
 	
 	m_inDoor = false;
 }

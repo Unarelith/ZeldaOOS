@@ -30,9 +30,11 @@ u8 lowWaterEffectAnimation[3] = {0, 1, 2};
 void CharacterManager::init() {
 	player = new Player();
 	
-	grassEffect = new Sprite(0, 0, SprSize_16x16, 0, 4, 4, 0, grassEffectTiles, nullptr);
+	grassEffect = new Sprite(0, 1, SprSize_16x16, 32, 4, 4, 0, grassEffectTiles, nullptr);
+	setSpritePriority(0, 1, 0);
 	
-	lowWaterEffect = new Sprite(0, 1, SprSize_16x16, 4, 4, 12, 0, waterEffectTiles, nullptr);
+	lowWaterEffect = new Sprite(0, 2, SprSize_16x16, 36, 4, 12, 0, waterEffectTiles, nullptr);
+	setSpritePriority(0, 2, 0);
 	lowWaterEffect->addAnimation(3, lowWaterEffectAnimation, 150);
 }
 
