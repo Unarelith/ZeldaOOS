@@ -29,6 +29,8 @@ class Sprite {
 		Sprite(u8 screen, u8 id, s5_dimension size, u8 baseTile, u16 tileSize, u16 nbTiles, u8 paletteSlot, const void *tilesData, const void *palData);
 		~Sprite();
 		
+		void clear();
+		
 		void drawFrame(s16 x, s16 y, u8 frame);
 		
 		void addAnimation(u8 size, u8 *frames, u16 delay);

@@ -47,11 +47,11 @@ class Character : public Sprite {
 		};
 		
 	protected:
-		s16 m_x;
-		s16 m_y;
+		float m_x;
+		float m_y;
 		
-		s8 m_vx;
-		s8 m_vy;
+		float m_vx;
+		float m_vy;
 		
 		u8 m_direction;
 		

@@ -38,6 +38,10 @@ Sprite::Sprite(u8 screen, u8 id, s5_dimension size, u8 baseTile, u16 tileSize, u
 Sprite::~Sprite() {
 }
 
+void Sprite::clear() {
+	clearSprite(m_screen, m_id);
+}
+
 void Sprite::drawFrame(s16 x, s16 y, u8 frame) {
 	drawSprite(m_screen, m_id, x, y, m_size, m_color, m_baseTile + frame * m_tileSize, m_paletteSlot);
 }

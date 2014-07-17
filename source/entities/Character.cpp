@@ -16,7 +16,7 @@
  * =====================================================================================
  */
 #include "MapManager.hpp"
-#include "Character.hpp"
+#include "CharacterManager.hpp"
 
 Character::Character(u8 screen, s16 x, s16 y, u8 direction, u8 id, s5_dimension size, u8 baseTile, u16 tileSize, u16 nbTiles, u8 paletteSlot, const void *tilesData, const void *palData) : Sprite(screen, id, size, baseTile, tileSize, nbTiles, paletteSlot, tilesData, palData) {
 	m_x = x;
@@ -87,6 +87,39 @@ void Character::mapCollisions() {
 				else if(    m_vx == 0)	m_vx = -1;
 			}
 		}
+	}
+	
+	if(((stairsTile(m_x +  2, m_y +  2))
+	||  (stairsTile(m_x + 14, m_y +  2))
+	||  (stairsTile(m_x +  2, m_y + 14))
+	||  (stairsTile(m_x + 14, m_y + 14)))
+	&& m_vy != 0) {
+		m_vx /= 2;
+		m_vy /= 2;
+	}
+	
+	if((grassTile(m_x +  2, m_y +  2))
+	|| (grassTile(m_x + 14, m_y +  2))
+	|| (grassTile(m_x +  2, m_y + 14))
+	|| (grassTile(m_x + 14, m_y + 14))) {
+		m_vx /= 4;
+		m_vx *= 3;
+		
+		m_vy /= 4;
+		m_vy *= 3;
+		
+		CharacterManager::grassEffect->drawFrame(m_x, m_y, 0);
+	} else {
+		CharacterManager::grassEffect->clear();
+	}
+	
+	if((lowWaterTile(m_x +  2, m_y +  2))
+	|| (lowWaterTile(m_x + 14, m_y +  2))
+	|| (lowWaterTile(m_x +  2, m_y + 14))
+	|| (lowWaterTile(m_x + 14, m_y + 14))) {
+		CharacterManager::lowWaterEffect->playAnimation(m_x, m_y + 8, 0);
+	} else {
+		CharacterManager::lowWaterEffect->clear();
 	}
 }
 

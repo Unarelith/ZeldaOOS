@@ -205,7 +205,6 @@ bool inTiles(s16 tileX, s16 tileY, u8 tiles[]) {
 
 bool passable(s16 x, s16 y) {
 	u8 tile = MapManager::currentMap->tileset()->info[MapManager::currentMap->getTile(x >> 4, y >> 4)];
-	// TODO: Understand why I wrote that
 	if(tilesInfo[tile][((x - ((x >> 4) << 4)) >> 3) + ((y - ((y >> 4) << 4)) >> 3) * 2] == 1) {
 		return false;
 	} else {
@@ -215,11 +214,22 @@ bool passable(s16 x, s16 y) {
 
 bool onDoor(s16 x, s16 y) {
 	u8 tile = MapManager::currentMap->tileset()->info[MapManager::currentMap->getTile(x >> 4, y >> 4)];
-	// TODO: Understand why I wrote that
 	if(tilesInfo[tile][((x - ((x >> 4) << 4)) >> 3) + ((y - ((y >> 4) << 4)) >> 3) * 2] == 2) {
 		return true;
 	} else {
 		return false;
 	}
+}
+
+bool stairsTile(s16 x, s16 y) {
+	return MapManager::currentMap->tileset()->info[MapManager::currentMap->getTile(x >> 4, y >> 4)] == 11;
+}
+
+bool grassTile(s16 x, s16 y) {
+	return MapManager::currentMap->tileset()->info[MapManager::currentMap->getTile(x >> 4, y >> 4)] == 12;
+}
+
+bool lowWaterTile(s16 x, s16 y) {
+	return MapManager::currentMap->tileset()->info[MapManager::currentMap->getTile(x >> 4, y >> 4)] == 13;
 }
 

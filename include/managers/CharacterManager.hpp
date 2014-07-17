@@ -25,6 +25,9 @@ namespace CharacterManager {
 	void free();
 	
 	extern Player *player;
+	
+	extern Sprite *grassEffect;
+	extern Sprite *lowWaterEffect;
 };
 
 #endif // CHARACTERMANAGER_HPP_

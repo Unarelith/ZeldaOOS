@@ -49,4 +49,8 @@ bool inTiles(s16 tileX, s16 tileY, u8 tiles[]);
 bool passable(s16 x, s16 y);
 bool onDoor(s16 x, s16 y);
 
+bool stairsTile(s16 x, s16 y);
+bool grassTile(s16 x, s16 y);
+bool lowWaterTile(s16 x, s16 y);
+
 #endif // MAPMANAGER_HPP_

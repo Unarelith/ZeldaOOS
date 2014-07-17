@@ -15,12 +15,12 @@
 //
 //======================================================================
 
-#ifndef GRIT_GRASS_EFFECT_H
-#define GRIT_GRASS_EFFECT_H
+#ifndef GRIT_GRASSEFFECT_H
+#define GRIT_GRASSEFFECT_H
 
 #define grass_effectTilesLen 128
-extern const unsigned int grass_effectTiles[32];
+extern const unsigned int grassEffectTiles[32];
 
-#endif // GRIT_GRASS_EFFECT_H
+#endif // GRIT_GRASSEFFECT_H
 
-//}}BLOCK(grass_effect)
+//}}BLOCK(grassEffect)

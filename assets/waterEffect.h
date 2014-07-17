@@ -1,9 +1,9 @@
 
-//{{BLOCK(water_effect)
+//{{BLOCK(waterEffect)
 
 //======================================================================
 //
-//	water_effect, 48x16@4, 
+//	waterEffect, 48x16@4, 
 //	Transparent color : 0F,F0,FF
 //	+ palette 256 entries, not compressed
 //	+ 12 tiles Metatiled by 2x2 not compressed
@@ -15,12 +15,12 @@
 //
 //======================================================================
 
-#ifndef GRIT_WATER_EFFECT_H
-#define GRIT_WATER_EFFECT_H
+#ifndef GRIT_WATEREFFECT_H
+#define GRIT_WATEREFFECT_H
 
-#define water_effectTilesLen 384
-extern const unsigned int water_effectTiles[96];
+#define waterEffectTilesLen 384
+extern const unsigned int waterEffectTiles[96];
 
-#endif // GRIT_WATER_EFFECT_H
+#endif // GRIT_WATEREFFECT_H
 
-//}}BLOCK(water_effect)
+//}}BLOCK(waterEffect)

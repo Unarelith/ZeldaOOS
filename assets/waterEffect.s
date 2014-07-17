@@ -1,9 +1,9 @@
 
-@{{BLOCK(water_effect)
+@{{BLOCK(waterEffect)
 
 @=======================================================================
 @
-@	water_effect, 48x16@4, 
+@	waterEffect, 48x16@4, 
 @	Transparent color : 0F,F0,FF
 @	12 tiles Metatiled by 2x2 not compressed
 @	Total size: 384
@@ -16,8 +16,8 @@
 
 	.section .rodata
 	.align	2
-	.global water_effectTiles		@ 384 unsigned chars
-water_effectTiles:
+	.global waterEffectTiles		@ 384 unsigned chars
+waterEffectTiles:
 	.word 0x00000000,0x00000000,0x00000000,0x00000000,0x00000000,0x00031000,0x00031000,0x03310000
 	.word 0x00000000,0x00000000,0x00000000,0x00000000,0x00000000,0x00013000,0x00013300,0x00001330
 	.word 0x31100000,0x11000000,0x00000000,0x00000000,0x00000000,0x00000000,0x00000000,0x00000000
@@ -32,4 +32,4 @@ water_effectTiles:
 	.word 0x00000310,0x00033100,0x33311000,0x11100000,0x00000000,0x00000000,0x00000000,0x00000000
 	.word 0x01300000,0x00133000,0x00011333,0x00000111,0x00000000,0x00000000,0x00000000,0x00000000
 
-@}}BLOCK(water_effect)
+@}}BLOCK(waterEffect)
