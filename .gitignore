@@ -1,4 +1,5 @@
 build
+doxygen
 *.elf
 *.nds
 *.swp
