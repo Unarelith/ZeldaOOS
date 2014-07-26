@@ -205,7 +205,7 @@ bool inTiles(s16 tileX, s16 tileY, u8 tiles[]) {
 
 bool passable(s16 x, s16 y) {
 	u8 tile = MapManager::currentMap->tileset()->info[MapManager::currentMap->getTile(x >> 4, y >> 4)];
-	if(tilesInfo[tile][((x - ((x >> 4) << 4)) >> 3) + ((y - ((y >> 4) << 4)) >> 3) * 2] == 1) {
+	if(tilesInfo[tile][(x & 0xF) / 8 + (y & 0xF) / 8 * 2] == 1) {
 		return false;
 	} else {
 		return true;
@@ -214,7 +214,7 @@ bool passable(s16 x, s16 y) {
 
 bool onDoor(s16 x, s16 y) {
 	u8 tile = MapManager::currentMap->tileset()->info[MapManager::currentMap->getTile(x >> 4, y >> 4)];
-	if(tilesInfo[tile][((x - ((x >> 4) << 4)) >> 3) + ((y - ((y >> 4) << 4)) >> 3) * 2] == 2) {
+	if(tilesInfo[tile][(x & 0xF) / 8 + (y & 0xF) / 8 * 2] == 2) {
 		return true;
 	} else {
 		return false;
