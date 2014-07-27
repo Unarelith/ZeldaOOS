@@ -21,14 +21,15 @@
 #include "Timer.hpp"
 
 struct SpriteAnimation {
-	SpriteAnimation(u16 _size, u8 *_tabAnim, u16 _delay) :
-		size(_size), tabAnim(_tabAnim), delay(_delay), isPlaying(false) {}
+	SpriteAnimation(u16 _size, u8 *_tabAnim, u16 _delay, s16 _position[][2]) :
+		size(_size), tabAnim(_tabAnim), delay(_delay), isPlaying(false), position(_position) {}
 	
 	u16 size;
 	u8 *tabAnim;
 	u16 delay;
 	Timer timer;
 	bool isPlaying;
+	s16 (*position)[2];
 };
 
 #endif // SPRITEANIMATION_HPP_

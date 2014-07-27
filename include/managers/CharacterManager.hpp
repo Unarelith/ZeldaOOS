@@ -26,6 +26,8 @@ namespace CharacterManager {
 	
 	extern Player *player;
 	
+	extern Sprite *sword;
+	extern Sprite *grassDestroy;
 	extern Sprite *grassEffect;
 	extern Sprite *lowWaterEffect;
 };

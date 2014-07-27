@@ -1,0 +1,4 @@
+* Metatiles are important for different sprites sizes.
+  Example:
+	16x16: 2x2 metatiles
+	32x32: 4x4 metatiles

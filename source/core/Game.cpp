@@ -88,6 +88,10 @@ void Game::mainLoop() {
 		
 		CharacterManager::player->move();
 		
+		if(keysHeld() & KEY_A) {
+			CharacterManager::player->useSword();
+		}
+		
 		CharacterManager::player->draw();
 		
 		swiWaitForVBlank();

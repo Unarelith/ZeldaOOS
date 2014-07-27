@@ -1,0 +1,5 @@
+* Add PlayerState enum to Player
+	- Standing
+	- Moving
+	- Attacking
+	- Talking

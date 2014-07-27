@@ -20,7 +20,7 @@
 #include "Tools.hpp"
 #include "MapManager.hpp"
 #include "DoorManager.hpp"
-#include "Player.hpp"
+#include "CharacterManager.hpp"
 
 #include "link.h"
 
@@ -146,5 +146,9 @@ void Player::move() {
 	else if(m_y < 0) {
 		MapManager::scrollMaps(0, -1);
 	}
+}
+
+void Player::useSword() {
+	CharacterManager::sword->playAnimation(m_x, m_y, m_direction);
 }
 

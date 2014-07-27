@@ -30,6 +30,8 @@ class Player : public Character {
 		
 		void move();
 		
+		void useSword();
+		
 	private:
 		bool m_inDoor;
 };
