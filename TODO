@@ -1,10 +1,7 @@
-* Add PlayerState enum to Player
-	- Standing
-	- Moving
-	- Attacking
-		=> When Standing, can Move, Attack, Talk
-		=> When Moving, can Attack, Stand, Talk
-		=> When Attacking, must wait the end before doing something else
+* Player must move while using sword
+	=> px, py from Radonia
+* Check sword speed from the original game
+* Sword change color while charging
 
 * Add States objects
 	=> MapState
