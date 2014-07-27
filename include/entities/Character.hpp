@@ -46,7 +46,15 @@ class Character : public Sprite {
 			Up
 		};
 		
+		enum State {
+			Idle,
+			Moving,
+			Attacking
+		};
+		
 	protected:
+		State m_state;
+		
 		float m_x;
 		float m_y;
 		
@@ -54,8 +62,6 @@ class Character : public Sprite {
 		float m_vy;
 		
 		u8 m_direction;
-		
-		bool m_moving;
 };
 
 #endif // CHARACTER_HPP_

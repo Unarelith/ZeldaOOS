@@ -28,6 +28,8 @@ class Player : public Character {
 		void testCollisions();
 		void doorCollisions();
 		
+		void update();
+		
 		void move();
 		
 		void useSword();

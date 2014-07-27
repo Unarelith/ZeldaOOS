@@ -19,6 +19,8 @@
 #include "CharacterManager.hpp"
 
 Character::Character(u8 screen, s16 x, s16 y, u8 direction, u8 id, s5_dimension size, u8 baseTile, u16 tileSize, u16 nbTiles, u8 paletteSlot, const void *tilesData, const void *palData) : Sprite(screen, id, size, baseTile, tileSize, nbTiles, paletteSlot, tilesData, palData) {
+	m_state = State::Idle;
+	
 	m_x = x;
 	m_y = y;
 	
@@ -26,18 +28,17 @@ Character::Character(u8 screen, s16 x, s16 y, u8 direction, u8 id, s5_dimension 
 	m_vy = 0;
 	
 	m_direction = Direction::Down;
-	
-	m_moving = false;
 }
 
 Character::~Character() {
 }
 
 void Character::draw() {
-	if(m_moving) {
-		playAnimation(m_x, m_y, m_direction);
-	} else {
+	if(m_state == State::Idle){
 		drawFrame(m_x, m_y, m_direction);
+	}
+	else if(m_state == State::Moving) {
+		playAnimation(m_x, m_y, m_direction);
 	}
 }
 

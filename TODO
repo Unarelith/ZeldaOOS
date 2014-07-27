@@ -2,4 +2,13 @@
 	- Standing
 	- Moving
 	- Attacking
-	- Talking
+		=> When Standing, can Move, Attack, Talk
+		=> When Moving, can Attack, Stand, Talk
+		=> When Attacking, must wait the end before doing something else
+
+* Add States objects
+	=> MapState
+	=> DialogState
+	=> TitleScreenState
+	=> MenuState
+

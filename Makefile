@@ -119,7 +119,7 @@ else
 	endif
 endif
  
-.PHONY: $(BUILD) clean run nitro maps
+.PHONY: $(BUILD) run clean edit nitro maps
 
 #---------------------------------------------------------------------------------
 $(BUILD):
@@ -134,6 +134,10 @@ run:
 clean:
 	@echo clean ...
 	@rm -fr $(BUILD) $(TARGET).elf $(TARGET).nds
+	
+#---------------------------------------------------------------------------------
+edit:
+	@vim -c "OpenSession $(TARGET)"
 	
 #---------------------------------------------------------------------------------
 nitro:

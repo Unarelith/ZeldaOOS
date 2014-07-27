@@ -86,11 +86,7 @@ void Game::mainLoop() {
 	while(1) {
 		scanKeys();
 		
-		CharacterManager::player->move();
-		
-		if(keysHeld() & KEY_A) {
-			CharacterManager::player->useSword();
-		}
+		CharacterManager::player->update();
 		
 		CharacterManager::player->draw();
 		

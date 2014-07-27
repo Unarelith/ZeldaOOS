@@ -31,7 +31,7 @@ u8 linkAnimations[4][4] = {
 	{7, 3}
 };
 
-Player::Player() : Character(0, (10 << 4), (5 << 4), 0, 0, SprSize_16x16, 0, 4, 32, 0, linkTiles, linkPal) {
+Player::Player() : Character(SCREEN_UP, (10 << 4), (5 << 4), 0, 0, SprSize_16x16, 0, 4, 32, 0, linkTiles, linkPal) {
 	addAnimation(2, linkAnimations[0], 150);
 	addAnimation(2, linkAnimations[1], 150);
 	addAnimation(2, linkAnimations[2], 150);
@@ -87,12 +87,22 @@ void Player::doorCollisions() {
 	}
 }
 
+void Player::update() {
+	if(m_state == State::Idle || m_state == State::Moving) {
+		move();
+		
+		if(keysHeld() & KEY_A) {
+			useSword();
+		}
+	}
+}
+
 void Player::move() {
-	m_moving = false;
+	m_state = State::Idle;
 	
 	if(keysHeld() & KEY_LEFT) {
 		m_vx = -1;
-		m_moving = true;
+		m_state = State::Moving;
 		
 		if(!(keysHeld() & KEY_DOWN) && !(keysHeld() & KEY_UP) && !(keysHeld() & KEY_RIGHT)) {
 			m_direction = Direction::Left;
@@ -101,7 +111,7 @@ void Player::move() {
 	
 	if(keysHeld() & KEY_RIGHT) {
 		m_vx = 1;
-		m_moving = true;
+		m_state = State::Moving;
 		
 		if(!(keysHeld() & KEY_DOWN) && !(keysHeld() & KEY_LEFT) && !(keysHeld() & KEY_UP)) {
 			m_direction = Direction::Right;
@@ -110,7 +120,7 @@ void Player::move() {
 	
 	if(keysHeld() & KEY_UP) {
 		m_vy = -1;
-		m_moving = true;
+		m_state = State::Moving;
 		
 		if(!(keysHeld() & KEY_DOWN) && !(keysHeld() & KEY_LEFT) && !(keysHeld() & KEY_RIGHT)) {
 			m_direction = Direction::Up;
@@ -119,7 +129,7 @@ void Player::move() {
 	
 	if(keysHeld() & KEY_DOWN) {
 		m_vy = 1;
-		m_moving = true;
+		m_state = State::Moving;
 		
 		if(!(keysHeld() & KEY_UP) && !(keysHeld() & KEY_LEFT) && !(keysHeld() & KEY_RIGHT)) {
 			m_direction = Direction::Down;
