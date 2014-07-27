@@ -32,6 +32,7 @@ class Sprite {
 		void clear();
 		
 		void drawFrame(s16 x, s16 y, u8 frame);
+		void drawPositionedFrame(s16 x, s16 y, u8 anim, u8 frame);
 		
 		void addAnimation(u8 size, u8 *frames, u16 delay, s16 position[][2] = NULL);
 		

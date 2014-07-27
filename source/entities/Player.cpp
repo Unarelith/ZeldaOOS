@@ -24,18 +24,32 @@
 
 #include "link.h"
 
-u8 linkAnimations[4][4] = {
+u8 linkAnimations[8][4] = {
+	// Movement
 	{4, 0},
 	{5, 1},
 	{6, 2},
-	{7, 3}
+	{7, 3},
+	
+	// Sword attack
+	{ 8, 12, 12, 12},
+	{ 9, 13, 13, 13},
+	{10, 14, 14, 14},
+	{11, 15, 15, 15}
 };
 
-Player::Player() : Character(SCREEN_UP, (10 << 4), (5 << 4), 0, 0, SprSize_16x16, 0, 4, 32, 0, linkTiles, linkPal) {
+Player::Player() : Character(SCREEN_UP, (10 << 4), (5 << 4), 0, 0, SprSize_16x16, 0, 4, 64, 0, linkTiles, linkPal) {
+	// Movement
 	addAnimation(2, linkAnimations[0], 150);
 	addAnimation(2, linkAnimations[1], 150);
 	addAnimation(2, linkAnimations[2], 150);
 	addAnimation(2, linkAnimations[3], 150);
+	
+	// Sword attack
+	addAnimation(4, linkAnimations[4], 100);
+	addAnimation(4, linkAnimations[5], 100);
+	addAnimation(4, linkAnimations[6], 100);
+	addAnimation(4, linkAnimations[7], 100);
 	
 	setSpritePriority(m_screen, m_id, 1);
 	
@@ -88,12 +102,18 @@ void Player::doorCollisions() {
 }
 
 void Player::update() {
-	if(m_state == State::Idle || m_state == State::Moving) {
+	if(m_state != State::Attacking) {
 		move();
+	}
+	
+	if(keysHeld() & KEY_A || m_state == State::Attacking) {
+		useSword();
+	}
+	
+	if(!(keysHeld() & KEY_A) && m_state == State::Attacking && isAnimationAtEnd(m_direction + 4)) {
+		m_state = State::Idle;
 		
-		if(keysHeld() & KEY_A) {
-			useSword();
-		}
+		CharacterManager::sword->clear();
 	}
 }
 
@@ -159,6 +179,26 @@ void Player::move() {
 }
 
 void Player::useSword() {
-	CharacterManager::sword->playAnimation(m_x, m_y, m_direction);
+	if(m_state != State::Attacking) {
+		m_state = State::Attacking;
+		
+		resetAnimation(m_direction + 4);
+		startAnimation(m_direction + 4);
+		
+		playAnimation(m_x, m_y, m_direction + 4);
+		
+		CharacterManager::sword->playAnimation(m_x, m_y, m_direction);
+	}
+	else if(!isAnimationAtEnd(m_direction + 4)) {
+		playAnimation(m_x, m_y, m_direction + 4);
+		
+		if(!CharacterManager::sword->isAnimationAtEnd(m_direction)) {
+			CharacterManager::sword->playAnimation(m_x, m_y, m_direction);
+		}
+	} else {
+		drawFrame(m_x, m_y, m_direction);
+		
+		CharacterManager::sword->drawPositionedFrame(m_x, m_y, m_direction, 3);
+	}
 }
 

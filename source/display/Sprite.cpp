@@ -46,6 +46,18 @@ void Sprite::drawFrame(s16 x, s16 y, u8 frame) {
 	drawSprite(m_screen, m_id, x, y, m_size, m_color, m_baseTile + frame * m_tileSize, m_paletteSlot);
 }
 
+void Sprite::drawPositionedFrame(s16 x, s16 y, u8 anim, u8 frame) {
+	s16 ox = 0;
+	s16 oy = 0;
+	
+	if(m_animations[anim].position && m_animations[anim].position[frame]) {
+		ox = m_animations[anim].position[frame][0];
+		oy = m_animations[anim].position[frame][1];
+	}
+	
+	drawFrame(x + ox, y + oy, m_animations[anim].tabAnim[frame]);
+}
+
 void Sprite::addAnimation(u8 size, u8 *frames, u16 delay, s16 position[][2]) {
 	m_animations.push_back(SpriteAnimation(size, frames, delay, position));
 }
@@ -82,16 +94,7 @@ void Sprite::playAnimation(s16 x, s16 y, u8 anim) {
 		startAnimation(anim);
 	}
 	
-	u8 frameToDraw = m_animations[anim].tabAnim[getAnimationFrame(anim)];
-	
-	s16 ox = 0;
-	s16 oy = 0;
-	
-	if(m_animations[anim].position && m_animations[anim].position[getAnimationFrame(anim)]) {
-		ox = m_animations[anim].position[getAnimationFrame(anim)][0];
-		oy = m_animations[anim].position[getAnimationFrame(anim)][1];
-	}
-	
-	drawFrame(x + ox, y + oy, frameToDraw);
+	//u8 frameToDraw = m_animations[anim].tabAnim[getAnimationFrame(anim)];
+	drawPositionedFrame(x, y, anim, getAnimationFrame(anim));//frameToDraw);
 }
 

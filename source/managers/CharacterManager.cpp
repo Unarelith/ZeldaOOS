@@ -50,21 +50,21 @@ u8 lowWaterEffectAnimation[3] = {0, 1, 2};
 void CharacterManager::init() {
 	player = new Player();
 	
-	sword = new Sprite(SCREEN_UP, 1, SprSize_16x16, 32, 4, 48, 0, swordTiles, nullptr);
+	sword = new Sprite(SCREEN_UP, 1, SprSize_16x16, 64, 4, 48, 0, swordTiles, nullptr);
 	setSpritePriority(SCREEN_UP, 1, 0);
 	sword->addAnimation(4, swordAnimation[0], 100, swordPosition[0]);
 	sword->addAnimation(4, swordAnimation[1], 100, swordPosition[1]);
 	sword->addAnimation(4, swordAnimation[2], 100, swordPosition[2]);
 	sword->addAnimation(4, swordAnimation[3], 100, swordPosition[3]);
 	
-	grassDestroy = new Sprite(SCREEN_UP, 2, SprSize_32x32, 80, 16, 96, 0, grassDestroyTiles, nullptr);
+	grassDestroy = new Sprite(SCREEN_UP, 2, SprSize_32x32, 112, 16, 96, 0, grassDestroyTiles, nullptr);
 	setSpritePriority(SCREEN_UP, 2, 0);
 	grassDestroy->addAnimation(6, grassDestroyAnimation, 50);
 	
-	grassEffect = new Sprite(SCREEN_UP, 3, SprSize_16x16, 176, 4, 4, 0, grassEffectTiles, nullptr);
+	grassEffect = new Sprite(SCREEN_UP, 3, SprSize_16x16, 208, 4, 4, 0, grassEffectTiles, nullptr);
 	setSpritePriority(SCREEN_UP, 3, 0);
 	
-	lowWaterEffect = new Sprite(SCREEN_UP, 4, SprSize_16x16, 180, 4, 12, 0, waterEffectTiles, nullptr);
+	lowWaterEffect = new Sprite(SCREEN_UP, 4, SprSize_16x16, 212, 4, 12, 0, waterEffectTiles, nullptr);
 	setSpritePriority(SCREEN_UP, 4, 0);
 	lowWaterEffect->addAnimation(3, lowWaterEffectAnimation, 150);
 }
