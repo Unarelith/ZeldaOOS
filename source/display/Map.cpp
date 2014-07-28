@@ -83,17 +83,30 @@ void Map::loadTile(s16 x, s16 y, s8 offsetX, s8 offsetY) {
 	x += offsetX;
 	y += offsetY;
 	
-	u16 *mapPtr = (u16*)bgGetMapPtr(MapManager::mapBg);
-	mapPtr[screenPos(x * 2    , y * 2    )] = m_data[dataX + dataY * m_width] * 4;
-	mapPtr[screenPos(x * 2 + 1, y * 2    )] = m_data[dataX + dataY * m_width] * 4 + 1;
-	mapPtr[screenPos(x * 2    , y * 2 + 1)] = m_data[dataX + dataY * m_width] * 4 + 2;
-	mapPtr[screenPos(x * 2 + 1, y * 2 + 1)] = m_data[dataX + dataY * m_width] * 4 + 3;
+	loadTileInMemory(x, y, m_data[dataX + dataY * m_width]);
 }
 
-void Map::setTile(u16 tileX, u16 tileY, u16 tile) {
+void Map::loadTileInMemory(s16 x, s16 y, u16 tile) {
+	u16 *mapPtr = (u16*)bgGetMapPtr(MapManager::mapBg);
+	
+	mapPtr[screenPos(x * 2    , y * 2    )] = tile * 4;
+	mapPtr[screenPos(x * 2 + 1, y * 2    )] = tile * 4 + 1;
+	mapPtr[screenPos(x * 2    , y * 2 + 1)] = tile * 4 + 2;
+	mapPtr[screenPos(x * 2 + 1, y * 2 + 1)] = tile * 4 + 3;
+}
+
+void Map::setDisplayTile(u16 tileX, u16 tileY, u16 tile) {
 	if(tileX + tileY * m_width < m_width * m_height) {
-		m_data[tileX + tileY * m_width] = tile;
-		loadTile(m_x * 256 / 16 + tileX, m_y * 192 / 16 + tileY);
+		loadTileInMemory(m_x * 256 / 16 + tileX, m_y * 192 / 16 + tileY, tile);
+	}
+}
+
+u16 Map::getDisplayTile(u16 tileX, u16 tileY) {
+	if(tileX + tileY * m_width < m_width * m_height) {
+		u16 *mapPtr = (u16*)bgGetMapPtr(MapManager::mapBg);
+		return mapPtr[screenPos((m_x * 256 / 16 + tileX) * 2, (m_y * 192 / 16 + tileY) * 2)] / 4;
+	} else {
+		return 0;
 	}
 }
 

@@ -200,11 +200,11 @@ bool inTable(u8 t[], u8 n) {
 }
 
 bool inTiles(s16 tileX, s16 tileY, u8 tiles[]) {
-	return inTable(tiles, MapManager::currentMap->tileset()->info[MapManager::currentMap->getTile(tileX, tileY)]);
+	return inTable(tiles, MapManager::currentMap->tileset()->info[MapManager::currentMap->getDisplayTile(tileX, tileY)]);
 }
 
 bool passable(s16 x, s16 y) {
-	u8 tile = MapManager::currentMap->tileset()->info[MapManager::currentMap->getTile(x >> 4, y >> 4)];
+	u8 tile = MapManager::currentMap->tileset()->info[MapManager::currentMap->getDisplayTile(x >> 4, y >> 4)];
 	if(tilesInfo[tile][(x & 0xF) / 8 + (y & 0xF) / 8 * 2] == 1) {
 		return false;
 	} else {
@@ -213,7 +213,7 @@ bool passable(s16 x, s16 y) {
 }
 
 bool onDoor(s16 x, s16 y) {
-	u8 tile = MapManager::currentMap->tileset()->info[MapManager::currentMap->getTile(x >> 4, y >> 4)];
+	u8 tile = MapManager::currentMap->tileset()->info[MapManager::currentMap->getDisplayTile(x >> 4, y >> 4)];
 	if(tilesInfo[tile][(x & 0xF) / 8 + (y & 0xF) / 8 * 2] == 2) {
 		return true;
 	} else {
@@ -222,7 +222,7 @@ bool onDoor(s16 x, s16 y) {
 }
 
 bool isTile(s16 x, s16 y, u8 tile) {
-	return MapManager::currentMap->tileset()->info[MapManager::currentMap->getTile(x >> 4, y >> 4)] == tile;
+	return MapManager::currentMap->tileset()->info[MapManager::currentMap->getDisplayTile(x >> 4, y >> 4)] == tile;
 }
 
 bool stairsTile(s16 x, s16 y) {

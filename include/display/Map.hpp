@@ -31,8 +31,11 @@ class Map {
 		
 		void load();
 		void loadTile(s16 x, s16 y, s8 offsetX = 0, s8 offsetY = 0);
+		void loadTileInMemory(s16 x, s16 y, u16 tile);
 		
-		void setTile(u16 tileX, u16 tileY, u16 tile);
+		void setDisplayTile(u16 tileX, u16 tileY, u16 tile);
+		u16 getDisplayTile(u16 tileX, u16 tileY);
+		
 		u16 getTile(u16 tileX, u16 tileY);
 		
 		static s16 scrollX;
