@@ -90,19 +90,19 @@ void Character::mapCollisions() {
 		}
 	}
 	
-	if(((stairsTile(m_x +  2, m_y +  2))
-	||  (stairsTile(m_x + 14, m_y +  2))
-	||  (stairsTile(m_x +  2, m_y + 14))
-	||  (stairsTile(m_x + 14, m_y + 14)))
+	if(((stairsTile(m_x + 6, m_y + 11))
+	&&  (stairsTile(m_x + 7, m_y + 11))
+	&&  (stairsTile(m_x + 6, m_y + 12))
+	&&  (stairsTile(m_x + 7, m_y + 12)))
 	&& m_vy != 0) {
 		m_vx /= 2;
 		m_vy /= 2;
 	}
 	
-	if((lowGrassTile(m_x +  2, m_y +  2))
-	|| (lowGrassTile(m_x + 14, m_y +  2))
-	|| (lowGrassTile(m_x +  2, m_y + 14))
-	|| (lowGrassTile(m_x + 14, m_y + 14))) {
+	if((lowGrassTile(m_x + 6, m_y + 11))
+	&& (lowGrassTile(m_x + 7, m_y + 11))
+	&& (lowGrassTile(m_x + 6, m_y + 12))
+	&& (lowGrassTile(m_x + 7, m_y + 12))) {
 		m_vx /= 4;
 		m_vx *= 3;
 		
@@ -114,10 +114,10 @@ void Character::mapCollisions() {
 		SpriteManager::grassEffect->clear();
 	}
 	
-	if((lowWaterTile(m_x +  2, m_y +  2))
-	|| (lowWaterTile(m_x + 14, m_y +  2))
-	|| (lowWaterTile(m_x +  2, m_y + 14))
-	|| (lowWaterTile(m_x + 14, m_y + 14))) {
+	if((lowWaterTile(m_x + 6, m_y + 11))
+	&& (lowWaterTile(m_x + 7, m_y + 11))
+	&& (lowWaterTile(m_x + 6, m_y + 12))
+	&& (lowWaterTile(m_x + 7, m_y + 12))) {
 		SpriteManager::lowWaterEffect->playAnimation(m_x, m_y + 8, 0);
 	} else {
 		SpriteManager::lowWaterEffect->clear();
