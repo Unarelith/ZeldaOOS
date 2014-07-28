@@ -93,7 +93,7 @@ void Map::loadTile(s16 x, s16 y, s8 offsetX, s8 offsetY) {
 void Map::setTile(u16 tileX, u16 tileY, u16 tile) {
 	if(tileX + tileY * m_width < m_width * m_height) {
 		m_data[tileX + tileY * m_width] = tile;
-		loadTile(tileX, tileY);
+		loadTile(m_x * 256 / 16 + tileX, m_y * 192 / 16 + tileY);
 	}
 }
 

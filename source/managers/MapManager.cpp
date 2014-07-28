@@ -238,6 +238,6 @@ bool lowWaterTile(s16 x, s16 y) {
 }
 
 bool grassTile(s16 x, s16 y) {
-	return isTile(x, y, 14);
+	return isTile(x, y, 14) || lowGrassTile(x, y);
 }
 
