@@ -38,12 +38,12 @@ u8 linkAnimations[8][4] = {
 	{11, 15, 15, 15}
 };
 
-s16 linkPosition[4][4][2] {
+/*s16 linkPosition[4][4][2] {
 	{{ 0,  3}, { 0,  3}, { 0,  3}, { 0,  3}},
 	{{ 4,  0}, { 4,  0}, { 4,  0}, { 4,  0}},
 	{{-4,  0}, {-4,  0}, {-4,  0}, {-4,  0}},
 	{{ 0, -3}, { 0, -3}, { 0, -3}, { 0, -3}}
-};
+};*/
 
 Player::Player() : Character(SCREEN_UP, (10 << 4), (5 << 4), 0, 0, SprSize_16x16, 0, 4, 64, 0, linkTiles, linkPal) {
 	// Movement
@@ -53,10 +53,10 @@ Player::Player() : Character(SCREEN_UP, (10 << 4), (5 << 4), 0, 0, SprSize_16x16
 	addAnimation(2, linkAnimations[3], 150);
 	
 	// Sword attack
-	addAnimation(4, linkAnimations[4], 90, linkPosition[0]);
-	addAnimation(4, linkAnimations[5], 90, linkPosition[1]);
-	addAnimation(4, linkAnimations[6], 90, linkPosition[2]);
-	addAnimation(4, linkAnimations[7], 90, linkPosition[3]);
+	addAnimation(4, linkAnimations[4], 90);//, linkPosition[0]);
+	addAnimation(4, linkAnimations[5], 90);//, linkPosition[1]);
+	addAnimation(4, linkAnimations[6], 90);//, linkPosition[2]);
+	addAnimation(4, linkAnimations[7], 90);//, linkPosition[3]);
 	
 	setSpritePriority(m_screen, m_id, 1);
 	
@@ -117,10 +117,39 @@ void Player::update() {
 		useSword();
 	}
 	
+	testCollisions();
+	
+	m_x += m_vx;
+	m_y += m_vy;
+	
+	m_vx = 0;
+	m_vy = 0;
+	
+	if(m_x > 256 - 16 + 2) {
+		MapManager::scrollMaps(1, 0);
+	}
+	else if(m_x < -2) {
+		MapManager::scrollMaps(-1, 0);
+	}
+	else if(m_y > 192 - 16 + 1) {
+		MapManager::scrollMaps(0, 1);
+	}
+	else if(m_y < 0) {
+		MapManager::scrollMaps(0, -1);
+	}
+	
 	if(!(keysHeld() & KEY_A) && m_state == State::Attacking && isAnimationAtEnd(m_direction + 4)) {
 		m_state = State::Idle;
 		
 		CharacterManager::sword->clear();
+	}
+	
+	if(m_state == State::Attacking && CharacterManager::sword->isAnimationAtFrame(m_direction, 3)) {
+		if(m_direction == Direction::Up
+		&& grassTile(m_x + 4, m_y - 6)
+		&& grassTile(m_x + 12, m_y - 6)) {
+			MapManager::currentMap->setTile(int(m_x + 4) >> 4, int(m_y - 10) >> 4, 2);
+		}
 	}
 }
 
@@ -162,27 +191,6 @@ void Player::move() {
 			m_direction = Direction::Down;
 		}
 	}
-	
-	testCollisions();
-	
-	m_x += m_vx;
-	m_y += m_vy;
-	
-	m_vx = 0;
-	m_vy = 0;
-	
-	if(m_x > 256 - 16 + 2) {
-		MapManager::scrollMaps(1, 0);
-	}
-	else if(m_x < -2) {
-		MapManager::scrollMaps(-1, 0);
-	}
-	else if(m_y > 192 - 16 + 1) {
-		MapManager::scrollMaps(0, 1);
-	}
-	else if(m_y < 0) {
-		MapManager::scrollMaps(0, -1);
-	}
 }
 
 void Player::useSword() {
@@ -195,6 +203,21 @@ void Player::useSword() {
 		playAnimation(m_x, m_y, m_direction + 4);
 		
 		CharacterManager::sword->playAnimation(m_x + m_animations[m_direction + 4].position[0][0], m_y + m_animations[m_direction + 4].position[0][1], m_direction);
+		
+		switch(m_direction) {
+			case Direction::Left:
+				m_vx = -4;
+				break;
+			case Direction::Right:
+				m_vx = 4;
+				break;
+			case Direction::Up:
+				m_vy = -3;
+				break;
+			case Direction::Down:
+				m_vy = 3;
+				break;
+		}
 	}
 	else if(!isAnimationAtEnd(m_direction + 4)) {
 		playAnimation(m_x, m_y, m_direction + 4);
@@ -203,6 +226,25 @@ void Player::useSword() {
 			CharacterManager::sword->playAnimation(m_x + m_animations[m_direction + 4].position[0][0], m_y + m_animations[m_direction + 4].position[0][1], m_direction);
 		}
 	} else {
+		if(m_animations[m_direction + 4].isPlaying) {
+			switch(m_direction) {
+				case Direction::Left:
+					m_vx = 4;
+					break;
+				case Direction::Right:
+					m_vx = -4;
+					break;
+				case Direction::Up:
+					m_vy = 3;
+					break;
+				case Direction::Down:
+					m_vy = -3;
+					break;
+			}
+			
+			stopAnimation(m_direction + 4);
+		}
+		
 		drawFrame(m_x, m_y, m_direction);
 		
 		CharacterManager::sword->drawPositionedFrame(m_x, m_y, m_direction, 3);

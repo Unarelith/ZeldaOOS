@@ -34,7 +34,7 @@ u16 MapManager::transitionBg;
 std::vector<Tileset*> MapManager::tilesets;
 std::vector<std::vector<Map*>> MapManager::maps;
 
-Map *MapManager::currentMap = NULL;
+Map *MapManager::currentMap = nullptr;
 
 void MapManager::init() {
 	mapBg = bgInit(0, BgType_Text8bpp, BgSize_T_512x512, 0, 1);
@@ -221,15 +221,23 @@ bool onDoor(s16 x, s16 y) {
 	}
 }
 
-bool stairsTile(s16 x, s16 y) {
-	return MapManager::currentMap->tileset()->info[MapManager::currentMap->getTile(x >> 4, y >> 4)] == 11;
+bool isTile(s16 x, s16 y, u8 tile) {
+	return MapManager::currentMap->tileset()->info[MapManager::currentMap->getTile(x >> 4, y >> 4)] == tile;
 }
 
-bool grassTile(s16 x, s16 y) {
-	return MapManager::currentMap->tileset()->info[MapManager::currentMap->getTile(x >> 4, y >> 4)] == 12;
+bool stairsTile(s16 x, s16 y) {
+	return isTile(x, y, 11);
+}
+
+bool lowGrassTile(s16 x, s16 y) {
+	return isTile(x, y, 12);
 }
 
 bool lowWaterTile(s16 x, s16 y) {
-	return MapManager::currentMap->tileset()->info[MapManager::currentMap->getTile(x >> 4, y >> 4)] == 13;
+	return isTile(x, y, 13);
+}
+
+bool grassTile(s16 x, s16 y) {
+	return isTile(x, y, 14);
 }
 

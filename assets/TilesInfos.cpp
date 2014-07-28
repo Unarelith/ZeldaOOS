@@ -66,8 +66,16 @@ u8 tilesInfo[TILE_NB][4] = {
 	{0, 0,
 	 0, 0},
 	
-	// Tile 12: Grass tile
+	// Tile 12: Low grass tile
 	{0, 0,
-	 0, 0}
+	 0, 0},
+	
+	// Tile 13: Low water tile
+	{0, 0,
+	 0, 0},
+	
+	// Tile 14: Grass tile
+	{1, 1,
+	 1, 1}
 };
 

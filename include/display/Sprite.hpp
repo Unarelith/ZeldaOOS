@@ -40,6 +40,7 @@ class Sprite {
 		void startAnimation(u8 anim);
 		void resetAnimation(u8 anim);
 		
+		bool isAnimationAtFrame(u8 anim, u8 frame);
 		bool isAnimationAtEnd(u8 anim);
 		
 		u16 getAnimationFrame(u8 anim);

@@ -20,7 +20,7 @@
 
 #include <nds.h>
 
-#define TILE_NB 13
+#define TILE_NB 15
 
 extern u8 tilesInfo[TILE_NB][4];
 

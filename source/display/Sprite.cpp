@@ -64,14 +64,21 @@ void Sprite::addAnimation(u8 size, u8 *frames, u16 delay, s16 position[][2]) {
 
 void Sprite::stopAnimation(u8 anim) {
 	m_animations[anim].timer.stop();
+	m_animations[anim].isPlaying = false;
 }
 
 void Sprite::startAnimation(u8 anim) {
 	m_animations[anim].timer.start();
+	m_animations[anim].isPlaying = true;
 }
 
 void Sprite::resetAnimation(u8 anim) {
 	m_animations[anim].timer.reset();
+	m_animations[anim].isPlaying = false;
+}
+
+bool Sprite::isAnimationAtFrame(u8 anim, u8 frame) {
+	return u16(m_animations[anim].timer.time() / m_animations[anim].delay) == frame;
 }
 
 bool Sprite::isAnimationAtEnd(u8 anim) {
@@ -86,7 +93,6 @@ void Sprite::playAnimation(s16 x, s16 y, u8 anim) {
 	if(!m_animations[anim].isPlaying) {
 		resetAnimation(anim);
 		startAnimation(anim);
-		m_animations[anim].isPlaying = true;
 	}
 	
 	if(isAnimationAtEnd(anim)) {

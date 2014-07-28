@@ -99,10 +99,10 @@ void Character::mapCollisions() {
 		m_vy /= 2;
 	}
 	
-	if((grassTile(m_x +  2, m_y +  2))
-	|| (grassTile(m_x + 14, m_y +  2))
-	|| (grassTile(m_x +  2, m_y + 14))
-	|| (grassTile(m_x + 14, m_y + 14))) {
+	if((lowGrassTile(m_x +  2, m_y +  2))
+	|| (lowGrassTile(m_x + 14, m_y +  2))
+	|| (lowGrassTile(m_x +  2, m_y + 14))
+	|| (lowGrassTile(m_x + 14, m_y + 14))) {
 		m_vx /= 4;
 		m_vx *= 3;
 		
