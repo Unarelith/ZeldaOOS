@@ -78,11 +78,11 @@ void Sprite::resetAnimation(u8 anim) {
 }
 
 bool Sprite::isAnimationAtFrame(u8 anim, u8 frame) {
-	return u16(m_animations[anim].timer.time() / m_animations[anim].delay) == frame;
+	return getAnimationFrame(anim) == frame;
 }
 
 bool Sprite::isAnimationAtEnd(u8 anim) {
-	return m_animations[anim].timer.time() / m_animations[anim].delay >= m_animations[anim].size;
+	return getAnimationFrame(anim) >= m_animations[anim].size;
 }
 
 u16 Sprite::getAnimationFrame(u8 anim) {
@@ -100,7 +100,6 @@ void Sprite::playAnimation(s16 x, s16 y, u8 anim) {
 		startAnimation(anim);
 	}
 	
-	//u8 frameToDraw = m_animations[anim].tabAnim[getAnimationFrame(anim)];
-	drawPositionedFrame(x, y, anim, getAnimationFrame(anim));//frameToDraw);
+	drawPositionedFrame(x, y, anim, getAnimationFrame(anim));
 }
 

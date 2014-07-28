@@ -109,18 +109,18 @@ void Character::mapCollisions() {
 		m_vy /= 4;
 		m_vy *= 3;
 		
-		CharacterManager::grassEffect->drawFrame(m_x, m_y, 0);
+		SpriteManager::grassEffect->drawFrame(m_x, m_y, 0);
 	} else {
-		CharacterManager::grassEffect->clear();
+		SpriteManager::grassEffect->clear();
 	}
 	
 	if((lowWaterTile(m_x +  2, m_y +  2))
 	|| (lowWaterTile(m_x + 14, m_y +  2))
 	|| (lowWaterTile(m_x +  2, m_y + 14))
 	|| (lowWaterTile(m_x + 14, m_y + 14))) {
-		CharacterManager::lowWaterEffect->playAnimation(m_x, m_y + 8, 0);
+		SpriteManager::lowWaterEffect->playAnimation(m_x, m_y + 8, 0);
 	} else {
-		CharacterManager::lowWaterEffect->clear();
+		SpriteManager::lowWaterEffect->clear();
 	}
 }
 

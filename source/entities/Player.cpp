@@ -20,7 +20,7 @@
 #include "Tools.hpp"
 #include "MapManager.hpp"
 #include "DoorManager.hpp"
-#include "CharacterManager.hpp"
+#include "Player.hpp"
 
 #include "link.h"
 
@@ -38,13 +38,6 @@ u8 linkAnimations[8][4] = {
 	{11, 15, 15, 15}
 };
 
-/*s16 linkPosition[4][4][2] {
-	{{ 0,  3}, { 0,  3}, { 0,  3}, { 0,  3}},
-	{{ 4,  0}, { 4,  0}, { 4,  0}, { 4,  0}},
-	{{-4,  0}, {-4,  0}, {-4,  0}, {-4,  0}},
-	{{ 0, -3}, { 0, -3}, { 0, -3}, { 0, -3}}
-};*/
-
 Player::Player() : Character(SCREEN_UP, (10 << 4), (5 << 4), 0, 0, SprSize_16x16, 0, 4, 64, 0, linkTiles, linkPal) {
 	// Movement
 	addAnimation(2, linkAnimations[0], 150);
@@ -53,10 +46,10 @@ Player::Player() : Character(SCREEN_UP, (10 << 4), (5 << 4), 0, 0, SprSize_16x16
 	addAnimation(2, linkAnimations[3], 150);
 	
 	// Sword attack
-	addAnimation(4, linkAnimations[4], 90);//, linkPosition[0]);
-	addAnimation(4, linkAnimations[5], 90);//, linkPosition[1]);
-	addAnimation(4, linkAnimations[6], 90);//, linkPosition[2]);
-	addAnimation(4, linkAnimations[7], 90);//, linkPosition[3]);
+	addAnimation(4, linkAnimations[4], 90);
+	addAnimation(4, linkAnimations[5], 90);
+	addAnimation(4, linkAnimations[6], 90);
+	addAnimation(4, linkAnimations[7], 90);
 	
 	setSpritePriority(m_screen, m_id, 1);
 	
@@ -141,14 +134,16 @@ void Player::update() {
 	if(!(keysHeld() & KEY_A) && m_state == State::Attacking && isAnimationAtEnd(m_direction + 4)) {
 		m_state = State::Idle;
 		
-		CharacterManager::sword->clear();
+		SpriteManager::sword->clear();
 	}
 	
-	if(m_state == State::Attacking && CharacterManager::sword->isAnimationAtFrame(m_direction, 3)) {
+	if(m_state == State::Attacking
+	&& SpriteManager::sword->isAnimationAtFrame(m_direction, 3)) {
 		if(m_direction == Direction::Up
 		&& grassTile(m_x + 4, m_y - 6)
 		&& grassTile(m_x + 12, m_y - 6)) {
 			MapManager::currentMap->setTile(int(m_x + 4) >> 4, int(m_y - 10) >> 4, 2);
+			SpriteManager::addGrassDestroyAnimation(int(m_x + 4) >> 4, int(m_y - 10) >> 4);
 		}
 	}
 }
@@ -202,7 +197,7 @@ void Player::useSword() {
 		
 		playAnimation(m_x, m_y, m_direction + 4);
 		
-		CharacterManager::sword->playAnimation(m_x + m_animations[m_direction + 4].position[0][0], m_y + m_animations[m_direction + 4].position[0][1], m_direction);
+		SpriteManager::sword->playAnimation(m_x + m_animations[m_direction + 4].position[0][0], m_y + m_animations[m_direction + 4].position[0][1], m_direction);
 		
 		switch(m_direction) {
 			case Direction::Left:
@@ -222,8 +217,8 @@ void Player::useSword() {
 	else if(!isAnimationAtEnd(m_direction + 4)) {
 		playAnimation(m_x, m_y, m_direction + 4);
 		
-		if(!CharacterManager::sword->isAnimationAtEnd(m_direction)) {
-			CharacterManager::sword->playAnimation(m_x + m_animations[m_direction + 4].position[0][0], m_y + m_animations[m_direction + 4].position[0][1], m_direction);
+		if(!SpriteManager::sword->isAnimationAtEnd(m_direction)) {
+			SpriteManager::sword->playAnimation(m_x + m_animations[m_direction + 4].position[0][0], m_y + m_animations[m_direction + 4].position[0][1], m_direction);
 		}
 	} else {
 		if(m_animations[m_direction + 4].isPlaying) {
@@ -247,7 +242,7 @@ void Player::useSword() {
 		
 		drawFrame(m_x, m_y, m_direction);
 		
-		CharacterManager::sword->drawPositionedFrame(m_x, m_y, m_direction, 3);
+		SpriteManager::sword->drawPositionedFrame(m_x, m_y, m_direction, 3);
 	}
 }
 

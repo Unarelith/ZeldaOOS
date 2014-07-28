@@ -18,7 +18,7 @@
 #ifndef CHARACTER_HPP_
 #define CHARACTER_HPP_
 
-#include "Sprite.hpp"
+#include "SpriteManager.hpp"
 
 class Character : public Sprite {
 	public:

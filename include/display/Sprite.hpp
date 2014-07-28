@@ -47,6 +47,8 @@ class Sprite {
 		
 		void playAnimation(s16 x, s16 y, u8 anim);
 		
+		void setID(u8 id) { m_id = id; }
+		
 	protected:
 		u8 m_screen;
 		

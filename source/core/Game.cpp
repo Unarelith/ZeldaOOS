@@ -40,10 +40,14 @@ Game::Game() {
 	
 	CharacterManager::init();
 	
+	SpriteManager::init();
+	
 	m_continue = true;
 }
 
 Game::~Game() {
+	SpriteManager::free();
+	
 	CharacterManager::free();
 	
 	DoorManager::free();
@@ -85,6 +89,8 @@ void Game::mainLoop() {
 	
 	while(1) {
 		scanKeys();
+		
+		SpriteManager::updateAnimations();
 		
 		CharacterManager::player->update();
 		
