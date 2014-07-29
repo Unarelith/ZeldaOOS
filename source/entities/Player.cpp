@@ -144,6 +144,7 @@ void Player::update() {
 		&& grassTile(m_x + 6, m_y - 4)) {
 			MapManager::currentMap->setDisplayTile(int(m_x + 4) >> 4, int(m_y - 4) >> 4, 2);
 			SpriteManager::addGrassDestroyAnimation(int(m_x + 4) >> 4, int(m_y - 4) >> 4);
+			if(rand() % 5 >= 1) SpriteManager::addHeartAnimation(int(m_x + 4) >> 4, int(m_y - 4) >> 4);
 		}
 		
 		if(m_direction == Direction::Down
@@ -151,6 +152,7 @@ void Player::update() {
 		&& grassTile(m_x + 6, m_y + 16 + 4)) {
 			MapManager::currentMap->setDisplayTile(int(m_x + 4) >> 4, int(m_y + 16 + 4) >> 4, 2);
 			SpriteManager::addGrassDestroyAnimation(int(m_x + 4) >> 4, int(m_y + 16 + 4) >> 4);
+			if(rand() % 5 >= 1) SpriteManager::addHeartAnimation(int(m_x + 4) >> 4, int(m_y + 16 + 4) >> 4);
 		}
 		
 		if(m_direction == Direction::Left
@@ -158,6 +160,7 @@ void Player::update() {
 		&& grassTile(m_x - 5, m_y + 11)) {
 			MapManager::currentMap->setDisplayTile(int(m_x - 5) >> 4, int(m_y + 10) >> 4, 2);
 			SpriteManager::addGrassDestroyAnimation(int(m_x - 5) >> 4, int(m_y + 10) >> 4);
+			if(rand() % 5 >= 1) SpriteManager::addHeartAnimation(int(m_x - 5) >> 4, int(m_y + 10) >> 4);
 		}
 		
 		if(m_direction == Direction::Right
@@ -165,6 +168,7 @@ void Player::update() {
 		&& grassTile(m_x + 16 + 5, m_y + 11)) {
 			MapManager::currentMap->setDisplayTile(int(m_x + 16 + 5) >> 4, int(m_y + 10) >> 4, 2);
 			SpriteManager::addGrassDestroyAnimation(int(m_x + 16 + 5) >> 4, int(m_y + 10) >> 4);
+			if(rand() % 5 >= 1) SpriteManager::addHeartAnimation(int(m_x + 16 + 5) >> 4, int(m_y + 10) >> 4);
 		}
 	}
 }

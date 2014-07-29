@@ -19,6 +19,8 @@
 
 #include <nds.h>
 #include <filesystem.h>
+#include <math.h>
+#include <time.h>
 
 #include "MapManager.hpp"
 #include "DoorManager.hpp"
@@ -27,6 +29,8 @@
 
 Game::Game() {
 	defaultExceptionHandler();
+	
+	srand(time(NULL));
 	
 	initNitroFS();
 	initVideo();
@@ -80,8 +84,8 @@ void Game::initVideo() {
 }
 
 void Game::initSpriteSystem() {
-	enableSprites(0, 0);
-	enableSprites(1, 0);
+	enableSprites(SCREEN_UP, 0);
+	enableSprites(SCREEN_DOWN, 0);
 }
 
 void Game::mainLoop() {

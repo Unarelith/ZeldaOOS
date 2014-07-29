@@ -27,11 +27,13 @@ namespace SpriteManager {
 	void updateAnimations();
 	
 	void addGrassDestroyAnimation(u16 tileX, u16 tileY);
+	void addHeartAnimation(u16 tileX, u16 tileY);
 	
 	extern Sprite *sword;
 	extern Sprite *grassDestroy;
 	extern Sprite *grassEffect;
 	extern Sprite *lowWaterEffect;
+	extern Sprite *heart;
 	
 	extern std::vector<std::pair<Sprite, u32>> tmpanims;
 	extern std::vector<std::pair<Sprite, u32>> anims;
