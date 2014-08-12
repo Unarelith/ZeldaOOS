@@ -1,0 +1,9 @@
+* Metatiles are important for different sprites sizes.
+  Example:
+	16x16: 2x2 metatiles
+	32x32: 4x4 metatiles
+
+* libs5.h defines SCREEN_UP and SCREEN_DOWN
+
+* Scrolling is a lot slower in the original Zelda!
+

@@ -1,0 +1,19 @@
+* Get real coordinate ( with table 'position' or hardware? ) of sprites with a function, then
+  use them for collisions between Player and heart
+* Render stats on bottom screen, and test hearts
+* Add rupees in the stats and in the map
+* Work on Sound and add sound effects for hearts and rupees
+
+* Improve collisions for sword and grass tiles
+
+* Player must move while using sword
+	=> px, py from Radonia
+* Check sword speed from the original game
+* Sword change color while charging
+
+* Add States objects
+	=> MapState
+	=> DialogState
+	=> TitleScreenState
+	=> MenuState
+
