@@ -1,3 +1,13 @@
- - Maps intérieures
- - Gestion des armes
- - À voir si j'ai le temps: Améliorer le reader.
+- Dialogs
+- Larger maps
+- Enemies
+- Special tiles
+- Inventory
+- Weapons
+- Stats ( Lifes, money )
+
+(
+- s_ instead of m_ in sprites.cpp sprites.h
+- Improve classes NPC Player and Sprite because there is similar functions in some classes
+- rename mapManager to handler
+)

@@ -1,26 +1,27 @@
 /*---------------------------------------------------------------------------------
 
-    The Legend of Zelda: Oracle of Secrets
-    Copyright (C) 2011 Pixelda quent42340@gmail.com
-
-    This program is free software: you can redistribute it and/or modify
-    it under the terms of the GNU General Public License as published by
-    the Free Software Foundation, either version 3 of the License, or
-    (at your option) any later version.
-
-    This program is distributed in the hope that it will be useful,
-    but WITHOUT ANY WARRANTY; without even the implied warranty of
-    MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
-    GNU General Public License for more details.
-
-    You should have received a copy of the GNU General Public License
-    along with this program.  If not, see <http://www.gnu.org/licenses/>.
+	Eleandra
+	Copyright (C) 2012 Quentin BAZIN quent42340@gmail.com
+	
+	This program is free software: you can redistribute it and/or modify
+	it under the terms of the GNU General Public License as published by
+	the Free Software Foundation, either version 3 of the License, or
+	(at your option) any later version.
+	
+	This program is distributed in the hope that it will be useful,
+	but WITHOUT ANY WARRANTY; without even the implied warranty of
+	MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+	GNU General Public License for more details.
+	
+	You should have received a copy of the GNU General Public License
+	along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
 ---------------------------------------------------------------------------------*/
-#include "main.h"
-#include "gfx.h"
+#include <nds.h>
+#include "timer.h"
+#include "sprites.h"
 
-Sprite_Animation::Sprite_Animation(int size, int* tabAnim, int delay) {
+Sprite_Animation::Sprite_Animation(int size, int *tabAnim, int delay) {
 	s_size = size;
 	s_tabAnim = tabAnim;
 	s_delay = delay;
@@ -30,35 +31,6 @@ Sprite_Animation::Sprite_Animation(int size, int* tabAnim, int delay) {
 
 Sprite_Animation::~Sprite_Animation() {
 	delete s_tmr;
-}
-
-void Sprite::loadAllIcons(u8 screen) {
-	loadTiles(screen, 0, 2, SprColors_16, dongeonkeyTiles);
-	loadTiles(screen, 2, 2, SprColors_16, geshaTiles);
-	loadTiles(screen, 4, 2, SprColors_16, ringTiles);
-	loadTiles(screen, 6, 5, SprColors_16, seedsTiles);
-	loadTiles(screen, 9, 1, SprColors_16, weapon_levelTiles);
-	loadTiles(screen, 10, 2, SprColors_16, bombTiles);
-	loadTiles(screen, 12, 2, SprColors_16, boomrangL1Tiles);
-	loadTiles(screen, 14, 2, SprColors_16, boomrangL2Tiles);
-	loadTiles(screen, 16, 2, SprColors_16, bowTiles);
-	loadTiles(screen, 18, 2, SprColors_16, caneL1Tiles);
-	loadTiles(screen, 20, 2, SprColors_16, caneL2Tiles);
-	loadTiles(screen, 22, 2, SprColors_16, catapultTiles);
-	loadTiles(screen, 24, 2, SprColors_16, featherL1Tiles);
-	loadTiles(screen, 26, 4, SprColors_16, fluteTiles);
-	loadTiles(screen, 30, 2, SprColors_16, grapnelTiles);
-	loadTiles(screen, 32, 2, SprColors_16, seedbagTiles);
-	loadTiles(screen, 34, 2, SprColors_16, shieldL1Tiles);
-	loadTiles(screen, 36, 2, SprColors_16, shieldL2Tiles);
-	loadTiles(screen, 38, 2, SprColors_16, shieldL3Tiles);
-	loadTiles(screen, 40, 2, SprColors_16, shovelTiles);
-	loadTiles(screen, 42, 2, SprColors_16, strenghL1Tiles);
-	loadTiles(screen, 44, 2, SprColors_16, strenghL2Tiles);
-	loadTiles(screen, 46, 2, SprColors_16, swordL1Tiles);
-	loadTiles(screen, 48, 2, SprColors_16, swordL2Tiles);
-	loadTiles(screen, 50, 2, SprColors_16, swordL3Tiles);
-	loadPalette(screen, 0, gfxPal);
 }
 
 Sprite::Sprite(u8 screen, int id, s5_dimension size, u8 baseTile, int tileSize) {
@@ -89,7 +61,7 @@ void Sprite::drawFrame(s16 x, s16 y, int frame, u8 palette) {
 	drawSprite(s_screen, s_id, x, y, s_size, s_color, s_baseTile + frame * s_tileSize, palette);
 }
 
-void Sprite::addAnimation(int size, int* tabAnim, int delay) {
+void Sprite::addAnimation(int size, int *tabAnim, int delay) {
 	Sprite_Animation* tmp = new Sprite_Animation(size, tabAnim, delay);
 	s_animations.push_back(tmp);
 }
@@ -128,3 +100,4 @@ void Sprite::playAnimation(s16 x, s16 y, int anim, u8 palette) {
 	int animToDraw = s_animations.at(anim)->tabAnim()[(int)(s_animations.at(anim)->tmr()->time() / s_animations.at(anim)->delay())];
 	drawFrame(x, y, animToDraw, palette); // Draw the frame
 }
+

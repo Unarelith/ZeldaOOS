@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <map version="1.0" orientation="orthogonal" width="16" height="12" tilewidth="16" tileheight="16">
  <tileset firstgid="1" name="plain" tilewidth="16" tileheight="16">
-  <image source="../../../../devkitPro/projects/ZeldaOOS/graphics/tilesets/plain.png" trans="ff00ff" width="256" height="256"/>
+  <image source="../graphics/tilesets/plain.png" trans="ff00ff" width="256" height="256"/>
  </tileset>
  <layer name="Calque 1" width="16" height="12">
   <data encoding="csv">

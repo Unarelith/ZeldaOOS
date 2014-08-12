@@ -1,2 +1,5 @@
 reader: reader.c
-	gcc -o $@ `xml2-config --cflags` $< `xml2-config --libs`
+	gcc -g -o $@ `xml2-config --cflags` $< `xml2-config --libs`
+
+clean:
+	rm -f reader

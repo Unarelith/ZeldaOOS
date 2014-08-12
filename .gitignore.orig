@@ -1,0 +1,13 @@
+build
+*.elf
+*.nds
+<<<<<<< HEAD
+*.kate-swp
+*~
+*.img
+=======
+*~
+*.img
+*.swp
+>>>>>>> Eleandra/master
+

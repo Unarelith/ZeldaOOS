@@ -1,48 +1,48 @@
 /*---------------------------------------------------------------------------------
 
-    The Legend of Zelda: Oracle of Secrets
-    Copyright (C) 2011 Pixelda quent42340@gmail.com
-
-    This program is free software: you can redistribute it and/or modify
-    it under the terms of the GNU General Public License as published by
-    the Free Software Foundation, either version 3 of the License, or
-    (at your option) any later version.
-
-    This program is distributed in the hope that it will be useful,
-    but WITHOUT ANY WARRANTY; without even the implied warranty of
-    MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
-    GNU General Public License for more details.
-
-    You should have received a copy of the GNU General Public License
-    along with this program.  If not, see <http://www.gnu.org/licenses/>.
+	Eleandra
+	Copyright (C) 2012 Quentin BAZIN quent42340@gmail.com
+	
+	This program is free software: you can redistribute it and/or modify
+	it under the terms of the GNU General Public License as published by
+	the Free Software Foundation, either version 3 of the License, or
+	(at your option) any later version.
+	
+	This program is distributed in the hope that it will be useful,
+	but WITHOUT ANY WARRANTY; without even the implied warranty of
+	MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+	GNU General Public License for more details.
+	
+	You should have received a copy of the GNU General Public License
+	along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
 ---------------------------------------------------------------------------------*/
-
 #ifndef MAP_H
 #define MAP_H
 
+#include <vector>
+
 typedef struct {
-	const u32* tiles;
-	const u16* palette;
-	u16* info;
+	const u32 *tiles;
+	u32 tilesLen;
+	const u16 *palette;
+	u32 paletteLen;
+	u16 *info;
 } Tileset;
 
 class Map {
 	public:
-		// Construct & Destruct
-		Map(Tileset* tileset, char* filename, u16 width, u16 height, u16 tileWidth, u16 tileHeight, u8 bg);
+		Map(Tileset *tileset, char *filename, u16 width, u16 height, u16 tileWidth, u16 tileHeight, u8 bg, s16 group = -1, s16 mapX = -1, s16 mapY = -1);
 		~Map();
-		
+			
 		// Initialize the map
 		void init();
-		
-		// Draw the map
-		void draw();
+		void initOTF();
 		
 		// Scroll the map
 		void scroll(s16 xx, s16 yy);
 		
-		// Indoor transition
+		// Outdoor to indoor transition
 		void indoorTransInit();
 		void indoorTrans();
 		
@@ -51,15 +51,17 @@ class Map {
 		
 		// Get functions
 		u16 getTile(s16 tileX, s16 tileY); // Get a tile with coordinates
-		u16* map() const { return s_map; }
-		Map* nextMap() const { return s_nextMap; }
-		u16 width() const { return s_width; }
-		u16 height() const { return s_height; }
-		Tileset* tileset() const { return s_tileset; }
-		u8 bg() const { return s_bg; }
-		int id() const { return s_id; }
-		u16 mapX() const { return s_mapX; }
-		u16 mapY() const { return s_mapY; }
+		u16 *map() const { return m_map; }
+		Map *nextMap() const { return m_nextMap; }
+		u16 width() const { return m_width; }
+		u16 height() const { return m_height; }
+		Tileset *tileset() const { return m_tileset; }
+		u8 bg() const { return m_bg; }
+		u16 id() const { return m_id; }
+		s16 mapX() const { return m_mapX; }
+		void mapX(s16 mapX) { m_mapX = mapX; }
+		s16 mapY() const { return m_mapY; }
+		void mapY(s16 mapY) { m_mapY = mapY; }
 		
 		// Number of maps
 		static int nbMaps;
@@ -70,40 +72,53 @@ class Map {
 		static s16 scrollX;
 		static s16 scrollY;
 		
+		static std::vector<std::vector<Map*>> groups;
+		
+		// NPC management
+		void drawNPCs();
+		static NPC **NPCs;
+		
 	private:
 		// Map id
-		int s_id;
+		u16 m_id;
 		
 		// Map position
-		u16 s_mapX;
-		u16 s_mapY;
+		s16 m_mapX;
+		s16 m_mapY;
 		
 		// Map
-		u16* s_map;
+		u16 *m_map;
 		
 		// Next map
-		Map* s_nextMap;
+		Map *m_nextMap;
 		
 		// Map filename
-		char* s_filename;
+		char *m_filename;
 		
 		// Map bg
-		u8 s_bg;
+		u8 m_bg;
 		
 		// Tileset
-		Tileset* s_tileset;
+		Tileset *m_tileset;
 		
 		// Map size
-		u16 s_width;
-		u16 s_height;
+		u16 m_width;
+		u16 m_height;
 		
 		// Tile size
-		u16 s_tileWidth;
-		u16 s_tileHeight;
+		u16 m_tileWidth;
+		u16 m_tileHeight;
+		
+		// Map group
+		s16 m_group;
+		s16 m_groupID;
 		
 		// Put tile
-		void putTile(s16 x, s16 y, const Map* map, s16 mapX, s16 mapY);
+		void putTile(s16 x, s16 y, const Map *map, s16 mapX, s16 mapY);
 		
+		// NPC management
+		int m_NPCnb;
+		NPC **m_NPCs;
 };
 
 #endif // MAP_H

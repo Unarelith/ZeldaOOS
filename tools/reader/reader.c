@@ -1,12 +1,12 @@
-/*
- *  xmlReader and Converter for Tiled map-editor
- * Quent42340
- * see COPYING
- * usage: reader <input map> <output map>
- * example: reader map.tmx map.map
- *
- */
-
+//---------------------------------------------------------
+//	
+//	xmlReader and converter for Tiled map-editor
+//	by Quent42340
+//	see COPYING
+//	usage: reader <input map> <output map>
+//	example: reader map.tmx map.map
+//	
+//---------------------------------------------------------
 #include <stdio.h>
 #include <string.h>
 #include <libxml/xmlreader.h>
@@ -14,6 +14,7 @@
 #ifdef LIBXML_READER_ENABLED
 
 char* outfilepath;
+unsigned short width, height;
 
 /**
  * processNode:
@@ -24,61 +25,54 @@ char* outfilepath;
 static void
 processNode(xmlTextReaderPtr reader) {
     const xmlChar *name, *value;
-
+	
     name = xmlTextReaderConstName(reader);
     if (name == NULL)
 	name = BAD_CAST "--";
 
-    value = xmlTextReaderConstValue(reader);
-
+	value = xmlTextReaderConstValue(reader);
+	
     /*printf("%d %d %s %d %d\n", 
 	    xmlTextReaderDepth(reader),
 	    xmlTextReaderNodeType(reader),
 	    name,
 	    xmlTextReaderIsEmptyElement(reader),
 	    xmlTextReaderHasValue(reader));*/
-		
+	
+	if((strcmp(name, "layer") == 0) && (xmlTextReaderNodeType(reader) == 1)) {
+		width = (unsigned short)atof(xmlTextReaderGetAttribute(reader, "width"));
+		height = (unsigned short)atof(xmlTextReaderGetAttribute(reader, "height"));
+	}
+	
     if(value != NULL) {
 		if(xmlTextReaderNodeType(reader) == 3) {
-			//printf("%s", xmlStrsub(value, 1, xmlStrlen(value)));
-			unsigned short* table = (unsigned short*)malloc(xmlStrlen(value) / 2 * sizeof(unsigned short));
-			char* tmp = (char*)malloc(5 * sizeof(char));
-			char* preout = (char*)malloc(xmlStrlen(value) * sizeof(char));
-			char* out = (char*)malloc(xmlStrlen(value) * sizeof(char));
-			char* buffer = (char*)malloc(sizeof(char) * xmlStrlen(value) + 1);
-			sprintf(buffer, "%s", value);
+			unsigned short* table = malloc(width * height * sizeof(unsigned short));
+			
 			// (Now buffer contains the map file)
 			int counter = 0;
-			char* token;
-			unsigned short tile;
 			const char delimiters[] = ",";
-			token = strtok(buffer, delimiters);
-			tile = (unsigned short)atof(token);
+			char* token = strtok((char*)value, delimiters);
+			unsigned short tile = (unsigned short)atof(token);
+			
 			table[counter] = tile - 1;
-			sprintf(tmp, "%d,", table[counter]);
-			strncat(preout, tmp, strlen(tmp));
 			counter++;
-			while(token != NULL){
+			
+			while(token != NULL) {
 				token = strtok(NULL, delimiters);
-				if(token != NULL){
+				if(token != NULL) {
 					tile = (unsigned short)atof(token);
 					table[counter] = tile - 1;
-					sprintf(tmp, "%d,", table[counter]);
-					strncat(preout, tmp, strlen(tmp));
 				}
 				counter++;
 			}
-			free(buffer);
-			//printf("%s\n", strncpy(out, preout, strlen(preout) - 1));
 			
-			FILE* file;
-			file = fopen(outfilepath, "wb");
-			//fwrite(out, sizeof(out), 1, file);
-			//fprintf(file, "%s", strncpy(out, preout, strlen(preout) - 1));
+			FILE* file = fopen(outfilepath, "wb");
 			fwrite(table, 2, counter - 1, file);
 			fclose(file);
+			
+			free(table);
 		}
-    }
+	}
 }
 
 /**
@@ -89,10 +83,8 @@ processNode(xmlTextReaderPtr reader) {
  */
 static void
 streamFile(const char *filename) {
-    xmlTextReaderPtr reader;
+    xmlTextReaderPtr reader = xmlReaderForFile(filename, NULL, 0);
     int ret;
-
-    reader = xmlReaderForFile(filename, NULL, 0);
     if (reader != NULL) {
         ret = xmlTextReaderRead(reader);
         while (ret == 1) {

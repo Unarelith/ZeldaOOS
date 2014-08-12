@@ -1,23 +1,33 @@
 /*---------------------------------------------------------------------------------
 
-    The Legend of Zelda: Oracle of Secrets
-    Copyright (C) 2011 Pixelda quent42340@gmail.com
-
-    This program is free software: you can redistribute it and/or modify
-    it under the terms of the GNU General Public License as published by
-    the Free Software Foundation, either version 3 of the License, or
-    (at your option) any later version.
-
-    This program is distributed in the hope that it will be useful,
-    but WITHOUT ANY WARRANTY; without even the implied warranty of
-    MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
-    GNU General Public License for more details.
-
-    You should have received a copy of the GNU General Public License
-    along with this program.  If not, see <http://www.gnu.org/licenses/>.
+	Eleandra
+	Copyright (C) 2012 Quentin BAZIN quent42340@gmail.com
+	
+	This program is free software: you can redistribute it and/or modify
+	it under the terms of the GNU General Public License as published by
+	the Free Software Foundation, either version 3 of the License, or
+	(at your option) any later version.
+	
+	This program is distributed in the hope that it will be useful,
+	but WITHOUT ANY WARRANTY; without even the implied warranty of
+	MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+	GNU General Public License for more details.
+	
+	You should have received a copy of the GNU General Public License
+	along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
 ---------------------------------------------------------------------------------*/
-#include "main.h"
+#include <nds.h>
+#include <cstdio>
+#include "timer.h"
+#include "sprites.h"
+#include "player.h"
+#include "NPC.h"
+#include "map.h"
+#include "mapManager.h"
+#include "link.h"
+#include "door.h"
+#include "game.h"
 
 // Fill animations table
 int animations[12][4] = {
@@ -34,16 +44,16 @@ int animations[12][4] = {
 	{22,26},
 	{23,27}
 };
+
+Player::Player() : Sprite(SCREEN_UP, 0, SprSize_16x16, 0) {
+	loadTiles(SCREEN_UP, 0, 32, SprColors_16, linkTiles);
+	loadPalette(SCREEN_UP, 0, linkPal);
 	
-Player::Player() : Sprite(SCREEN_DOWN, 0, SprSize_16x16, 0) {
-	loadTiles(SCREEN_DOWN, 0, 32, SprColors_16, linkTiles);
-	loadPalette(SCREEN_DOWN, 0, linkPal);
-	
-	s_x = 240;
-	s_y = 128;
-	s_vx = 0;
-	s_vy = 0;
-	s_direction = DIR_LEFT;
+	m_x = 240;
+	m_y = 128;
+	m_vx = 0;
+	m_vy = 0;
+	m_direction = DIR_LEFT;
 	
 	// Add animations to player's sprite
 	addAnimation(2, animations[0], 100); // Down
@@ -90,113 +100,154 @@ bool Player::inTiles(s16 caseX, s16 caseY, u16 t[]) {
 	}
 }
 
+bool inDoor = false;
+
+void Player::doorCollisions() {
+	printf("INDOOR: %d\n", inDoor);
+	if(((m_vy < 0) && ((inTiles((m_x + 5) >> 4, (m_y + 12) >> 4, doorUp)) || (inTiles((m_x + 10) >> 4, (m_y + 12) >> 4, doorUp))))
+	|| ((m_vy > 0) && ((inTiles((m_x + 5) >> 4, m_y >> 4, doorDown)) || (inTiles((m_x + 10) >> 4, m_y >> 4, doorDown))))
+	|| ((inTiles((m_x + 8) >> 4, (m_y + 8) >> 4, changeMapTiles)) && (!inDoor))) {
+		m_vx = 0;
+		m_vy = 0;
+		s16 doorID = findDoorID(m_x, m_y, Game::currentMap->id());
+		if(doorID == -1) {
+			printf("Fatal error. Code: 02\n");
+			printf("%d ; %d", m_x >> 4, m_y >> 4);
+			while(1) swiWaitForVBlank();
+		}
+		printf("door id: %d\n", doorID);
+		Game::currentMap->indoorTransInit();
+		Game::currentMap = Game::maps[Game::doors[Game::doors[doorID]->nextDoorID]->mapID];
+		m_x = Game::doors[Game::doors[doorID]->nextDoorID]->x;
+		m_y = Game::doors[Game::doors[doorID]->nextDoorID]->y;
+		m_direction = Game::doors[Game::doors[doorID]->nextDoorID]->direction;
+		draw();
+		Map::scrollX = Game::currentMap->mapX() * 256;
+		Map::scrollY = Game::currentMap->mapY() * 192;
+		bgSetScroll(Game::currentMap->bg(), Map::scrollX, Map::scrollY);
+		bgUpdate();
+		Game::currentMap->initOTF();
+		Game::currentMap->indoorTrans();
+		inDoor = true;
+	}
+	if((!inTiles((m_x + 2) >> 4, (m_y + 2) >> 4, changeMapTiles))
+	&& (!inTiles((m_x + 14) >> 4, (m_y + 14) >> 4, changeMapTiles))) {
+		inDoor = false;
+	}
+}
+
 void Player::testCollisions() {
 	// Right
-	if ((s_vx > 0) && ((!passable((s_x + 12) >> 4, (s_y + 8) >> 4)) || (!passable((s_x + 12) >> 4, (s_y + 13) >> 4)))) {
-		s_vx = 0;
+	if((m_vx > 0) && ((!passable((m_x + 12) >> 4, (m_y + 8) >> 4)) || (!passable((m_x + 12) >> 4, (m_y + 13) >> 4)))) {
+		m_vx = 0;
 		
 		// Obstacle up
-		if ((!passable((s_x + 12) >> 4, (s_y + 8) >> 4)) && passable((s_x + 12) >> 4, (s_y + 13) >> 4)) {
-			if (s_vy == 0) s_vy = 1;
+		if((!passable((m_x + 12) >> 4, (m_y + 8) >> 4)) && passable((m_x + 12) >> 4, (m_y + 13) >> 4)) {
+			if(m_vy == 0) m_vy = 1;
 		}
 		// Obstacle down
-		if ((!passable((s_x + 12) >> 4, (s_y + 13) >> 4)) && passable((s_x + 12) >> 4, (s_y + 8) >> 4)) {
-			if (s_vy == 0) s_vy = -1;
+		if((!passable((m_x + 12) >> 4, (m_y + 13) >> 4)) && passable((m_x + 12) >> 4, (m_y + 8) >> 4)) {
+			if(m_vy == 0) m_vy = -1;
 		}
 	}
+	
 	// Left
-	if ((s_vx < 0) && ((!passable((s_x + 3) >> 4, (s_y + 8) >> 4)) || (!passable((s_x + 3) >> 4, (s_y + 13) >> 4)))) {
-		s_vx = 0;
+	if((m_vx < 0) && ((!passable((m_x + 3) >> 4, (m_y + 8) >> 4)) || (!passable((m_x + 3) >> 4, (m_y + 13) >> 4)))) {
+		m_vx = 0;
 		
 		// Obstacle up
-		if ((!passable((s_x + 3) >> 4, (s_y + 8) >> 4)) && passable((s_x + 3) >> 4, (s_y + 13) >> 4)) {
-			if (s_vy == 0) s_vy = 1;
+		if((!passable((m_x + 3) >> 4, (m_y + 8) >> 4)) && passable((m_x + 3) >> 4, (m_y + 13) >> 4)) {
+			if(m_vy == 0) m_vy = 1;
 		}
 		// Obstacle down
-		if ((!passable((s_x + 3) >> 4, (s_y + 13) >> 4)) && passable((s_x + 3) >> 4, (s_y + 8) >> 4)) {
-			if (s_vy == 0) s_vy = -1;
+		if((!passable((m_x + 3) >> 4, (m_y + 13) >> 4)) && passable((m_x + 3) >> 4, (m_y + 8) >> 4)) {
+			if(m_vy == 0) m_vy = -1;
 		}
 	}
+	
 	// Up
-	if ((s_vy < 0) && ((!passable((s_x + 5) >> 4, (s_y + 5) >> 4)) || (!passable((s_x + 10) >> 4, (s_y + 5) >> 4)))) {
-		s_vy = 0;
+	if((m_vy < 0) && ((!passable((m_x + 5) >> 4, (m_y + 5) >> 4)) || (!passable((m_x + 10) >> 4, (m_y + 5) >> 4)))) {
+		m_vy = 0;
 		
 		// Obstacle left
-		if ((!passable((s_x + 5) >> 4, (s_y + 5) >> 4)) && passable((s_x + 10) >> 4, (s_y + 5) >> 4)) {
-			if (s_vx == 0) s_vx = 1;
+		if((!passable((m_x + 5) >> 4, (m_y + 5) >> 4)) && passable((m_x + 10) >> 4, (m_y + 5) >> 4)) {
+			if(m_vx == 0) m_vx = 1;
 		}
 		// Obstacle right
-		if ((!passable((s_x + 10) >> 4, (s_y + 5) >> 4)) && passable((s_x + 5) >> 4, (s_y + 5) >> 4)) {
-			if (s_vx == 0) s_vx = -1;
+		if((!passable((m_x + 10) >> 4, (m_y + 5) >> 4)) && passable((m_x + 5) >> 4, (m_y + 5) >> 4)) {
+			if(m_vx == 0) m_vx = -1;
 		}
 	}
+	
 	// Down
-	if ((s_vy > 0) && ((!passable((s_x + 5) >> 4, (s_y + 15) >> 4)) || (!passable((s_x + 10) >> 4, (s_y + 15) >> 4)))) {
-		s_vy = 0;
+	if((m_vy > 0) && ((!passable((m_x + 5) >> 4, (m_y + 15) >> 4)) || (!passable((m_x + 10) >> 4, (m_y + 15) >> 4)))) {
+		m_vy = 0;
+		
+		printf("Truc");
 		
 		// Obstacle left
-		if ((!passable((s_x + 5) >> 4, (s_y + 15) >> 4)) && passable((s_x + 10) >> 4, (s_y + 15) >> 4)) {
-			if (s_vx == 0) s_vx = 1;
+		if((!passable((m_x + 5) >> 4, (m_y + 15) >> 4)) && passable((m_x + 10) >> 4, (m_y + 15) >> 4)) {
+			if(m_vx == 0) m_vx = 1;
 		}
 		// Obstacle right
-		if ((!passable((s_x + 10) >> 4, (s_y + 15) >> 4)) && passable((s_x + 5) >> 4, (s_y + 15) >> 4)) {
-			if (s_vx == 0) s_vx = -1;
+		if((!passable((m_x + 10) >> 4, (m_y + 15) >> 4)) && passable((m_x + 5) >> 4, (m_y + 15) >> 4)) {
+			if(m_vx == 0) m_vx = -1;
 		}
 	}
 }
 
 void Player::move() {
 	if((keysHeld() & KEY_UP)) {
-		s_vy = -1; // Set vertical speed vector negative
+		m_vy = -1; // Set vertical speed vector negative
 		
 		if((!(keysHeld() & KEY_DOWN)) && (!(keysHeld() & KEY_LEFT)) && (!(keysHeld() & KEY_RIGHT))) {
-			s_direction = DIR_UP; // Set direction to up
+			m_direction = DIR_UP; // Set direction to up
 		}
 	}
 	
 	if((keysHeld() & KEY_DOWN)) {
-		s_vy = 1; // Set vertical speed vector positive
+		m_vy = 1; // Set vertical speed vector positive
 		
 		if((!(keysHeld() & KEY_UP)) && (!(keysHeld() & KEY_LEFT)) && (!(keysHeld() & KEY_RIGHT))) {
-			s_direction = DIR_DOWN; // Set direction to down
+			m_direction = DIR_DOWN; // Set direction to down
 		}
 	}
 	
 	if((keysHeld() & KEY_LEFT)) {
-		s_vx = -1; // Set horizontal speed vector negative
+		m_vx = -1; // Set horizontal speed vector negative
 		
 		if((!(keysHeld() & KEY_UP)) && (!(keysHeld() & KEY_DOWN)) && (!(keysHeld() & KEY_RIGHT))) {
-			s_direction = DIR_LEFT; // Set direction to left
+			m_direction = DIR_LEFT; // Set direction to left
 		}
 	}
 	
 	if((keysHeld() & KEY_RIGHT)) {
-		s_vx = 1; // Set horizontal speed vector positive
+		m_vx = 1; // Set horizontal speed vector positive
 		
 		if((!(keysHeld() & KEY_UP)) && (!(keysHeld() & KEY_DOWN)) && (!(keysHeld() & KEY_LEFT))) {
-			s_direction = DIR_RIGHT; // Set direction to right
+			m_direction = DIR_RIGHT; // Set direction to right
 		}
 	}
 	
 	// Test collisions
 	testCollisions();
-	Game::indoorChange();
-
+	doorCollisions();
+	
 	// Add speed vectors to coordinates ( move the player )
-	s_x += s_vx;
-	s_y += s_vy;
+	m_x += m_vx;
+	m_y += m_vy;
 	
 	// Reset speed vectors
-	s_vx = 0;
-	s_vy = 0;
+	m_vx = 0;
+	m_vy = 0;
 }
 
 void Player::draw() {
 	// If all directional keys are released
-	if (!(keysHeld() & (KEY_UP | KEY_DOWN | KEY_LEFT | KEY_RIGHT))) {
-		drawFrame(s_x, s_y, s_direction); // Draw a simple frame
+	if(!(keysHeld() & (KEY_UP | KEY_DOWN | KEY_LEFT | KEY_RIGHT))) {
+		drawFrame(m_x, m_y, m_direction); // Draw a simple frame
 	} else {
-		playAnimation(s_x, s_y, s_direction); // Play player's animation
+		playAnimation(m_x, m_y, m_direction); // Play player's animation
 	}
 }
 

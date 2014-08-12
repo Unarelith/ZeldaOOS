@@ -1,69 +1,117 @@
 /*---------------------------------------------------------------------------------
 
-	The Legend of Zelda: Oracle of Secrets
-	Copyright (C) 2011 Pixelda quent42340@gmail.com
-
+	Eleandra
+	Copyright (C) 2012 Quentin BAZIN quent42340@gmail.com
+	
 	This program is free software: you can redistribute it and/or modify
 	it under the terms of the GNU General Public License as published by
 	the Free Software Foundation, either version 3 of the License, or
 	(at your option) any later version.
-
+	
 	This program is distributed in the hope that it will be useful,
 	but WITHOUT ANY WARRANTY; without even the implied warranty of
 	MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
 	GNU General Public License for more details.
-
+	
 	You should have received a copy of the GNU General Public License
 	along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
 ---------------------------------------------------------------------------------*/
+#include <nds.h>
+#include <stdio.h>
+#include <sys/stat.h>
+#include <cmath>
+#include "timer.h"
+#include "sprites.h"
+#include "player.h"
+#include "NPC.h"
+#include "map.h"
+#include "mapManager.h"
+#include "door.h"
+#include "game.h"
 
-#include "main.h"
+using namespace std;
 
 int Map::nbMaps = 0;
 
 s16 Map::scrollX = 0;
 s16 Map::scrollY = 0;
 
-Map::Map(Tileset* tileset, char* filename, u16 width, u16 height, u16 tileWidth, u16 tileHeight, u8 bg) {
-	s_id = nbMaps;
+vector<vector<Map*>> Map::groups;
+
+NPC **Map::NPCs;
+
+Map::Map(Tileset *tileset, char *filename, u16 width, u16 height, u16 tileWidth, u16 tileHeight, u8 bg, s16 group, s16 mapX, s16 mapY) {
+	m_id = nbMaps;
 	nbMaps++;
 	
-	s_mapY = s_id / WM_SIZE;
-	s_mapX = s_id - s_mapY * WM_SIZE;
-	
-	s_tileset = tileset;
-	s_filename = filename;
-	s_width = width;
-	s_height = height;
-	s_tileWidth = tileWidth;
-	s_tileHeight = tileHeight;
+	m_tileset = tileset;
+	m_filename = filename;
+	m_width = width;
+	m_height = height;
+	m_tileWidth = tileWidth;
+	m_tileHeight = tileHeight;
 	
 	// Make temporary table to get map file data
-	u16* table;
-	table = (u16*)malloc(s_width * s_height * sizeof(u16));
+	u16* table = (u16*)malloc(m_width * m_height * sizeof(u16));
 	
 	// Load map from file
-	int filesize;
 	struct stat file_status;
 	if(stat(filename, &file_status) != 0){
-		printf("Unable to load %s", s_filename);
+		printf("Unable to load %s", m_filename);
 	}
-	filesize = file_status.st_size;
+	int filesize = file_status.st_size;
+	
 	FILE* f = fopen(filename, "r");
 	fread(table, 2, filesize, f);
 	fclose(f);
 	
-	s_map = table;
-	s_bg = bg;
+	m_map = table;
+	m_bg = bg;
+	
+	m_group = group;
+	if(m_group != -1) {
+		if((s16)groups.size() == m_group) {
+			vector<Map*> v;
+			v.push_back(this);
+			groups.push_back(v);
+		}
+		else if((s16)groups.size() > m_group) {
+			groups[m_group].push_back(this);
+		} else {
+			consoleClear();
+			printf("Fatal error. Code: 03\n");
+			printf("%d, %d", m_group, groups.size());
+			while(1) swiWaitForVBlank();
+		}
+	}
+	
+	m_NPCs = new NPC*;
+	m_NPCnb = 0;
+	for(unsigned int i = 0 ; i < NPC::nbNPCs ; i++) {
+		if(NPCs[i]->map() == m_id) {
+			m_NPCs[m_NPCnb] = NPCs[i];
+			m_NPCnb++;
+		}
+	}
+	
+	m_mapY = ((mapY == -1) ? (m_id / WM_SIZE) : (mapY));
+	m_mapX = ((mapX == -1) ? (m_id - m_mapY * WM_SIZE) : (mapX));
+	
+	scrollX = m_mapX * 256;
+	scrollY = m_mapY * 192;
+	
+	bgSetScroll(m_bg, scrollX, scrollY);
+	bgUpdate();
 }
 
 Map::~Map() {
+	delete m_NPCs;
 }
 
 void Map::init() {
-	dmaCopy(s_tileset->tiles, bgGetGfxPtr(s_bg), plainTilesLen);
-	dmaCopy(s_tileset->palette, BG_PALETTE_SUB, plainPalLen);
+	dmaCopy(m_tileset->tiles, bgGetGfxPtr(m_bg), m_tileset->tilesLen);
+	dmaCopy(m_tileset->palette, BG_PALETTE, m_tileset->paletteLen);
 	
 	u16 x, y;
 	for(y = 0 ; y < 12 ; y++) {
@@ -73,7 +121,16 @@ void Map::init() {
 	}
 }
 
-void Map::draw() {
+void Map::initOTF() {
+	dmaCopy(m_tileset->tiles, bgGetGfxPtr(m_bg), m_tileset->tilesLen);
+	dmaCopy(m_tileset->palette, BG_PALETTE, m_tileset->paletteLen);
+	
+	u16 x, y;
+	for(y = scrollY / 16 ; y < scrollY / 16 + 12 ; y++) {
+		for(x = scrollX / 16 ; x < scrollX / 16 + 16 ; x++) {
+			putTile(x, y, this, x, y);
+		}
+	}
 }
 
 u16 Map::screenPos(s16 x, s16 y) const {
@@ -83,71 +140,79 @@ u16 Map::screenPos(s16 x, s16 y) const {
 void Map::putTile(s16 x, s16 y, const Map* map, s16 mapX, s16 mapY) {
 	mapX &= 15;
 	mapY %= 12;
-	u16* mapPtr = (u16*)bgGetMapPtr(s_bg);
+	u16 *mapPtr = (u16*)bgGetMapPtr(m_bg);
 	mapPtr[screenPos(x * 2, y * 2)] = map->map()[mapX + mapY * map->width()] * 4;
 	mapPtr[screenPos(x * 2 + 1, y * 2)] = map->map()[mapX + mapY * map->width()] * 4 + 1;
 	mapPtr[screenPos(x * 2, y * 2 + 1)] = map->map()[mapX + mapY * map->width()] * 4 + 2;
 	mapPtr[screenPos(x * 2 + 1, y * 2 + 1)] = map->map()[mapX + mapY * map->width()] * 4 + 3;
 }
 
+s16 findMapID(s16 mapX, s16 mapY, vector<Map*> group) {
+	for(s16 i = 0 ; i < (s16)group.size() ; i++) {
+		if((group[i]->mapX() == mapX) && (group[i]->mapY() == mapY)) {
+			return i;
+		}
+	}
+	return -1;
+}
+
 void Map::scroll(s16 xx, s16 yy) {
-	if(xx > 0) { // Scroll right		
-		s_nextMap = Game::maps[s_mapX + 1 + s_mapY * WM_SIZE]; // Next map to scroll on
+	if(xx > 0) { // Scroll right
+		if(m_group != -1) m_nextMap = Game::maps[groups[m_group][findMapID(m_mapX + 1, m_mapY, groups[m_group])]->id()];
+		else m_nextMap = Game::maps[m_mapX + 1 + m_mapY * WM_SIZE];
 		
-		for(int i = 0 ; (i < xx) && (scrollX < s_width * WM_SIZE * 16 - 256) ; i++) {
+		for(int i = 0 ; i < xx ; i++) {
 			if(!(scrollX & 15)) {
 				for(int j = scrollY / 16 ; j < scrollY / 16 + 12 ; j++) {
-					putTile(scrollX / 16 + 16, j, s_nextMap, scrollX / 16, j);
+					putTile(scrollX / 16 + 16, j, m_nextMap, scrollX / 16, j);
 				}
 			}
 			scrollX++; // Scroll the map
 		}
-		
-		REG_BG0HOFS_SUB = scrollX & 1023; // Scroll the BG
 	}
 	else if(xx < 0) { // Scroll left
-		s_nextMap = Game::maps[s_mapX - 1 + s_mapY * WM_SIZE]; // Next map to scroll on
+		if(m_group != -1) m_nextMap = Game::maps[groups[m_group][findMapID(m_mapX - 1, m_mapY, groups[m_group])]->id()];
+		else m_nextMap = Game::maps[m_mapX - 1 + m_mapY * WM_SIZE];
 		
-		for(int i = 0 ; (i < -xx) && (scrollX > 0) ; i++) {
+		for(int i = 0 ; i < -xx ; i++) {
 			if(!(scrollX & 15)) {
 				for(int j = scrollY / 16 ; j < scrollY / 16 + 12 ; j++) {
-					putTile(scrollX / 16 - 1, j, s_nextMap, scrollX / 16 - 1, j);
+					putTile(scrollX / 16 - 1, j, m_nextMap, scrollX / 16 - 1, j);
 				}
 			}
 			scrollX--; // Scroll the map
 		}
-		
-		REG_BG0HOFS_SUB = scrollX & 1023; // Scroll the BG
 	}
 	
 	if(yy > 0) { // Scroll down
-		s_nextMap = Game::maps[s_mapX + (s_mapY + 1) * WM_SIZE]; // Next map to scroll on
+		if(m_group != -1) m_nextMap = Game::maps[groups[m_group][findMapID(m_mapX, m_mapY + 1, groups[m_group])]->id()];
+		else m_nextMap = Game::maps[m_mapX + (m_mapY + 1) * WM_SIZE];
 		
-		for(int i = 0 ; (i < yy) && (scrollY < s_height * WM_SIZE * 16 - 192) ; i++) {
+		for(int i = 0 ; i < yy ; i++) {
 			if(!(scrollY & 15)) {
 				for(int j = scrollX / 16 ; j < scrollX / 16 + 16 ; j++) {
-					putTile(j, scrollY / 16 + 12, s_nextMap, j, scrollY / 16);
+					putTile(j, scrollY / 16 + 12, m_nextMap, j, scrollY / 16);
 				}
 			}
 			scrollY++; // Scroll the map
 		}
-		
-		REG_BG0VOFS_SUB = scrollY & 1023; // Scroll the BG
 	}
 	else if(yy < 0) { // Scroll up
-		s_nextMap = Game::maps[s_mapX + (s_mapY - 1) * WM_SIZE]; // Next map to scroll on
+		if(m_group != -1) m_nextMap = Game::maps[groups[m_group][findMapID(m_mapX, m_mapY - 1, groups[m_group])]->id()];
+		else m_nextMap = Game::maps[m_mapX + (m_mapY - 1) * WM_SIZE];
 		
-		for(int i = 0 ; (i < -yy) && (scrollY > 0) ; i++) {
+		for(int i = 0 ; i < -yy ; i++) {
 			if(!(scrollY & 15)) {
 				for(int j = scrollX / 16 ; j < scrollX / 16 + 16 ; j++) {
-					putTile(j, scrollY / 16 - 1, s_nextMap, j, scrollY / 16 - 1);
+					putTile(j, scrollY / 16 - 1, m_nextMap, j, scrollY / 16 - 1);
 				}
 			}
 			scrollY--; // Scroll the map
 		}
-		
-		REG_BG0VOFS_SUB = scrollY & 1023; // Scroll the BG
 	}
+	
+	bgSetScroll(m_bg, scrollX, scrollY);
+	bgUpdate();
 }
 
 void Map::indoorTransInit() {
@@ -169,9 +234,20 @@ void Map::indoorTrans() {
 }
 
 void Map::setTile(s16 tileX, s16 tileY, u16 tile) {
-	s_map[tileX + tileY * s_width] = tile;
+	m_map[tileX + tileY * m_width] = tile;
 }
 
 u16 Map::getTile(s16 tileX, s16 tileY) {
-	return s_map[tileX + tileY * s_width];
+	if(tileX + tileY * m_width < m_width * m_height) {
+		return m_map[tileX + tileY * m_width];
+	} else {
+		return 0;
+	}
 }
+
+void Map::drawNPCs() {
+	for(int i = 0 ; i < m_NPCnb ; i++) {
+		m_NPCs[i]->draw();
+	}
+}
+

@@ -1,7 +1,7 @@
 build
 *.elf
 *.nds
-*.kate-swp
 *~
 *.img
+*.swp
 
