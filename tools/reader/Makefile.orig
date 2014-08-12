@@ -1,9 +1,0 @@
-reader: reader.c
-<<<<<<< HEAD
-	gcc -o $@ `xml2-config --cflags` $< `xml2-config --libs`
-=======
-	gcc -g -o $@ `xml2-config --cflags` $< `xml2-config --libs`
-
-clean:
-	rm -f reader
->>>>>>> Eleandra/master
